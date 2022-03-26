@@ -1,0 +1,247 @@
+[{
+    "name": "钉钉通用接口:v1&【fighter-dingtalk-base】",
+    "url": "/fighter-dingtalk-base/v2/api-docs?group=钉钉通用接口:v1",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-dingtalk-base/v2/api-docs?group=钉钉通用接口:v1"
+  },
+  {
+    "name": "钉钉登录集成:v1&【fighter-integrate-dingtalk-login】",
+    "url": "/fighter-integrate-dingtalk-login/v2/api-docs?group=钉钉登录集成:v1",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-integrate-dingtalk-login/v2/api-docs?group=钉钉登录集成:v1"
+  },
+  {
+    "name": "任务中心-流程数据接入端APIs:v1.0.7-SNAPSHOT&【fighter-taskcenter】",
+    "url": "/fighter-taskcenter/v2/api-docs?group=任务中心-流程数据接入端APIs:v1.0.7-SNAPSHOT",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-taskcenter/v2/api-docs?group=任务中心-流程数据接入端APIs:v1.0.7-SNAPSHOT"
+  },
+  {
+    "name": "任务中心管理端APIs:v1.0.3&【fighter-taskcenter】",
+    "url": "/fighter-taskcenter/v2/api-docs?group=任务中心管理端APIs:v1.0.3",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-taskcenter/v2/api-docs?group=任务中心管理端APIs:v1.0.3"
+  },
+  {
+    "name": "课程群管理:v1.0.0&【fighter-course-group】",
+    "url": "/fighter-course-group/v2/api-docs?group=课程群管理:v1.0.0",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-course-group/v2/api-docs?group=课程群管理:v1.0.0"
+  },
+  {
+    "name": "apis-http-控件:v1&【fighter-apis-manage】",
+    "url": "/fighter-apis-manage/v2/api-docs?group=apis-http-控件:v1&【fighter-apis-manage】",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-apis-manage/v2/api-docs?group=apis-http-控件:v1&【fighter-apis-manage】"
+  },
+  {
+    "name": "apis-rest动态服务:v1&【fighter-apis-manage】",
+    "url": "/fighter-apis-manage/v2/api-docs?group=apis-rest动态服务:v1&【fighter-apis-manage】",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-apis-manage/v2/api-docs?group=apis-rest动态服务:v1&【fighter-apis-manage】"
+  },
+  {
+    "name": "apis-主配置服务:v1&【fighter-apis-manage】",
+    "url": "/fighter-apis-manage/v2/api-docs?group=apis-主配置服务:v1&【fighter-apis-manage】",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-apis-manage/v2/api-docs?group=apis-主配置服务:v1&【fighter-apis-manage】"
+  },
+  {
+    "name": "apis-常量转换控件:v1&【fighter-apis-manage】",
+    "url": "/fighter-apis-manage/v2/api-docs?group=apis-常量转换控件:v1&【fighter-apis-manage】",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-apis-manage/v2/api-docs?group=apis-常量转换控件:v1&【fighter-apis-manage】"
+  },
+  {
+    "name": "apis-数据加工控件:v1&【fighter-apis-manage】",
+    "url": "/fighter-apis-manage/v2/api-docs?group=apis-数据加工控件:v1&【fighter-apis-manage】",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-apis-manage/v2/api-docs?group=apis-数据加工控件:v1&【fighter-apis-manage】"
+  },
+  {
+    "name": "apis-线控件:v1&【fighter-apis-manage】",
+    "url": "/fighter-apis-manage/v2/api-docs?group=apis-线控件:v1&【fighter-apis-manage】",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-apis-manage/v2/api-docs?group=apis-线控件:v1&【fighter-apis-manage】"
+  },
+  {
+    "name": "apis-表格控件:v1&【fighter-apis-manage】",
+    "url": "/fighter-apis-manage/v2/api-docs?group=apis-表格控件:v1&【fighter-apis-manage】",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-apis-manage/v2/api-docs?group=apis-表格控件:v1&【fighter-apis-manage】"
+  },
+  {
+    "name": "apis-请求控件和响应控件:v1&【fighter-apis-manage】",
+    "url": "/fighter-apis-manage/v2/api-docs?group=apis-请求控件和响应控件:v1&【fighter-apis-manage】",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-apis-manage/v2/api-docs?group=apis-请求控件和响应控件:v1&【fighter-apis-manage】"
+  },
+  {
+    "name": "表字段资源:v1&【fighter-apis-manage】",
+    "url": "/fighter-apis-manage/v2/api-docs?group=表字段资源:v1&【fighter-apis-manage】",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-apis-manage/v2/api-docs?group=表字段资源:v1&【fighter-apis-manage】"
+  },
+  {
+    "name": "通讯录管理:v2.0.0&【fighter-address-book】",
+    "url": "/fighter-address-book/v2/api-docs?group=通讯录管理:v2.0.0",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-address-book/v2/api-docs?group=通讯录管理:v2.0.0"
+  },
+  {
+    "name": "数据报表:v1&【fighter-data-report】",
+    "url": "/fighter-data-report/v2/api-docs?group=数据报表:v1",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-data-report/v2/api-docs?group=数据报表:v1"
+  },
+  {
+    "name": "消息中心OpenAPIs:v1&【fighter-msgcenter】",
+    "url": "/fighter-msgcenter/v2/api-docs?group=消息中心OpenAPIs:v1",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-msgcenter/v2/api-docs?group=消息中心OpenAPIs:v1"
+  },
+  {
+    "name": "消息中心管理端APIs:v1.0.0&【fighter-msgcenter】",
+    "url": "/fighter-msgcenter/v2/api-docs?group=消息中心管理端APIs:v1.0.0",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-msgcenter/v2/api-docs?group=消息中心管理端APIs:v1.0.0"
+  },
+  {
+    "name": "认证集成:v1&【fighter-integrate-uaap】",
+    "url": "/fighter-integrate-uaap/v2/api-docs?group=认证集成:v1",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-integrate-uaap/v2/api-docs?group=认证集成:v1"
+  },
+  {
+    "name": "一卡通:v1&【fighter-lightportal-saas-ykt】",
+    "url": "/fighter-lightportal-saas-ykt/v2/api-docs?group=一卡通:v1",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-lightportal-saas-ykt/v2/api-docs?group=一卡通:v1"
+  },
+  {
+    "name": "资源访问控制:v1&【fighter-permission】",
+    "url": "/fighter-permission/v2/api-docs?group=资源访问控制:v1",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-permission/v2/api-docs?group=资源访问控制:v1"
+  },
+  {
+    "name": "动态表单:v1&【fighter-workflow】",
+    "url": "/fighter-workflow/v2/api-docs?group=动态表单:v1",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-workflow/v2/api-docs?group=动态表单:v1"
+  },
+  {
+    "name": "多数据源:v1&【fighter-workflow】",
+    "url": "/fighter-workflow/v2/api-docs?group=多数据源:v1",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-workflow/v2/api-docs?group=多数据源:v1"
+  },
+  {
+    "name": "数据采集:v1&【fighter-workflow】",
+    "url": "/fighter-workflow/v2/api-docs?group=数据采集:v1",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-workflow/v2/api-docs?group=数据采集:v1"
+  },
+  {
+    "name": "流程平台:v1&【fighter-workflow】",
+    "url": "/fighter-workflow/v2/api-docs?group=流程平台:v1",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-workflow/v2/api-docs?group=流程平台:v1"
+  },
+  {
+    "name": "流程模型:v1&【fighter-workflow】",
+    "url": "/fighter-workflow/v2/api-docs?group=流程模型:v1",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-workflow/v2/api-docs?group=流程模型:v1"
+  },
+  {
+    "name": "简易流程:v1&【fighter-workflow】",
+    "url": "/fighter-workflow/v2/api-docs?group=简易流程:v1",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-workflow/v2/api-docs?group=简易流程:v1"
+  },
+  {
+    "name": "附件管理APIs:v1&【fighter-attachment-manage】",
+    "url": "/fighter-attachment-manage/v2/api-docs?group=附件管理APIs:v1",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-attachment-manage/v2/api-docs?group=附件管理APIs:v1"
+  },
+  {
+    "name": "系统管理:v1&【fighter-system-manage】",
+    "url": "/fighter-system-manage/v2/api-docs?group=系统管理:v1",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-system-manage/v2/api-docs?group=系统管理:v1"
+  },
+  {
+    "name": "门户-上课签到:v1&【fighter-lightportal-saas】",
+    "url": "/fighter-lightportal-saas/v2/api-docs?group=门户-上课签到:v1",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-lightportal-saas/v2/api-docs?group=门户-上课签到:v1"
+  },
+  {
+    "name": "门户-业务管理:v1&【fighter-lightportal-saas】",
+    "url": "/fighter-lightportal-saas/v2/api-docs?group=门户-业务管理:v1",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-lightportal-saas/v2/api-docs?group=门户-业务管理:v1"
+  },
+  {
+    "name": "门户-个人中心:v1&【fighter-lightportal-saas】",
+    "url": "/fighter-lightportal-saas/v2/api-docs?group=门户-个人中心:v1",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-lightportal-saas/v2/api-docs?group=门户-个人中心:v1"
+  },
+  {
+    "name": "门户-临时人员:v1&【fighter-lightportal-saas】",
+    "url": "/fighter-lightportal-saas/v2/api-docs?group=门户-临时人员:v1",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-lightportal-saas/v2/api-docs?group=门户-临时人员:v1"
+  },
+  {
+    "name": "门户-分管领导:v1&【fighter-lightportal-saas】",
+    "url": "/fighter-lightportal-saas/v2/api-docs?group=门户-分管领导:v1",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-lightportal-saas/v2/api-docs?group=门户-分管领导:v1"
+  },
+  {
+    "name": "门户-应用管理:v1&【fighter-lightportal-saas】",
+    "url": "/fighter-lightportal-saas/v2/api-docs?group=门户-应用管理:v1",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-lightportal-saas/v2/api-docs?group=门户-应用管理:v1"
+  },
+  {
+    "name": "门户-文字识别:v1&【fighter-lightportal-saas】",
+    "url": "/fighter-lightportal-saas/v2/api-docs?group=门户-文字识别:v1",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-lightportal-saas/v2/api-docs?group=门户-文字识别:v1"
+  },
+  {
+    "name": "门户-永洪:v1&【fighter-lightportal-saas】",
+    "url": "/fighter-lightportal-saas/v2/api-docs?group=门户-永洪:v1",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-lightportal-saas/v2/api-docs?group=门户-永洪:v1"
+  },
+  {
+    "name": "门户-消息组件:v1&【fighter-lightportal-saas】",
+    "url": "/fighter-lightportal-saas/v2/api-docs?group=门户-消息组件:v1",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-lightportal-saas/v2/api-docs?group=门户-消息组件:v1"
+  },
+  {
+    "name": "门户-通知公告管理:v1&【fighter-lightportal-saas】",
+    "url": "/fighter-lightportal-saas/v2/api-docs?group=门户-通知公告管理:v1",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-lightportal-saas/v2/api-docs?group=门户-通知公告管理:v1"
+  },
+  {
+    "name": "常量管理:v1&【fighter-const-manage】",
+    "url": "/fighter-const-manage/v2/api-docs?group=常量管理:v1",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-const-manage/v2/api-docs?group=常量管理:v1"
+  },
+  {
+    "name": "动态服务列表",
+    "url": "/fighter-apis-manage/swagger/v2/api-docs",
+    "swaggerVersion": "2.0",
+    "location": "/fighter-apis-manage/swagger/v2/api-docs"
+  }
+]

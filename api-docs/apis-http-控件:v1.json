@@ -1,0 +1,286 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "apis-http-控件"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-apis-manage",
+  "tags": [{
+    "name": "apis的http控件的配置信息",
+    "description": "Apis Http Ctls Controller"
+  }],
+  "paths": {
+    "/apis/rest-ctls/save": {
+      "post": {
+        "tags": ["apis的http控件的配置信息"],
+        "summary": "保存服务的所有线",
+        "operationId": "saveUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "model",
+          "description": "model",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ApisHttpCtlsModel"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/apis/rest-ctls/stepThrough": {
+      "post": {
+        "tags": ["apis的http控件的配置信息"],
+        "summary": "单步调试(参数源里不存参数数据，参数值填在默认值里)",
+        "operationId": "stepThroughUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "model",
+          "description": "model",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ApisHttpCtlsModel"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«Map»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/apis/rest-ctls/{id}": {
+      "get": {
+        "tags": ["apis的http控件的配置信息"],
+        "summary": "查看http服务配置",
+        "operationId": "queryUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«ApisHttpCtlsModel»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "ApisHttpCtls": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "ctlsName": {
+          "type": "string",
+          "description": "控件名称"
+        },
+        "url": {
+          "type": "string",
+          "description": "地址(https:www.baidu.com)https:www.baidu.com"
+        },
+        "reqMethod": {
+          "type": "string",
+          "description": "请求方式(.GET .POST .PUT)"
+        },
+        "characterSet": {
+          "type": "string",
+          "description": "字符集(.GBK  .UTF-8)"
+        },
+        "timeOut": {
+          "type": "integer",
+          "format": "int32",
+          "description": "超出时间(60)s"
+        },
+        "contentType": {
+          "type": "string",
+          "description": "内容类型(application/json .application/text)"
+        },
+        "variableOutRest": {
+          "type": "string",
+          "description": "rest输出变量名"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-11-29 10:10:10",
+          "description": "创建时间"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisHttpCtls",
+      "description": "rest控件的配置信息"
+    },
+    "ApisHttpCtlsModel": {
+      "type": "object",
+      "properties": {
+        "apisHttpCtls": {
+          "description": "http控件主配置",
+          "$ref": "#/definitions/ApisHttpCtls"
+        },
+        "apisHttpCtlsReqParamList": {
+          "type": "array",
+          "description": "http请求参数",
+          "items": {
+            "$ref": "#/definitions/ApisHttpCtlsReqParam"
+          }
+        }
+      },
+      "title": "ApisHttpCtlsModel",
+      "description": "http控件的配置参数"
+    },
+    "ApisHttpCtlsReqParam": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "httpCtlsId": {
+          "type": "string",
+          "description": "控件Id"
+        },
+        "param": {
+          "type": "string",
+          "description": "参数名"
+        },
+        "paraSource": {
+          "type": "string",
+          "description": "参数来源"
+        },
+        "paraPath": {
+          "type": "string",
+          "description": "参数值路径"
+        },
+        "filedType": {
+          "type": "string",
+          "description": "字段类型(string,array)"
+        },
+        "ginsengType": {
+          "type": "string",
+          "description": "传参类型(query,body,header,cookie)"
+        },
+        "defValue": {
+          "type": "string",
+          "description": "默认值"
+        },
+        "annotation": {
+          "type": "string",
+          "description": "注释"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisHttpCtlsReqParam",
+      "description": "rest控件的配置参数"
+    },
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«ApisHttpCtlsModel»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/ApisHttpCtlsModel"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«ApisHttpCtlsModel»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«Map»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«Map»",
+      "description": "返回响应数据"
+    }
+  }
+}

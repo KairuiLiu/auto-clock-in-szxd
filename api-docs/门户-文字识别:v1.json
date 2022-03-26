@@ -1,0 +1,163 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "门户-文字识别"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-lightportal-saas",
+  "tags": [{
+    "name": "文字识别",
+    "description": "T Ocr Controller"
+  }],
+  "paths": {
+    "/Tocr/add": {
+      "post": {
+        "tags": ["文字识别"],
+        "summary": "图片文字识别",
+        "operationId": "addUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "tOcrDto",
+          "description": "tOcrDto",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/TOcrDto对象"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/Tocr/testimageRecognition": {
+      "post": {
+        "tags": ["文字识别"],
+        "summary": "testimageRecognition",
+        "operationId": "testimageRecognitionUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    },
+    "TOcrDto对象": {
+      "type": "object",
+      "properties": {
+        "bgd": {
+          "type": "string",
+          "description": "体检报告单"
+        },
+        "bgdsfyc": {
+          "type": "string",
+          "description": "体检报告单是否异常"
+        },
+        "createTime": {
+          "type": "string",
+          "description": "流程申请时间"
+        },
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "idcard": {
+          "type": "string",
+          "description": "身份证号"
+        },
+        "jkm": {
+          "type": "string",
+          "description": "健康码"
+        },
+        "jkmsfyc": {
+          "type": "string",
+          "description": "健康码是否异常"
+        },
+        "mobile": {
+          "type": "string",
+          "description": "手机号"
+        },
+        "time": {
+          "type": "string",
+          "description": "流程申请时间"
+        },
+        "workflowid": {
+          "type": "string",
+          "description": "流程id"
+        },
+        "workflowpid": {
+          "type": "string",
+          "description": "流程子表id"
+        },
+        "xcm": {
+          "type": "string",
+          "description": "行程码"
+        },
+        "xcmsfyc": {
+          "type": "string",
+          "description": "行程码是否异常"
+        },
+        "xm": {
+          "type": "string",
+          "description": "姓名"
+        }
+      },
+      "title": "TOcrDto对象"
+    }
+  }
+}

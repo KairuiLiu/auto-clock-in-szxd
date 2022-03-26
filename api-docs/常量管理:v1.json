@@ -1,0 +1,1455 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "常量管理"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-const-manage",
+  "tags": [{
+    "name": "字典常量",
+    "description": "T Const Controller"
+  }, {
+    "name": "字典目录表",
+    "description": "T Const Cata Controller"
+  }],
+  "paths": {
+    "/pub/dm-const": {
+      "get": {
+        "tags": ["字典常量"],
+        "summary": "查询所有字典常量",
+        "operationId": "listUsingGET_1",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«TConst»»"
+            }
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["字典常量"],
+        "summary": "新增字典常量",
+        "operationId": "saveBodyUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "pub_dm_const",
+          "description": "字典常量",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/TConst"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["字典常量"],
+        "summary": "更新字典常量",
+        "operationId": "updateBodyUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "pub_dm_const",
+          "description": "字典常量",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/TConst"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["字典常量"],
+        "summary": "删除字典常量",
+        "operationId": "deleteUsingDELETE_1",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "idList",
+          "in": "query",
+          "description": "唯一健集合",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/pub/dm-const-cata": {
+      "get": {
+        "tags": ["字典目录表"],
+        "summary": "查询所有字典目录表",
+        "operationId": "listUsingGET",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«TConstCata»»"
+            }
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["字典目录表"],
+        "summary": "新增字典目录表",
+        "operationId": "saveUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "tConstCata",
+          "description": "字典目录表",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/T_CONST_CATA"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["字典目录表"],
+        "summary": "更新字典目录表",
+        "operationId": "updateUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "tConstCata",
+          "description": "字典目录表",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/T_CONST_CATA"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["字典目录表"],
+        "summary": "删除字典目录表",
+        "operationId": "deleteUsingDELETE",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "idList",
+          "in": "query",
+          "description": "唯一健集合",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/pub/dm-const-cata/listCondition": {
+      "post": {
+        "tags": ["字典目录表"],
+        "summary": "根据条件查询所有字典目录表",
+        "operationId": "listConditionUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«TConstCata»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«TConstCata»»"
+            }
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/pub/dm-const-cata/listSelect": {
+      "get": {
+        "tags": ["字典目录表"],
+        "summary": "查询所有字典常量目录下拉",
+        "operationId": "listSelectUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "filterStatus",
+          "in": "query",
+          "description": "是否过滤状态",
+          "required": false,
+          "type": "boolean"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«PubDmConstVo»»"
+            }
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/pub/dm-const-cata/query": {
+      "get": {
+        "tags": ["字典目录表"],
+        "summary": "分页查询字典目录表",
+        "operationId": "queryUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "cataCode",
+          "in": "query",
+          "description": "目录编号",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "cataName",
+          "in": "query",
+          "description": "目录名",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "cataSort",
+          "in": "query",
+          "description": "目录排序",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "endDate",
+          "in": "query",
+          "description": "结束时间",
+          "required": false,
+          "type": "string",
+          "x-example": "2021-01-06"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页的数量",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "startDate",
+          "in": "query",
+          "description": "开始时间",
+          "required": false,
+          "type": "string",
+          "x-example": "2021-01-01"
+        }, {
+          "name": "status",
+          "in": "query",
+          "description": "状态(1,启用;2,停用)",
+          "required": false,
+          "type": "ref"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«TConstCata»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/pub/dm-const-cata/updateStatus": {
+      "put": {
+        "tags": ["字典目录表"],
+        "summary": "更新字典目录表状态",
+        "operationId": "updateStatusUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "query",
+          "description": "唯一健",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "status",
+          "in": "query",
+          "description": "状态",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/pub/dm-const-cata/{id}": {
+      "get": {
+        "tags": ["字典目录表"],
+        "summary": "根据主键查询字典目录表",
+        "operationId": "getUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "唯一健id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«TConstCata»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/pub/dm-const/listByCataCode": {
+      "get": {
+        "tags": ["字典常量"],
+        "summary": "根据目录码查询所有下拉",
+        "operationId": "listByCataCodeUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "cataCode",
+          "in": "query",
+          "description": "目录码",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "filterStatus",
+          "in": "query",
+          "description": "是否过滤状态",
+          "required": false,
+          "type": "boolean"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«PubDmConstVo»»"
+            }
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/pub/dm-const/listByCataCodeItemCode": {
+      "get": {
+        "tags": ["字典常量"],
+        "summary": "根据目录码和条目码查询所有下拉",
+        "operationId": "listByCataCodeItemCodeUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "cataCode",
+          "in": "query",
+          "description": "目录码",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "itemCode",
+          "in": "query",
+          "description": "条目码",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«PubDmConstVo»»"
+            }
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/pub/dm-const/listByCataIdOthers": {
+      "get": {
+        "tags": ["字典常量"],
+        "summary": "根据目录id查询所有对象",
+        "operationId": "listByCataIdOthersUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "cataId",
+          "in": "query",
+          "description": "目录id",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "excludeId",
+          "in": "query",
+          "description": "排除的id",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "filterStatus",
+          "in": "query",
+          "description": "是否过滤状态",
+          "required": false,
+          "type": "boolean"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«TConst»»"
+            }
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/pub/dm-const/listIntOptionByCataCode": {
+      "get": {
+        "tags": ["字典常量"],
+        "summary": "根据目录码查询所有整型key下拉",
+        "operationId": "listIntOptionByCataCodeUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "cataCode",
+          "in": "query",
+          "description": "目录码",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "filterStatus",
+          "in": "query",
+          "description": "是否过滤状态",
+          "required": false,
+          "type": "boolean"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«IntOptionVo»»"
+            }
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/pub/dm-const/listSelect": {
+      "get": {
+        "tags": ["字典常量"],
+        "summary": "查询所有字典常量目录下拉",
+        "operationId": "listSelectUsingGET_1",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "filterStatus",
+          "in": "query",
+          "description": "filterStatus",
+          "required": false,
+          "type": "boolean"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«PubDmConstVo»»"
+            }
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/pub/dm-const/listSubByParentCataCodeItemCode": {
+      "get": {
+        "tags": ["字典常量"],
+        "summary": "根据父级目录码和父级条目码查询所有子集",
+        "operationId": "listSubByParentCataCodeItemCodeUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "cataCode",
+          "in": "query",
+          "description": "目录码",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "filterStatus",
+          "in": "query",
+          "description": "是否过滤状态",
+          "required": false,
+          "type": "boolean"
+        }, {
+          "name": "itemCode",
+          "in": "query",
+          "description": "条目码",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«TConst»»"
+            }
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/pub/dm-const/listSubVoByParentCataCodeItemCode": {
+      "get": {
+        "tags": ["字典常量"],
+        "summary": "根据父级目录码和父级条目码查询所有下拉子集",
+        "operationId": "listSubVoByParentCataCodeItemCodeUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "cataCode",
+          "in": "query",
+          "description": "目录码",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "filterStatus",
+          "in": "query",
+          "description": "是否过滤状态",
+          "required": false,
+          "type": "boolean"
+        }, {
+          "name": "itemCode",
+          "in": "query",
+          "description": "条目码",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«PubDmConstVo»»"
+            }
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/pub/dm-const/query": {
+      "get": {
+        "tags": ["字典常量"],
+        "summary": "分页查询字典常量",
+        "operationId": "queryUsingGET_1",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "cataCode",
+          "in": "query",
+          "description": "目录码",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "cataId",
+          "in": "query",
+          "description": "目录",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "cataName",
+          "in": "query",
+          "description": "目录名",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "cataSort",
+          "in": "query",
+          "description": "目录顺序",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "creatorId",
+          "in": "query",
+          "description": "创建人",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "endDate",
+          "in": "query",
+          "description": "结束时间",
+          "required": false,
+          "type": "string",
+          "x-example": "2020-03-12"
+        }, {
+          "name": "flag",
+          "in": "query",
+          "description": "标识：0:ROOTSYSTEM--系统级；1:CUSTOM：用户级（系统级不允许修改）",
+          "required": false,
+          "type": "ref"
+        }, {
+          "name": "itemCode",
+          "in": "query",
+          "description": "条目码",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "itemSort",
+          "in": "query",
+          "description": "条目排序",
+          "required": false,
+          "type": "ref"
+        }, {
+          "name": "itemValue",
+          "in": "query",
+          "description": "条目值",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页的数量",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pid",
+          "in": "query",
+          "description": "父编号",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "startDate",
+          "in": "query",
+          "description": "开始时间",
+          "required": false,
+          "type": "string",
+          "x-example": "2020-03-12"
+        }, {
+          "name": "status",
+          "in": "query",
+          "description": "状态(1,启用;2,停用)",
+          "required": false,
+          "type": "ref"
+        }, {
+          "name": "updatorId",
+          "in": "query",
+          "description": "更新人",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«TConst»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/pub/dm-const/updateStatus": {
+      "put": {
+        "tags": ["字典常量"],
+        "summary": "更新字典常量状态",
+        "operationId": "updateStatusUsingPUT_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "query",
+          "description": "唯一健",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "status",
+          "in": "query",
+          "description": "状态",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/pub/dm-const/{id}": {
+      "get": {
+        "tags": ["字典常量"],
+        "summary": "根据主键查询字典常量",
+        "operationId": "getUsingGET_1",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "唯一健id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«TConst»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "IPage«TConstCata»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TConstCata"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«TConstCata»"
+    },
+    "IPage«TConst»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TConst"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«TConst»"
+    },
+    "IntOptionVo": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "IntOptionVo",
+      "description": "整型下拉选项值"
+    },
+    "OrderItem": {
+      "type": "object",
+      "properties": {
+        "asc": {
+          "type": "boolean"
+        },
+        "column": {
+          "type": "string"
+        }
+      },
+      "title": "OrderItem"
+    },
+    "PubDmConstVo": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "title": "PubDmConstVo",
+      "description": "字典常量扩展"
+    },
+    "QueryCondition«TConstCata»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/TConstCata"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«TConstCata»",
+      "description": "查询条件"
+    },
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«TConstCata»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«TConstCata»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«TConstCata»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«TConst»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«TConst»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«TConst»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«IntOptionVo»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/IntOptionVo"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«IntOptionVo»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«PubDmConstVo»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/PubDmConstVo"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«PubDmConstVo»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«TConstCata»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/TConstCata"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«TConstCata»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«TConst»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/TConst"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«TConst»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«TConstCata»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/TConstCata"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«TConstCata»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«TConst»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/TConst"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«TConst»",
+      "description": "返回响应数据"
+    },
+    "TConst": {
+      "type": "object",
+      "required": ["id"],
+      "properties": {
+        "cataCode": {
+          "type": "string",
+          "description": "目录码"
+        },
+        "cataId": {
+          "type": "string",
+          "description": "目录码"
+        },
+        "cataName": {
+          "type": "string",
+          "description": "目录名"
+        },
+        "cataSort": {
+          "type": "string",
+          "description": "目录顺序"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-03-12 09:43:39",
+          "description": "创建时间"
+        },
+        "creatorId": {
+          "type": "string",
+          "description": "创建人"
+        },
+        "flag": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "标识：0:ROOTSYSTEM--系统级；1:CUSTOM：用户级（系统级不允许修改）"
+        },
+        "hasSub": {
+          "type": "integer",
+          "format": "int32",
+          "description": "有下级"
+        },
+        "id": {
+          "type": "string",
+          "description": "主键"
+        },
+        "itemCode": {
+          "type": "string",
+          "description": "条目码"
+        },
+        "itemSort": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "条目排序"
+        },
+        "itemValue": {
+          "type": "string",
+          "description": "条目名"
+        },
+        "pcataId": {
+          "type": "string",
+          "description": "父目录Id"
+        },
+        "pid": {
+          "type": "string",
+          "description": "父编号"
+        },
+        "pitemCode": {
+          "type": "string",
+          "description": "父条目码"
+        },
+        "pitemValue": {
+          "type": "string",
+          "description": "父条目值"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "状态(1,启用;2,停用)"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-03-12 09:43:39",
+          "description": "更新时间"
+        },
+        "updatorId": {
+          "type": "string",
+          "description": "更新人"
+        }
+      },
+      "title": "TConst",
+      "description": "字典常量"
+    },
+    "TConstCata": {
+      "type": "object",
+      "required": ["id"],
+      "properties": {
+        "cataCode": {
+          "type": "string",
+          "description": "目录编号"
+        },
+        "cataName": {
+          "type": "string",
+          "description": "目录名"
+        },
+        "cataSort": {
+          "type": "string",
+          "description": "目录排序"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2021-01-01 10:10:10",
+          "description": "创建时间"
+        },
+        "creatorId": {
+          "type": "string",
+          "description": "创建人"
+        },
+        "id": {
+          "type": "string",
+          "description": "主键"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "状态(1,启用;2,停用)"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "tenantId"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2021-01-01 10:10:10",
+          "description": "更新时间"
+        },
+        "updatorId": {
+          "type": "string",
+          "description": "更新人"
+        }
+      },
+      "title": "TConstCata",
+      "description": "字典目录表"
+    }
+  }
+}

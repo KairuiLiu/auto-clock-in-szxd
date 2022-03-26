@@ -1,0 +1,3317 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1.0.7-SNAPSHOT",
+    "title": "任务中心-流程数据接入端APIs"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-taskcenter",
+  "tags": [{
+    "name": "任务中心-流程数据接入端：任务查询",
+    "description": "Task Query Controller"
+  }, {
+    "name": "任务中心-流程数据接入端：任务管理",
+    "description": "Task Manager Controller"
+  }, {
+    "name": "任务中心-流程数据接入端：任务类型查询",
+    "description": "Task Type Controller"
+  }, {
+    "name": "任务中心-流程数据接入端：常用查询",
+    "description": "Common Controller"
+  }, {
+    "name": "任务中心-流程数据接入端：按个人统计",
+    "description": "Stat Person Controller"
+  }, {
+    "name": "任务中心-流程数据接入端：按流程实例统计",
+    "description": "Stat Flow Instance Controller"
+  }, {
+    "name": "任务中心-流程数据接入端：按部门统计",
+    "description": "Stat Dept Controller"
+  }],
+  "paths": {
+    "/taskCenter/common/listSystem": {
+      "get": {
+        "tags": ["任务中心-流程数据接入端：常用查询"],
+        "summary": "接入的第三方系统查询",
+        "operationId": "listSystemUsingGET",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«TcCommonSystem»»"
+            }
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/taskCenter/manager/addTask": {
+      "post": {
+        "tags": ["任务中心-流程数据接入端：任务管理"],
+        "summary": "新增待办",
+        "operationId": "addTaskUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "currentNode",
+          "in": "query",
+          "description": "当前任务节点名称",
+          "required": true,
+          "type": "string",
+          "x-example": "部门经理审批"
+        }, {
+          "name": "serviceId",
+          "in": "query",
+          "description": "流程编号，唯一健",
+          "required": true,
+          "type": "string",
+          "x-example": "6930128697529486947"
+        }, {
+          "in": "body",
+          "name": "taskJsonList",
+          "description": "待办任务数据",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/TcFlowTaskAdd"
+            }
+          }
+        }, {
+          "name": "updateTime",
+          "in": "query",
+          "description": "流程更新时间",
+          "required": true,
+          "type": "string",
+          "x-example": "2019-10-09 15:25:56"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "403": {
+            "description": "服务器接收请求，但是拒绝处理"
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/taskCenter/manager/deleteProcess": {
+      "delete": {
+        "tags": ["任务中心-流程数据接入端：任务管理"],
+        "summary": "删除流程",
+        "description": "直接彻底删除：流程数据、待办任务数据、待办人数据，谨慎使用！",
+        "operationId": "deleteProcessUsingDELETE",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "serviceId",
+          "in": "query",
+          "description": "流程编号，唯一健",
+          "required": true,
+          "type": "string",
+          "x-example": "6930128697529486947"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/taskCenter/manager/deleteTask": {
+      "delete": {
+        "tags": ["任务中心-流程数据接入端：任务管理"],
+        "summary": "删除待办任务",
+        "description": "直接彻底删除：待办任务数据、办理人数据，谨慎使用！",
+        "operationId": "deleteTaskUsingDELETE",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "serviceId",
+          "in": "query",
+          "description": "流程编号，唯一健",
+          "required": true,
+          "type": "string",
+          "x-example": "6930128697529486947"
+        }, {
+          "name": "taskIds",
+          "in": "query",
+          "description": "待办任务编号唯一健集合，多个值以英文逗号分割",
+          "required": true,
+          "type": "string",
+          "x-example": "97529486947"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/taskCenter/manager/finishProcess": {
+      "post": {
+        "tags": ["任务中心-流程数据接入端：任务管理"],
+        "summary": "结束流程",
+        "operationId": "finishProcessUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "approveResult",
+          "in": "query",
+          "description": "审批结果（1正常办结、2异常办结、3终止）",
+          "required": true,
+          "type": "string",
+          "x-example": "1"
+        }, {
+          "name": "completeTime",
+          "in": "query",
+          "description": "完成时间",
+          "required": true,
+          "type": "string",
+          "x-example": "2019-10-09 15:25:56"
+        }, {
+          "name": "serviceId",
+          "in": "query",
+          "description": "流程编号，唯一健",
+          "required": true,
+          "type": "string",
+          "x-example": "6930128697529486947"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "403": {
+            "description": "服务器接收请求，但是拒绝处理"
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/taskCenter/manager/startProcess": {
+      "post": {
+        "tags": ["任务中心-流程数据接入端：任务管理"],
+        "summary": "启动流程",
+        "operationId": "startProcessUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "processInfo",
+          "description": "启动流程参数",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/TcFlowProcess"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "403": {
+            "description": "服务器接收请求，但是拒绝处理"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/taskCenter/manager/task/addPerson": {
+      "post": {
+        "tags": ["任务中心-流程数据接入端：任务管理"],
+        "summary": "待办任务-添加办理人",
+        "description": "在当前任务下，插入新的办理人",
+        "operationId": "taskAddPersonUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "serviceId",
+          "in": "query",
+          "description": "流程编号，唯一健",
+          "required": true,
+          "type": "string",
+          "x-example": "6930128697529486947"
+        }, {
+          "name": "taskId",
+          "in": "query",
+          "description": "待办任务编号，唯一健",
+          "required": true,
+          "type": "string",
+          "x-example": "97529486947"
+        }, {
+          "name": "userAndDeps",
+          "in": "query",
+          "description": "办理人部门集合",
+          "required": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserAndDep"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/taskCenter/manager/task/coveragePerson": {
+      "post": {
+        "tags": ["任务中心-流程数据接入端：任务管理"],
+        "summary": "待办任务-覆盖办理人",
+        "description": "当前任务下，彻底删除所有办理人，重新添加新的办理人，谨慎使用！",
+        "operationId": "taskCoveragePersonUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "serviceId",
+          "in": "query",
+          "description": "流程编号，唯一健",
+          "required": true,
+          "type": "string",
+          "x-example": "6930128697529486947"
+        }, {
+          "name": "taskId",
+          "in": "query",
+          "description": "待办任务编号，唯一健",
+          "required": true,
+          "type": "string",
+          "x-example": "97529486947"
+        }, {
+          "name": "userAndDeps",
+          "in": "query",
+          "description": "办理人部门集合",
+          "required": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserAndDep"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/taskCenter/manager/task/deletePerson": {
+      "delete": {
+        "tags": ["任务中心-流程数据接入端：任务管理"],
+        "summary": "待办任务-删除办理人",
+        "description": "当前任务下，彻底删除已存在的办理人，谨慎使用！",
+        "operationId": "taskDeletePersonUsingDELETE",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "serviceId",
+          "in": "query",
+          "description": "流程编号，唯一健",
+          "required": true,
+          "type": "string",
+          "x-example": "6930128697529486947"
+        }, {
+          "name": "taskId",
+          "in": "query",
+          "description": "待办任务编号，唯一健",
+          "required": true,
+          "type": "string",
+          "x-example": "97529486947"
+        }, {
+          "name": "userAndDeps",
+          "in": "query",
+          "description": "办理人部门集合",
+          "required": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserAndDep"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/taskCenter/manager/updateTask": {
+      "post": {
+        "tags": ["任务中心-流程数据接入端：任务管理"],
+        "summary": "更新待办",
+        "operationId": "updateTaskUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "currentNode",
+          "in": "query",
+          "description": "当前任务节点名称",
+          "required": true,
+          "type": "string",
+          "x-example": "部门经理审批"
+        }, {
+          "name": "serviceId",
+          "in": "query",
+          "description": "流程编号，唯一健",
+          "required": true,
+          "type": "string",
+          "x-example": "6930128697529486947"
+        }, {
+          "in": "body",
+          "name": "taskJsonList",
+          "description": "taskJsonList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/TcFlowTaskUpdate"
+            }
+          }
+        }, {
+          "name": "updateTime",
+          "in": "query",
+          "description": "流程更新时间",
+          "required": true,
+          "type": "string",
+          "x-example": "2019-10-09 15:25:56"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "403": {
+            "description": "服务器接收请求，但是拒绝处理"
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/taskCenter/query/getAlreadyApproval": {
+      "get": {
+        "tags": ["任务中心-流程数据接入端：任务查询"],
+        "summary": "我办理的流程-我已办理",
+        "description": "按流程维度，仅查询我已办理的数据",
+        "operationId": "getAlreadyApprovalUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appId",
+          "in": "query",
+          "description": "第三方系统唯一健",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "applyPerson",
+          "in": "query",
+          "description": "申请人唯一编号/申请人名称",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "displayTerminal",
+          "in": "query",
+          "description": "数据显示终端（PC、APP）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "endDate",
+          "in": "query",
+          "description": "发起结束时间（格式：yyyy-MM-dd）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "fuzzyKey",
+          "in": "query",
+          "description": "模糊匹配查询：申请的流程编号、申请的流程流程名称、关键字",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "keyWord",
+          "in": "query",
+          "description": "关键字",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页显示条数",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "serviceId",
+          "in": "query",
+          "description": "申请的流程编号（针对于用户申请的业务）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "serviceName",
+          "in": "query",
+          "description": "申请的流程名称（针对于用户申请的业务）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "serviceType",
+          "in": "query",
+          "description": "服务类型编号，通过接口查询编码值",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "startDate",
+          "in": "query",
+          "description": "发起开始时间（格式：yyyy-MM-dd）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "unit",
+          "in": "query",
+          "description": "申请人单位唯一编号/申请人单位名称",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "userId",
+          "in": "query",
+          "description": "办理人唯一编号",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«TcFlowProcessQuery»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/taskCenter/query/getApplication": {
+      "get": {
+        "tags": ["任务中心-流程数据接入端：任务查询"],
+        "summary": "我申请的流程",
+        "operationId": "getApplicationUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appId",
+          "in": "query",
+          "description": "第三方系统唯一健",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "approveResult",
+          "in": "query",
+          "description": "审批结果（1正常办结、2异常办结、3终止）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "displayTerminal",
+          "in": "query",
+          "description": "数据显示终端（PC、APP）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "endDate",
+          "in": "query",
+          "description": "发起结束时间（格式：yyyy-MM-dd）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "fuzzyKey",
+          "in": "query",
+          "description": "模糊匹配查询：所属系统名称、申请的流程编号、申请的流程流程名称、关键字",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "keyWord",
+          "in": "query",
+          "description": "关键字",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页显示条数",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "serviceId",
+          "in": "query",
+          "description": "申请的流程编号（针对于用户申请的业务）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "serviceName",
+          "in": "query",
+          "description": "申请的流程名称（针对于用户申请的业务）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "serviceType",
+          "in": "query",
+          "description": "服务类型编号，通过接口查询编码值",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "startDate",
+          "in": "query",
+          "description": "发起开始时间（格式：yyyy-MM-dd）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "status",
+          "in": "query",
+          "description": "流程状态集合，多个值以英文逗号分隔[0:待发;1: 进行中; 2: 已完成]",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "userId",
+          "in": "query",
+          "description": "申请人唯一编号",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«TcFlowProcessQuery»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/taskCenter/query/getApproval": {
+      "get": {
+        "tags": ["任务中心-流程数据接入端：任务查询"],
+        "summary": "我办理的流程",
+        "description": "已办任务【按任务】维度查询待我办理/我已办理",
+        "operationId": "getApprovalUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appId",
+          "in": "query",
+          "description": "第三方系统唯一健",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "applyPerson",
+          "in": "query",
+          "description": "申请人唯一编号/申请人名称",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "displayTerminal",
+          "in": "query",
+          "description": "数据显示终端（PC、APP）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "endDate",
+          "in": "query",
+          "description": "发起结束时间（格式：yyyy-MM-dd）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "fuzzyKey",
+          "in": "query",
+          "description": "模糊匹配查询：所属系统名称、申请的流程编号、申请的流程流程名称、关键字",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "keyWord",
+          "in": "query",
+          "description": "关键字",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页显示条数",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "serviceId",
+          "in": "query",
+          "description": "申请的流程编号（针对于用户申请的业务）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "serviceName",
+          "in": "query",
+          "description": "申请的流程名称（针对于用户申请的业务）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "serviceType",
+          "in": "query",
+          "description": "服务类型编号，通过接口查询编码值",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "startDate",
+          "in": "query",
+          "description": "发起开始时间（格式：yyyy-MM-dd）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "status",
+          "in": "query",
+          "description": "办理状态 [1: 待办; 2: 已办]",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "unit",
+          "in": "query",
+          "description": "申请人单位唯一编号/申请人单位名称",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "userId",
+          "in": "query",
+          "description": "办理人唯一编号",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«TcFlowTask»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/taskCenter/statistics/dept/countDeptFlowInfo": {
+      "get": {
+        "tags": ["任务中心-流程数据接入端：按部门统计"],
+        "summary": "部门/全校统计：流程明细",
+        "description": "全校统计数据不受dataType约束",
+        "operationId": "countDeptFlowInfoUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appId",
+          "in": "query",
+          "description": "第三方系统唯一健",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "dataType",
+          "in": "query",
+          "description": "数据类型（1部门管理的服务、2部门参与的服务）",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "deptId",
+          "in": "query",
+          "description": "部门唯一健",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "endDate",
+          "in": "query",
+          "description": "发起结束时间（格式：yyyy-MM-dd）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "flowId",
+          "in": "query",
+          "description": "流程实例编号（针对于基础流程配置）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页显示条数",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "sidx",
+          "in": "query",
+          "description": "排序字段",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "sord",
+          "in": "query",
+          "description": "排序方式（desc或asc）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "startDate",
+          "in": "query",
+          "description": "发起开始时间（格式：yyyy-MM-dd）",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«TcStatDeptFlowInfo»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/taskCenter/statistics/dept/countDeptFlowTarget": {
+      "get": {
+        "tags": ["任务中心-流程数据接入端：按部门统计"],
+        "summary": "部门/全校横向统计：指标项",
+        "description": "全校统计数据不受dataType约束",
+        "operationId": "countDeptFlowTargetUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appId",
+          "in": "query",
+          "description": "第三方系统唯一健",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "dataType",
+          "in": "query",
+          "description": "数据类型（1部门管理的服务、2部门参与的服务）",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "deptId",
+          "in": "query",
+          "description": "部门唯一健",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "endDate",
+          "in": "query",
+          "description": "发起结束时间（格式：yyyy-MM-dd）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "flowId",
+          "in": "query",
+          "description": "流程实例编号（针对于基础流程配置）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "startDate",
+          "in": "query",
+          "description": "发起开始时间（格式：yyyy-MM-dd）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "target",
+          "in": "query",
+          "description": "指标项（1流程使用次数、2已处理次数、3待处理次数、4积压率、5平均办结、6办结情况）",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«TcStatDeptFlowTarget»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/taskCenter/statistics/dept/countDeptFlowTargetHistory": {
+      "get": {
+        "tags": ["任务中心-流程数据接入端：按部门统计"],
+        "summary": "部门/全校历史统计：指标项",
+        "description": "全校统计数据不受dataType约束",
+        "operationId": "countDeptFlowTargetHistoryUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appId",
+          "in": "query",
+          "description": "第三方系统唯一健",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "dataType",
+          "in": "query",
+          "description": "数据类型（1部门管理的服务、2部门参与的服务）",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "deptId",
+          "in": "query",
+          "description": "部门唯一健",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "dimension",
+          "in": "query",
+          "description": "统计纬度（1按年、2按月、3按天）",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "endDate",
+          "in": "query",
+          "description": "发起结束时间（格式：yyyy-MM-dd）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "flowId",
+          "in": "query",
+          "description": "流程实例编号（针对于基础流程配置）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "startDate",
+          "in": "query",
+          "description": "发起开始时间（格式：yyyy-MM-dd）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "target",
+          "in": "query",
+          "description": "指标项（1已处理次数、2待处理次数）",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«TcStatDeptFlowTargetHistoryGroup»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/taskCenter/statistics/dept/listSystem": {
+      "get": {
+        "tags": ["任务中心-流程数据接入端：按部门统计"],
+        "summary": "查询接入的第三方应用-按部门",
+        "operationId": "listSystemUsingGET_1",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "deptId",
+          "in": "query",
+          "description": "部门唯一编号",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«TcCommonSystem»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/taskCenter/statistics/flowInstance/countApproveResultStat": {
+      "get": {
+        "tags": ["任务中心-流程数据接入端：按流程实例统计"],
+        "summary": "按审批结果统计",
+        "operationId": "countApproveResultStatUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "applyPerson",
+          "in": "query",
+          "description": "申请人唯一编号",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "endDate",
+          "in": "query",
+          "description": "发起结束时间（格式：yyyy-MM-dd）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "flowId",
+          "in": "query",
+          "description": "流程实例编号（针对于基础流程配置）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "sidx",
+          "in": "query",
+          "description": "排序字段",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "sord",
+          "in": "query",
+          "description": "排序方式（desc或asc）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "startDate",
+          "in": "query",
+          "description": "发起开始时间（格式：yyyy-MM-dd）",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«TcStatApproveResult»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/taskCenter/statistics/person/countApplyPersonBasic": {
+      "get": {
+        "tags": ["任务中心-流程数据接入端：按个人统计"],
+        "summary": "我申请的服务-概括",
+        "operationId": "countApplyPersonBasicUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appId",
+          "in": "query",
+          "description": "第三方系统唯一健",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "applyPerson",
+          "in": "query",
+          "description": "申请人唯一编号",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "endDate",
+          "in": "query",
+          "description": "发起结束时间（格式：yyyy-MM-dd）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "startDate",
+          "in": "query",
+          "description": "发起开始时间（格式：yyyy-MM-dd）",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«TcStatPersonApplyBasic»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/taskCenter/statistics/person/countApplyPersonByFlow": {
+      "get": {
+        "tags": ["任务中心-流程数据接入端：按个人统计"],
+        "summary": "我申请的服务-按流程",
+        "operationId": "countApplyPersonByFlowUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appId",
+          "in": "query",
+          "description": "第三方系统唯一健",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "applyPerson",
+          "in": "query",
+          "description": "申请人唯一编号",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "endDate",
+          "in": "query",
+          "description": "发起结束时间（格式：yyyy-MM-dd）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页显示条数",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "startDate",
+          "in": "query",
+          "description": "发起开始时间（格式：yyyy-MM-dd）",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«TcStatPersonApplyByFlow»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/taskCenter/statistics/person/countApplyPersonByFlowToInfo": {
+      "get": {
+        "tags": ["任务中心-流程数据接入端：按个人统计"],
+        "summary": "我申请的服务-按流程（明细）",
+        "operationId": "countApplyPersonByFlowToInfoUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appId",
+          "in": "query",
+          "description": "第三方系统唯一健",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "applyPerson",
+          "in": "query",
+          "description": "申请人唯一编号",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "endDate",
+          "in": "query",
+          "description": "发起结束时间（格式：yyyy-MM-dd）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页显示条数",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "sidx",
+          "in": "query",
+          "description": "排序字段",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "sord",
+          "in": "query",
+          "description": "排序方式（desc或asc）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "startDate",
+          "in": "query",
+          "description": "发起开始时间（格式：yyyy-MM-dd）",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«TcStatPersonApplyByFlowToInfo»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/taskCenter/statistics/person/countMyApprovalBasic": {
+      "get": {
+        "tags": ["任务中心-流程数据接入端：按个人统计"],
+        "summary": "待我办理的服务-概括",
+        "operationId": "countMyApprovalBasicUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appId",
+          "in": "query",
+          "description": "第三方系统唯一健",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "approvalPerson",
+          "in": "query",
+          "description": "办理人唯一编号",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "endDate",
+          "in": "query",
+          "description": "发起结束时间（格式：yyyy-MM-dd）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "startDate",
+          "in": "query",
+          "description": "发起开始时间（格式：yyyy-MM-dd）",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«TcStatPersonApprovalBasic»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/taskCenter/statistics/person/countMyApprovalByFlow": {
+      "get": {
+        "tags": ["任务中心-流程数据接入端：按个人统计"],
+        "summary": "待我办理的服务-按流程",
+        "operationId": "countMyApprovalByFlowUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appId",
+          "in": "query",
+          "description": "第三方系统唯一健",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "approvalPerson",
+          "in": "query",
+          "description": "办理人唯一编号",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "endDate",
+          "in": "query",
+          "description": "发起结束时间（格式：yyyy-MM-dd）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页显示条数",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "startDate",
+          "in": "query",
+          "description": "发起开始时间（格式：yyyy-MM-dd）",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«TcStatPersonApprovalByFlow»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/taskCenter/statistics/person/countMyApprovalByFlowToInfo": {
+      "get": {
+        "tags": ["任务中心-流程数据接入端：按个人统计"],
+        "summary": "待我办理的服务-按流程（明细）",
+        "operationId": "countMyApprovalByFlowToInfoUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appId",
+          "in": "query",
+          "description": "第三方系统唯一健",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "approvalPerson",
+          "in": "query",
+          "description": "办理人唯一编号",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "endDate",
+          "in": "query",
+          "description": "发起结束时间（格式：yyyy-MM-dd）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页显示条数",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "sidx",
+          "in": "query",
+          "description": "排序字段",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "sord",
+          "in": "query",
+          "description": "排序方式（desc或asc）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "startDate",
+          "in": "query",
+          "description": "发起开始时间（格式：yyyy-MM-dd）",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«TcStatPersonApprovalByFlowToInfo»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/taskCenter/statistics/person/listSystem": {
+      "get": {
+        "tags": ["任务中心-流程数据接入端：按个人统计"],
+        "summary": "查询接入的第三方应用-按个人",
+        "operationId": "listSystemUsingGET_2",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "currentState",
+          "in": "query",
+          "description": "办理状态（1进行中、2已完成）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "userId",
+          "in": "query",
+          "description": "申请人/办理人唯一编号",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "userType",
+          "in": "query",
+          "description": "用户类型（1申请人、2办理人）",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«TcCommonSystem»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/taskCenter/statistics/person/listSystemFlow": {
+      "get": {
+        "tags": ["任务中心-流程数据接入端：按个人统计"],
+        "summary": "查询接入的基础流程信息-按个人",
+        "operationId": "listSystemFlowUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appId",
+          "in": "query",
+          "description": "接入的第三方系统唯一健",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "currentState",
+          "in": "query",
+          "description": "办理状态（1进行中、2已完成）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "userId",
+          "in": "query",
+          "description": "申请人/办理人唯一编号",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "userType",
+          "in": "query",
+          "description": "用户类型（1申请人、2办理人）",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«TcCommonSystemFlow»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/taskCenter/type/list": {
+      "get": {
+        "tags": ["任务中心-流程数据接入端：任务类型查询"],
+        "summary": "查询服务流程类型",
+        "operationId": "listUsingGET",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«TcFlowType»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "IPage«TcFlowProcessQuery»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TcFlowProcessQuery"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«TcFlowProcessQuery»"
+    },
+    "IPage«TcFlowTask»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TcFlowTask"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«TcFlowTask»"
+    },
+    "IPage«TcStatDeptFlowInfo»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TcStatDeptFlowInfo"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«TcStatDeptFlowInfo»"
+    },
+    "IPage«TcStatPersonApplyByFlowToInfo»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TcStatPersonApplyByFlowToInfo"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«TcStatPersonApplyByFlowToInfo»"
+    },
+    "IPage«TcStatPersonApplyByFlow»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TcStatPersonApplyByFlow"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«TcStatPersonApplyByFlow»"
+    },
+    "IPage«TcStatPersonApprovalByFlowToInfo»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TcStatPersonApprovalByFlowToInfo"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«TcStatPersonApprovalByFlowToInfo»"
+    },
+    "IPage«TcStatPersonApprovalByFlow»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TcStatPersonApprovalByFlow"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«TcStatPersonApprovalByFlow»"
+    },
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«TcFlowProcessQuery»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«TcFlowProcessQuery»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«TcFlowProcessQuery»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«TcFlowTask»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«TcFlowTask»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«TcFlowTask»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«TcStatDeptFlowInfo»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«TcStatDeptFlowInfo»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«TcStatDeptFlowInfo»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«TcStatPersonApplyByFlowToInfo»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«TcStatPersonApplyByFlowToInfo»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«TcStatPersonApplyByFlowToInfo»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«TcStatPersonApplyByFlow»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«TcStatPersonApplyByFlow»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«TcStatPersonApplyByFlow»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«TcStatPersonApprovalByFlowToInfo»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«TcStatPersonApprovalByFlowToInfo»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«TcStatPersonApprovalByFlowToInfo»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«TcStatPersonApprovalByFlow»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«TcStatPersonApprovalByFlow»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«TcStatPersonApprovalByFlow»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«TcCommonSystemFlow»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/TcCommonSystemFlow"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«TcCommonSystemFlow»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«TcCommonSystem»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/TcCommonSystem"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«TcCommonSystem»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«TcFlowType»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/TcFlowType"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«TcFlowType»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«TcStatApproveResult»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/TcStatApproveResult"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«TcStatApproveResult»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«TcStatDeptFlowTargetHistoryGroup»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/TcStatDeptFlowTargetHistoryGroup"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«TcStatDeptFlowTargetHistoryGroup»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«TcStatDeptFlowTarget»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/TcStatDeptFlowTarget"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«TcStatDeptFlowTarget»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«TcStatPersonApplyBasic»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/TcStatPersonApplyBasic"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«TcStatPersonApplyBasic»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«TcStatPersonApprovalBasic»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/TcStatPersonApprovalBasic"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«TcStatPersonApprovalBasic»",
+      "description": "返回响应数据"
+    },
+    "TcCommonSystem": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "example": "2f532999feaf41a5b1acb80aef7a595f",
+          "description": "接入系统唯一健"
+        },
+        "appName": {
+          "type": "string",
+          "example": "门户",
+          "description": "接入系统名称"
+        }
+      },
+      "title": "TcCommonSystem",
+      "description": "接入系统信息"
+    },
+    "TcCommonSystemFlow": {
+      "type": "object",
+      "properties": {
+        "serviceId": {
+          "type": "string",
+          "example": "test",
+          "description": "流程实例唯一编码"
+        },
+        "serviceName": {
+          "type": "string",
+          "example": "请假申请",
+          "description": "流程实例名称"
+        }
+      },
+      "title": "TcCommonSystemFlow",
+      "description": "第三方系统接入流程信息"
+    },
+    "TcFlowProcess": {
+      "type": "object",
+      "required": ["applyPerson", "currentNode", "serviceId", "serviceName", "startTime", "status", "unit"],
+      "properties": {
+        "appRedirectUrl": {
+          "type": "string",
+          "example": "http://ip:port/xxx",
+          "description": "移动端跳转链接"
+        },
+        "applyPerson": {
+          "type": "string",
+          "example": "000088",
+          "description": "申请人唯一健"
+        },
+        "approveResult": {
+          "type": "string",
+          "example": "2019-10-08 15:22:25",
+          "description": "审批结果"
+        },
+        "completeTime": {
+          "type": "string",
+          "example": "2019-10-08 15:22:25",
+          "description": "完成时间"
+        },
+        "currentNode": {
+          "type": "string",
+          "example": "部门经理审批",
+          "description": "流程当前节点名"
+        },
+        "keyWord": {
+          "type": "string",
+          "example": "xxx申请的年假审批",
+          "description": "关键字"
+        },
+        "pcRedirectUrl": {
+          "type": "string",
+          "example": "http://ip:port/xxx",
+          "description": "PC端跳转链接"
+        },
+        "serviceId": {
+          "type": "string",
+          "example": "e18d5fe35e374b54a8fc097d71d43aa5",
+          "description": "流程编号，唯一健（针对于用户申请的业务）"
+        },
+        "serviceName": {
+          "type": "string",
+          "example": "年假申请",
+          "description": "流程名称（针对于用户申请的业务）"
+        },
+        "startTime": {
+          "type": "string",
+          "example": "2019-10-08 15:22:25",
+          "description": "申请时间"
+        },
+        "status": {
+          "type": "string",
+          "example": "1",
+          "description": "流程当前状态(0待发；1运行中；2已完成)"
+        },
+        "unit": {
+          "type": "string",
+          "example": 235781,
+          "description": "申请人部门唯一健"
+        },
+        "updateTime": {
+          "type": "string",
+          "example": "2019-10-08 15:22:25",
+          "description": "申请时间"
+        }
+      },
+      "title": "TcFlowProcess",
+      "description": "服务流程"
+    },
+    "TcFlowProcessQuery": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "example": "e18d5fe35e374b54a8fc097d71d43aa5",
+          "description": "所属系统唯一健"
+        },
+        "appName": {
+          "type": "string",
+          "example": "请假申请",
+          "description": "所属系统名称"
+        },
+        "applyPerson": {
+          "type": "string",
+          "example": "000088",
+          "description": "申请人唯一健"
+        },
+        "applyPersonName": {
+          "type": "string",
+          "example": "张三",
+          "description": "申请人名称"
+        },
+        "approveResult": {
+          "type": "string",
+          "example": 1,
+          "description": "审批结果（1正常办结、2异常办结、3终止）"
+        },
+        "currentNode": {
+          "type": "string",
+          "example": "部门经理审批",
+          "description": "流程当前节点名"
+        },
+        "keyWord": {
+          "type": "string",
+          "example": "年假申请",
+          "description": "关键字"
+        },
+        "lastApproveTime": {
+          "type": "string",
+          "example": "2019-10-08 19:22:25",
+          "description": "最后办理时间"
+        },
+        "serviceId": {
+          "type": "string",
+          "example": "e18d5fe35e374b54a8fc097d71d43aa5",
+          "description": "流程编号，唯一健（针对于用户申请的业务）"
+        },
+        "serviceName": {
+          "type": "string",
+          "example": "xxx请假审批",
+          "description": "流程名称（针对于用户申请的业务）"
+        },
+        "serviceType": {
+          "type": "string",
+          "example": "2",
+          "description": "服务分类"
+        },
+        "startTime": {
+          "type": "string",
+          "example": "2019-10-08 15:22:25",
+          "description": "申请时间"
+        },
+        "status": {
+          "type": "string",
+          "example": "1",
+          "description": "流程当前状态(0待发；1运行中；2已完成)"
+        },
+        "unit": {
+          "type": "string",
+          "example": 235781,
+          "description": "申请人部门唯一健"
+        },
+        "unitName": {
+          "type": "string",
+          "example": "研发中心",
+          "description": "申请人部门名称"
+        },
+        "pcRedirectUrl": {
+          "type": "string",
+          "example": "http://ip:port/xxx",
+          "description": "PC端跳转链接"
+        },
+        "appRedirectUrl": {
+          "type": "string",
+          "example": "http://ip:port/xxx",
+          "description": "移动端跳转链接"
+        }
+      },
+      "title": "TcFlowProcessQuery",
+      "description": "服务流程查询"
+    },
+    "TcFlowTask": {
+      "type": "object",
+      "required": ["id"],
+      "properties": {
+        "appId": {
+          "type": "string",
+          "example": "e18d5fe35e374b54a8fc097d71d43aa5",
+          "description": "所属系统唯一健"
+        },
+        "appRedirectUrl": {
+          "type": "string",
+          "example": "url",
+          "description": "移动端跳转链接"
+        },
+        "appServiceId": {
+          "type": "string",
+          "description": "应用服务编号"
+        },
+        "completeTime": {
+          "type": "string",
+          "example": "yyyy-MM-dd HH:mm:ss",
+          "description": "待办任务办理时间"
+        },
+        "createTime": {
+          "type": "string",
+          "example": "yyyy-MM-dd HH:mm:ss",
+          "description": "待办任务创建时间"
+        },
+        "currentState": {
+          "type": "string",
+          "example": "1",
+          "description": "办理状态（1待办，2已办）"
+        },
+        "executDep": {
+          "type": "string",
+          "example": 1001,
+          "description": "办理人所在部门唯一健不能为空"
+        },
+        "executor": {
+          "type": "string",
+          "example": "张三",
+          "description": "办理人"
+        },
+        "id": {
+          "type": "string",
+          "description": "编号，唯一健"
+        },
+        "pcRedirectUrl": {
+          "type": "string",
+          "example": "url",
+          "description": "跳转链接"
+        },
+        "serviceId": {
+          "type": "string",
+          "example": "e18d5fe35e374b54a8fc097d71d43aa5",
+          "description": "流程编号，唯一健（针对于用户申请的业务）"
+        },
+        "taskId": {
+          "type": "string",
+          "example": 6930128697529487000,
+          "description": "待办任务编号，唯一健"
+        },
+        "taskName": {
+          "type": "string",
+          "example": "部门经理审批",
+          "description": "待办任务名称"
+        }
+      },
+      "title": "TcFlowTask",
+      "description": "待办任务"
+    },
+    "TcFlowTaskAdd": {
+      "type": "object",
+      "required": ["createTime", "taskId", "taskName", "userAndDepList"],
+      "properties": {
+        "appRedirectUrl": {
+          "type": "string",
+          "example": "http://ip:port/xxx",
+          "description": "移动端跳转链接"
+        },
+        "createTime": {
+          "type": "string",
+          "example": "2019-10-09 15:25:56",
+          "description": "创建时间"
+        },
+        "keyWord": {
+          "type": "string",
+          "example": "年假申请",
+          "description": "关键字"
+        },
+        "pcRedirectUrl": {
+          "type": "string",
+          "example": "http://ip:port/xxx",
+          "description": "PC端跳转链接"
+        },
+        "taskId": {
+          "type": "string",
+          "example": 6930128697529487000,
+          "description": "待办任务编号，唯一健"
+        },
+        "taskName": {
+          "type": "string",
+          "example": "部门经理审批",
+          "description": "待办任务名称"
+        },
+        "userAndDepList": {
+          "type": "array",
+          "example": [{
+            "userId": "000159",
+            "depIds": "1002,1004"
+          }],
+          "description": "办理人部门集合,部门多个值以英文逗号分割",
+          "items": {
+            "$ref": "#/definitions/UserAndDep"
+          }
+        }
+      },
+      "title": "TcFlowTaskAdd",
+      "description": "新增待办"
+    },
+    "TcFlowTaskUpdate": {
+      "type": "object",
+      "required": ["completeTime", "executDep", "executor", "taskId"],
+      "properties": {
+        "appRedirectUrl": {
+          "type": "string",
+          "example": "http://ip:port/xxx",
+          "description": "移动端跳转链接"
+        },
+        "completeTime": {
+          "type": "string",
+          "example": "2019-10-09 16:25:56",
+          "description": "办理时间"
+        },
+        "executDep": {
+          "type": "string",
+          "example": 1001,
+          "description": "办理人所在部门唯一健不能为空"
+        },
+        "executor": {
+          "type": "string",
+          "example": "000159",
+          "description": "办理人唯一健"
+        },
+        "pcRedirectUrl": {
+          "type": "string",
+          "example": "http://ip:port/xxx",
+          "description": "PC端跳转链接"
+        },
+        "taskId": {
+          "type": "string",
+          "example": 6930128697529487000,
+          "description": "待办任务编号，唯一健"
+        }
+      },
+      "title": "TcFlowTaskUpdate",
+      "description": "更新待办"
+    },
+    "TcFlowType": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": 1,
+          "description": "编码"
+        },
+        "name": {
+          "type": "string",
+          "example": "财务服务",
+          "description": "名称"
+        }
+      },
+      "title": "TcFlowType",
+      "description": "服务流程类型"
+    },
+    "TcStatApproveResult": {
+      "type": "object",
+      "properties": {
+        "abnormalNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "异常办结"
+        },
+        "allNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 7,
+          "description": "总数"
+        },
+        "normalNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 4,
+          "description": "正常办结"
+        },
+        "serviceId": {
+          "type": "string",
+          "example": "e18d5fe35e374b54a8fc097d71d43aa5",
+          "description": "流程实例编号，唯一健"
+        },
+        "serviceName": {
+          "type": "string",
+          "example": "请假申请",
+          "description": "流程实例名称"
+        },
+        "terminationNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0,
+          "description": "终止办结"
+        },
+        "toDoNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 2,
+          "description": "办理中"
+        }
+      },
+      "title": "TcStatApproveResult",
+      "description": "审批结果状态统计"
+    },
+    "TcStatDeptFlowInfo": {
+      "type": "object",
+      "properties": {
+        "abnormalNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "异常办结"
+        },
+        "appId": {
+          "type": "string",
+          "example": "12397a6123454e77b28cad75bc948c33",
+          "description": "第三方系统唯一健"
+        },
+        "appName": {
+          "type": "string",
+          "example": "门户",
+          "description": "第三方系统名称"
+        },
+        "applyNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 7,
+          "description": "申请数量"
+        },
+        "averageTransact": {
+          "type": "number",
+          "format": "float",
+          "example": 0,
+          "description": "平均办结时间（天）"
+        },
+        "backlogRate": {
+          "type": "integer",
+          "format": "int32",
+          "example": 4.2,
+          "description": "积压率"
+        },
+        "collectionNum": {
+          "type": "number",
+          "format": "float",
+          "example": 30,
+          "description": "收藏次数"
+        },
+        "grade": {
+          "type": "number",
+          "format": "float",
+          "example": 5,
+          "description": "评分"
+        },
+        "normalNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 4,
+          "description": "正常办结"
+        },
+        "ordinaryAlreadyNum": {
+          "type": "number",
+          "format": "float",
+          "example": 0,
+          "description": "普通异常已办"
+        },
+        "ordinaryToDoNum": {
+          "type": "number",
+          "format": "float",
+          "example": 0,
+          "description": "普通异常待办"
+        },
+        "serviceId": {
+          "type": "string",
+          "example": "e18d5fe35e374b54a8fc097d71d43aa5",
+          "description": "流程实例编号，唯一健"
+        },
+        "serviceName": {
+          "type": "string",
+          "example": "请假申请",
+          "description": "流程实例名称"
+        },
+        "severityAlreadyNum": {
+          "type": "number",
+          "format": "float",
+          "example": 0,
+          "description": "严重异常已办"
+        },
+        "severityToDoNum": {
+          "type": "number",
+          "format": "float",
+          "example": 0,
+          "description": "严重异常待办"
+        },
+        "terminationNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0,
+          "description": "终止办结"
+        },
+        "toDoNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 2,
+          "description": "待办"
+        },
+        "unit": {
+          "type": "string",
+          "example": 239000,
+          "description": "部门唯一健"
+        },
+        "unitName": {
+          "type": "string",
+          "example": "研发中心",
+          "description": "部门名称"
+        },
+        "visitNum": {
+          "type": "number",
+          "format": "float",
+          "example": 143,
+          "description": "浏览次数"
+        }
+      },
+      "title": "TcStatDeptFlowInfo",
+      "description": "部门统计-指标"
+    },
+    "TcStatDeptFlowTarget": {
+      "type": "object",
+      "properties": {
+        "abnormalNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "异常办结"
+        },
+        "appId": {
+          "type": "string",
+          "example": "12397a6123454e77b28cad75bc948c33",
+          "description": "第三方系统唯一健"
+        },
+        "appName": {
+          "type": "string",
+          "example": "门户",
+          "description": "第三方系统名称"
+        },
+        "normalNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 4,
+          "description": "正常办结"
+        },
+        "num": {
+          "type": "integer",
+          "format": "int32",
+          "example": 4,
+          "description": "流程使用次数/已处理次数/待处理次数/浏览次数"
+        },
+        "rate": {
+          "type": "number",
+          "format": "float",
+          "example": 4,
+          "description": "积压率/平均评分/平均办结"
+        },
+        "serviceId": {
+          "type": "string",
+          "example": "e18d5fe35e374b54a8fc097d71d43aa5",
+          "description": "流程实例编号，唯一健"
+        },
+        "serviceName": {
+          "type": "string",
+          "example": "请假申请",
+          "description": "流程实例名称"
+        },
+        "terminationNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0,
+          "description": "终止办结"
+        }
+      },
+      "title": "TcStatDeptFlowTarget",
+      "description": "部门统计-指标"
+    },
+    "TcStatDeptFlowTargetHistory": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "example": "12397a6123454e77b28cad75bc948c33",
+          "description": "第三方系统唯一健"
+        },
+        "appName": {
+          "type": "string",
+          "example": "门户",
+          "description": "第三方系统名称"
+        },
+        "date": {
+          "type": "string",
+          "example": "yyyy或yyyy-MM或yyyy-MM-dd",
+          "description": "统计时间格式"
+        },
+        "num": {
+          "type": "integer",
+          "format": "int32",
+          "example": 4,
+          "description": "已处理次数/待处理次数"
+        },
+        "serviceName": {
+          "type": "string",
+          "example": "请假申请",
+          "description": "流程实例名称"
+        }
+      },
+      "title": "TcStatDeptFlowTargetHistory",
+      "description": "部门统计-指标-历史"
+    },
+    "TcStatDeptFlowTargetHistoryGroup": {
+      "type": "object",
+      "properties": {
+        "serviceName": {
+          "type": "string",
+          "description": "流程实例名称"
+        },
+        "statList": {
+          "type": "array",
+          "description": "统计数据",
+          "items": {
+            "$ref": "#/definitions/TcStatDeptFlowTargetHistory"
+          }
+        }
+      },
+      "title": "TcStatDeptFlowTargetHistoryGroup",
+      "description": "部门统计-指标-历史-分组"
+    },
+    "TcStatPersonApplyBasic": {
+      "type": "object",
+      "properties": {
+        "abnormalNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "异常办结"
+        },
+        "allNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 7,
+          "description": "申请总数"
+        },
+        "normalNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 4,
+          "description": "正常办结"
+        },
+        "terminationNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0,
+          "description": "终止办结"
+        },
+        "toDoNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 2,
+          "description": "办理中"
+        }
+      },
+      "title": "TcStatPersonApplyBasic",
+      "description": "我申请的服务-概括"
+    },
+    "TcStatPersonApplyByFlow": {
+      "type": "object",
+      "properties": {
+        "rate": {
+          "type": "number",
+          "format": "float",
+          "example": 4,
+          "description": "占比-百分比（与总数比）"
+        },
+        "serviceId": {
+          "type": "string",
+          "example": "e18d5fe35e374b54a8fc097d71d43aa5",
+          "description": "流程实例编号，唯一健"
+        },
+        "serviceName": {
+          "type": "string",
+          "example": "请假申请",
+          "description": "流程实例名称"
+        },
+        "subAllNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 7,
+          "description": "申请数量（此流程）"
+        }
+      },
+      "title": "TcStatPersonApplyByFlow",
+      "description": "我申请的服务-按流程"
+    },
+    "TcStatPersonApplyByFlowToInfo": {
+      "type": "object",
+      "properties": {
+        "abnormalNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "异常办结"
+        },
+        "appId": {
+          "type": "string",
+          "example": "12397a6123454e77b28cad75bc948c33",
+          "description": "第三方系统唯一健"
+        },
+        "appName": {
+          "type": "string",
+          "example": "门户",
+          "description": "第三方系统名称"
+        },
+        "applyNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 7,
+          "description": "申请数量（此流程）"
+        },
+        "averageTransact": {
+          "type": "number",
+          "format": "float",
+          "example": 0,
+          "description": "平均办结时间（天）"
+        },
+        "normalNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 4,
+          "description": "正常办结"
+        },
+        "ordinaryAlreadyNum": {
+          "type": "number",
+          "format": "float",
+          "example": 0,
+          "description": "普通异常已办"
+        },
+        "ordinaryToDoNum": {
+          "type": "number",
+          "format": "float",
+          "example": 0,
+          "description": "普通异常待办"
+        },
+        "serviceId": {
+          "type": "string",
+          "example": "e18d5fe35e374b54a8fc097d71d43aa5",
+          "description": "流程实例编号，唯一健"
+        },
+        "serviceName": {
+          "type": "string",
+          "example": "请假申请",
+          "description": "流程实例名称"
+        },
+        "severityAlreadyNum": {
+          "type": "number",
+          "format": "float",
+          "example": 0,
+          "description": "严重异常已办"
+        },
+        "severityToDoNum": {
+          "type": "number",
+          "format": "float",
+          "example": 0,
+          "description": "严重异常待办"
+        },
+        "terminationNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0,
+          "description": "终止办结"
+        },
+        "toDoNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 2,
+          "description": "待办"
+        },
+        "unit": {
+          "type": "string",
+          "example": 239000,
+          "description": "部门唯一健"
+        },
+        "unitName": {
+          "type": "string",
+          "example": "研发中心",
+          "description": "部门名称"
+        }
+      },
+      "title": "TcStatPersonApplyByFlowToInfo",
+      "description": "个人业务量-按流程"
+    },
+    "TcStatPersonApprovalBasic": {
+      "type": "object",
+      "properties": {
+        "flowAbnormalNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "流程异常办结"
+        },
+        "flowAllNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 15,
+          "description": "流程总数（含未办）"
+        },
+        "flowNormalNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 4,
+          "description": "流程正常办结"
+        },
+        "flowTerminationNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0,
+          "description": "流程终止办结"
+        },
+        "taskAllNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 7,
+          "description": "待办任务总数（含未办）"
+        },
+        "taskAlreadyNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 5,
+          "description": "已办任务"
+        },
+        "taskToDoNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 2,
+          "description": "待办任务"
+        }
+      },
+      "title": "TcStatPersonApprovalBasic",
+      "description": "待我办理的服务-概括"
+    },
+    "TcStatPersonApprovalByFlow": {
+      "type": "object",
+      "properties": {
+        "rate": {
+          "type": "number",
+          "format": "float",
+          "example": 4,
+          "description": "占比-百分比（与总数比）"
+        },
+        "serviceId": {
+          "type": "string",
+          "example": "e18d5fe35e374b54a8fc097d71d43aa5",
+          "description": "流程实例编号，唯一健"
+        },
+        "serviceName": {
+          "type": "string",
+          "example": "请假申请",
+          "description": "流程实例名称"
+        },
+        "subAllNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 7,
+          "description": "待办总数量-含未办（此流程）"
+        }
+      },
+      "title": "TcStatPersonApprovalByFlow",
+      "description": "待我办理的服务-按流程"
+    },
+    "TcStatPersonApprovalByFlowToInfo": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "example": "12397a6123454e77b28cad75bc948c33",
+          "description": "第三方系统唯一健"
+        },
+        "appName": {
+          "type": "string",
+          "example": "门户",
+          "description": "第三方系统名称"
+        },
+        "averageTransact": {
+          "type": "number",
+          "format": "float",
+          "example": 0,
+          "description": "平均办结时间（天）"
+        },
+        "collectionNum": {
+          "type": "string",
+          "example": 16,
+          "description": "收藏次数"
+        },
+        "flowAbnormalNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "流程异常办结"
+        },
+        "flowAllNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 7,
+          "description": "对应流程总数（含未办）"
+        },
+        "flowNormalNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 4,
+          "description": "流程正常办结"
+        },
+        "flowTerminationNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0,
+          "description": "流程终止办结"
+        },
+        "ordinaryAlreadyNum": {
+          "type": "number",
+          "format": "float",
+          "example": 0,
+          "description": "普通异常已办"
+        },
+        "ordinaryToDoNum": {
+          "type": "number",
+          "format": "float",
+          "example": 0,
+          "description": "普通异常待办"
+        },
+        "serviceId": {
+          "type": "string",
+          "example": "e18d5fe35e374b54a8fc097d71d43aa5",
+          "description": "流程实例编号，唯一健"
+        },
+        "serviceName": {
+          "type": "string",
+          "example": "请假申请",
+          "description": "流程实例名称"
+        },
+        "severityAlreadyNum": {
+          "type": "number",
+          "format": "float",
+          "example": 0,
+          "description": "严重异常已办"
+        },
+        "severityToDoNum": {
+          "type": "number",
+          "format": "float",
+          "example": 0,
+          "description": "严重异常待办"
+        },
+        "taskAllNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 7,
+          "description": "待办任务总数-含未办（此流程）"
+        },
+        "taskAlreadyNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 5,
+          "description": "已办任务"
+        },
+        "taskToDoNum": {
+          "type": "integer",
+          "format": "int32",
+          "example": 2,
+          "description": "待办任务"
+        },
+        "unit": {
+          "type": "string",
+          "example": 239000,
+          "description": "部门唯一健"
+        },
+        "unitName": {
+          "type": "string",
+          "example": "研发中心",
+          "description": "部门名称"
+        }
+      },
+      "title": "TcStatPersonApprovalByFlowToInfo",
+      "description": "个人业务量-按流程"
+    },
+    "UserAndDep": {
+      "type": "object",
+      "required": ["depIds", "userId"],
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "example": "00642ec6c668475989a17365ad9d9f01",
+          "description": "用户accountId"
+        },
+        "depIds": {
+          "type": "string",
+          "example": "000,111",
+          "description": "机构唯一健集合,多个值以英文逗号分割"
+        },
+        "userId": {
+          "type": "string",
+          "example": "000159",
+          "description": "用户id"
+        }
+      },
+      "title": "UserAndDep",
+      "description": "用户信息+用户机构信息"
+    }
+  }
+}

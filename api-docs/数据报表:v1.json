@@ -1,0 +1,460 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "数据报表"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-data-report",
+  "tags": [{
+    "name": "报表-动态字典案例",
+    "description": "Report Example Controller"
+  }, {
+    "name": "报表模型 前端控制器",
+    "description": "T Data Report Model Controller"
+  }],
+  "paths": {
+    "/data-report/model": {
+      "post": {
+        "tags": ["报表模型 前端控制器"],
+        "summary": "报表模型保存",
+        "description": "报表模型保存",
+        "operationId": "saveUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "modelJson",
+          "description": "modelJson",
+          "required": true,
+          "schema": {
+            "type": "object"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«string»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/data-report/model/query": {
+      "post": {
+        "tags": ["报表模型 前端控制器"],
+        "summary": "查询",
+        "operationId": "queryUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«TDataReportModel对象»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«TDataReportModel对象»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/data-report/model/{id}": {
+      "get": {
+        "tags": ["报表模型 前端控制器"],
+        "summary": "根据id查询报表模型",
+        "operationId": "getByIdUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "报表模型ID",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«TDataReportModel对象»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["报表模型 前端控制器"],
+        "summary": "根据id删除报表模型",
+        "operationId": "deleteUsingDELETE",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "报表模型ID",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«int»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/report-example/get-cascader": {
+      "get": {
+        "tags": ["报表-动态字典案例"],
+        "summary": "get方式级联，树形",
+        "description": "get方式级联，树形",
+        "operationId": "getCascaderUsingGET",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/report-example/get-select": {
+      "get": {
+        "tags": ["报表-动态字典案例"],
+        "summary": "get方式单选，下拉，多选",
+        "description": "get方式单选，下拉，多选",
+        "operationId": "getSelectUsingGET",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "IPage«TDataReportModel对象»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TDataReportModel对象"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«TDataReportModel对象»"
+    },
+    "OrderItem": {
+      "type": "object",
+      "properties": {
+        "asc": {
+          "type": "boolean"
+        },
+        "column": {
+          "type": "string"
+        }
+      },
+      "title": "OrderItem"
+    },
+    "QueryCondition«TDataReportModel对象»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/TDataReportModel对象"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«TDataReportModel对象»",
+      "description": "查询条件"
+    },
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«TDataReportModel对象»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«TDataReportModel对象»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«TDataReportModel对象»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«TDataReportModel对象»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/TDataReportModel对象"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«TDataReportModel对象»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«int»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«int»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«string»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "string",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«string»",
+      "description": "返回响应数据"
+    },
+    "TDataReportModel对象": {
+      "type": "object",
+      "properties": {
+        "creator": {
+          "type": "string",
+          "description": "创建人id"
+        },
+        "creatorName": {
+          "type": "string",
+          "description": "创建人姓名"
+        },
+        "creatorTime": {
+          "type": "string",
+          "description": "创建时间"
+        },
+        "deleteFlag": {
+          "type": "integer",
+          "format": "int32",
+          "description": "删除标记（1：已删除；0：有效）"
+        },
+        "id": {
+          "type": "string",
+          "description": "关键字"
+        },
+        "modelJson": {
+          "type": "string",
+          "description": "配置预览"
+        },
+        "modelJsonMap": {
+          "type": "object"
+        },
+        "orgId": {
+          "type": "string",
+          "description": "管理部门"
+        },
+        "orgName": {
+          "type": "string",
+          "description": "管理部门名称"
+        },
+        "remark": {
+          "type": "string",
+          "description": "描述信息"
+        },
+        "reportKey": {
+          "type": "string",
+          "description": "模型对应的key"
+        },
+        "reportName": {
+          "type": "string",
+          "description": "模型名称"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        },
+        "type": {
+          "type": "string",
+          "description": "大屏：screen,报表：report"
+        },
+        "updateTime": {
+          "type": "string",
+          "description": "更新时间"
+        },
+        "updator": {
+          "type": "string",
+          "description": "更新人"
+        },
+        "updatorName": {
+          "type": "string",
+          "description": "更新人姓名"
+        }
+      },
+      "title": "TDataReportModel对象",
+      "description": "报表模型"
+    }
+  }
+}

@@ -1,0 +1,255 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "apis-数据加工控件"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-apis-manage",
+  "tags": [{
+    "name": "apis数据加工控件",
+    "description": "Apis Data Processing Ctls Controlller"
+  }],
+  "paths": {
+    "/apis/data-processing-ctls/save": {
+      "post": {
+        "tags": ["apis数据加工控件"],
+        "summary": "数据加工控件保存配置",
+        "operationId": "saveModelUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "model",
+          "description": "model",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ApisDataProcessingCtlsModel"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/apis/data-processing-ctls/stepThrough/{id}": {
+      "get": {
+        "tags": ["apis数据加工控件"],
+        "summary": "数据加工控件调试",
+        "operationId": "stepThroughUsingGET_2",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«Map»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/apis/data-processing-ctls/{id}": {
+      "get": {
+        "tags": ["apis数据加工控件"],
+        "summary": "查看数据加工控件配置",
+        "operationId": "queryModelUsingGET_1",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "ApisDataProcessingCtls": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "ctlsName": {
+          "type": "string",
+          "description": "控件名称"
+        },
+        "variableInData": {
+          "type": "string",
+          "description": "数据加工输出变量名"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-11-29 10:10:10",
+          "description": "创建时间"
+        }
+      },
+      "title": "ApisDataProcessingCtls",
+      "description": "数据加工控件"
+    },
+    "ApisDataProcessingCtlsDetail": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "dataProcessingCtls": {
+          "description": "控件",
+          "$ref": "#/definitions/ApisDataProcessingCtls"
+        },
+        "dataProcessingCtlsId": {
+          "type": "string",
+          "description": "控件Id"
+        },
+        "funcType": {
+          "type": "string",
+          "description": "方法类型(/pub/dm-const/listByCataCode?cataCode=APIS_DATA_PROCESSING_TYPE,展示label,传给后台传value)"
+        },
+        "functions": {
+          "type": "string",
+          "description": "方法(/pub/dm-const/listSubVoByParentCataCodeItemCode?cataCode=APIS_DATA_PROCESSING_TYPE&&itemCode=上一层的value;   展示label,传给后台传value)"
+        },
+        "funcName": {
+          "type": "string",
+          "description": "方法名称(1.substr 2.concat 3.format 4.replace 5.类型转换 6.list交集 7.list并集 8.listjoin 9.list去重 10.jsonpath)"
+        },
+        "param1": {
+          "type": "string",
+          "description": "参数1"
+        },
+        "param2": {
+          "type": "string",
+          "description": "参数2"
+        },
+        "param3": {
+          "type": "string",
+          "description": "参数3"
+        },
+        "param4": {
+          "type": "string",
+          "description": "参数4"
+        },
+        "variableNewData": {
+          "type": "string",
+          "description": "数据加工新变量名"
+        },
+        "sortting": {
+          "type": "integer",
+          "format": "int32",
+          "description": "排序"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisDataProcessingCtlsDetail",
+      "description": "数据加工明细"
+    },
+    "ApisDataProcessingCtlsModel": {
+      "type": "object",
+      "properties": {
+        "apisDataProcessingCtls": {
+          "description": "数据加工主配置",
+          "$ref": "#/definitions/ApisDataProcessingCtls"
+        },
+        "apisDataProcessingCtlsDetailList": {
+          "type": "array",
+          "description": "数据加工配置明细",
+          "items": {
+            "$ref": "#/definitions/ApisDataProcessingCtlsDetail"
+          }
+        }
+      },
+      "title": "ApisDataProcessingCtlsModel",
+      "description": "数据加工明细"
+    },
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«Map»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«Map»",
+      "description": "返回响应数据"
+    }
+  }
+}

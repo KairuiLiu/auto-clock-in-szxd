@@ -1,0 +1,1552 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "动态服务列表"
+  },
+  "host": "222.198.120.117:9090/fighter-apis-manage",
+  "basePath": "/",
+  "tags": [{
+    "name": "基础数据",
+    "description": "基础数据分类"
+  }, {
+    "name": "学生数据",
+    "description": "学生数据分类"
+  }],
+  "paths": {
+    "/apis/queryPage/apis-1642475224576": {
+      "get": {
+        "summary": "课程信息API",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "getUsingGET_apis-1642475224576",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "in": "query",
+          "name": "teachClass",
+          "description": "teachClass",
+          "type": "string",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "teachJobNumber",
+          "description": "teachJobNumber",
+          "type": "string",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "courseName",
+          "description": "courseName",
+          "type": "string",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "schoolTerm",
+          "description": "schoolTerm",
+          "type": "string",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "schoolYear",
+          "description": "schoolYear",
+          "type": "string",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "pageNum",
+          "format": "int32",
+          "description": "当前页",
+          "type": "integer",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "pageSize",
+          "format": "int32",
+          "description": "每页的数量",
+          "type": "integer",
+          "required": false
+        }],
+        "tags": ["基础数据"]
+      }
+    },
+    "/apis/exportExcel/apis-1629429102677": {
+      "post": {
+        "summary": "根据学号获取当日打卡数据,参数：",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "exportExcelUsingPOST_apis-1629429102677",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "schema": {
+            "type": "object",
+            "items": {
+              "$ref": "#/definitions/RestParamsBody"
+            }
+          },
+          "in": "body",
+          "name": "restParams",
+          "description": "参数值列表",
+          "type": "string",
+          "required": false,
+          "example": ""
+        }],
+        "tags": ["学生数据"],
+        "consumes": ["application/json"]
+      }
+    },
+    "/apis/exportExcel/apis-1629354597774": {
+      "post": {
+        "summary": "学生请假销假,参数：",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "exportExcelUsingPOST_apis-1629354597774",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "schema": {
+            "type": "object",
+            "items": {
+              "$ref": "#/definitions/RestParamsBody"
+            }
+          },
+          "in": "body",
+          "name": "restParams",
+          "description": "参数值列表",
+          "type": "string",
+          "required": false,
+          "example": ""
+        }],
+        "tags": ["学生数据"],
+        "consumes": ["application/json"]
+      }
+    },
+    "/apis/queryPage/apis-1631771113207": {
+      "get": {
+        "summary": "查寝配置",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "getUsingGET_apis-1631771113207",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "in": "query",
+          "name": "pageNum",
+          "format": "int32",
+          "description": "当前页",
+          "type": "integer",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "pageSize",
+          "format": "int32",
+          "description": "每页的数量",
+          "type": "integer",
+          "required": false
+        }],
+        "tags": ["学生数据"]
+      }
+    },
+    "/apis/exportExcel/apis-1629268251041": {
+      "post": {
+        "summary": "test111,参数：",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "exportExcelUsingPOST_apis-1629268251041",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "schema": {
+            "type": "object",
+            "items": {
+              "$ref": "#/definitions/RestParamsBody"
+            }
+          },
+          "in": "body",
+          "name": "restParams",
+          "description": "参数值列表",
+          "type": "string",
+          "required": false,
+          "example": ""
+        }],
+        "tags": ["学生数据"],
+        "consumes": ["application/json"]
+      }
+    },
+    "/apis/queryPage/apis-1640926904980": {
+      "get": {
+        "summary": "学生上课签到API",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "getUsingGET_apis-1640926904980",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "in": "query",
+          "name": "courseGroupId",
+          "description": "courseGroupId",
+          "type": "string",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "pageNum",
+          "format": "int32",
+          "description": "当前页",
+          "type": "integer",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "pageSize",
+          "format": "int32",
+          "description": "每页的数量",
+          "type": "integer",
+          "required": false
+        }],
+        "tags": ["基础数据"]
+      }
+    },
+    "/apis/exportExcel/apis-1631771113207": {
+      "post": {
+        "summary": "查寝配置,参数：",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "exportExcelUsingPOST_apis-1631771113207",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "schema": {
+            "type": "object",
+            "items": {
+              "$ref": "#/definitions/RestParamsBody"
+            }
+          },
+          "in": "body",
+          "name": "restParams",
+          "description": "参数值列表",
+          "type": "string",
+          "required": false,
+          "example": ""
+        }],
+        "tags": ["学生数据"],
+        "consumes": ["application/json"]
+      }
+    },
+    "/apis/exportExcel/apis-1629349461570": {
+      "post": {
+        "summary": "签到任务,参数：",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "exportExcelUsingPOST_apis-1629349461570",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "schema": {
+            "type": "object",
+            "items": {
+              "$ref": "#/definitions/RestParamsBody"
+            }
+          },
+          "in": "body",
+          "name": "restParams",
+          "description": "参数值列表",
+          "type": "string",
+          "required": false,
+          "example": ""
+        }],
+        "tags": ["学生数据"],
+        "consumes": ["application/json"]
+      }
+    },
+    "/apis/queryPage/apis-1645540207059": {
+      "get": {
+        "summary": "学生返校报到-图像识别",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "getUsingGET_apis-1645540207059",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "in": "query",
+          "name": "xm",
+          "description": "xm",
+          "type": "string",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "yc",
+          "description": "yc",
+          "type": "string",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "xymc",
+          "description": "xymc",
+          "type": "string",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "njdm",
+          "description": "njdm",
+          "type": "string",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "sjh",
+          "description": "sjh",
+          "type": "string",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "pageNum",
+          "format": "int32",
+          "description": "当前页",
+          "type": "integer",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "pageSize",
+          "format": "int32",
+          "description": "每页的数量",
+          "type": "integer",
+          "required": false
+        }],
+        "tags": ["基础数据"]
+      }
+    },
+    "/apis/queryPage/apis-1647346176582": {
+      "get": {
+        "summary": "学生入校图像识别",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "getUsingGET_apis-1647346176582",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "in": "query",
+          "name": "xm",
+          "description": "xm",
+          "type": "string",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "sjh",
+          "description": "sjh",
+          "type": "string",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "yc",
+          "description": "yc",
+          "type": "string",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "pageNum",
+          "format": "int32",
+          "description": "当前页",
+          "type": "integer",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "pageSize",
+          "format": "int32",
+          "description": "每页的数量",
+          "type": "integer",
+          "required": false
+        }],
+        "tags": ["基础数据"]
+      }
+    },
+    "/apis/queryPage/apis-1629257200318": {
+      "get": {
+        "summary": "测试接口",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "getUsingGET_apis-1629257200318",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "in": "query",
+          "name": "address",
+          "description": "address",
+          "type": "string",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "pageNum",
+          "format": "int32",
+          "description": "当前页",
+          "type": "integer",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "pageSize",
+          "format": "int32",
+          "description": "每页的数量",
+          "type": "integer",
+          "required": false
+        }],
+        "tags": ["学生数据"]
+      }
+    },
+    "/apis/query/apis-1629268887214": {
+      "post": {
+        "summary": "login,参数：",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "getUsingPOST_apis-1629268887214",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "in": "query",
+          "name": "username",
+          "description": null,
+          "type": "String",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "password",
+          "description": null,
+          "type": "String",
+          "required": false
+        }, {
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/RestParamsBody"
+            }
+          },
+          "in": "body",
+          "name": "restParams",
+          "description": "参数值列表",
+          "type": "string",
+          "required": false,
+          "example": ""
+        }],
+        "tags": ["基础数据"],
+        "consumes": ["application/json"]
+      }
+    },
+    "/apis/exportExcel/apis-1629268887214": {
+      "post": {
+        "summary": "login,参数：",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "exportExcelUsingPOST_apis-1629268887214",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "schema": {
+            "type": "object",
+            "items": {
+              "$ref": "#/definitions/RestParamsBody"
+            }
+          },
+          "in": "body",
+          "name": "restParams",
+          "description": "参数值列表",
+          "type": "string",
+          "required": false,
+          "example": ""
+        }],
+        "tags": ["基础数据"],
+        "consumes": ["application/json"]
+      }
+    },
+    "/apis/queryPage/apis-1629349461570": {
+      "get": {
+        "summary": "签到任务",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "getUsingGET_apis-1629349461570",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "in": "query",
+          "name": "pageNum",
+          "format": "int32",
+          "description": "当前页",
+          "type": "integer",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "pageSize",
+          "format": "int32",
+          "description": "每页的数量",
+          "type": "integer",
+          "required": false
+        }],
+        "tags": ["学生数据"]
+      }
+    },
+    "/apis/queryPage/apis-1629517027957": {
+      "get": {
+        "summary": "健康打卡",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "getUsingGET_apis-1629517027957",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "in": "query",
+          "name": "pageNum",
+          "format": "int32",
+          "description": "当前页",
+          "type": "integer",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "pageSize",
+          "format": "int32",
+          "description": "每页的数量",
+          "type": "integer",
+          "required": false
+        }],
+        "tags": ["学生数据"]
+      }
+    },
+    "/apis/queryPage/apis-1629268251041": {
+      "get": {
+        "summary": "test111",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "getUsingGET_apis-1629268251041",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "in": "query",
+          "name": "adress",
+          "description": "adress",
+          "type": "string",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "pageNum",
+          "format": "int32",
+          "description": "当前页",
+          "type": "integer",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "pageSize",
+          "format": "int32",
+          "description": "每页的数量",
+          "type": "integer",
+          "required": false
+        }],
+        "tags": ["学生数据"]
+      }
+    },
+    "/apis/exportExcel/apis-1642475224576": {
+      "post": {
+        "summary": "课程信息API,参数：",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "exportExcelUsingPOST_apis-1642475224576",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "schema": {
+            "type": "object",
+            "items": {
+              "$ref": "#/definitions/RestParamsBody"
+            }
+          },
+          "in": "body",
+          "name": "restParams",
+          "description": "参数值列表",
+          "type": "string",
+          "required": false,
+          "example": ""
+        }],
+        "tags": ["基础数据"],
+        "consumes": ["application/json"]
+      }
+    },
+    "/apis/query/apis-1629429102677": {
+      "post": {
+        "summary": "根据学号获取当日打卡数据,参数：",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "getUsingPOST_apis-1629429102677",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "in": "query",
+          "name": "dkrq",
+          "description": null,
+          "type": "String",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "bdzt",
+          "description": null,
+          "type": "String",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "creator",
+          "description": null,
+          "type": "String",
+          "required": false
+        }, {
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/RestParamsBody"
+            }
+          },
+          "in": "body",
+          "name": "restParams",
+          "description": "参数值列表",
+          "type": "string",
+          "required": false,
+          "example": ""
+        }],
+        "tags": ["学生数据"],
+        "consumes": ["application/json"]
+      }
+    },
+    "/apis/queryPage/apis-1629354597774": {
+      "get": {
+        "summary": "学生请假销假",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "getUsingGET_apis-1629354597774",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "in": "query",
+          "name": "pageNum",
+          "format": "int32",
+          "description": "当前页",
+          "type": "integer",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "pageSize",
+          "format": "int32",
+          "description": "每页的数量",
+          "type": "integer",
+          "required": false
+        }],
+        "tags": ["学生数据"]
+      }
+    },
+    "/apis/exportExcel/apis-1645540207059": {
+      "post": {
+        "summary": "学生返校报到-图像识别,参数：",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "exportExcelUsingPOST_apis-1645540207059",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "schema": {
+            "type": "object",
+            "items": {
+              "$ref": "#/definitions/RestParamsBody"
+            }
+          },
+          "in": "body",
+          "name": "restParams",
+          "description": "参数值列表",
+          "type": "string",
+          "required": false,
+          "example": ""
+        }],
+        "tags": ["基础数据"],
+        "consumes": ["application/json"]
+      }
+    },
+    "/apis/exportExcel/apis-1647346176582": {
+      "post": {
+        "summary": "学生入校图像识别,参数：",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "exportExcelUsingPOST_apis-1647346176582",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "schema": {
+            "type": "object",
+            "items": {
+              "$ref": "#/definitions/RestParamsBody"
+            }
+          },
+          "in": "body",
+          "name": "restParams",
+          "description": "参数值列表",
+          "type": "string",
+          "required": false,
+          "example": ""
+        }],
+        "tags": ["基础数据"],
+        "consumes": ["application/json"]
+      }
+    },
+    "/apis/exportExcel/apis-1629257200318": {
+      "post": {
+        "summary": "测试接口,参数：",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "exportExcelUsingPOST_apis-1629257200318",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "schema": {
+            "type": "object",
+            "items": {
+              "$ref": "#/definitions/RestParamsBody"
+            }
+          },
+          "in": "body",
+          "name": "restParams",
+          "description": "参数值列表",
+          "type": "string",
+          "required": false,
+          "example": ""
+        }],
+        "tags": ["学生数据"],
+        "consumes": ["application/json"]
+      }
+    },
+    "/apis/exportExcel/apis-1640926904980": {
+      "post": {
+        "summary": "学生上课签到API,参数：",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "exportExcelUsingPOST_apis-1640926904980",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "schema": {
+            "type": "object",
+            "items": {
+              "$ref": "#/definitions/RestParamsBody"
+            }
+          },
+          "in": "body",
+          "name": "restParams",
+          "description": "参数值列表",
+          "type": "string",
+          "required": false,
+          "example": ""
+        }],
+        "tags": ["基础数据"],
+        "consumes": ["application/json"]
+      }
+    },
+    "/apis/queryPage/apis-1646213236454": {
+      "get": {
+        "summary": "管理员用的上课签到统计",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "getUsingGET_apis-1646213236454",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "in": "query",
+          "name": "createTime",
+          "description": "createTime",
+          "type": "string",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "pageNum",
+          "format": "int32",
+          "description": "当前页",
+          "type": "integer",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "pageSize",
+          "format": "int32",
+          "description": "每页的数量",
+          "type": "integer",
+          "required": false
+        }],
+        "tags": ["基础数据"]
+      }
+    },
+    "/apis/exportExcel/apis-1629517027957": {
+      "post": {
+        "summary": "健康打卡,参数：",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "exportExcelUsingPOST_apis-1629517027957",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "schema": {
+            "type": "object",
+            "items": {
+              "$ref": "#/definitions/RestParamsBody"
+            }
+          },
+          "in": "body",
+          "name": "restParams",
+          "description": "参数值列表",
+          "type": "string",
+          "required": false,
+          "example": ""
+        }],
+        "tags": ["学生数据"],
+        "consumes": ["application/json"]
+      }
+    },
+    "/apis/exportExcel/apis-1646213236454": {
+      "post": {
+        "summary": "管理员用的上课签到统计,参数：",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "exportExcelUsingPOST_apis-1646213236454",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "schema": {
+            "type": "object",
+            "items": {
+              "$ref": "#/definitions/RestParamsBody"
+            }
+          },
+          "in": "body",
+          "name": "restParams",
+          "description": "参数值列表",
+          "type": "string",
+          "required": false,
+          "example": ""
+        }],
+        "tags": ["基础数据"],
+        "consumes": ["application/json"]
+      }
+    },
+    "/apis/queryPage/apis-1644852794044": {
+      "get": {
+        "summary": "校外人员进校-图像识别",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "getUsingGET_apis-1644852794044",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "in": "query",
+          "name": "xm",
+          "description": "xm",
+          "type": "string",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "yc",
+          "description": "yc",
+          "type": "string",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "sjh",
+          "description": "sjh",
+          "type": "string",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "pageNum",
+          "format": "int32",
+          "description": "当前页",
+          "type": "integer",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "pageSize",
+          "format": "int32",
+          "description": "每页的数量",
+          "type": "integer",
+          "required": false
+        }],
+        "tags": ["基础数据"]
+      }
+    },
+    "/apis/exportExcel/apis-1647345928017": {
+      "post": {
+        "summary": "教职工入校图像识别,参数：",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "exportExcelUsingPOST_apis-1647345928017",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "schema": {
+            "type": "object",
+            "items": {
+              "$ref": "#/definitions/RestParamsBody"
+            }
+          },
+          "in": "body",
+          "name": "restParams",
+          "description": "参数值列表",
+          "type": "string",
+          "required": false,
+          "example": ""
+        }],
+        "tags": ["基础数据"],
+        "consumes": ["application/json"]
+      }
+    },
+    "/apis/queryPage/apis-1629337179703": {
+      "get": {
+        "summary": "定位信息",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "getUsingGET_apis-1629337179703",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "in": "query",
+          "name": "pageNum",
+          "format": "int32",
+          "description": "当前页",
+          "type": "integer",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "pageSize",
+          "format": "int32",
+          "description": "每页的数量",
+          "type": "integer",
+          "required": false
+        }],
+        "tags": ["基础数据"]
+      }
+    },
+    "/apis/exportExcel/apis-1629337179703": {
+      "post": {
+        "summary": "定位信息,参数：",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "exportExcelUsingPOST_apis-1629337179703",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "schema": {
+            "type": "object",
+            "items": {
+              "$ref": "#/definitions/RestParamsBody"
+            }
+          },
+          "in": "body",
+          "name": "restParams",
+          "description": "参数值列表",
+          "type": "string",
+          "required": false,
+          "example": ""
+        }],
+        "tags": ["基础数据"],
+        "consumes": ["application/json"]
+      }
+    },
+    "/apis/queryPage/apis-1647345928017": {
+      "get": {
+        "summary": "教职工入校图像识别",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "getUsingGET_apis-1647345928017",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "in": "query",
+          "name": "sjh",
+          "description": "sjh",
+          "type": "string",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "yc",
+          "description": "yc",
+          "type": "string",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "xm",
+          "description": "xm",
+          "type": "string",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "pageNum",
+          "format": "int32",
+          "description": "当前页",
+          "type": "integer",
+          "required": false
+        }, {
+          "in": "query",
+          "name": "pageSize",
+          "format": "int32",
+          "description": "每页的数量",
+          "type": "integer",
+          "required": false
+        }],
+        "tags": ["基础数据"]
+      }
+    },
+    "/apis/exportExcel/apis-1644852794044": {
+      "post": {
+        "summary": "校外人员进校-图像识别,参数：",
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false,
+        "produces": ["*/*"],
+        "operationId": "exportExcelUsingPOST_apis-1644852794044",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«BeanMap»"
+            },
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "parameters": [{
+          "schema": {
+            "type": "object",
+            "items": {
+              "$ref": "#/definitions/RestParamsBody"
+            }
+          },
+          "in": "body",
+          "name": "restParams",
+          "description": "参数值列表",
+          "type": "string",
+          "required": false,
+          "example": ""
+        }],
+        "tags": ["基础数据"],
+        "consumes": ["application/json"]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "in": "header",
+      "name": "fighter-auth-token",
+      "type": "apiKey"
+    }
+  },
+  "definitions": {
+    "BeanMap": {
+      "additionalProperties": {
+        "type": "object"
+      },
+      "type": "object",
+      "title": "BeanMap"
+    },
+    "ResultInfo«BeanMap»": {
+      "description": "返回响应数据",
+      "type": "object",
+      "title": "ResultInfo«BeanMap»",
+      "properties": {
+        "msg": {
+          "description": "成功或错误的具体信息",
+          "type": "string"
+        },
+        "code": {
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常",
+          "type": "integer"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "type": "object"
+        }
+      }
+    },
+    "RestParamsBody": {
+      "description": "rest参数对象",
+      "type": "object",
+      "title": "RestParamsBody",
+      "properties": {
+        "value": {
+          "description": "值",
+          "type": "object"
+        },
+        "key": {
+          "description": "键",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

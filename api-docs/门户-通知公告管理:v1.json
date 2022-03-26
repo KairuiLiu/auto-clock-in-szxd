@@ -1,0 +1,655 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "门户-通知公告管理"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-lightportal-saas",
+  "tags": [{
+    "name": "通知公告",
+    "description": "Notice Controller"
+  }],
+  "paths": {
+    "/notice/changePublishStatus": {
+      "get": {
+        "tags": ["通知公告"],
+        "summary": "修改发布状态",
+        "operationId": "publishUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "query",
+          "description": "非业务主键-唯一健",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "status",
+          "in": "query",
+          "description": "发布状态",
+          "required": true,
+          "type": "ref",
+          "enum": ["publishStatus_0", "publishStatus_1"]
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«string»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "404": {
+            "description": "文档不存在"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/notice/delete": {
+      "post": {
+        "tags": ["通知公告"],
+        "summary": "删除",
+        "operationId": "deleteForAnotherWayUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "ids",
+          "in": "query",
+          "description": "ids",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "404": {
+            "description": "文档不存在"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["通知公告"],
+        "summary": "删除",
+        "operationId": "deleteUsingDELETE_2",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "ids",
+          "in": "query",
+          "description": "ids",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "404": {
+            "description": "文档不存在"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/notice/get": {
+      "get": {
+        "tags": ["通知公告"],
+        "summary": "查看-管理员",
+        "operationId": "getUsingGET_3",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "query",
+          "description": "非业务主键-唯一健",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«Notice»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "404": {
+            "description": "文档不存在"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/notice/list": {
+      "post": {
+        "tags": ["通知公告"],
+        "summary": "非分页查询",
+        "operationId": "listUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«Notice»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«Notice»»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/notice/query": {
+      "post": {
+        "tags": ["通知公告"],
+        "summary": "分页查询",
+        "operationId": "queryUsingPOST_3",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页的数量",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«Notice»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«Notice»»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/notice/readNotice": {
+      "get": {
+        "tags": ["通知公告"],
+        "summary": "查阅-用户",
+        "operationId": "readNoticeUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "query",
+          "description": "非业务主键-唯一健",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«Notice»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "404": {
+            "description": "文档不存在"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/notice/saveOrUpdate": {
+      "post": {
+        "tags": ["通知公告"],
+        "summary": "新增",
+        "operationId": "saveUsingPOST_2",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "entity",
+          "description": "entity",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Notice"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«string»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["通知公告"],
+        "summary": "更新",
+        "operationId": "updateUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "entity",
+          "description": "entity",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Notice"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«string»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/notice/update": {
+      "post": {
+        "tags": ["通知公告"],
+        "summary": "更新",
+        "operationId": "updateByAnotherWayUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "entity",
+          "description": "entity",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Notice"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«string»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "IPage«Notice»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Notice"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«Notice»"
+    },
+    "Notice": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "非业务主键-唯一"
+        },
+        "title": {
+          "type": "string",
+          "description": "标题"
+        },
+        "publisher": {
+          "type": "string",
+          "description": "操作人工号"
+        },
+        "publisher_name": {
+          "type": "string",
+          "description": "操作人姓名"
+        },
+        "publish_time": {
+          "type": "string",
+          "description": "发布时间"
+        },
+        "content": {
+          "type": "string",
+          "description": "内容"
+        },
+        "browse_volume": {
+          "type": "string",
+          "description": "阅读次数"
+        },
+        "status": {
+          "type": "string",
+          "description": "发布状态 0 未发布，1 已发布"
+        },
+        "pubtype": {
+          "type": "string",
+          "description": "发布类型"
+        },
+        "pubtypename": {
+          "type": "string",
+          "description": "发布类型名称"
+        },
+        "sftz": {
+          "type": "string",
+          "description": "是否通知 0 不通知，1 通知"
+        },
+        "update_time": {
+          "type": "string",
+          "description": "更新时间"
+        },
+        "zhid": {
+          "type": "string",
+          "description": "租户id"
+        },
+        "photo": {
+          "type": "string",
+          "description": "附件唯一编码-图片"
+        }
+      },
+      "title": "Notice",
+      "description": "通知公告实体类"
+    },
+    "OrderItem": {
+      "type": "object",
+      "properties": {
+        "asc": {
+          "type": "boolean"
+        },
+        "column": {
+          "type": "string"
+        }
+      },
+      "title": "OrderItem"
+    },
+    "QueryCondition«Notice»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/Notice"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«Notice»",
+      "description": "查询条件"
+    },
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«Notice»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«Notice»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«Notice»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«Notice»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/Notice"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«Notice»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«Notice»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/Notice"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«Notice»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«string»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "string",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«string»",
+      "description": "返回响应数据"
+    }
+  }
+}

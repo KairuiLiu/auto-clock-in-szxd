@@ -1,0 +1,403 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "apis-请求控件和响应控件"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-apis-manage",
+  "tags": [{
+    "name": "api服务参数配置控件",
+    "description": "Apis Main Config Req Ctls Controller"
+  }, {
+    "name": "api服务配置返回值控件",
+    "description": "Apis Main Out Ctls Controller"
+  }],
+  "paths": {
+    "/apis/main-out-ctls/query/{id}": {
+      "get": {
+        "tags": ["api服务配置返回值控件"],
+        "summary": "查询主服务输出配置",
+        "operationId": "queryUsingGET_3",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«ApisMainOutCtlsModel»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/apis/main-out-ctls/save": {
+      "post": {
+        "tags": ["api服务配置返回值控件"],
+        "summary": "保存服务的输出配置",
+        "operationId": "saveUsingPOST_4",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "apisMainOutCtlsModel",
+          "description": "apisMainOutCtlsModel",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ApisMainOutCtlsModel"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/apis/main-out-ctls/stepThrough/{id}": {
+      "get": {
+        "tags": ["api服务配置返回值控件"],
+        "summary": "单步调试",
+        "operationId": "stepThroughUsingGET_4",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«Map»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/apis/main-req-ctls/query/{id}": {
+      "get": {
+        "tags": ["api服务参数配置控件"],
+        "summary": "查询主服务参数配置",
+        "operationId": "queryUsingGET_2",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«ApisMainConfigReqCtls»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/apis/main-req-ctls/save": {
+      "post": {
+        "tags": ["api服务参数配置控件"],
+        "summary": "保存服务的参数配置",
+        "operationId": "saveUsingPOST_3",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "apisMainConfigReqCtlsList",
+          "description": "apisMainConfigReqCtlsList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ApisMainConfigReqCtls"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/apis/main-req-ctls/stepThrough/{id}": {
+      "get": {
+        "tags": ["api服务参数配置控件"],
+        "summary": "单步调试",
+        "operationId": "stepThroughUsingGET_3",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«Map»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "ApisMainConfigReqCtls": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "mainConfigId": {
+          "type": "string",
+          "description": "服务编号"
+        },
+        "param": {
+          "type": "string",
+          "description": "参数"
+        },
+        "remark": {
+          "type": "string",
+          "description": "参数备注"
+        },
+        "filedType": {
+          "type": "string",
+          "description": "参数类型(string; array)"
+        },
+        "defValue": {
+          "type": "string",
+          "description": "默认值"
+        },
+        "attribute": {
+          "type": "string",
+          "description": "参数属性(body,query,header,cookie)"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisMainConfigReqCtls",
+      "description": "api服务配置请求参数"
+    },
+    "ApisMainOutCtls": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "ctlsName": {
+          "type": "string",
+          "description": "控件名称"
+        },
+        "variableEnd": {
+          "type": "string",
+          "description": "最后输出变量"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-11-29 10:10:10",
+          "description": "创建时间"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisMainOutCtls",
+      "description": "api服务配置返回值控件"
+    },
+    "ApisMainOutCtlsData": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "mainOutCtlsId": {
+          "type": "string",
+          "description": "控件"
+        },
+        "variableSource": {
+          "type": "string",
+          "description": "变量来源"
+        },
+        "variablePath": {
+          "type": "string",
+          "description": "变量路径"
+        },
+        "outPutPath": {
+          "type": "string",
+          "description": "输出变量"
+        },
+        "sortting": {
+          "type": "integer",
+          "format": "int32",
+          "description": "排序（1.2.3.4）"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisMainOutCtlsData",
+      "description": "apis配置返回的参数信息"
+    },
+    "ApisMainOutCtlsModel": {
+      "type": "object",
+      "properties": {
+        "apisMainOutCtls": {
+          "description": "apis服务返回主配置",
+          "$ref": "#/definitions/ApisMainOutCtls"
+        },
+        "apisMainOutCtlsDataList": {
+          "type": "array",
+          "description": "输出列表",
+          "items": {
+            "$ref": "#/definitions/ApisMainOutCtlsData"
+          }
+        }
+      },
+      "title": "ApisMainOutCtlsModel",
+      "description": "api服务配置返回值控件"
+    },
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«ApisMainOutCtlsModel»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/ApisMainOutCtlsModel"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«ApisMainOutCtlsModel»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«ApisMainConfigReqCtls»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/ApisMainConfigReqCtls"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«ApisMainConfigReqCtls»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«Map»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«Map»",
+      "description": "返回响应数据"
+    }
+  }
+}

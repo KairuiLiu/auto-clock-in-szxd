@@ -1,0 +1,3113 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1.0.0",
+    "title": "消息中心管理端APIs"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-msgcenter",
+  "tags": [{
+    "name": "应用管理",
+    "description": "App Controller"
+  }, {
+    "name": "模板管理",
+    "description": "Template Controller"
+  }, {
+    "name": "消息接收者必填项管理",
+    "description": "Queue Must Param Controller"
+  }, {
+    "name": "消息接收者管理",
+    "description": "Queue Controller"
+  }, {
+    "name": "消息管理",
+    "description": "Msg Controller"
+  }, {
+    "name": "消息类型管理",
+    "description": "Msg Type Controller"
+  }, {
+    "name": "首页",
+    "description": "Home Controller"
+  }],
+  "paths": {
+    "/mc/app/delete/{appKey}": {
+      "delete": {
+        "tags": ["应用管理"],
+        "summary": "删除应用",
+        "operationId": "deleteUsingDELETE",
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "path",
+          "description": "系统代码，支持批量删除，appKey值以英文逗号（,）分割",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/app/generateKey": {
+      "post": {
+        "tags": ["应用管理"],
+        "summary": "生成密钥",
+        "operationId": "generateKeyUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "系统代码",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/app/getAppConfigView/{appKey}": {
+      "get": {
+        "tags": ["应用管理"],
+        "summary": "系统应用配置预览",
+        "operationId": "getAppConfigViewUsingGET",
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "path",
+          "description": "系统代码",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«McAppConfigView»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/app/msgType": {
+      "get": {
+        "tags": ["应用管理"],
+        "summary": "分页查询可分配/已分配的消息类型列表数据",
+        "operationId": "queryMsgTypeByAppKeyUsingGET",
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "系统代码",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "dataType",
+          "in": "query",
+          "description": "数据类型（0可分配的数据、1已分配的数据）",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页的数量",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«McMsgType»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/app/msgType/delete": {
+      "post": {
+        "tags": ["应用管理"],
+        "summary": "移除应用与消息类型关联",
+        "operationId": "deleteMsgTypeUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "系统代码",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "typeCodes",
+          "in": "query",
+          "description": "消息类型code，支持批量移除，以英文逗号（,）分割",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/app/msgType/save": {
+      "post": {
+        "tags": ["应用管理"],
+        "summary": "新增应用与消息类型关联",
+        "operationId": "saveMsgTypeUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "系统代码",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "typeCodes",
+          "in": "query",
+          "description": "消息类型code集合，以英文逗号（,）分割",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/app/query": {
+      "get": {
+        "tags": ["应用管理"],
+        "summary": "分页查询应用列表数据",
+        "operationId": "queryUsingGET",
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "系统代码",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "name",
+          "in": "query",
+          "description": "系统名称",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页的数量",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«McApp»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/app/update": {
+      "post": {
+        "tags": ["应用管理"],
+        "summary": "更新应用",
+        "operationId": "updateAppUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "系统代码",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "registerQueue",
+          "in": "query",
+          "description": "是否接收消息",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/home/countAppSendMsgList": {
+      "get": {
+        "tags": ["首页"],
+        "summary": "应用消息发送数量统计",
+        "operationId": "countAppSendMsgListUsingGET",
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«HomeAppSendMsgCount»»"
+            }
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/home/countMsgTypeList": {
+      "get": {
+        "tags": ["首页"],
+        "summary": "消息类型适用统计",
+        "description": "按消息类型统计消息发送量",
+        "operationId": "countMsgTypeListUsingGET",
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«HomeMsgTypeCount»»"
+            }
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/home/countRecentSendMsgList": {
+      "get": {
+        "tags": ["首页"],
+        "summary": "近7日消息发送量统计",
+        "operationId": "countRecentSendMsgListUsingGET",
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«HomeRecentSendMsgCount»»"
+            }
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/home/countStatusSendMsgList": {
+      "get": {
+        "tags": ["首页"],
+        "summary": "消息发送状态统计",
+        "operationId": "countStatusSendMsgListUsingGET",
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«HomeStatusSendMsgCount»»"
+            }
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/home/countSystemData": {
+      "get": {
+        "tags": ["首页"],
+        "summary": "系统数据统计",
+        "operationId": "countSystemDataUsingGET",
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«HomeSystemDataCount»"
+            }
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/msg/get/{id}": {
+      "get": {
+        "tags": ["消息管理"],
+        "summary": "查询消息详情",
+        "operationId": "getUsingGET",
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "消息主键ID",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«McMsg»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/msg/listApp": {
+      "get": {
+        "tags": ["消息管理"],
+        "summary": "查询发送方（全部）/接收方（仅registerQueue=1）列表数据-页面查询条件",
+        "operationId": "listAppUsingGET",
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«T_SYS_APP»»"
+            }
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/msg/query": {
+      "get": {
+        "tags": ["消息管理"],
+        "summary": "分页查询消息列表数据",
+        "operationId": "queryUsingGET_1",
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "consumerAppKey",
+          "in": "query",
+          "description": "consumerAppKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "endDate",
+          "in": "query",
+          "description": "发送结束时间",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "id",
+          "in": "query",
+          "description": "消息ID",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页的数量",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "producerAppKey",
+          "in": "query",
+          "description": "发送方",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "startDate",
+          "in": "query",
+          "description": "发送开始时间",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "status",
+          "in": "query",
+          "description": "status",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«McMsg»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/msg/queryMsgStatus": {
+      "get": {
+        "tags": ["消息管理"],
+        "summary": "分页查询消息列表数据",
+        "operationId": "queryMsgStatusUsingGET",
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "msgId",
+          "in": "query",
+          "description": "消息ID",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页的数量",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "queueId",
+          "in": "query",
+          "description": "队列ID",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "status",
+          "in": "query",
+          "description": "发送结果（0失败、1成功、2待发送）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "type",
+          "in": "query",
+          "description": "类型（0：队列1：消息）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "useForRevFieldValue",
+          "in": "query",
+          "description": "消息接收者",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«McMsgStatus»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/msgType/delete/{code}": {
+      "delete": {
+        "tags": ["消息类型管理"],
+        "summary": "删除消息类型",
+        "operationId": "deleteUsingDELETE_1",
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "code",
+          "in": "path",
+          "description": "消息类型代码，支持批量删除，code值以英文逗号（,）分割",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/msgType/get/{code}": {
+      "get": {
+        "tags": ["消息类型管理"],
+        "summary": "查询消息类型详情",
+        "operationId": "getUsingGET_1",
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "code",
+          "in": "path",
+          "description": "消息类型代码",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«McMsgType»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/msgType/query": {
+      "get": {
+        "tags": ["消息类型管理"],
+        "summary": "分页查询消息类型列表数据",
+        "operationId": "queryUsingGET_2",
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "code",
+          "in": "query",
+          "description": "消息类型代码",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "name",
+          "in": "query",
+          "description": "消息类型名称",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页的数量",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«McMsgType»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/msgType/queue": {
+      "get": {
+        "tags": ["消息类型管理"],
+        "summary": "分页查询可分配/已分配的消息接收者列表数据",
+        "operationId": "queryQueueByCodeUsingGET",
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "code",
+          "in": "query",
+          "description": "消息类型代码",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "dataType",
+          "in": "query",
+          "description": "数据类型（0可分配的数据、1已分配的数据）",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页的数量",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«McQueue»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/msgType/queue/delete": {
+      "post": {
+        "tags": ["消息类型管理"],
+        "summary": "移除消息类型与消息接收者关联",
+        "operationId": "deleteMsgTypeUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "code",
+          "in": "query",
+          "description": "消息类型代码",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "queueIds",
+          "in": "query",
+          "description": "消息接收者queueId，支持批量移除，以英文逗号（,）分割",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/msgType/queue/save": {
+      "post": {
+        "tags": ["消息类型管理"],
+        "summary": "新增消息类型与消息接收者关联",
+        "operationId": "saveMsgTypeUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "code",
+          "in": "query",
+          "description": "消息类型代码",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "queueIds",
+          "in": "query",
+          "description": "消息接收者queueId集合，以英文逗号（,）分割",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/msgType/save": {
+      "post": {
+        "tags": ["消息类型管理"],
+        "summary": "新增消息类型",
+        "operationId": "saveUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "alwaysSend",
+          "in": "query",
+          "description": "是否验证所有接收者必填项（0:是, 1:否）",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "description",
+          "in": "query",
+          "description": "描述",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "name",
+          "in": "query",
+          "description": "消息类型名称",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/msgType/update": {
+      "post": {
+        "tags": ["消息类型管理"],
+        "summary": "修改消息类型",
+        "operationId": "updateUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "alwaysSend",
+          "in": "query",
+          "description": "是否验证所有接收者必填项（0:是, 1:否）",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "code",
+          "in": "query",
+          "description": "消息类型代码",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "description",
+          "in": "query",
+          "description": "描述",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "name",
+          "in": "query",
+          "description": "消息类型名称",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/queue/get/{id}": {
+      "get": {
+        "tags": ["消息接收者管理"],
+        "summary": "查询消息接收者详情",
+        "operationId": "getUsingGET_2",
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "消息接收者主键ID",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«McQueue»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/queue/list": {
+      "get": {
+        "tags": ["消息接收者管理"],
+        "summary": "消息类型 查询消息接收者",
+        "operationId": "listUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "dataType",
+          "in": "query",
+          "description": "数据类型（0可分配的数据、1已分配的数据）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "typeCode",
+          "in": "query",
+          "description": "消息类型",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«McQueue»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/queue/mustParam/delete/{ids}": {
+      "delete": {
+        "tags": ["消息接收者必填项管理"],
+        "summary": "删除必填项",
+        "operationId": "deleteUsingDELETE_2",
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "ids",
+          "in": "path",
+          "description": "必填项id，支持批量删除，id值以英文逗号（,）分割",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/queue/mustParam/save": {
+      "post": {
+        "tags": ["消息接收者必填项管理"],
+        "summary": "新增必填项",
+        "operationId": "saveUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "description",
+          "in": "query",
+          "description": "属性字段描述",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "field",
+          "in": "query",
+          "description": "属性字段",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "queueId",
+          "in": "query",
+          "description": "消息接收者id",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/queue/mustParam/update": {
+      "post": {
+        "tags": ["消息接收者必填项管理"],
+        "summary": "更新必填项",
+        "operationId": "updateUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "description",
+          "in": "query",
+          "description": "属性字段描述",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "id",
+          "in": "query",
+          "description": "必填项id",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/queue/mustParam/{queueId}": {
+      "get": {
+        "tags": ["消息接收者必填项管理"],
+        "summary": "查询消息接收者必填项列表",
+        "operationId": "queryMustParamUsingGET",
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "queueId",
+          "in": "path",
+          "description": "消息接收者主键ID",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«McQueueMustParam»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/queue/query": {
+      "get": {
+        "tags": ["消息接收者管理"],
+        "summary": "分页查询消息接收者列表数据",
+        "operationId": "queryUsingGET_3",
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页的数量",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "queueKey",
+          "in": "query",
+          "description": "队列代码",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«McQueue»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/queue/queryStatus/{queueId}": {
+      "get": {
+        "tags": ["消息接收者管理"],
+        "summary": "分页查询消息接收者详情数据",
+        "operationId": "queryStatusUsingGET",
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页的数量",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "queueId",
+          "in": "path",
+          "description": "队列Id",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«McQueueStatus»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/template/delete/{ids}": {
+      "delete": {
+        "tags": ["模板管理"],
+        "summary": "删除模板",
+        "operationId": "deleteUsingDELETE_3",
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "ids",
+          "in": "path",
+          "description": "模板id，支持批量删除，id值以英文逗号（,）分割",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/template/get/{id}": {
+      "get": {
+        "tags": ["模板管理"],
+        "summary": "查询模板详情",
+        "operationId": "getUsingGET_3",
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "模板id",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«McTypeQueueCustomParam»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "404": {
+            "description": "服务器找不到给定的资源，文档不存在"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/template/query": {
+      "get": {
+        "tags": ["模板管理"],
+        "summary": "分页查询模板列表数据",
+        "operationId": "queryUsingGET_4",
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "groupCode",
+          "in": "query",
+          "description": "模板分组Code",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页的数量",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "queueKey",
+          "in": "query",
+          "description": "消息接收者代码",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "typeCode",
+          "in": "query",
+          "description": "消息类型代码",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«McTypeQueueCustomParam»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/template/save": {
+      "post": {
+        "tags": ["模板管理"],
+        "summary": "新增模板",
+        "operationId": "saveUsingPOST_2",
+        "consumes": ["application/json"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "field",
+          "in": "query",
+          "description": "字段",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "queueKey",
+          "in": "query",
+          "description": "消息接收者代码",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "textTemplate",
+          "in": "query",
+          "description": "文本模板",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "typeCode",
+          "in": "query",
+          "description": "消息类型代码",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "403": {
+            "description": "服务器接收请求，但是拒绝处理"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/mc/template/update": {
+      "post": {
+        "tags": ["模板管理"],
+        "summary": "更新模板",
+        "operationId": "updateUsingPOST_2",
+        "consumes": ["application/json"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "id",
+          "in": "query",
+          "description": "模板id",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "textTemplate",
+          "in": "query",
+          "description": "文本模板",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "header",
+          "description": "传入token",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "403": {
+            "description": "服务器接收请求，但是拒绝处理"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "HomeAppSendMsgCount": {
+      "type": "object",
+      "properties": {
+        "appName": {
+          "type": "string",
+          "description": "应用名称"
+        },
+        "appSendMsgCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "发送数量 "
+        }
+      },
+      "title": "HomeAppSendMsgCount",
+      "description": "应用消息发送数量统计"
+    },
+    "HomeMsgTypeCount": {
+      "type": "object",
+      "properties": {
+        "msgTypeName": {
+          "type": "string",
+          "description": "消息类型名称"
+        },
+        "sendMsgCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "发送数量 "
+        }
+      },
+      "title": "HomeMsgTypeCount",
+      "description": "消息类型适用统计"
+    },
+    "HomeRecentSendMsgCount": {
+      "type": "object",
+      "properties": {
+        "sendDate": {
+          "type": "string",
+          "description": "发送日期"
+        },
+        "sendMsgCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "发送数量 "
+        }
+      },
+      "title": "HomeRecentSendMsgCount",
+      "description": "近7日消息发送量统计"
+    },
+    "HomeStatusSendMsgCount": {
+      "type": "object",
+      "properties": {
+        "sendMsgCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "发送数量 "
+        },
+        "status": {
+          "type": "string",
+          "description": "发送状态"
+        }
+      },
+      "title": "HomeStatusSendMsgCount",
+      "description": "消息发送状态统计"
+    },
+    "HomeSystemDataCount": {
+      "type": "object",
+      "properties": {
+        "appCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "应用数量统计"
+        },
+        "msgSendTotalCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "消息发送总数量统计 "
+        },
+        "msgTypeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "消息类型数量统计 "
+        },
+        "queueCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "消息接收者数量统计 "
+        }
+      },
+      "title": "HomeSystemDataCount",
+      "description": "应用数量、消息类型数量、消息接收者数量、消息发送数量统计"
+    },
+    "IPage«McApp»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/McApp"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«McApp»"
+    },
+    "IPage«McMsgStatus»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/McMsgStatus"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«McMsgStatus»"
+    },
+    "IPage«McMsgType»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/McMsgType"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«McMsgType»"
+    },
+    "IPage«McMsg»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/McMsg"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«McMsg»"
+    },
+    "IPage«McQueueStatus»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/McQueueStatus"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«McQueueStatus»"
+    },
+    "IPage«McQueue»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/McQueue"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«McQueue»"
+    },
+    "IPage«McTypeQueueCustomParam»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/McTypeQueueCustomParam"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«McTypeQueueCustomParam»"
+    },
+    "McApp": {
+      "type": "object",
+      "properties": {
+        "appKey": {
+          "type": "string",
+          "description": "系统代码"
+        },
+        "createTime": {
+          "type": "string",
+          "description": "创建时间"
+        },
+        "creatorId": {
+          "type": "string",
+          "description": "创建人Id"
+        },
+        "description": {
+          "type": "string",
+          "description": "描述"
+        },
+        "msgTypeNum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "关联消息类型数"
+        },
+        "name": {
+          "type": "string",
+          "description": "应用名称"
+        },
+        "registerQueue": {
+          "type": "string",
+          "description": "是否允许接收消息（1:是, 0:否）"
+        },
+        "updateTime": {
+          "type": "string",
+          "description": "最后更新时间"
+        },
+        "updatorId": {
+          "type": "string",
+          "description": "最后更新人"
+        }
+      },
+      "title": "McApp",
+      "description": "消息应用管理"
+    },
+    "McAppConfigView": {
+      "type": "object",
+      "properties": {
+        "app": {
+          "description": "系统应用信息",
+          "$ref": "#/definitions/T_SYS_APP"
+        },
+        "msgTypeList": {
+          "type": "array",
+          "description": "应用所配置的：消息类型信息",
+          "items": {
+            "$ref": "#/definitions/McMsgType"
+          }
+        },
+        "mustParamMap": {
+          "type": "object",
+          "description": "消息类型所配置的：所有必填项属性信息",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/McQueueMustParam"
+            }
+          }
+        },
+        "queueMap": {
+          "type": "object",
+          "description": "消息类型所配置的：消息接收者信息",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/McQueue"
+            }
+          }
+        }
+      },
+      "title": "McAppConfigView",
+      "description": "系统应用配置参数一览表"
+    },
+    "McMsg": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "消息内容"
+        },
+        "id": {
+          "type": "string",
+          "description": "消息主键ID"
+        },
+        "producerAppKey": {
+          "type": "string",
+          "description": "发送方应用代码"
+        },
+        "producerName": {
+          "type": "string",
+          "description": "发送方应用名称"
+        },
+        "sendToMqTime": {
+          "type": "string",
+          "description": "发送时间"
+        },
+        "typeCode": {
+          "type": "string",
+          "description": "消息类型代码"
+        },
+        "typeName": {
+          "type": "string",
+          "description": "消息类型名称"
+        }
+      },
+      "title": "McMsg",
+      "description": "消息管理"
+    },
+    "McMsgStatus": {
+      "type": "object",
+      "properties": {
+        "consumerHandleTime": {
+          "type": "string",
+          "description": "处理时间"
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "错误代码"
+        },
+        "errorInfo": {
+          "type": "string",
+          "description": "错误信息"
+        },
+        "id": {
+          "type": "string",
+          "description": "消息主键ID"
+        },
+        "msgId": {
+          "type": "string",
+          "description": "消息ID"
+        },
+        "producerAppKey": {
+          "type": "string",
+          "description": "发送方应用代码"
+        },
+        "producerName": {
+          "type": "string",
+          "description": "发送方应用名称"
+        },
+        "queueId": {
+          "type": "string",
+          "description": "消息队列ID"
+        },
+        "queueKey": {
+          "type": "string",
+          "description": "消息队列Key"
+        },
+        "status": {
+          "type": "string",
+          "description": "发送结果（0失败、1成功、2待发送）"
+        },
+        "type": {
+          "type": "string",
+          "description": "类型（0队列消息、1单消息）"
+        },
+        "typeCode": {
+          "type": "string",
+          "description": "消息类型代码"
+        },
+        "typeName": {
+          "type": "string",
+          "description": "消息类型名称"
+        },
+        "useForRevFieldValue": {
+          "type": "string",
+          "description": "接收人"
+        }
+      },
+      "title": "McMsgStatus",
+      "description": "消息状态管理"
+    },
+    "McMsgType": {
+      "type": "object",
+      "properties": {
+        "alwaysSend": {
+          "type": "string",
+          "description": "是否验证所有接收者必填项（0:是, 1:否）"
+        },
+        "code": {
+          "type": "string",
+          "description": "消息类型代码"
+        },
+        "createTime": {
+          "type": "string",
+          "description": "创建时间"
+        },
+        "creatorId": {
+          "type": "string",
+          "description": "创建人Id"
+        },
+        "creatorName": {
+          "type": "string",
+          "description": "创建人名称"
+        },
+        "description": {
+          "type": "string",
+          "description": "描述"
+        },
+        "msgQueueNum": {
+          "type": "string",
+          "description": "关联接收者数"
+        },
+        "name": {
+          "type": "string",
+          "description": "消息类型名称"
+        },
+        "updateTime": {
+          "type": "string",
+          "description": "最后更新时间"
+        },
+        "updatorId": {
+          "type": "string",
+          "description": "最后更新人"
+        },
+        "updatorName": {
+          "type": "string",
+          "description": "最后更新人名称"
+        }
+      },
+      "title": "McMsgType",
+      "description": "消息类型管理"
+    },
+    "McQueue": {
+      "type": "object",
+      "properties": {
+        "createAppKey": {
+          "type": "string",
+          "description": "appKey"
+        },
+        "createTime": {
+          "type": "string",
+          "description": "创建时间"
+        },
+        "exchange": {
+          "type": "string",
+          "description": "交换器"
+        },
+        "id": {
+          "type": "string",
+          "description": "主键"
+        },
+        "mustParamNum": {
+          "type": "string",
+          "description": "必填项数"
+        },
+        "queueDesc": {
+          "type": "string",
+          "description": "队列描述"
+        },
+        "queueKey": {
+          "type": "string",
+          "description": "队列代码"
+        },
+        "queueSecret": {
+          "type": "string",
+          "description": "队列密钥"
+        },
+        "routingKey": {
+          "type": "string",
+          "description": "路由关键字"
+        },
+        "typeCode": {
+          "type": "string",
+          "description": "消息类型代码"
+        },
+        "updateTime": {
+          "type": "string",
+          "description": "更新时间"
+        }
+      },
+      "title": "McQueue",
+      "description": "消息接收者管理"
+    },
+    "McQueueMustParam": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "描述"
+        },
+        "field": {
+          "type": "string",
+          "description": "字段"
+        },
+        "fieldType": {
+          "type": "string",
+          "description": "属性类型（0内置、1自定义），只要自定义属性才能修改、删除等操作"
+        },
+        "id": {
+          "type": "string",
+          "description": "必填项id，唯一值"
+        },
+        "queueId": {
+          "type": "string",
+          "description": "队列ID"
+        },
+        "typeCode": {
+          "type": "string",
+          "description": "消息类型代码"
+        }
+      },
+      "title": "McQueueMustParam",
+      "description": "消息接收者-必填项管理"
+    },
+    "McQueueStatus": {
+      "type": "object",
+      "properties": {
+        "createTime": {
+          "type": "string",
+          "description": "开始时间"
+        },
+        "endTime": {
+          "type": "string",
+          "description": "结束时间"
+        },
+        "id": {
+          "type": "string",
+          "description": "主键"
+        },
+        "queueId": {
+          "type": "string",
+          "description": "消息队列ID"
+        },
+        "queueIp": {
+          "type": "string",
+          "description": "消息队列IP"
+        }
+      },
+      "title": "McQueueStatus",
+      "description": "消息队列状态管理"
+    },
+    "McTypeQueueCustomParam": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "字段"
+        },
+        "id": {
+          "type": "string",
+          "description": "模板id，唯一值"
+        },
+        "queueDesc": {
+          "type": "string",
+          "description": "消息接收者描述"
+        },
+        "queueKey": {
+          "type": "string",
+          "description": "消息接收者代码"
+        },
+        "textTemplate": {
+          "type": "string",
+          "description": "文本模板"
+        },
+        "typeCode": {
+          "type": "string",
+          "description": "消息类型代码"
+        },
+        "typeName": {
+          "type": "string",
+          "description": "消息类型名称"
+        },
+        "typeQueueId": {
+          "type": "string",
+          "description": "mc_type_queue表的id"
+        }
+      },
+      "title": "McTypeQueueCustomParam",
+      "description": "模板管理"
+    },
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«HomeSystemDataCount»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/HomeSystemDataCount"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«HomeSystemDataCount»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«McApp»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«McApp»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«McApp»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«McMsgStatus»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«McMsgStatus»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«McMsgStatus»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«McMsgType»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«McMsgType»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«McMsgType»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«McMsg»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«McMsg»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«McMsg»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«McQueueStatus»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«McQueueStatus»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«McQueueStatus»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«McQueue»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«McQueue»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«McQueue»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«McTypeQueueCustomParam»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«McTypeQueueCustomParam»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«McTypeQueueCustomParam»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«HomeAppSendMsgCount»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/HomeAppSendMsgCount"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«HomeAppSendMsgCount»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«HomeMsgTypeCount»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/HomeMsgTypeCount"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«HomeMsgTypeCount»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«HomeRecentSendMsgCount»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/HomeRecentSendMsgCount"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«HomeRecentSendMsgCount»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«HomeStatusSendMsgCount»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/HomeStatusSendMsgCount"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«HomeStatusSendMsgCount»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«McQueueMustParam»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/McQueueMustParam"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«McQueueMustParam»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«McQueue»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/McQueue"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«McQueue»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«T_SYS_APP»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/T_SYS_APP"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«T_SYS_APP»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«McAppConfigView»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/McAppConfigView"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«McAppConfigView»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«McMsgType»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/McMsgType"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«McMsgType»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«McMsg»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/McMsg"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«McMsg»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«McQueue»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/McQueue"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«McQueue»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«McTypeQueueCustomParam»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/McTypeQueueCustomParam"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«McTypeQueueCustomParam»",
+      "description": "返回响应数据"
+    },
+    "T_PERMISSION_PUB_SUBJECT_EXT": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "描述"
+        },
+        "extPropertyKey": {
+          "type": "string",
+          "description": "字段键值"
+        },
+        "extPropertyValue": {
+          "type": "string",
+          "description": "字段值"
+        },
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "subjectId": {
+          "type": "string",
+          "description": "主题id"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户ID"
+        }
+      },
+      "title": "T_PERMISSION_PUB_SUBJECT_EXT",
+      "description": "主题扩展信息"
+    },
+    "T_SYS_APP": {
+      "type": "object",
+      "properties": {
+        "appKey": {
+          "type": "string",
+          "description": "应用键值"
+        },
+        "description": {
+          "type": "string",
+          "description": "描述"
+        },
+        "detail": {
+          "description": "扩展信息",
+          "$ref": "#/definitions/T_SYS_APP_DETAIL"
+        },
+        "extInfoList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/T_PERMISSION_PUB_SUBJECT_EXT"
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "name": {
+          "type": "string",
+          "description": "名称"
+        },
+        "rsaPrivateKey": {
+          "type": "string",
+          "description": "rsa私钥"
+        },
+        "rsaPublicKey": {
+          "type": "string",
+          "description": "rsa公钥"
+        },
+        "serviceId": {
+          "type": "string",
+          "description": "应用标识"
+        },
+        "sort": {
+          "type": "number",
+          "description": "排序字段"
+        },
+        "status": {
+          "type": "number",
+          "description": "状态 1:正常/2:冻结"
+        }
+      },
+      "title": "T_SYS_APP",
+      "description": "应用信息"
+    },
+    "T_SYS_APP_DETAIL": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "description": "应用ID"
+        },
+        "id": {
+          "type": "string",
+          "description": "ID"
+        },
+        "logoAndBanner": {
+          "type": "string",
+          "description": "logo和banner"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户ID"
+        }
+      },
+      "title": "T_SYS_APP_DETAIL"
+    }
+  }
+}

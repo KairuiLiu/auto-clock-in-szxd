@@ -1,0 +1,104 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "钉钉通用接口"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-dingtalk-base",
+  "tags": [{
+    "name": "jsApi",
+    "description": "Js Api Sign Controller"
+  }, {
+    "name": "全局定位范围",
+    "description": "T Global Range Controller"
+  }],
+  "paths": {
+    "/ding-talk/global-range/verify": {
+      "post": {
+        "tags": ["全局定位范围"],
+        "summary": "verify",
+        "operationId": "verifyUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "mapResult",
+          "description": "mapResult",
+          "required": true,
+          "schema": {
+            "type": "object"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/ding-talk/js-api/sign": {
+      "get": {
+        "tags": ["jsApi"],
+        "summary": "鉴权",
+        "operationId": "signUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "url",
+          "in": "query",
+          "description": "url",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    }
+  }
+}

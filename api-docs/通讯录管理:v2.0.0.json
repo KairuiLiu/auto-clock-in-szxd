@@ -1,0 +1,606 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v2.0.0",
+    "title": "通讯录管理"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-address-book",
+  "tags": [{
+    "name": "初始化全量同步钉钉企业通讯录数据",
+    "description": "Data Sync Controller"
+  }, {
+    "name": "数据初始化全量同步",
+    "description": "Init Data Sync Controller"
+  }, {
+    "name": "数据同步补偿",
+    "description": "Data Perfect Sync Controller"
+  }, {
+    "name": "统计通讯录同步人数",
+    "description": "Data Sync Count Controller"
+  }, {
+    "name": "钉钉回调事件",
+    "description": "Ding Talk Callback Controller"
+  }],
+  "paths": {
+    "/address-book/full-sync-data": {
+      "get": {
+        "tags": ["初始化全量同步钉钉企业通讯录数据"],
+        "summary": "初始化全量同步钉钉企业通讯录数据",
+        "operationId": "initOrgDataSyncUsingGET",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/address-book/init-edu-role-sync": {
+      "get": {
+        "tags": ["数据初始化全量同步"],
+        "summary": "初始化同步家校通讯录角色数据",
+        "operationId": "initFullSyncEduRoleDataUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "authCorpId",
+          "in": "query",
+          "description": "钉钉企业Id",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "tenantId",
+          "in": "query",
+          "description": "租户Id",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/address-book/init-org-sync": {
+      "get": {
+        "tags": ["数据初始化全量同步"],
+        "summary": "初始化同步机构数据",
+        "operationId": "initFullSyncOrgDataUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "authCorpId",
+          "in": "query",
+          "description": "钉钉企业Id(委托开发单租户模式下为必传参数)",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "tenantId",
+          "in": "query",
+          "description": "租户Id(多租户模式下为毕传参数)",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/address-book/init-role-sync": {
+      "get": {
+        "tags": ["数据初始化全量同步"],
+        "summary": "初始化同步角色数据",
+        "operationId": "initFullSyncRoleDataUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "authCorpId",
+          "in": "query",
+          "description": "钉钉企业Id",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "tenantId",
+          "in": "query",
+          "description": "租户Id",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/address-book/init-user-sync": {
+      "get": {
+        "tags": ["数据初始化全量同步"],
+        "summary": "初始化全量同步内部通讯录+家校通讯录用户数据",
+        "operationId": "initFullSyncUserDataUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "authCorpId",
+          "in": "query",
+          "description": "钉钉企业Id",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "tenantId",
+          "in": "query",
+          "description": "租户Id",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/address-book/sync-dept-by-ding-dept-id": {
+      "get": {
+        "tags": ["数据同步补偿"],
+        "summary": "企业内部应用--单租户模式--根据钉钉部门Id递归同步下属所有部门信息",
+        "operationId": "syncOrgInfoByDingDeptIdUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "dingDeptId",
+          "in": "query",
+          "description": "钉钉部门Id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/address-book/sync/perfect/class/data": {
+      "get": {
+        "tags": ["数据同步补偿"],
+        "summary": "补偿同步--学校--班级下--老师、学生、家长信息",
+        "operationId": "doSyncClassDataUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "orgName",
+          "in": "query",
+          "description": "班级名称",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "tenantId",
+          "in": "query",
+          "description": "租户Id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/address-book/sync/perfect/dept/user/data": {
+      "get": {
+        "tags": ["数据同步补偿"],
+        "summary": "补偿同步--通讯录--用户信息",
+        "operationId": "doSyncDeptUserDataUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "corpId",
+          "in": "query",
+          "description": "钉钉企业corpId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "dingUserId",
+          "in": "query",
+          "description": "钉钉用户userId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/address-book/sync/perfect/guardian": {
+      "get": {
+        "tags": ["数据同步补偿"],
+        "summary": "补偿同步--学校--班级下--家长信息",
+        "operationId": "doSyncGuardianUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "orgName",
+          "in": "query",
+          "description": "班级名称",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "tenantId",
+          "in": "query",
+          "description": "租户Id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/address-book/sync/perfect/student": {
+      "get": {
+        "tags": ["数据同步补偿"],
+        "summary": "补偿同步--学校--班级下--学生信息",
+        "operationId": "doSyncStudentUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "orgName",
+          "in": "query",
+          "description": "班级名称",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "tenantId",
+          "in": "query",
+          "description": "租户Id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/address-book/sync/perfect/teacher": {
+      "get": {
+        "tags": ["数据同步补偿"],
+        "summary": "补偿同步--学校--班级下--老师信息",
+        "operationId": "doSyncTeacherUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "orgName",
+          "in": "query",
+          "description": "班级名称",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "tenantId",
+          "in": "query",
+          "description": "租户Id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/address-book/sync/perfect/user/dingTalkUserId": {
+      "get": {
+        "tags": ["数据同步补偿"],
+        "summary": "钉钉企业内部应用--通过dingTalkUserId--补偿同步--用户信息",
+        "operationId": "doSyncDingUserByDingTalkUserIdUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "dingTalkUserId",
+          "in": "query",
+          "description": "钉钉userId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/address-book/sync/perfect/user/mobile": {
+      "get": {
+        "tags": ["数据同步补偿"],
+        "summary": "钉钉企业内部应用--通过手机号码--补偿同步--用户信息",
+        "operationId": "doSyncDingUserByMobileUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "mobile",
+          "in": "query",
+          "description": "手机号码",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/address-book/user/count": {
+      "get": {
+        "tags": ["统计通讯录同步人数"],
+        "summary": "统计通讯录同步人数和差异情况",
+        "operationId": "getUserSyncCountUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "tenantId",
+          "in": "query",
+          "description": "租户Id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/dingtalk/callback/delete": {
+      "post": {
+        "tags": ["钉钉回调事件"],
+        "summary": "删除已订阅事件",
+        "operationId": "callbackDeleteUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "authCorpId",
+          "in": "query",
+          "description": "钉钉企业Id(委托开发单租户模式下为必传参数)",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "tenantId",
+          "in": "query",
+          "description": "租户Id(多租户模式下为必传参数)",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/dingtalk/callback/receive": {
+      "post": {
+        "tags": ["钉钉回调事件"],
+        "summary": "接收钉钉Http模式推送事件(多租户模式)",
+        "operationId": "receiveDingtalkCallbackWithTenantUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "json",
+          "description": "json",
+          "required": false,
+          "schema": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          }
+        }, {
+          "name": "msg_signature",
+          "in": "query",
+          "description": "msg_signature",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "nonce",
+          "in": "query",
+          "description": "nonce",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "tenantId",
+          "in": "query",
+          "description": "tenantId",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "timestamp",
+          "in": "query",
+          "description": "timestamp",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/dingtalk/callback/register": {
+      "post": {
+        "tags": ["钉钉回调事件"],
+        "summary": "事件订阅",
+        "operationId": "callbackRegisterUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "authCorpId",
+          "in": "query",
+          "description": "钉钉企业Id(委托开发单租户模式下为必传参数)",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "tenantId",
+          "in": "query",
+          "description": "租户Id(多租户模式下为必传参数)",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    }
+  }
+}

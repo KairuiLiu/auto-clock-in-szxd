@@ -1,0 +1,1419 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "apis-主配置服务"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-apis-manage",
+  "tags": [{
+    "name": "api服务主配置",
+    "description": "Apis Main Config Controller"
+  }],
+  "paths": {
+    "/apis/main-config": {
+      "post": {
+        "tags": ["api服务主配置"],
+        "summary": "保存服务",
+        "operationId": "saveUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "apisMainConfigModel",
+          "description": "apisMainConfigModel",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ApisMainConfigModel"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["api服务主配置"],
+        "summary": "删除服务",
+        "operationId": "deleteUsingDELETE",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "idList",
+          "in": "query",
+          "description": "idList",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/apis/main-config/getUser": {
+      "get": {
+        "tags": ["api服务主配置"],
+        "summary": "获取用户信息",
+        "operationId": "getUserUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "path",
+          "in": "query",
+          "description": "path",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«Map»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/apis/main-config/query": {
+      "post": {
+        "tags": ["api服务主配置"],
+        "summary": "分页查询服务主要信息",
+        "operationId": "queryUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": false,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«ApisMainConfig»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«ApisMainConfig»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/apis/main-config/query/{id}": {
+      "get": {
+        "tags": ["api服务主配置"],
+        "summary": "服务请求",
+        "operationId": "stepThroughUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«Map»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/apis/main-config/queryList": {
+      "get": {
+        "tags": ["api服务主配置"],
+        "summary": "查询服务信息列表",
+        "operationId": "queryListUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appId",
+          "in": "query",
+          "description": "appId",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "serveClass",
+          "in": "query",
+          "description": "serveClass",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«ApisMainConfig»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/apis/main-config/updateStatus": {
+      "post": {
+        "tags": ["api服务主配置"],
+        "summary": "修改服务禁用、启用",
+        "operationId": "updateStatusUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "idList",
+          "in": "query",
+          "description": "idList",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/apis/main-config/{id}": {
+      "get": {
+        "tags": ["api服务主配置"],
+        "summary": "根据服务主主键查询主要信息",
+        "operationId": "getUsingGET_1",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«ApisMainConfigModel»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "ApisAndCtls": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "mainConfigId": {
+          "type": "string",
+          "description": "服务编号"
+        },
+        "ctlsId": {
+          "type": "string",
+          "description": "控件ID"
+        },
+        "ctlsName": {
+          "type": "string",
+          "description": "控件名称"
+        },
+        "cltsClass": {
+          "type": "string",
+          "description": "控件分类",
+          "enum": ["begin", "line", "table", "http", "constant", "data", "respons"]
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisAndCtls",
+      "description": "api关联控件"
+    },
+    "ApisConstantCvsCtls": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "ctlsName": {
+          "type": "string",
+          "description": "控件名称"
+        },
+        "variableSource": {
+          "type": "string",
+          "description": "源变量名"
+        },
+        "variablePath": {
+          "type": "string",
+          "description": "变量名路径"
+        },
+        "constCata": {
+          "type": "string",
+          "description": "常量目录"
+        },
+        "variableNew": {
+          "type": "string",
+          "description": "新变量名"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-11-29 10:10:10",
+          "description": "创建时间"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisConstantCvsCtls",
+      "description": "常量转换控件配置"
+    },
+    "ApisConstantCvsCtlsData": {
+      "type": "object",
+      "properties": {
+        "constantCvsCtlsId": {
+          "type": "string",
+          "description": "控件Id"
+        },
+        "dkey": {
+          "type": "string"
+        },
+        "dvalue": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisConstantCvsCtlsData",
+      "description": "常量转换数据字典"
+    },
+    "ApisConstantCvsCtlsModel": {
+      "type": "object",
+      "properties": {
+        "apisConstantCvsCtls": {
+          "description": "常量转换主配置",
+          "$ref": "#/definitions/ApisConstantCvsCtls"
+        },
+        "apisConstantCvsCtlsDataList": {
+          "type": "array",
+          "description": "常量转换数据信息",
+          "items": {
+            "$ref": "#/definitions/ApisConstantCvsCtlsData"
+          }
+        }
+      },
+      "title": "ApisConstantCvsCtlsModel",
+      "description": "常量转换控件"
+    },
+    "ApisDataProcessingCtls": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "ctlsName": {
+          "type": "string",
+          "description": "控件名称"
+        },
+        "variableInData": {
+          "type": "string",
+          "description": "数据加工输出变量名"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-11-29 10:10:10",
+          "description": "创建时间"
+        }
+      },
+      "title": "ApisDataProcessingCtls",
+      "description": "数据加工控件"
+    },
+    "ApisDataProcessingCtlsDetail": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "dataProcessingCtls": {
+          "description": "控件",
+          "$ref": "#/definitions/ApisDataProcessingCtls"
+        },
+        "dataProcessingCtlsId": {
+          "type": "string",
+          "description": "控件Id"
+        },
+        "funcType": {
+          "type": "string",
+          "description": "方法类型(/pub/dm-const/listByCataCode?cataCode=APIS_DATA_PROCESSING_TYPE,展示label,传给后台传value)"
+        },
+        "functions": {
+          "type": "string",
+          "description": "方法(/pub/dm-const/listSubVoByParentCataCodeItemCode?cataCode=APIS_DATA_PROCESSING_TYPE&&itemCode=上一层的value;   展示label,传给后台传value)"
+        },
+        "funcName": {
+          "type": "string",
+          "description": "方法名称(1.substr 2.concat 3.format 4.replace 5.类型转换 6.list交集 7.list并集 8.listjoin 9.list去重 10.jsonpath)"
+        },
+        "param1": {
+          "type": "string",
+          "description": "参数1"
+        },
+        "param2": {
+          "type": "string",
+          "description": "参数2"
+        },
+        "param3": {
+          "type": "string",
+          "description": "参数3"
+        },
+        "param4": {
+          "type": "string",
+          "description": "参数4"
+        },
+        "variableNewData": {
+          "type": "string",
+          "description": "数据加工新变量名"
+        },
+        "sortting": {
+          "type": "integer",
+          "format": "int32",
+          "description": "排序"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisDataProcessingCtlsDetail",
+      "description": "数据加工明细"
+    },
+    "ApisDataProcessingCtlsModel": {
+      "type": "object",
+      "properties": {
+        "apisDataProcessingCtls": {
+          "description": "数据加工主配置",
+          "$ref": "#/definitions/ApisDataProcessingCtls"
+        },
+        "apisDataProcessingCtlsDetailList": {
+          "type": "array",
+          "description": "数据加工配置明细",
+          "items": {
+            "$ref": "#/definitions/ApisDataProcessingCtlsDetail"
+          }
+        }
+      },
+      "title": "ApisDataProcessingCtlsModel",
+      "description": "数据加工明细"
+    },
+    "ApisHttpCtls": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "ctlsName": {
+          "type": "string",
+          "description": "控件名称"
+        },
+        "url": {
+          "type": "string",
+          "description": "地址(https:www.baidu.com)https:www.baidu.com"
+        },
+        "reqMethod": {
+          "type": "string",
+          "description": "请求方式(.GET .POST .PUT)"
+        },
+        "characterSet": {
+          "type": "string",
+          "description": "字符集(.GBK  .UTF-8)"
+        },
+        "timeOut": {
+          "type": "integer",
+          "format": "int32",
+          "description": "超出时间(60)s"
+        },
+        "contentType": {
+          "type": "string",
+          "description": "内容类型(application/json .application/text)"
+        },
+        "variableOutRest": {
+          "type": "string",
+          "description": "rest输出变量名"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-11-29 10:10:10",
+          "description": "创建时间"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisHttpCtls",
+      "description": "rest控件的配置信息"
+    },
+    "ApisHttpCtlsModel": {
+      "type": "object",
+      "properties": {
+        "apisHttpCtls": {
+          "description": "http控件主配置",
+          "$ref": "#/definitions/ApisHttpCtls"
+        },
+        "apisHttpCtlsReqParamList": {
+          "type": "array",
+          "description": "http请求参数",
+          "items": {
+            "$ref": "#/definitions/ApisHttpCtlsReqParam"
+          }
+        }
+      },
+      "title": "ApisHttpCtlsModel",
+      "description": "http控件的配置参数"
+    },
+    "ApisHttpCtlsReqParam": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "httpCtlsId": {
+          "type": "string",
+          "description": "控件Id"
+        },
+        "param": {
+          "type": "string",
+          "description": "参数名"
+        },
+        "paraSource": {
+          "type": "string",
+          "description": "参数来源"
+        },
+        "paraPath": {
+          "type": "string",
+          "description": "参数值路径"
+        },
+        "filedType": {
+          "type": "string",
+          "description": "字段类型(string,array)"
+        },
+        "ginsengType": {
+          "type": "string",
+          "description": "传参类型(query,body,header,cookie)"
+        },
+        "defValue": {
+          "type": "string",
+          "description": "默认值"
+        },
+        "annotation": {
+          "type": "string",
+          "description": "注释"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisHttpCtlsReqParam",
+      "description": "rest控件的配置参数"
+    },
+    "ApisLineCtls": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "mainConfigId": {
+          "type": "string",
+          "description": "主服务编号"
+        },
+        "source": {
+          "type": "string",
+          "description": "来源"
+        },
+        "sourceType": {
+          "type": "string",
+          "description": "来源分类",
+          "enum": ["begin", "line", "table", "http", "constant", "data", "respons"]
+        },
+        "target": {
+          "type": "string",
+          "description": "目标"
+        },
+        "targetType": {
+          "type": "string",
+          "description": "目标分类",
+          "enum": ["begin", "line", "table", "http", "constant", "data", "respons"]
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisLineCtls",
+      "description": "apis线控件"
+    },
+    "ApisMainConfig": {
+      "type": "object",
+      "properties": {
+        "pageNum": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "tenantId": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "name": {
+          "type": "string",
+          "description": "服务名称"
+        },
+        "serveClass": {
+          "type": "string",
+          "description": "服务分类(基础数据.)"
+        },
+        "reqMethod": {
+          "type": "string",
+          "description": "请求类型(GET .POST .PUT)"
+        },
+        "url": {
+          "type": "string",
+          "description": "接口路径"
+        },
+        "remark": {
+          "type": "string",
+          "description": "备注"
+        },
+        "xml": {
+          "type": "string",
+          "description": "xml"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-11-29 10:10:10",
+          "description": "创建时间"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "状态(1,是;2,否)"
+        },
+        "appId": {
+          "type": "string",
+          "description": "所属应用"
+        },
+        "creator": {
+          "type": "string",
+          "description": "创建人"
+        }
+      },
+      "title": "ApisMainConfig",
+      "description": "api服务主配置"
+    },
+    "ApisMainConfigModel": {
+      "type": "object",
+      "properties": {
+        "apisMainConfig": {
+          "description": "主配置",
+          "$ref": "#/definitions/ApisMainConfig"
+        },
+        "apisLineCtls": {
+          "type": "array",
+          "description": "线控件",
+          "items": {
+            "$ref": "#/definitions/ApisLineCtls"
+          }
+        },
+        "apisMainConfigReqCtls": {
+          "type": "array",
+          "description": "请求参数控件",
+          "items": {
+            "$ref": "#/definitions/ApisMainConfigReqCtls"
+          }
+        },
+        "apisTbCtlsModels": {
+          "type": "array",
+          "description": "表格控件",
+          "items": {
+            "$ref": "#/definitions/ApisTbCtlsModel"
+          }
+        },
+        "apisHttpCtlsModels": {
+          "type": "array",
+          "description": "http控件",
+          "items": {
+            "$ref": "#/definitions/ApisHttpCtlsModel"
+          }
+        },
+        "apisConstantCvsCtlsModels": {
+          "type": "array",
+          "description": "常量转换控件",
+          "items": {
+            "$ref": "#/definitions/ApisConstantCvsCtlsModel"
+          }
+        },
+        "apisDataProcessingCtlsModels": {
+          "type": "array",
+          "description": "数据加工控件",
+          "items": {
+            "$ref": "#/definitions/ApisDataProcessingCtlsModel"
+          }
+        },
+        "apisMainOutCtlsModels": {
+          "description": "输出控件",
+          "$ref": "#/definitions/ApisMainOutCtlsModel"
+        },
+        "apisAndCtls": {
+          "type": "array",
+          "description": "主服务关联所有控件",
+          "items": {
+            "$ref": "#/definitions/ApisAndCtls"
+          }
+        }
+      },
+      "title": "ApisMainConfigModel",
+      "description": "服务主要信息"
+    },
+    "ApisMainConfigReqCtls": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "mainConfigId": {
+          "type": "string",
+          "description": "服务编号"
+        },
+        "param": {
+          "type": "string",
+          "description": "参数"
+        },
+        "remark": {
+          "type": "string",
+          "description": "参数备注"
+        },
+        "filedType": {
+          "type": "string",
+          "description": "参数类型(string; array)"
+        },
+        "defValue": {
+          "type": "string",
+          "description": "默认值"
+        },
+        "attribute": {
+          "type": "string",
+          "description": "参数属性(body,query,header,cookie)"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisMainConfigReqCtls",
+      "description": "api服务配置请求参数"
+    },
+    "ApisMainOutCtls": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "ctlsName": {
+          "type": "string",
+          "description": "控件名称"
+        },
+        "variableEnd": {
+          "type": "string",
+          "description": "最后输出变量"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-11-29 10:10:10",
+          "description": "创建时间"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisMainOutCtls",
+      "description": "api服务配置返回值控件"
+    },
+    "ApisMainOutCtlsData": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "mainOutCtlsId": {
+          "type": "string",
+          "description": "控件"
+        },
+        "variableSource": {
+          "type": "string",
+          "description": "变量来源"
+        },
+        "variablePath": {
+          "type": "string",
+          "description": "变量路径"
+        },
+        "outPutPath": {
+          "type": "string",
+          "description": "输出变量"
+        },
+        "sortting": {
+          "type": "integer",
+          "format": "int32",
+          "description": "排序（1.2.3.4）"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisMainOutCtlsData",
+      "description": "apis配置返回的参数信息"
+    },
+    "ApisMainOutCtlsModel": {
+      "type": "object",
+      "properties": {
+        "apisMainOutCtls": {
+          "description": "apis服务返回主配置",
+          "$ref": "#/definitions/ApisMainOutCtls"
+        },
+        "apisMainOutCtlsDataList": {
+          "type": "array",
+          "description": "输出列表",
+          "items": {
+            "$ref": "#/definitions/ApisMainOutCtlsData"
+          }
+        }
+      },
+      "title": "ApisMainOutCtlsModel",
+      "description": "api服务配置返回值控件"
+    },
+    "ApisTbCtls": {
+      "type": "object",
+      "properties": {
+        "ignorePaging": {
+          "type": "boolean"
+        },
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "ctlsName": {
+          "type": "string",
+          "description": "控件名称"
+        },
+        "dataSourceId": {
+          "type": "string",
+          "description": "数据源ID"
+        },
+        "isSingle": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "是否单表(1,是;2,否)"
+        },
+        "tb": {
+          "type": "string",
+          "description": "表名"
+        },
+        "tbRname": {
+          "type": "string",
+          "description": "表别名"
+        },
+        "tbComment": {
+          "type": "string",
+          "description": "表的备注"
+        },
+        "isDistinct": {
+          "type": "integer",
+          "format": "int32",
+          "description": "是否加去重"
+        },
+        "isComplex": {
+          "type": "integer",
+          "format": "int32",
+          "description": "是否复杂sql"
+        },
+        "variableOutTb": {
+          "type": "string",
+          "description": "表的输出变量名"
+        },
+        "isPaging": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "是否分页(1,是;2,否)"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-11-29 10:10:10",
+          "description": "创建时间"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisTbCtls",
+      "description": "表格控件"
+    },
+    "ApisTbCtlsCorrelation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "tbCtlsId": {
+          "type": "string",
+          "description": "mainTb"
+        },
+        "mainTb": {
+          "type": "string",
+          "description": "主表"
+        },
+        "mainTbRname": {
+          "type": "string",
+          "description": "主表别名"
+        },
+        "mainTbComment": {
+          "type": "string",
+          "description": "主表备注"
+        },
+        "mainField": {
+          "type": "string",
+          "description": "主表关联字段"
+        },
+        "mainFunc": {
+          "type": "string",
+          "description": "主表函数"
+        },
+        "correlation": {
+          "type": "string",
+          "description": "关联关系（左连接LEFT JOIN,内链接INNER JOIN,右链接RIGHT JOIN）"
+        },
+        "afterTb": {
+          "type": "string",
+          "description": "关联表"
+        },
+        "afterTbRname": {
+          "type": "string",
+          "description": "关联表别名"
+        },
+        "afterTbComment": {
+          "type": "string",
+          "description": "关联表备注"
+        },
+        "afterField": {
+          "type": "string",
+          "description": "关联表关联字段"
+        },
+        "afterFunc": {
+          "type": "string",
+          "description": "关联表函数"
+        },
+        "conditions": {
+          "type": "string",
+          "description": "条件(等于.=,大于.>,小于.<,大于等于.>=,小于等于.<=,区间.between,like)"
+        },
+        "sortting": {
+          "type": "integer",
+          "format": "int32",
+          "description": "排序（1.2.3....）"
+        },
+        "relation": {
+          "type": "string",
+          "description": "关系AND、OR"
+        },
+        "relationTeam": {
+          "type": "string",
+          "description": "关系分组"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisTbCtlsCorrelation",
+      "description": "表与表之间的的关联关系"
+    },
+    "ApisTbCtlsModel": {
+      "type": "object",
+      "properties": {
+        "apisTbCtls": {
+          "description": "表格控件主配置",
+          "$ref": "#/definitions/ApisTbCtls"
+        },
+        "apisTbCtlsCorrelationList": {
+          "type": "array",
+          "description": "表和表之间的关联关系",
+          "items": {
+            "$ref": "#/definitions/ApisTbCtlsCorrelation"
+          }
+        },
+        "apisTbCtlsReqParamList": {
+          "type": "array",
+          "description": "表查询的请求参数配置",
+          "items": {
+            "$ref": "#/definitions/ApisTbCtlsReqParam"
+          }
+        },
+        "apisTbCtlsReqParamConditionsModelList": {
+          "type": "array",
+          "description": "表格控件查询条件组配",
+          "items": {
+            "$ref": "#/definitions/ApisTbCtlsReqParamConditionsModel"
+          }
+        },
+        "apisTbCtlsReturnList": {
+          "type": "array",
+          "description": "表查询的返回参数配置",
+          "items": {
+            "$ref": "#/definitions/ApisTbCtlsReturn"
+          }
+        }
+      },
+      "title": "ApisTbCtlsModel",
+      "description": "表格控件"
+    },
+    "ApisTbCtlsReqParam": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "编号"
+        },
+        "tbCtlsId": {
+          "type": "string",
+          "description": "控件"
+        },
+        "tb": {
+          "type": "string",
+          "description": "表名"
+        },
+        "field": {
+          "type": "string",
+          "description": "字段"
+        },
+        "filedComment": {
+          "type": "string",
+          "description": "字段注释"
+        },
+        "filedType": {
+          "type": "string",
+          "description": "字段类型(数据的字段类型)"
+        },
+        "conditions": {
+          "type": "string",
+          "description": "条件(等于.=,大于.>,小于.<,大于等于.>=,小于等于.<=,区间.between,like,notlike,in,notin,!=)"
+        },
+        "paraSource": {
+          "type": "string",
+          "description": "参数来源"
+        },
+        "paraPath": {
+          "type": "string",
+          "description": "参数值路径"
+        },
+        "defValue": {
+          "type": "string",
+          "description": "默认值"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisTbCtlsReqParam",
+      "description": "表格控件请求参数的配置"
+    },
+    "ApisTbCtlsReqParamConditionsModel": {
+      "type": "object",
+      "properties": {
+        "pid": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "description": "编号"
+        },
+        "tbCtlsId": {
+          "type": "string",
+          "description": "mainTb"
+        },
+        "conditions": {
+          "type": "string",
+          "description": "条件组"
+        },
+        "conditionsName": {
+          "type": "string",
+          "description": "条件组名称"
+        },
+        "apisTbCtlsReqParam": {
+          "description": "参数条件",
+          "$ref": "#/definitions/ApisTbCtlsReqParam"
+        },
+        "childConditions": {
+          "type": "string",
+          "description": "子条件组"
+        },
+        "scope": {
+          "type": "string",
+          "description": "范围(内部inner,外部outer,内外部innerAndOuter)"
+        },
+        "reqParamConditionsModels": {
+          "type": "array",
+          "description": "子条件组",
+          "items": {
+            "$ref": "#/definitions/ApisTbCtlsReqParamConditionsModel"
+          }
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisTbCtlsReqParamConditionsModel",
+      "description": "表格控件查询条件组配置model"
+    },
+    "ApisTbCtlsReturn": {
+      "type": "object",
+      "properties": {
+        "tb": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "scope": {
+          "type": "string",
+          "description": "范围(针对分组的范围,内部inner,外部outer,内外部innerAndOuter)"
+        },
+        "tbCtlsId": {
+          "type": "string",
+          "description": "控件"
+        },
+        "field": {
+          "type": "string",
+          "description": "字段名"
+        },
+        "filedComment": {
+          "type": "string",
+          "description": "注释"
+        },
+        "filedType": {
+          "type": "string",
+          "description": "字段类型(数据库字段类型)"
+        },
+        "otherName": {
+          "type": "string",
+          "description": "别名"
+        },
+        "func": {
+          "type": "string",
+          "description": "函数(求和.SUM 求平均.AVG 最小值.MIN 最大值.MAX 计数.COUNT)"
+        },
+        "sortMethods": {
+          "type": "string",
+          "description": "排序方式(desc.降序,asc.升序,空则不排序)"
+        },
+        "isGroup": {
+          "type": "integer",
+          "format": "int32",
+          "description": "是否分组(1,是;2,否)"
+        },
+        "sortting": {
+          "type": "integer",
+          "format": "int32",
+          "description": "排序)"
+        },
+        "isOut": {
+          "type": "integer",
+          "format": "int32",
+          "description": "是否输出(1,是;2,否)"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisTbCtlsReturn",
+      "description": "表格控件返回的信息"
+    },
+    "IPage«ApisMainConfig»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApisMainConfig"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«ApisMainConfig»"
+    },
+    "OrderItem": {
+      "type": "object",
+      "properties": {
+        "asc": {
+          "type": "boolean"
+        },
+        "column": {
+          "type": "string"
+        }
+      },
+      "title": "OrderItem"
+    },
+    "QueryCondition«ApisMainConfig»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/ApisMainConfig"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«ApisMainConfig»",
+      "description": "查询条件"
+    },
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«ApisMainConfigModel»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/ApisMainConfigModel"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«ApisMainConfigModel»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«ApisMainConfig»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«ApisMainConfig»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«ApisMainConfig»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«ApisMainConfig»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/ApisMainConfig"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«ApisMainConfig»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«Map»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«Map»",
+      "description": "返回响应数据"
+    }
+  }
+}

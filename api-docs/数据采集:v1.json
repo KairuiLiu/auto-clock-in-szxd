@@ -1,0 +1,1263 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "数据采集"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-workflow",
+  "tags": [{
+    "name": "数据采集平台-业务系统接口",
+    "description": "Business Interface Controller"
+  }, {
+    "name": "数据采集平台-字段权限配置",
+    "description": "T Data Collection Resource Field Controller"
+  }, {
+    "name": "数据采集平台-查询条件字段关系映射",
+    "description": "T Data Collection Resource Map Controller"
+  }, {
+    "name": "数据采集平台-表（视图）资源屏蔽配置（采集库超级管理员）",
+    "description": "T Data Collection Resource Set Controller"
+  }, {
+    "name": "数据采集平台-资源权限配置",
+    "description": "T Data Collection Resource Controller"
+  }],
+  "paths": {
+    "/business-interface/field-query": {
+      "get": {
+        "tags": ["数据采集平台-业务系统接口"],
+        "summary": "资源表（视图）字段查询-开放给业务系统管理员",
+        "operationId": "fieldQueryUsingGET_1",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "resourceId",
+          "in": "query",
+          "description": "resourceId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/business-interface/list-data-collection": {
+      "post": {
+        "tags": ["数据采集平台-业务系统接口"],
+        "summary": "列表数据采集",
+        "operationId": "listDataCollectionUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "fieldList",
+          "description": "fieldList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }, {
+          "name": "filterCondition",
+          "in": "query",
+          "description": "过滤条件（工号，账号id）",
+          "required": true,
+          "type": "string",
+          "enum": ["jobNumber", "accountId"]
+        }, {
+          "name": "resourceId",
+          "in": "query",
+          "description": "资源id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/business-interface/query-data-collection": {
+      "post": {
+        "tags": ["数据采集平台-业务系统接口"],
+        "summary": "分页数据查询",
+        "operationId": "queryDataCollectionUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "filterCondition",
+          "in": "query",
+          "description": "过滤条件（工号，账号id）",
+          "required": false,
+          "type": "string",
+          "enum": ["jobNumber", "accountId"]
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«支持弹框选择器新建的查询字段及字段条件实体»"
+          }
+        }, {
+          "name": "resourceId",
+          "in": "query",
+          "description": "资源id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/business-interface/single-data-collection": {
+      "post": {
+        "tags": ["数据采集平台-业务系统接口"],
+        "summary": "单数据采集",
+        "operationId": "singleDataCollectionUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "fieldList",
+          "description": "fieldList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }, {
+          "name": "filterCondition",
+          "in": "query",
+          "description": "过滤条件（工号，账号id）",
+          "required": true,
+          "type": "string",
+          "enum": ["jobNumber", "accountId"]
+        }, {
+          "name": "resourceId",
+          "in": "query",
+          "description": "资源id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/business-interface/single-data-write-back": {
+      "post": {
+        "tags": ["数据采集平台-业务系统接口"],
+        "summary": "单数据回写",
+        "operationId": "singleDataWriteBackUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "fieldValueMap",
+          "description": "fieldValueMap",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }, {
+          "name": "filterCondition",
+          "in": "query",
+          "description": "过滤条件（工号，账号id）",
+          "required": true,
+          "type": "string",
+          "enum": ["jobNumber", "accountId"]
+        }, {
+          "name": "resourceId",
+          "in": "query",
+          "description": "资源id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/business-interface/table-or-view-query": {
+      "post": {
+        "tags": ["数据采集平台-业务系统接口"],
+        "summary": "表（视图）资源分页查询-开放给业务系统管理员",
+        "operationId": "tableOrViewQueryUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«TDataCollectionResource对象»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/t-data-collection-resource": {
+      "put": {
+        "tags": ["数据采集平台-资源权限配置"],
+        "summary": "更新表（视图）记录信息",
+        "operationId": "updateUsingPUT_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "tDataCollectionResource",
+          "description": "tDataCollectionResource",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/TDataCollectionResource对象"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/t-data-collection-resource-field": {
+      "post": {
+        "tags": ["数据采集平台-字段权限配置"],
+        "summary": "新增",
+        "operationId": "saveUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "tDataCollectionResourceField",
+          "description": "tDataCollectionResourceField",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/TDataCollectionResourceField对象"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["数据采集平台-字段权限配置"],
+        "summary": "更新信息",
+        "operationId": "updateUsingPUT_2",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "tDataCollectionResourceField",
+          "description": "tDataCollectionResourceField",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/TDataCollectionResourceField对象"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/t-data-collection-resource-field/init-resource": {
+      "post": {
+        "tags": ["数据采集平台-字段权限配置"],
+        "summary": "初始化字段资源-建议所有字段都要纳入时采用",
+        "operationId": "initFieldResourceUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "resourceId",
+          "in": "query",
+          "description": "resourceId",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/t-data-collection-resource-field/query": {
+      "post": {
+        "tags": ["数据采集平台-字段权限配置"],
+        "summary": "分页查询",
+        "operationId": "queryUsingPOST_3",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«TDataCollectionResourceField对象»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/t-data-collection-resource-field/{id}": {
+      "get": {
+        "tags": ["数据采集平台-字段权限配置"],
+        "summary": "根据id查询详情",
+        "operationId": "getByIdUsingGET_2",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "信息ID",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["数据采集平台-字段权限配置"],
+        "summary": "根据id删除信息",
+        "operationId": "deleteByIdUsingDELETE_2",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "信息ID",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/t-data-collection-resource-map": {
+      "post": {
+        "tags": ["数据采集平台-查询条件字段关系映射"],
+        "summary": "新增",
+        "operationId": "saveUsingPOST_2",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "tDataCollectionResourceMap",
+          "description": "tDataCollectionResourceMap",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/TDataCollectionResourceMap对象"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["数据采集平台-查询条件字段关系映射"],
+        "summary": "更新信息",
+        "operationId": "updateUsingPUT_3",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "tDataCollectionResourceMap",
+          "description": "tDataCollectionResourceMap",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/TDataCollectionResourceMap对象"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/t-data-collection-resource-map/query": {
+      "post": {
+        "tags": ["数据采集平台-查询条件字段关系映射"],
+        "summary": "分页查询",
+        "operationId": "queryUsingPOST_4",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«TDataCollectionResourceMap对象»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/t-data-collection-resource-map/{id}": {
+      "get": {
+        "tags": ["数据采集平台-查询条件字段关系映射"],
+        "summary": "根据id查询详情",
+        "operationId": "getByIdUsingGET_3",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "信息ID",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["数据采集平台-查询条件字段关系映射"],
+        "summary": "根据id删除信息",
+        "operationId": "deleteByIdUsingDELETE_3",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "信息ID",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/t-data-collection-resource-shield": {
+      "put": {
+        "tags": ["数据采集平台-表（视图）资源屏蔽配置（采集库超级管理员）"],
+        "summary": "更新表（视图）记录信息",
+        "operationId": "updateUsingPUT_4",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "tDataCollectionResourceSet",
+          "description": "tDataCollectionResourceSet",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/TDataCollectionResourceSet对象"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/t-data-collection-resource-shield/init-all-set-resource": {
+      "post": {
+        "tags": ["数据采集平台-表（视图）资源屏蔽配置（采集库超级管理员）"],
+        "summary": "初始化所有表（视图）资源- 以便完成资源开放和屏蔽工作",
+        "operationId": "initAllSetResourceUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "dataSourceId",
+          "in": "query",
+          "description": "dataSourceId",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/t-data-collection-resource-shield/query": {
+      "post": {
+        "tags": ["数据采集平台-表（视图）资源屏蔽配置（采集库超级管理员）"],
+        "summary": "管理端分页查询",
+        "operationId": "queryUsingPOST_5",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«TDataCollectionResourceSet对象»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/t-data-collection-resource-shield/{id}": {
+      "get": {
+        "tags": ["数据采集平台-表（视图）资源屏蔽配置（采集库超级管理员）"],
+        "summary": "根据id查询详情",
+        "operationId": "getByIdUsingGET_4",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "信息ID",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/t-data-collection-resource/init-resource": {
+      "post": {
+        "tags": ["数据采集平台-资源权限配置"],
+        "summary": "初始化资源表信息",
+        "operationId": "initResourceUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/t-data-collection-resource/query": {
+      "post": {
+        "tags": ["数据采集平台-资源权限配置"],
+        "summary": "管理端分页查询",
+        "operationId": "queryUsingPOST_2",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«TDataCollectionResource对象»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/t-data-collection-resource/{id}": {
+      "get": {
+        "tags": ["数据采集平台-资源权限配置"],
+        "summary": "根据id查询详情",
+        "operationId": "getByIdUsingGET_1",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "信息ID",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["数据采集平台-资源权限配置"],
+        "summary": "根据id删除配置",
+        "operationId": "deleteByIdUsingDELETE_1",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "表或视图记录id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "OrderItem": {
+      "type": "object",
+      "properties": {
+        "asc": {
+          "type": "boolean"
+        },
+        "column": {
+          "type": "string"
+        }
+      },
+      "title": "OrderItem"
+    },
+    "QueryCondition«TDataCollectionResourceField对象»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/TDataCollectionResourceField对象"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«TDataCollectionResourceField对象»",
+      "description": "查询条件"
+    },
+    "QueryCondition«TDataCollectionResourceMap对象»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/TDataCollectionResourceMap对象"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«TDataCollectionResourceMap对象»",
+      "description": "查询条件"
+    },
+    "QueryCondition«TDataCollectionResourceSet对象»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/TDataCollectionResourceSet对象"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«TDataCollectionResourceSet对象»",
+      "description": "查询条件"
+    },
+    "QueryCondition«TDataCollectionResource对象»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/TDataCollectionResource对象"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«TDataCollectionResource对象»",
+      "description": "查询条件"
+    },
+    "QueryCondition«支持弹框选择器新建的查询字段及字段条件实体»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/支持弹框选择器新建的查询字段及字段条件实体"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«支持弹框选择器新建的查询字段及字段条件实体»",
+      "description": "查询条件"
+    },
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    },
+    "TDataCollectionResourceField对象": {
+      "type": "object",
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "特殊于表（视图）权限部分的字段权限(close/read)"
+        },
+        "deleteFlag": {
+          "type": "integer",
+          "format": "int32",
+          "description": "删除标记（1：已删除；0：有效）"
+        },
+        "fieldComment": {
+          "type": "string",
+          "description": "字段注释"
+        },
+        "fieldName": {
+          "type": "string",
+          "description": "字段名称"
+        },
+        "id": {
+          "type": "string",
+          "description": "关键字"
+        },
+        "remark": {
+          "type": "string",
+          "description": "备注"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "资源表（视图）id"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户ID"
+        }
+      },
+      "title": "TDataCollectionResourceField对象",
+      "description": "数据采集资源表字段"
+    },
+    "TDataCollectionResourceMap对象": {
+      "type": "object",
+      "properties": {
+        "deleteFlag": {
+          "type": "integer",
+          "format": "int32",
+          "description": "删除标记（1：已删除；0：有效）"
+        },
+        "fieldComment": {
+          "type": "string",
+          "description": "对应字段注释"
+        },
+        "fieldName": {
+          "type": "string",
+          "description": "对应字段名称"
+        },
+        "id": {
+          "type": "string",
+          "description": "关键字"
+        },
+        "remark": {
+          "type": "string",
+          "description": "备注"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "资源表（视图）id"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户ID"
+        },
+        "type": {
+          "type": "string",
+          "description": "accountId,jobNumber"
+        }
+      },
+      "title": "TDataCollectionResourceMap对象",
+      "description": "数据采集工号映射表（资源表公共规则publicRule定义了账号id及工号的统一字段名称，如：xgh,但部分表字段的工号字段名称code，可通过这里特殊配置单表个性化的字段对应关系来转译）"
+    },
+    "TDataCollectionResourceSet对象": {
+      "type": "object",
+      "properties": {
+        "dataSourceId": {
+          "type": "string",
+          "description": "数据源ID"
+        },
+        "dataSourceName": {
+          "type": "string",
+          "description": "数据源名称"
+        },
+        "dataSourceType": {
+          "type": "string",
+          "description": "数据源类型"
+        },
+        "dataSourceUser": {
+          "type": "string",
+          "description": "数据源用户名"
+        },
+        "dbNameAndTableName": {
+          "type": "string",
+          "description": "库名.表名"
+        },
+        "deleteFlag": {
+          "type": "integer",
+          "format": "int32",
+          "description": "删除标记（1：已删除；0：有效）"
+        },
+        "id": {
+          "type": "string",
+          "description": "关键字"
+        },
+        "remark": {
+          "type": "string",
+          "description": "特殊说明"
+        },
+        "shield": {
+          "type": "string",
+          "description": "true:屏蔽，false:不屏蔽"
+        },
+        "tableComment": {
+          "type": "string",
+          "description": "表注释"
+        },
+        "tableType": {
+          "type": "string",
+          "description": "资源类型"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户ID"
+        }
+      },
+      "title": "TDataCollectionResourceSet对象",
+      "description": "所有数据采集资源表（超级管理员统一控制全库的资源开放性）"
+    },
+    "TDataCollectionResource对象": {
+      "type": "object",
+      "properties": {
+        "authority": {
+          "type": "string",
+          "description": "权限(close/allOpen/read/write)"
+        },
+        "dataSourceId": {
+          "type": "string",
+          "description": "数据源ID"
+        },
+        "dataSourceName": {
+          "type": "string",
+          "description": "数据源名称"
+        },
+        "dataSourceType": {
+          "type": "string",
+          "description": "数据源类型"
+        },
+        "dataSourceUser": {
+          "type": "string",
+          "description": "数据源用户名"
+        },
+        "dbNameAndTableName": {
+          "type": "string",
+          "description": "库名.表名"
+        },
+        "deleteFlag": {
+          "type": "integer",
+          "format": "int32",
+          "description": "删除标记（1：已删除；0：有效）"
+        },
+        "id": {
+          "type": "string",
+          "description": "关键字"
+        },
+        "remark": {
+          "type": "string",
+          "description": "备注"
+        },
+        "tableComment": {
+          "type": "string",
+          "description": "表注释"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户ID"
+        },
+        "type": {
+          "type": "string",
+          "description": "类型（publicRule:通用规则;table:表;view:视图）"
+        }
+      },
+      "title": "TDataCollectionResource对象",
+      "description": "数据采集资源表"
+    },
+    "支持弹框选择器字段条件实体": {
+      "type": "object",
+      "properties": {
+        "fieldName": {
+          "type": "string"
+        },
+        "fieldValue": {
+          "type": "string"
+        },
+        "queryType": {
+          "type": "string"
+        }
+      },
+      "title": "支持弹框选择器字段条件实体",
+      "description": "支持弹框选择器字段条件实体"
+    },
+    "支持弹框选择器新建的查询字段及字段条件实体": {
+      "type": "object",
+      "properties": {
+        "resultFieldList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "searchConditionList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/支持弹框选择器字段条件实体"
+          }
+        }
+      },
+      "title": "支持弹框选择器新建的查询字段及字段条件实体",
+      "description": "支持弹框选择器新建的查询字段及字段条件实体"
+    }
+  }
+}

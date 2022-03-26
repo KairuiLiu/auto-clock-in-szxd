@@ -1,0 +1,124 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "门户-临时人员"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-lightportal-saas",
+  "tags": [{
+    "name": "临时人员",
+    "description": "Temporary Person"
+  }],
+  "paths": {
+    "/TemporaryPerson/login": {
+      "post": {
+        "tags": ["临时人员"],
+        "summary": "用户登录",
+        "operationId": "loginUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "captcha",
+          "in": "query",
+          "description": "captcha",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "mobile",
+          "in": "query",
+          "description": "手机号",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "name",
+          "in": "query",
+          "description": "姓名",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«Map«string,object»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/TemporaryPerson/login-captcha": {
+      "get": {
+        "tags": ["临时人员"],
+        "summary": "获得登录验证码",
+        "operationId": "excelTemplateExportUsingGET",
+        "produces": ["*/*"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«Map«string,object»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«Map«string,object»»",
+      "description": "返回响应数据"
+    }
+  }
+}

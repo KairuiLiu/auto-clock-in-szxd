@@ -1,0 +1,105 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "表字段资源"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-apis-manage",
+  "tags": [{
+    "name": "表、字段资源",
+    "description": "Api Tb Field Resources Controller"
+  }],
+  "paths": {
+    "/tb-field-resources/queryField": {
+      "get": {
+        "tags": ["表、字段资源"],
+        "summary": "根据数据源的表获取表的所有字段",
+        "operationId": "queryFieldUsingGET_1",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "dataSourceId",
+          "in": "query",
+          "description": "数据源ID",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "tableName",
+          "in": "query",
+          "description": "表的名称",
+          "required": false,
+          "type": "string",
+          "x-example": "tb_user"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/tb-field-resources/queryTable": {
+      "get": {
+        "tags": ["表、字段资源"],
+        "summary": "根据数据源获取数据库的表",
+        "operationId": "queryTableUsingGET_1",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "dataSourceId",
+          "in": "query",
+          "description": "dataSourceId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    }
+  }
+}

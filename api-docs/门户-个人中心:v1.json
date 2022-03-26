@@ -1,0 +1,70 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "门户-个人中心"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-lightportal-saas",
+  "tags": [{
+    "name": "个人中心",
+    "description": "T Personal Center Controller"
+  }],
+  "paths": {
+    "/personalCenter/getPersonalCenter": {
+      "get": {
+        "tags": ["个人中心"],
+        "summary": "个人中心-基本信息",
+        "operationId": "getPersonalCenterUsingGET",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    }
+  }
+}

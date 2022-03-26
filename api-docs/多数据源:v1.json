@@ -1,0 +1,352 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "多数据源"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-workflow",
+  "tags": [{
+    "name": "多数据源管理",
+    "description": "Data Source Controller"
+  }],
+  "paths": {
+    "/multiple-database": {
+      "post": {
+        "tags": ["多数据源管理"],
+        "summary": "新增",
+        "operationId": "saveUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "dataSource",
+          "description": "dataSource",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/TDataSource对象"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["多数据源管理"],
+        "summary": "更新信息",
+        "operationId": "updateUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "dataSource",
+          "description": "dataSource",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/TDataSource对象"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/multiple-database/query": {
+      "post": {
+        "tags": ["多数据源管理"],
+        "summary": "分页查询",
+        "operationId": "queryUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«TDataSource对象»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/multiple-database/{id}": {
+      "get": {
+        "tags": ["多数据源管理"],
+        "summary": "根据id查询详情",
+        "operationId": "getByIdUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "数据源ID",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["多数据源管理"],
+        "summary": "根据id删除信息",
+        "operationId": "deleteByIdUsingDELETE",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "信息ID",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "OrderItem": {
+      "type": "object",
+      "properties": {
+        "asc": {
+          "type": "boolean"
+        },
+        "column": {
+          "type": "string"
+        }
+      },
+      "title": "OrderItem"
+    },
+    "QueryCondition«TDataSource对象»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/TDataSource对象"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«TDataSource对象»",
+      "description": "查询条件"
+    },
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    },
+    "TDataSource对象": {
+      "type": "object",
+      "properties": {
+        "asyncInit": {
+          "type": "string",
+          "description": "true:开启，false:关闭; 异步处理, 连接无法创建不影响应用的启动"
+        },
+        "createTime": {
+          "type": "string",
+          "description": "创建时间"
+        },
+        "creatorId": {
+          "type": "string",
+          "description": "创建人ID"
+        },
+        "dbCode": {
+          "type": "string",
+          "description": "数据源名称"
+        },
+        "dbIp": {
+          "type": "string",
+          "description": "数据库IP"
+        },
+        "dbName": {
+          "type": "string",
+          "description": "数据库名称"
+        },
+        "dbPort": {
+          "type": "string",
+          "description": "数据库端口"
+        },
+        "dbType": {
+          "type": "string",
+          "description": "数据库类型"
+        },
+        "driver": {
+          "type": "string",
+          "description": "数据库连接驱动"
+        },
+        "id": {
+          "type": "string",
+          "description": "关键字"
+        },
+        "initialSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "初始连接数"
+        },
+        "maxActive": {
+          "type": "integer",
+          "format": "int32",
+          "description": "最大连接数"
+        },
+        "maxWait": {
+          "type": "integer",
+          "format": "int32",
+          "description": "最长等待时间"
+        },
+        "minEvictableIdleTimeMillis": {
+          "type": "integer",
+          "format": "int32",
+          "description": "最小空闲时间"
+        },
+        "minIdle": {
+          "type": "integer",
+          "format": "int32",
+          "description": "最小连接数"
+        },
+        "passWord": {
+          "type": "string",
+          "description": "密码"
+        },
+        "poolPreparedStatements": {
+          "type": "string",
+          "description": "true:开启，false:关闭; 是否缓存preparedStatement，也就是PSCache。PSCache对支持游标的数据库性能提升巨大，比如说oracle。在mysql下建议关闭。"
+        },
+        "status": {
+          "type": "number",
+          "description": "状态 1:可用/2:不可用"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户ID"
+        },
+        "testOnBorrow": {
+          "type": "string",
+          "description": "true:开启，false:关闭; 申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。"
+        },
+        "testOnReturn": {
+          "type": "string",
+          "description": "true:开启，false:关闭; 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。"
+        },
+        "testWhileIdle": {
+          "type": "string",
+          "description": "true:开启，false:关闭; 建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。"
+        },
+        "tfilter": {
+          "type": "string"
+        },
+        "timeBetweenEvictionRunsMillis": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Destroy线程会检测连接的间隔时间"
+        },
+        "updateTime": {
+          "type": "string",
+          "description": "最后修改时间"
+        },
+        "updatorId": {
+          "type": "string",
+          "description": "最后修改者ID"
+        },
+        "url": {
+          "type": "string",
+          "description": "数据库url"
+        },
+        "userName": {
+          "type": "string",
+          "description": "用户名"
+        }
+      },
+      "title": "TDataSource对象",
+      "description": "多数据源信息表字段"
+    }
+  }
+}

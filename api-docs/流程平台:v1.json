@@ -1,0 +1,3197 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "流程平台"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-workflow",
+  "tags": [{
+    "name": "流程平台-业务数据列表",
+    "description": "Business List Controller"
+  }, {
+    "name": "流程平台-批量审核",
+    "description": "Batch Audit Controller"
+  }, {
+    "name": "流程平台-流程实例",
+    "description": "Flow Ext Controller"
+  }, {
+    "name": "流程平台-流程抄送",
+    "description": "Act Ext Cc Proc Controller"
+  }, {
+    "name": "流程平台-流程监控",
+    "description": "Flow Monitor Controller"
+  }, {
+    "name": "流程平台-流程统计",
+    "description": "Proc Analysis Controller"
+  }, {
+    "name": "流程平台-流转信息接口",
+    "description": "Flow Info Controller"
+  }, {
+    "name": "流程平台-环节变更",
+    "description": "Flow Task Change Controller"
+  }, {
+    "name": "流程平台-环节统计(数据下钻)",
+    "description": "Task Analysis Controller"
+  }],
+  "paths": {
+    "/batch-audit/do-task": {
+      "post": {
+        "tags": ["流程平台-批量审核"],
+        "summary": "执行活动",
+        "description": "执行活动",
+        "operationId": "doTaskUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "batchAudit",
+          "description": "batchAudit",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/BatchAudit"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/batch-audit/valid": {
+      "post": {
+        "tags": ["流程平台-批量审核"],
+        "summary": "验证是否可以批量执行，并获取填写内容",
+        "description": "验证是否可以批量执行，并获取填写内容——如在会签环节，则默认获取的是会签表单的内容",
+        "operationId": "validUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "businessTaskList",
+          "description": "businessTaskList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/BusinessTask"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/business-list/all-proc-complete": {
+      "post": {
+        "tags": ["流程平台-业务数据列表"],
+        "summary": "所有数据(已完成)",
+        "operationId": "allProcCompleteUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "formId",
+          "in": "query",
+          "description": "formId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "procDefKey",
+          "in": "query",
+          "description": "procDefKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/BusinessListCondition"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/business-list/all-proc-complete-export": {
+      "post": {
+        "tags": ["流程平台-业务数据列表"],
+        "summary": "所有数据导出(已完成)",
+        "operationId": "allProcCompleteExportUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/octet-stream", "application/json"],
+        "parameters": [{
+          "name": "formId",
+          "in": "query",
+          "description": "formId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "procDefKey",
+          "in": "query",
+          "description": "procDefKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/BusinessListCondition"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/business-list/all-proc-todo": {
+      "post": {
+        "tags": ["流程平台-业务数据列表"],
+        "summary": "所有数据(进行中)",
+        "operationId": "allProcTodoUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "formId",
+          "in": "query",
+          "description": "formId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "procDefKey",
+          "in": "query",
+          "description": "procDefKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/BusinessListCondition"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/business-list/all-proc-todo-export": {
+      "post": {
+        "tags": ["流程平台-业务数据列表"],
+        "summary": "所有数据导出(进行中)",
+        "operationId": "allProcTodoExportUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/octet-stream", "application/json"],
+        "parameters": [{
+          "name": "formId",
+          "in": "query",
+          "description": "formId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "procDefKey",
+          "in": "query",
+          "description": "procDefKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/BusinessListCondition"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/business-list/involved-depart-complete": {
+      "post": {
+        "tags": ["流程平台-业务数据列表"],
+        "summary": "涉及部门-部门参与(已完成)",
+        "operationId": "involvedDepartCompleteUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "formId",
+          "in": "query",
+          "description": "formId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "procDefKey",
+          "in": "query",
+          "description": "procDefKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/BusinessListCondition"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/business-list/involved-depart-complete-export": {
+      "post": {
+        "tags": ["流程平台-业务数据列表"],
+        "summary": "涉及部门-部门参与导出(已完成)",
+        "operationId": "involvedDepartCompleteExportUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/octet-stream", "application/json"],
+        "parameters": [{
+          "name": "formId",
+          "in": "query",
+          "description": "formId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "procDefKey",
+          "in": "query",
+          "description": "procDefKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/BusinessListCondition"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/business-list/involved-depart-todo": {
+      "post": {
+        "tags": ["流程平台-业务数据列表"],
+        "summary": "涉及部门-部门参与(进行中)",
+        "operationId": "involvedDepartTodoUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "formId",
+          "in": "query",
+          "description": "formId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "procDefKey",
+          "in": "query",
+          "description": "procDefKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/BusinessListCondition"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/business-list/involved-depart-todo-export": {
+      "post": {
+        "tags": ["流程平台-业务数据列表"],
+        "summary": "涉及部门-部门参与导出(进行中)",
+        "operationId": "involvedDepartTodoExportUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/octet-stream", "application/json"],
+        "parameters": [{
+          "name": "formId",
+          "in": "query",
+          "description": "formId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "procDefKey",
+          "in": "query",
+          "description": "procDefKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/BusinessListCondition"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/business-list/involved-my-proc-complete": {
+      "post": {
+        "tags": ["流程平台-业务数据列表"],
+        "summary": "个人流程数据(已完成)",
+        "operationId": "involvedMyProcCompleteUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "formId",
+          "in": "query",
+          "description": "formId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "procDefKey",
+          "in": "query",
+          "description": "procDefKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/BusinessListCondition"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/business-list/involved-my-proc-complete-export": {
+      "post": {
+        "tags": ["流程平台-业务数据列表"],
+        "summary": "个人流程数据导出(已完成)",
+        "operationId": "involvedMyProcCompleteExportUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/octet-stream", "application/json"],
+        "parameters": [{
+          "name": "formId",
+          "in": "query",
+          "description": "formId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "procDefKey",
+          "in": "query",
+          "description": "procDefKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/BusinessListCondition"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/business-list/involved-my-proc-todo": {
+      "post": {
+        "tags": ["流程平台-业务数据列表"],
+        "summary": "个人流程数据(进行中)",
+        "operationId": "involvedMyProcTodoUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "formId",
+          "in": "query",
+          "description": "formId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "procDefKey",
+          "in": "query",
+          "description": "procDefKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/BusinessListCondition"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/business-list/involved-my-proc-todo-export": {
+      "post": {
+        "tags": ["流程平台-业务数据列表"],
+        "summary": "个人流程数据导出(进行中)",
+        "operationId": "involvedMyProcTodoExportUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/octet-stream", "application/json"],
+        "parameters": [{
+          "name": "formId",
+          "in": "query",
+          "description": "formId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "procDefKey",
+          "in": "query",
+          "description": "procDefKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/BusinessListCondition"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/business-list/query-conditions": {
+      "get": {
+        "tags": ["流程平台-业务数据列表"],
+        "summary": "根据流程key获取查询条件",
+        "operationId": "queryConditionsUsingGET_1",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "procDefKey",
+          "in": "query",
+          "description": "procDefKey",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-cc-proc/query": {
+      "post": {
+        "tags": ["流程平台-流程抄送"],
+        "summary": "查看该流程实例抄送给了哪些人",
+        "description": "查看该流程实例抄送给了哪些人",
+        "operationId": "queryUsingPOST_6",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«ActExtCcProc对象»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-cc-proc/read-proc": {
+      "put": {
+        "tags": ["流程平台-流程抄送"],
+        "summary": "抄送人查看流程表单",
+        "description": "抄送人查看流程表单",
+        "operationId": "readProcUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "processInstanceId",
+          "in": "query",
+          "description": "processInstanceId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-cc-proc/to-users": {
+      "post": {
+        "tags": ["流程平台-流程抄送"],
+        "summary": "抄送给一批用户",
+        "description": "抄送给一批用户",
+        "operationId": "toUsersUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "processInstanceId",
+          "in": "query",
+          "description": "processInstanceId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "reCC",
+          "in": "query",
+          "description": "有数据变化时，是否需要重新抄送（场景-如已抄送过的数据，被后续退回，重新经过抄送环节，给同一个人数据标记为未读，让他能够知道数据发生变化了，需要重新查看）；但不推荐经常使用该操作，理由：update时执行效率比较低",
+          "required": false,
+          "type": "boolean",
+          "default": false,
+          "x-example": false
+        }, {
+          "in": "body",
+          "name": "userIdList",
+          "description": "userIdList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-ext/business-key": {
+      "put": {
+        "tags": ["流程平台-流程实例"],
+        "summary": "设置流程业务主键",
+        "operationId": "setBusinessKeyUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "businessKey",
+          "in": "query",
+          "description": "businessKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "processInstanceId",
+          "in": "query",
+          "description": "processInstanceId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-ext/claim-task-for-me": {
+      "post": {
+        "tags": ["流程平台-流程实例"],
+        "summary": "为自己认领任务",
+        "operationId": "claimTask4MeUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "taskId",
+          "in": "query",
+          "description": "taskId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-ext/do-task": {
+      "post": {
+        "tags": ["流程平台-流程实例"],
+        "summary": "执行活动",
+        "operationId": "doTaskUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "businessKey",
+          "in": "query",
+          "description": "businessKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "dataMap",
+          "description": "dataMap",
+          "required": false,
+          "schema": {
+            "type": "object"
+          }
+        }, {
+          "name": "processDefinitionId",
+          "in": "query",
+          "description": "processDefinitionId",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "taskId",
+          "in": "query",
+          "description": "taskId",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-ext/excel-form-export": {
+      "get": {
+        "tags": ["流程平台-流程实例"],
+        "summary": "excel表单导出-get方式",
+        "operationId": "getExcelFormExportUsingGET",
+        "produces": ["application/octet-stream", "application/json"],
+        "parameters": [{
+          "name": "dataId",
+          "in": "query",
+          "description": "dataId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "formId",
+          "in": "query",
+          "description": "formId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "processInstanceId",
+          "in": "query",
+          "description": "processInstanceId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "tenantId",
+          "in": "query",
+          "description": "tenantId",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["流程平台-流程实例"],
+        "summary": "excel表单导出",
+        "operationId": "excelFormExportUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/octet-stream", "application/json"],
+        "parameters": [{
+          "name": "dataId",
+          "in": "query",
+          "description": "dataId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "formId",
+          "in": "query",
+          "description": "formId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "processInstanceId",
+          "in": "query",
+          "description": "processInstanceId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-ext/i-did-apply": {
+      "get": {
+        "tags": ["流程平台-流程实例"],
+        "summary": "我做过的申请, 我做过的但不是我申请的流程",
+        "operationId": "iDidApplyUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "isContainProcKey",
+          "in": "query",
+          "description": "查询包含或不包含processDefinitionKey的数据,当流程processDefinitionKey不为空时生效，默认true",
+          "required": false,
+          "type": "boolean",
+          "default": true
+        }, {
+          "name": "keyword",
+          "in": "query",
+          "description": "keyword",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "orderByLastUpdateTime",
+          "in": "query",
+          "description": "orderByLastUpdateTime",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }, {
+          "name": "orderByStatusFirst",
+          "in": "query",
+          "description": "orderByStatusFirst",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "processDefinitionKey",
+          "in": "query",
+          "description": "processDefinitionKey",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "startUserId",
+          "in": "query",
+          "description": "startUserId",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "startedAfter",
+          "in": "query",
+          "description": "流程启动时间范围-起始（格式支持:1、yyyy-MM-dd(日期)；2、yyyy-MM-ddTHH:mm:ss）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "startedBefore",
+          "in": "query",
+          "description": "流程启动时间范围-截止（格式支持:1、yyyy-MM-dd(日期)；2、yyyy-MM-ddTHH:mm:ss）",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-ext/my-apply": {
+      "get": {
+        "tags": ["流程平台-流程实例"],
+        "summary": "我的申请",
+        "operationId": "myApplyUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "isContainProcKey",
+          "in": "query",
+          "description": "查询包含或不包含processDefinitionKey的数据,当流程processDefinitionKey不为空时生效，默认true",
+          "required": false,
+          "type": "boolean",
+          "default": true
+        }, {
+          "name": "keyword",
+          "in": "query",
+          "description": "keyword",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "orderByStatusFirst",
+          "in": "query",
+          "description": "orderByStatusFirst",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "processDefinitionKey",
+          "in": "query",
+          "description": "processDefinitionKey",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "startedAfter",
+          "in": "query",
+          "description": "流程启动时间范围-起始（格式支持:1、yyyy-MM-dd(日期)；2、yyyy-MM-ddTHH:mm:ss）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "startedBefore",
+          "in": "query",
+          "description": "流程启动时间范围-截止（格式支持:1、yyyy-MM-dd(日期)；2、yyyy-MM-ddTHH:mm:ss）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "workflowStatus",
+          "in": "query",
+          "description": "流程状态（所有、已完成、处理中）",
+          "required": false,
+          "type": "string",
+          "enum": ["all", "finish", "processing"]
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-ext/my-cc-proc": {
+      "get": {
+        "tags": ["流程平台-流程实例"],
+        "summary": "查询抄送到我的流程",
+        "operationId": "queryMyCcProcUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "haveRead",
+          "in": "query",
+          "description": "查阅状态（已阅/未阅）",
+          "required": false,
+          "type": "string",
+          "enum": ["true", "false"]
+        }, {
+          "name": "isContainProcKey",
+          "in": "query",
+          "description": "isContainProcKey",
+          "required": false,
+          "type": "boolean",
+          "default": true
+        }, {
+          "name": "keyword",
+          "in": "query",
+          "description": "keyword",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "processDefinitionKey",
+          "in": "query",
+          "description": "processDefinitionKey",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-ext/my-todo": {
+      "get": {
+        "tags": ["流程平台-流程实例"],
+        "summary": "查询我的待办任务",
+        "operationId": "queryMyTodoTaskUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "createdAfter",
+          "in": "query",
+          "description": "环节开始时间范围-起始（格式支持:1、yyyy-MM-dd(日期)；2、yyyy-MM-ddTHH:mm:ss）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "createdBefore",
+          "in": "query",
+          "description": "环节开始时间范围-截止（格式支持:1、yyyy-MM-dd(日期)；2、yyyy-MM-ddTHH:mm:ss）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "isContainProcKey",
+          "in": "query",
+          "description": "查询包含或不包含processDefinitionKey的数据,当流程processDefinitionKey不为空时生效，默认true",
+          "required": false,
+          "type": "boolean",
+          "default": true
+        }, {
+          "name": "keyword",
+          "in": "query",
+          "description": "keyword",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "processDefinitionKey",
+          "in": "query",
+          "description": "processDefinitionKey",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "startUserId",
+          "in": "query",
+          "description": "startUserId",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "taskDefinitionKey",
+          "in": "query",
+          "description": "taskDefinitionKey",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-ext/my-todo-and-wait-me-claim": {
+      "get": {
+        "tags": ["流程平台-流程实例"],
+        "summary": "查询我的任务和待我认领的任务",
+        "operationId": "queryMyTodoAndWaitMeClaimUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "createdAfter",
+          "in": "query",
+          "description": "环节开始时间范围-起始（格式支持:1、yyyy-MM-dd(日期)；2、yyyy-MM-ddTHH:mm:ss）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "createdBefore",
+          "in": "query",
+          "description": "环节开始时间范围-截止（格式支持:1、yyyy-MM-dd(日期)；2、yyyy-MM-ddTHH:mm:ss）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "isContainProcKey",
+          "in": "query",
+          "description": "查询包含或不包含processDefinitionKey的数据,当流程processDefinitionKey不为空时生效，默认true",
+          "required": false,
+          "type": "boolean",
+          "default": true
+        }, {
+          "name": "keyword",
+          "in": "query",
+          "description": "keyword",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "orderByTaskCreateTimeAsc",
+          "in": "query",
+          "description": "orderByTaskCreateTimeAsc",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "processDefinitionKey",
+          "in": "query",
+          "description": "processDefinitionKey",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "processInstanceId",
+          "in": "query",
+          "description": "processInstanceId",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "startUserId",
+          "in": "query",
+          "description": "startUserId",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "taskDefinitionKey",
+          "in": "query",
+          "description": "taskDefinitionKey",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-ext/pdf-form-export": {
+      "get": {
+        "tags": ["流程平台-流程实例"],
+        "summary": "pdf表单导出-get方式",
+        "operationId": "getPdfFormExportUsingGET",
+        "produces": ["application/octet-stream", "application/json"],
+        "parameters": [{
+          "name": "dataId",
+          "in": "query",
+          "description": "dataId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "formId",
+          "in": "query",
+          "description": "formId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "processInstanceId",
+          "in": "query",
+          "description": "processInstanceId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "tenantId",
+          "in": "query",
+          "description": "tenantId",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["流程平台-流程实例"],
+        "summary": "pdf表单导出",
+        "operationId": "pdfFormExportUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/octet-stream", "application/json"],
+        "parameters": [{
+          "name": "dataId",
+          "in": "query",
+          "description": "dataId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "formId",
+          "in": "query",
+          "description": "formId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "processInstanceId",
+          "in": "query",
+          "description": "processInstanceId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-ext/process-definition-list": {
+      "get": {
+        "tags": ["流程平台-流程实例"],
+        "summary": "流程定义列表信息",
+        "operationId": "processDefinitionListUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "involvedMe",
+          "in": "query",
+          "description": "涉及我的（申请/参与的）",
+          "required": true,
+          "type": "boolean",
+          "default": true
+        }, {
+          "name": "isContainProcKey",
+          "in": "query",
+          "description": "查询包含或不包含processDefinitionKey的数据,当流程processDefinitionKey不为空时生效，默认true",
+          "required": false,
+          "type": "boolean",
+          "default": true
+        }, {
+          "name": "processDefinitionKey",
+          "in": "query",
+          "description": "processDefinitionKey",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-ext/process-form-key": {
+      "get": {
+        "tags": ["流程平台-流程实例"],
+        "summary": "通过流程实例id获取流程表单地址",
+        "operationId": "processFormKeyUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "processInstanceId",
+          "in": "query",
+          "description": "processInstanceId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-ext/process-form-key-and-process-version": {
+      "get": {
+        "tags": ["流程平台-流程实例"],
+        "summary": "通过流程实例id获取流程表单地址",
+        "operationId": "processFormKeyAndProcessVersionUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "processInstanceId",
+          "in": "query",
+          "description": "processInstanceId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-ext/process-task-list": {
+      "get": {
+        "tags": ["流程平台-流程实例"],
+        "summary": "流程环节列表信息",
+        "operationId": "processTaskListUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "containHis",
+          "in": "query",
+          "description": "是否包含历史版本多余的环节",
+          "required": true,
+          "type": "boolean",
+          "default": true
+        }, {
+          "name": "procKey",
+          "in": "query",
+          "description": "procKey",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-ext/process-variables-map": {
+      "get": {
+        "tags": ["流程平台-流程实例"],
+        "summary": "获取流程变量Map",
+        "operationId": "getProcessVariablesMapUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "processInstanceId",
+          "in": "query",
+          "description": "processInstanceId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-ext/query-version-by-form-id": {
+      "get": {
+        "tags": ["流程平台-流程实例"],
+        "summary": "查询表单相关的流程版本",
+        "operationId": "queryVersionByFormIdUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "formId",
+          "in": "query",
+          "description": "formId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-ext/start-process-instance-by-key": {
+      "post": {
+        "tags": ["流程平台-流程实例"],
+        "summary": "根据流程定义Key启动流程",
+        "description": "返回值中如果包含forminfo则需要根据配置渲染表单供用户填写",
+        "operationId": "startProcessInstanceByKeyUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "businessKey",
+          "in": "query",
+          "description": "businessKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "processDefinitionKey",
+          "in": "query",
+          "description": "processDefinitionKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "variables",
+          "description": "variables",
+          "required": false,
+          "schema": {
+            "type": "object"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-ext/todo-task-description": {
+      "get": {
+        "tags": ["流程平台-流程实例"],
+        "summary": "获得待办任务的描述",
+        "operationId": "doTaskUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "businessKey",
+          "in": "query",
+          "description": "businessKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "taskId",
+          "in": "query",
+          "description": "taskId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-ext/variable": {
+      "put": {
+        "tags": ["流程平台-流程实例"],
+        "summary": "设置流程变量",
+        "operationId": "setVariableUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "executionId",
+          "in": "query",
+          "description": "executionId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "value",
+          "in": "query",
+          "description": "value",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "variableName",
+          "in": "query",
+          "description": "variableName",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-ext/variables": {
+      "put": {
+        "tags": ["流程平台-流程实例"],
+        "summary": "批量设置流程变量",
+        "operationId": "setVariablesUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "executionId",
+          "in": "query",
+          "description": "executionId",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "variables",
+          "description": "variables",
+          "required": true,
+          "schema": {
+            "type": "object"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-ext/wait-me-claim": {
+      "get": {
+        "tags": ["流程平台-流程实例"],
+        "summary": "查询待我认领的任务",
+        "operationId": "queryWaitMeClaimUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "createdAfter",
+          "in": "query",
+          "description": "环节开始时间范围-起始（格式支持:1、yyyy-MM-dd(日期)；2、yyyy-MM-ddTHH:mm:ss）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "createdBefore",
+          "in": "query",
+          "description": "环节开始时间范围-截止（格式支持:1、yyyy-MM-dd(日期)；2、yyyy-MM-ddTHH:mm:ss）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "isContainProcKey",
+          "in": "query",
+          "description": "查询包含或不包含processDefinitionKey的数据,当流程processDefinitionKey不为空时生效，默认true",
+          "required": false,
+          "type": "boolean",
+          "default": true
+        }, {
+          "name": "keyword",
+          "in": "query",
+          "description": "keyword",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "processDefinitionKey",
+          "in": "query",
+          "description": "processDefinitionKey",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "startUserId",
+          "in": "query",
+          "description": "startUserId",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "taskDefinitionKey",
+          "in": "query",
+          "description": "taskDefinitionKey",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-info/detail": {
+      "get": {
+        "tags": ["流程平台-流转信息接口"],
+        "summary": "流转详情",
+        "operationId": "detailUsingGET_2",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "processInstanceId",
+          "in": "query",
+          "description": "流程实例id",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "showFirstModifyRecord",
+          "in": "query",
+          "description": "是否显示第一个环节的变更（注：退回后再填就不算首环节了）",
+          "required": true,
+          "type": "boolean",
+          "default": false,
+          "x-example": false
+        }, {
+          "name": "showRepotModifyRecord",
+          "in": "query",
+          "description": "是否显示填报时的变更，当showFirstModifyRecord=false时，该参数无效果",
+          "required": true,
+          "type": "boolean",
+          "default": false,
+          "x-example": false
+        }, {
+          "name": "signMerge",
+          "in": "query",
+          "description": "signMerge",
+          "required": false,
+          "type": "boolean"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-monitor/delete-process-data/{processInstanceId}": {
+      "delete": {
+        "tags": ["流程平台-流程监控"],
+        "summary": "删除流程数据",
+        "operationId": "deleteByIdUsingDELETE_4",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "processInstanceId",
+          "in": "path",
+          "description": "流程实例id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-monitor/process-definition-task-list": {
+      "get": {
+        "tags": ["流程平台-流程监控"],
+        "summary": "流程定义环节列表",
+        "operationId": "processDefinitionTaskListUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "processDefinitionId",
+          "in": "query",
+          "description": "processDefinitionId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-monitor/process-instance-query": {
+      "get": {
+        "tags": ["流程平台-流程监控"],
+        "summary": "分页查询流程实例",
+        "operationId": "processInstanceQueryUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "keywords",
+          "in": "query",
+          "description": "keywords",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-monitor/process-task-list": {
+      "get": {
+        "tags": ["流程平台-流程监控"],
+        "summary": "查询流程环节",
+        "operationId": "processTaskListUsingGET_1",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "processInstanceId",
+          "in": "query",
+          "description": "processInstanceId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-task-change/add-task": {
+      "post": {
+        "tags": ["流程平台-环节变更"],
+        "summary": "加签（会签环节）",
+        "operationId": "addTaskUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "acceptUserId",
+          "in": "query",
+          "description": "acceptUserId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "addTaskReason",
+          "in": "query",
+          "description": "addTaskReason",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "processInstanceId",
+          "in": "query",
+          "description": "processInstanceId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "taskDefKey",
+          "in": "query",
+          "description": "taskDefKey",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-task-change/delegate-task": {
+      "post": {
+        "tags": ["流程平台-环节变更"],
+        "summary": "委派",
+        "operationId": "delegateTaskUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "acceptUserId",
+          "in": "query",
+          "description": "acceptUserId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "delegateTaskReason",
+          "in": "query",
+          "description": "delegateTaskReason",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "taskId",
+          "in": "query",
+          "description": "taskId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-task-change/delete-process-instance": {
+      "delete": {
+        "tags": ["流程平台-环节变更"],
+        "summary": "终止申请",
+        "operationId": "deleteProcessInstanceUsingDELETE",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "deleteReason",
+          "in": "query",
+          "description": "deleteReason",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "processInstanceId",
+          "in": "query",
+          "description": "processInstanceId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-task-change/delete-task": {
+      "delete": {
+        "tags": ["流程平台-环节变更"],
+        "summary": "减签（会签环节）",
+        "operationId": "deleteTaskUsingDELETE",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "deleteTaskReason",
+          "in": "query",
+          "description": "deleteTaskReason",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "taskId",
+          "in": "query",
+          "description": "taskId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-task-change/delete-task-list": {
+      "get": {
+        "tags": ["流程平台-环节变更"],
+        "summary": "获取可减签的环节列表（会签中才需要）",
+        "operationId": "getDeleteTaskListUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "processInstanceId",
+          "in": "query",
+          "description": "processInstanceId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "taskDefKey",
+          "in": "query",
+          "description": "taskDefKey",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-task-change/do-task-form-button-authority": {
+      "get": {
+        "tags": ["流程平台-环节变更"],
+        "summary": "获取表单办理界面按钮权限（加签(addTask)、减签(deleteTask)、委派(delegateTask)、取消委派（undoDelegateTask）、转办(turnTask)）",
+        "operationId": "getDoTaskFormButtonAuthorityUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "taskId",
+          "in": "query",
+          "description": "taskId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-task-change/jump": {
+      "put": {
+        "tags": ["流程平台-环节变更"],
+        "summary": "跳转（流程管理员行为）",
+        "operationId": "jumpUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "currentTaskDefKeys",
+          "in": "query",
+          "description": "currentTaskDefKeys",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "newTaskDefKeys",
+          "in": "query",
+          "description": "newTaskDefKeys",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "processInstanceId",
+          "in": "query",
+          "description": "processInstanceId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-task-change/revoke-per-task": {
+      "post": {
+        "tags": ["流程平台-环节变更"],
+        "summary": "撤回上一环节",
+        "operationId": "revokePreTaskUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "preTaskInfoMap",
+          "description": "preTaskInfoMap",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Map"
+              }
+            }
+          }
+        }, {
+          "name": "processInstanceId",
+          "in": "query",
+          "description": "processInstanceId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "revokePreTaskReason",
+          "in": "query",
+          "description": "revokePreTaskReason",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-task-change/revoke-refill": {
+      "get": {
+        "tags": ["流程平台-环节变更"],
+        "summary": "撤回重填",
+        "operationId": "revokeRefillUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "processInstanceId",
+          "in": "query",
+          "description": "processInstanceId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "revokePreTaskReason",
+          "in": "query",
+          "description": "revokePreTaskReason",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-task-change/set-variable": {
+      "put": {
+        "tags": ["流程平台-环节变更"],
+        "summary": "设置流程变量（流程管理员行为）",
+        "operationId": "setVariableUsingPUT_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "taskId",
+          "in": "query",
+          "description": "taskId",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "variables",
+          "description": "variables",
+          "required": true,
+          "schema": {
+            "type": "object"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-task-change/turn-task": {
+      "put": {
+        "tags": ["流程平台-环节变更"],
+        "summary": "转办",
+        "operationId": "turnTaskUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "acceptUserId",
+          "in": "query",
+          "description": "acceptUserId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "taskId",
+          "in": "query",
+          "description": "taskId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "turnTaskReason",
+          "in": "query",
+          "description": "turnTaskReason",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-task-change/undo-delegate-task": {
+      "delete": {
+        "tags": ["流程平台-环节变更"],
+        "summary": "取消委派",
+        "operationId": "undoDelegateTaskUsingDELETE",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "taskId",
+          "in": "query",
+          "description": "taskId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "undoDelegateTaskReason",
+          "in": "query",
+          "description": "undoDelegateTaskReason",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-task-change/update-assignee": {
+      "put": {
+        "tags": ["流程平台-环节变更"],
+        "summary": "修改参与者（管理员行为）",
+        "operationId": "updateAssigneeUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "acceptUserId",
+          "in": "query",
+          "description": "acceptUserId",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "taskId",
+          "in": "query",
+          "description": "taskId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "updateAssigneeReason",
+          "in": "query",
+          "description": "updateAssigneeReason",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-task-change/view-form-button-authority": {
+      "get": {
+        "tags": ["流程平台-环节变更"],
+        "summary": "获取表单查看界面按钮权限（终止(termination)、撤回上一步(revokePreTask)、加签(addTask)、减签(deleteTask)）",
+        "operationId": "getViewFormButtonAuthorityUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "processInstanceId",
+          "in": "query",
+          "description": "processInstanceId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/proc-analysis/his-change": {
+      "get": {
+        "tags": ["流程平台-流程统计"],
+        "summary": "历史变化",
+        "operationId": "hisChangeUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "procKey",
+          "in": "query",
+          "description": "procKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "startAfter",
+          "in": "query",
+          "description": "流程启动时间范围-起始（格式支持:1、yyyy-MM-dd(日期)；2、yyyy-MM-dd HH:mm:ss）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "startBefore",
+          "in": "query",
+          "description": "流程启动时间范围-截止（格式支持:1、yyyy-MM-dd(日期)；2、yyyy-MM-dd HH:mm:ss）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "targetType",
+          "in": "query",
+          "description": "指标类型（申请次数,正常办结次数,非正常办结次数,终止次数,待办次数,平均时间（秒）,积压率）",
+          "required": true,
+          "type": "string",
+          "enum": ["allProc", "successPass", "failedPass", "termination", "toDo", "avgDuration", "keepRate"]
+        }, {
+          "name": "type",
+          "in": "query",
+          "description": "统计类型（所有、部门参与、部门管理,我的申请，我的待办）",
+          "required": true,
+          "type": "string",
+          "enum": ["all", "deptInvolved", "deptManage", "myApplication", "myTodo"]
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/proc-analysis/query": {
+      "post": {
+        "tags": ["流程平台-流程统计"],
+        "summary": "列表",
+        "operationId": "queryUsingPOST_7",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "orderItemList",
+          "description": "orderItemList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/OrderItem"
+            }
+          }
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "procKey",
+          "in": "query",
+          "description": "procKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "startAfter",
+          "in": "query",
+          "description": "流程启动时间范围-起始（格式支持:1、yyyy-MM-dd(日期)；2、yyyy-MM-dd HH:mm:ss）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "startBefore",
+          "in": "query",
+          "description": "流程启动时间范围-截止（格式支持:1、yyyy-MM-dd(日期)；2、yyyy-MM-dd HH:mm:ss）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "type",
+          "in": "query",
+          "description": "统计类型（所有、部门参与、部门管理,我的申请，我的待办）",
+          "required": true,
+          "type": "string",
+          "enum": ["all", "deptInvolved", "deptManage", "myApplication", "myTodo"]
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/proc-analysis/tab-authority": {
+      "get": {
+        "tags": ["流程平台-流程统计"],
+        "summary": "所有，部门管理，部门参与维度的tab切换统计权限",
+        "operationId": "tabAuthorityUsingGET",
+        "produces": ["*/*"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/proc-analysis/target-list": {
+      "post": {
+        "tags": ["流程平台-流程统计"],
+        "summary": "指标",
+        "operationId": "targetListUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "orderItemList",
+          "description": "orderItemList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/OrderItem"
+            }
+          }
+        }, {
+          "name": "startAfter",
+          "in": "query",
+          "description": "流程启动时间范围-起始（格式支持:1、yyyy-MM-dd(日期)；2、yyyy-MM-dd HH:mm:ss）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "startBefore",
+          "in": "query",
+          "description": "流程启动时间范围-截止（格式支持:1、yyyy-MM-dd(日期)；2、yyyy-MM-dd HH:mm:ss）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "targetType",
+          "in": "query",
+          "description": "指标类型（申请次数,正常办结次数,非正常办结次数,终止次数,待办次数,平均时间（秒）,积压率）",
+          "required": true,
+          "type": "string",
+          "enum": ["allProc", "successPass", "failedPass", "termination", "toDo", "avgDuration", "keepRate"]
+        }, {
+          "name": "type",
+          "in": "query",
+          "description": "统计类型（所有、部门参与、部门管理,我的申请，我的待办）",
+          "required": true,
+          "type": "string",
+          "enum": ["all", "deptInvolved", "deptManage", "myApplication", "myTodo"]
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/task-analysis/target-list": {
+      "post": {
+        "tags": ["流程平台-环节统计(数据下钻)"],
+        "summary": "指标",
+        "operationId": "targetListUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "orderItemList",
+          "description": "orderItemList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/OrderItem"
+            }
+          }
+        }, {
+          "name": "procKey",
+          "in": "query",
+          "description": "procKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "startAfter",
+          "in": "query",
+          "description": "流程启动时间范围-起始（格式支持:1、yyyy-MM-dd(日期)；2、yyyy-MM-dd HH:mm:ss）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "startBefore",
+          "in": "query",
+          "description": "流程启动时间范围-截止（格式支持:1、yyyy-MM-dd(日期)；2、yyyy-MM-dd HH:mm:ss）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "type",
+          "in": "query",
+          "description": "统计类型（所有、部门参与、部门管理,我的申请，我的待办）",
+          "required": true,
+          "type": "string",
+          "enum": ["all", "deptInvolved", "deptManage", "myApplication", "myTodo"]
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "ActExtCcProc对象": {
+      "type": "object",
+      "properties": {
+        "businessSummary": {
+          "type": "string",
+          "description": "流程业务数据摘要"
+        },
+        "businessTitle": {
+          "type": "string",
+          "description": "流程业务数据标题"
+        },
+        "createTime": {
+          "type": "string",
+          "description": "创建时间"
+        },
+        "creator": {
+          "type": "string",
+          "description": "创建人-有则记录"
+        },
+        "creatorName": {
+          "type": "string",
+          "description": "创建人-姓名"
+        },
+        "haveRead": {
+          "type": "string",
+          "description": "已读：true/false"
+        },
+        "id": {
+          "type": "string",
+          "description": "关键字"
+        },
+        "keyWords": {
+          "type": "string",
+          "description": "流程业务数据关键字"
+        },
+        "lastExecutorName": {
+          "type": "string",
+          "description": "流程业务数据最终执行人"
+        },
+        "processCode": {
+          "type": "string",
+          "description": "流程业务数据编码"
+        },
+        "processInstanceId": {
+          "type": "string",
+          "description": "流程实例ID"
+        },
+        "readTime": {
+          "type": "string",
+          "description": "读消息时间"
+        },
+        "receiverId": {
+          "type": "string",
+          "description": "接收人id"
+        },
+        "receiverName": {
+          "type": "string",
+          "description": "抄送人-姓名"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ActExtCcProc对象",
+      "description": "流程抄送记录"
+    },
+    "BatchAudit": {
+      "type": "object",
+      "properties": {
+        "businessTaskList": {
+          "type": "array",
+          "description": "业务实例",
+          "items": {
+            "$ref": "#/definitions/BusinessTask"
+          }
+        },
+        "dataMap": {
+          "type": "object",
+          "description": "表单输入"
+        },
+        "formId": {
+          "type": "string",
+          "description": "表单id"
+        },
+        "isSign": {
+          "type": "string",
+          "description": "是否会签"
+        }
+      },
+      "title": "BatchAudit",
+      "description": "批量审核虚拟类"
+    },
+    "BusinessListCondition": {
+      "type": "object",
+      "properties": {
+        "fixedConditionList": {
+          "type": "array",
+          "description": "固定查询条件",
+          "items": {
+            "$ref": "#/definitions/FixedCondition"
+          }
+        },
+        "formQueryModelList": {
+          "type": "array",
+          "description": "动态查询条件",
+          "items": {
+            "$ref": "#/definitions/FormQueryModel对象"
+          }
+        }
+      },
+      "title": "BusinessListCondition",
+      "description": "查询条件"
+    },
+    "BusinessTask": {
+      "type": "object",
+      "properties": {
+        "businessKey": {
+          "type": "string",
+          "description": "业务主键"
+        },
+        "processInstanceId": {
+          "type": "string",
+          "description": "流程实例id"
+        },
+        "taskId": {
+          "type": "string",
+          "description": "环节ID"
+        }
+      },
+      "title": "BusinessTask",
+      "description": "业务实例及活动实例"
+    },
+    "FixedCondition": {
+      "type": "object",
+      "properties": {
+        "rangeSeachArray": {
+          "type": "array",
+          "description": "范围查询数组（如：执行时长范围，流程启动日期及时间范围）",
+          "items": {
+            "type": "string"
+          }
+        },
+        "secondType": {
+          "type": "string",
+          "description": "第二查询类型（执行时长：minute,hour,day；完成状态：success_end,fail_end,termination）"
+        },
+        "type": {
+          "type": "string",
+          "description": "查询类型（procStartDateTime,taskExeTimeRange,procExeTimeRange,ruTask,completeStatus）"
+        },
+        "value": {
+          "type": "string",
+          "description": "查询条件值"
+        }
+      },
+      "title": "FixedCondition",
+      "description": "固定的查询条件"
+    },
+    "FormQueryModel对象": {
+      "type": "object",
+      "properties": {
+        "dataType": {
+          "type": "string",
+          "description": "表单元素的数据类型"
+        },
+        "formId": {
+          "type": "string",
+          "description": "表单ID"
+        },
+        "id": {
+          "type": "string",
+          "description": "主键"
+        },
+        "label": {
+          "type": "string",
+          "description": "表单元素显示的label"
+        },
+        "orderPriority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "排序优先级"
+        },
+        "orderType": {
+          "type": "string",
+          "description": "排序类型（none:无,asc:正序,desc:倒序）"
+        },
+        "prop": {
+          "type": "string",
+          "description": "列名称"
+        },
+        "propJson": {
+          "type": "string",
+          "description": "属性json"
+        },
+        "queryFieldSort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "查询条件在form表单中的排序"
+        },
+        "queryType": {
+          "type": "string",
+          "description": "查询类型（none:无,accurate:精确,blurry:模糊,timeRange:时间范围,dateRange:日期范围）"
+        },
+        "searchArray": {
+          "type": "array",
+          "description": "查询条件范围数组",
+          "items": {
+            "type": "string"
+          }
+        },
+        "searchValue": {
+          "type": "string",
+          "description": "查询条件具体数值"
+        },
+        "tableSort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "在管理界面中的列排序"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "FormQueryModel对象",
+      "description": "表单通用查询配置"
+    },
+    "OrderItem": {
+      "type": "object",
+      "properties": {
+        "asc": {
+          "type": "boolean"
+        },
+        "column": {
+          "type": "string"
+        }
+      },
+      "title": "OrderItem"
+    },
+    "QueryCondition«ActExtCcProc对象»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/ActExtCcProc对象"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«ActExtCcProc对象»",
+      "description": "查询条件"
+    },
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    }
+  }
+}

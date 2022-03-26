@@ -1,0 +1,1024 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "门户-上课签到"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-lightportal-saas",
+  "tags": [{
+    "name": "上课签到",
+    "description": "F Xsskqdb Controller"
+  }, {
+    "name": "课程信息常量",
+    "description": "Course Xx Controller"
+  }],
+  "paths": {
+    "/classSign/courseConst/getCourse": {
+      "get": {
+        "tags": ["课程信息常量"],
+        "summary": "获取课程常量",
+        "operationId": "getCourseUsingGET",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/classSign/courseConst/getJxb": {
+      "get": {
+        "tags": ["课程信息常量"],
+        "summary": "获取教学班常量",
+        "operationId": "getJxbUsingGET",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/classSign/dataExport": {
+      "post": {
+        "tags": ["上课签到"],
+        "summary": "导出上课签到信息",
+        "operationId": "dataExportUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "entity",
+          "description": "entity",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/FXsskqdbDto对象"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/classSign/dataExportQdzb": {
+      "post": {
+        "tags": ["上课签到"],
+        "summary": "导出签到总表",
+        "operationId": "dataExportQdzbUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "entity",
+          "description": "entity",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/FXsskqdbDto对象"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/classSign/dataExportSkqd": {
+      "post": {
+        "tags": ["上课签到"],
+        "summary": "导出课程签到统计",
+        "operationId": "dataExportSkqdUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "entity",
+          "description": "entity",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/FXsskqdbDto对象"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/classSign/dataExportSkqdxq": {
+      "post": {
+        "tags": ["上课签到"],
+        "summary": "导出课程签到统计详情",
+        "operationId": "dataExportSkqdxqUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "entity",
+          "description": "entity",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/FXsskqdbDto对象"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/classSign/dataExportXQ": {
+      "post": {
+        "tags": ["上课签到"],
+        "summary": "导出上课签到详细信息",
+        "operationId": "dataExportXQUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "entity",
+          "description": "entity",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/FXsskqdbDto对象"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/classSign/getQdzb": {
+      "post": {
+        "tags": ["上课签到"],
+        "summary": "签到总表",
+        "operationId": "getQdzbUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "entity",
+          "description": "entity",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/FXsskqdbDto对象"
+          }
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页的数量",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«Map«string,string»»»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/classSign/getSkqd": {
+      "post": {
+        "tags": ["上课签到"],
+        "summary": "课程签到统计",
+        "operationId": "getSkqdUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "entity",
+          "description": "entity",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/FXsskqdbDto对象"
+          }
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页的数量",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«Map»»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/classSign/getSkqdBypid": {
+      "post": {
+        "tags": ["上课签到"],
+        "summary": "签到统计详情",
+        "operationId": "getSkqdBypidUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "entity",
+          "description": "entity",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/FXsskqdbDto对象"
+          }
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页的数量",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«Map»»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/classSign/getStatisticsCountSKQD": {
+      "post": {
+        "tags": ["上课签到"],
+        "summary": "签到统计查询",
+        "operationId": "getStatisticsCountSKQDListUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "entity",
+          "description": "entity",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/FXsskqdbDto对象"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«Map»»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/classSign/getStatisticsCountSKQDPage": {
+      "post": {
+        "tags": ["上课签到"],
+        "summary": "签到统计分页查询",
+        "operationId": "getStatisticsCountSKQDPageUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "entity",
+          "description": "entity",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/FXsskqdbDto对象"
+          }
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页的数量",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«FXsskqdbVo对象»»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/classSign/getStatisticsCountSKQDXQ": {
+      "post": {
+        "tags": ["上课签到"],
+        "summary": "签到统计详情分页查询",
+        "operationId": "getStatisticsCountSKQDXQUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "entity",
+          "description": "entity",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/FXsskqdbDto对象"
+          }
+        }, {
+          "name": "pageNum",
+          "description": "当前页",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }, {
+          "name": "pageSize",
+          "description": "每页的数量",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«Map»»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/classSign/getStatisticsCountSKQDXQPage": {
+      "post": {
+        "tags": ["上课签到"],
+        "summary": "签到统计详情查询",
+        "operationId": "getStatisticsCountSKQDXQPageUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "entity",
+          "description": "entity",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/FXsskqdbDto对象"
+          }
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页的数量",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«FXsskqxqdbVo对象»»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "FXsskqdbDto对象": {
+      "type": "object",
+      "properties": {
+        "courseGroupId": {
+          "type": "string",
+          "description": "课程群id"
+        },
+        "js": {
+          "type": "string",
+          "description": "教师工号或名称"
+        },
+        "jssj": {
+          "type": "string",
+          "description": "结束时间"
+        },
+        "jxbmc": {
+          "type": "string",
+          "description": "教学班名称"
+        },
+        "kcmc": {
+          "type": "string",
+          "description": "课程名称"
+        },
+        "kssj": {
+          "type": "string",
+          "description": "开始时间"
+        },
+        "noInCreateTime": {
+          "type": "array",
+          "description": "不计入统计的时间",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pid": {
+          "type": "string",
+          "description": "签到任务id"
+        },
+        "sfqd": {
+          "type": "string",
+          "description": "是否签到（1：签到 0：未签到  2：请假）"
+        },
+        "xn": {
+          "type": "string",
+          "description": "学年"
+        },
+        "xq": {
+          "type": "string",
+          "description": "学期"
+        },
+        "xs": {
+          "type": "string",
+          "description": "学生学号或名称"
+        }
+      },
+      "title": "FXsskqdbDto对象"
+    },
+    "FXsskqdbVo对象": {
+      "type": "object",
+      "properties": {
+        "courseGroupId": {
+          "type": "string",
+          "description": "课程群id"
+        },
+        "jxbmc": {
+          "type": "string",
+          "description": "教学班名称"
+        },
+        "kcmc": {
+          "type": "string",
+          "description": "课程名称"
+        },
+        "qjcs": {
+          "type": "string",
+          "description": "请假人次"
+        },
+        "sjqdcs": {
+          "type": "string",
+          "description": "实际签到人次"
+        },
+        "wqdcs": {
+          "type": "string",
+          "description": "未签到人次"
+        },
+        "xn": {
+          "type": "string",
+          "description": "学年"
+        },
+        "xq": {
+          "type": "string",
+          "description": "学期"
+        },
+        "yqdcs": {
+          "type": "string",
+          "description": "应签到人次"
+        }
+      },
+      "title": "FXsskqdbVo对象"
+    },
+    "FXsskqxqdbVo对象": {
+      "type": "object",
+      "properties": {
+        "bjmc": {
+          "type": "string",
+          "description": "班级名称"
+        },
+        "createTime": {
+          "type": "string",
+          "description": "发起时间"
+        },
+        "jsgh": {
+          "type": "string",
+          "description": "教师工号"
+        },
+        "jsxm": {
+          "type": "string",
+          "description": "教师姓名"
+        },
+        "jxbmc": {
+          "type": "string",
+          "description": "教学班名称"
+        },
+        "kcmc": {
+          "type": "string",
+          "description": "课程名称"
+        },
+        "qdsj": {
+          "type": "string",
+          "description": "签到时间"
+        },
+        "xh": {
+          "type": "string",
+          "description": "学号"
+        },
+        "xm": {
+          "type": "string",
+          "description": "姓名"
+        },
+        "xn": {
+          "type": "string",
+          "description": "学年"
+        },
+        "xq": {
+          "type": "string",
+          "description": "学期"
+        },
+        "xymc": {
+          "type": "string",
+          "description": "学院名称"
+        },
+        "zymc": {
+          "type": "string",
+          "description": "专业名称"
+        }
+      },
+      "title": "FXsskqxqdbVo对象"
+    },
+    "IPage«FXsskqdbVo对象»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FXsskqdbVo对象"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«FXsskqdbVo对象»"
+    },
+    "IPage«FXsskqxqdbVo对象»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FXsskqxqdbVo对象"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«FXsskqxqdbVo对象»"
+    },
+    "IPage«Map«string,string»»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Map«string,string»"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«Map«string,string»»"
+    },
+    "IPage«Map»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Map"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«Map»"
+    },
+    "Map": {
+      "type": "object",
+      "title": "Map",
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "Map«string,string»": {
+      "type": "object",
+      "title": "Map«string,string»",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«FXsskqdbVo对象»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«FXsskqdbVo对象»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«FXsskqdbVo对象»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«FXsskqxqdbVo对象»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«FXsskqxqdbVo对象»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«FXsskqxqdbVo对象»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«Map«string,string»»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«Map«string,string»»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«Map«string,string»»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«Map»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«Map»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«Map»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«Map»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/Map"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«Map»»",
+      "description": "返回响应数据"
+    }
+  }
+}

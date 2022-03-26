@@ -1,0 +1,232 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "apis-常量转换控件"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-apis-manage",
+  "tags": [{
+    "name": "常量转换控件",
+    "description": "Apis Constant Cvs Ctls Controller"
+  }],
+  "paths": {
+    "/apis/constant-cvs-ctls/save": {
+      "post": {
+        "tags": ["常量转换控件"],
+        "summary": "常量转换控件保存配置",
+        "operationId": "saveModelUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "model",
+          "description": "model",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ApisConstantCvsCtlsModel"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/apis/constant-cvs-ctls/stepThrough/{id}": {
+      "get": {
+        "tags": ["常量转换控件"],
+        "summary": "常量转换控件调试",
+        "operationId": "stepThroughUsingGET_1",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«Map»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/apis/constant-cvs-ctls/{id}": {
+      "get": {
+        "tags": ["常量转换控件"],
+        "summary": "查看常量控件配置",
+        "operationId": "queryModelUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "ApisConstantCvsCtls": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "ctlsName": {
+          "type": "string",
+          "description": "控件名称"
+        },
+        "variableSource": {
+          "type": "string",
+          "description": "源变量名"
+        },
+        "variablePath": {
+          "type": "string",
+          "description": "变量名路径"
+        },
+        "constCata": {
+          "type": "string",
+          "description": "常量目录"
+        },
+        "variableNew": {
+          "type": "string",
+          "description": "新变量名"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-11-29 10:10:10",
+          "description": "创建时间"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisConstantCvsCtls",
+      "description": "常量转换控件配置"
+    },
+    "ApisConstantCvsCtlsData": {
+      "type": "object",
+      "properties": {
+        "constantCvsCtlsId": {
+          "type": "string",
+          "description": "控件Id"
+        },
+        "dkey": {
+          "type": "string"
+        },
+        "dvalue": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisConstantCvsCtlsData",
+      "description": "常量转换数据字典"
+    },
+    "ApisConstantCvsCtlsModel": {
+      "type": "object",
+      "properties": {
+        "apisConstantCvsCtls": {
+          "description": "常量转换主配置",
+          "$ref": "#/definitions/ApisConstantCvsCtls"
+        },
+        "apisConstantCvsCtlsDataList": {
+          "type": "array",
+          "description": "常量转换数据信息",
+          "items": {
+            "$ref": "#/definitions/ApisConstantCvsCtlsData"
+          }
+        }
+      },
+      "title": "ApisConstantCvsCtlsModel",
+      "description": "常量转换控件"
+    },
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«Map»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«Map»",
+      "description": "返回响应数据"
+    }
+  }
+}

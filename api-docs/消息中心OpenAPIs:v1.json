@@ -1,0 +1,270 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "消息中心OpenAPIs"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-msgcenter",
+  "tags": [{
+    "name": "消息操作",
+    "description": "Msg Rest Controller"
+  }, {
+    "name": "队列操作",
+    "description": "Queue Rest Controller"
+  }],
+  "paths": {
+    "/v1/msg/callback": {
+      "post": {
+        "tags": ["消息操作"],
+        "summary": "消息发送回调接口",
+        "operationId": "sendMsgCallbackUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "errorCode",
+          "in": "query",
+          "description": "错误代码,可以由消息接收方定义",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "errorInfo",
+          "in": "query",
+          "description": "错误详细信息",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "handleTime",
+          "in": "query",
+          "description": "处理时间,时间戳格式,精确到毫秒",
+          "required": true,
+          "type": "integer",
+          "format": "int64"
+        }, {
+          "name": "ip",
+          "in": "query",
+          "description": "队列ip",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "msgId",
+          "in": "query",
+          "description": "消息ID",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "onlyUpdateNoStatus",
+          "in": "query",
+          "description": "当未传入具体的接收方的值时,说明希望批量更新,此时,该字段为 true:只更新没有设置过状态的数据/false:全部更新",
+          "required": false,
+          "type": "boolean",
+          "default": true
+        }, {
+          "name": "queueId",
+          "in": "query",
+          "description": "队列ID",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "success",
+          "in": "query",
+          "description": "消息处理是否成功,true/false",
+          "required": true,
+          "type": "boolean"
+        }, {
+          "name": "useForRevField",
+          "in": "query",
+          "description": "用于表示接收方的字段",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "useForRevFieldValue",
+          "in": "query",
+          "description": "用于表示接收方的字段值",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/v1/msg/sendByType": {
+      "post": {
+        "tags": ["消息操作"],
+        "summary": "根据类型发送消息",
+        "description": "返回结果的data.msgId表示该条消息的id,可用于查询发送状态等信息",
+        "operationId": "sendMsgByTypeUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "content",
+          "in": "query",
+          "description": "内容,json格式字符串,需满足类型关联的所有队列的必填项\n会固定添加msgId",
+          "required": true,
+          "type": "string",
+          "x-example": "{\"userIds\":[\"用户ID1\",\"用户ID2\"],\"content\":\"消息内容\",\"timeStamp\":\"1552914321000\"}"
+        }, {
+          "name": "type",
+          "in": "query",
+          "description": "消息类型,由后台管理员定义及维护与队列的关系",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/v1/queue/heartbeat": {
+      "post": {
+        "tags": ["队列操作"],
+        "summary": "队列状态接口",
+        "operationId": "heartbeatBackUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "queueIp",
+          "in": "query",
+          "description": "队列ip",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "queueKey",
+          "in": "query",
+          "description": "队列键值",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "queueSecret",
+          "in": "query",
+          "description": "队列密钥",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "time",
+          "in": "query",
+          "description": "间隔时间",
+          "required": true,
+          "type": "integer",
+          "format": "int64"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/v1/queue/register": {
+      "post": {
+        "tags": ["队列操作"],
+        "summary": "注册队列",
+        "description": "注册队列,返回的data为队列ID,可用于监听\n第二次调用该接口时,会验证key和secret是否与第一次相同,避免队列被其他非法客户端使用",
+        "operationId": "queueRegisterUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json;charset=UTF-8"],
+        "parameters": [{
+          "name": "exchange",
+          "in": "query",
+          "description": "交换器",
+          "required": false,
+          "type": "string",
+          "default": "DEFAULT_EXCHANGE"
+        }, {
+          "name": "mustParamaters",
+          "in": "query",
+          "description": "发送消息时必填字段,json数组格式字符串, 各节点key描述如下: FIELD->必填的字段, DESCRIPTION->字段描述, IS_ARRAY->是否是数组,true/false, USE_FOR_REV->该字段是否用于表示接收方,true/false",
+          "required": false,
+          "type": "string",
+          "default": "[{\"DESCRIPTION\":\"用户ID, 数组类型\",\"FIELD\":\"userIds\",\"IS_ARRAY\":\"true\",\"USE_FOR_REV\":\"true\"},{\"DESCRIPTION\":\"内容\",\"FIELD\":\"content\",\"IS_ARRAY\":\"\",\"USE_FOR_REV\":\"\"}]"
+        }, {
+          "name": "queueDesc",
+          "in": "query",
+          "description": "队列描述",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "queueKey",
+          "in": "query",
+          "description": "队列键值",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "queueSecret",
+          "in": "query",
+          "description": "队列密钥",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    }
+  }
+}

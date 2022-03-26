@@ -1,0 +1,3492 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "资源访问控制"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-permission",
+  "tags": [{
+    "name": "ORU模型管理",
+    "description": "Oru Controller"
+  }, {
+    "name": "主题管理",
+    "description": "Subject Controller"
+  }, {
+    "name": "公有主题管理",
+    "description": "Public Subject Controller"
+  }, {
+    "name": "权限管理",
+    "description": "注意:该组接口数据均从内存中获取, 所以不可用状态下的数据无法得到"
+  }, {
+    "name": "私有主题管理",
+    "description": "Private Subject Controller"
+  }, {
+    "name": "资源初始化",
+    "description": "Resource Init Controller"
+  }, {
+    "name": "资源管理",
+    "description": "Resource Controller"
+  }],
+  "paths": {
+    "/oru": {
+      "post": {
+        "tags": ["ORU模型管理"],
+        "summary": "新增oru信息",
+        "operationId": "saveUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "orgSubjectId",
+          "in": "query",
+          "description": "orgSubjectId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "roleSubjectIdList",
+          "in": "query",
+          "description": "roleSubjectIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "userSubjectIdList",
+          "in": "query",
+          "description": "userSubjectIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/oru/delete": {
+      "post": {
+        "tags": ["ORU模型管理"],
+        "summary": "删除oru信息",
+        "operationId": "deleteUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "idList",
+          "in": "query",
+          "description": "idList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/oru/list-by-org-subject-id": {
+      "post": {
+        "tags": ["ORU模型管理"],
+        "summary": "根据机构主题id查询oru信息",
+        "operationId": "listResourceUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_PERMISSION_ORU»"
+          }
+        }, {
+          "name": "roleName",
+          "in": "query",
+          "description": "roleName",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "userName",
+          "in": "query",
+          "description": "userName",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«T_PERMISSION_ORU»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/oru/query-by-org-subject-id": {
+      "post": {
+        "tags": ["ORU模型管理"],
+        "summary": "根据机构主题id分页查询oru信息",
+        "operationId": "queryByOrgSubjectIdUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_PERMISSION_ORU»"
+          }
+        }, {
+          "name": "roleName",
+          "in": "query",
+          "description": "roleName",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "userName",
+          "in": "query",
+          "description": "userName",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«T_PERMISSION_ORU»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/oru/{id}": {
+      "get": {
+        "tags": ["ORU模型管理"],
+        "summary": "根据ID查询oru信息",
+        "operationId": "getByIdUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "ID",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/check": {
+      "post": {
+        "tags": ["权限管理"],
+        "summary": "检查权限",
+        "operationId": "permissionCheckUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "action",
+          "in": "query",
+          "description": "action",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "appKey",
+          "in": "query",
+          "description": "appKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "loginInfo",
+          "description": "loginInfo",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/LoginInfo"
+          }
+        }, {
+          "name": "object",
+          "in": "query",
+          "description": "object",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "resourceType",
+          "in": "query",
+          "description": "resourceType",
+          "required": true,
+          "type": "string",
+          "enum": ["DATA", "API", "UI", "OTHER"]
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/cycle-relation-check": {
+      "post": {
+        "tags": ["权限管理"],
+        "summary": "循环关联检查, 发现循环关联时, 请使用api接口进行删除, 直接操作数据库后需要重启程序",
+        "operationId": "cycleRelationCheckUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "appKey",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«List«string»»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/generate-permission-xml": {
+      "get": {
+        "tags": ["权限管理"],
+        "summary": "生成权限xml信息",
+        "operationId": "generatePermissionXmlUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "导出的基础应用的key值",
+          "required": true,
+          "type": "string",
+          "default": "wip_fighter_framework"
+        }, {
+          "name": "subjectTypeEnumList",
+          "in": "query",
+          "description": "主题包含的类型",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["ORG", "ROLE", "USER", "RESOURCE_GROUP", "OTHER"]
+          },
+          "collectionFormat": "multi",
+          "enum": ["ORG", "ROLE", "USER", "RESOURCE_GROUP", "OTHER"]
+        }, {
+          "name": "tenantId",
+          "in": "query",
+          "description": "要导出的租户id",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/group-policy": {
+      "post": {
+        "tags": ["权限管理"],
+        "summary": "根据主题ID查询私有组策略, 只会获得有效状态的主题关系",
+        "operationId": "listGroupPolicyBySubjectIdUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "appKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "isRecursive",
+          "in": "query",
+          "description": "isRecursive",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }, {
+          "name": "relation",
+          "in": "query",
+          "description": "relation",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "subjectIdList",
+          "in": "query",
+          "description": "subjectIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "type",
+          "in": "query",
+          "description": "查询类型, up:向上查询,查询输入主题属于哪些组, down:向下查询,查询哪些组属于输入的主题, all:全部查询",
+          "required": true,
+          "type": "string",
+          "enum": ["up", "down", "all"]
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«T_PERMISSION_POLICY_GROUP»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/import-permission-xml": {
+      "post": {
+        "tags": ["权限管理"],
+        "summary": "根据生成权限xml信息进行导入, 导入到的应用最好是没有其他数据",
+        "operationId": "importByPermissionXmlUsingPOST",
+        "consumes": ["multipart/form-data"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "导入的基础应用的key值",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "file",
+          "in": "formData",
+          "description": "file",
+          "required": true,
+          "type": "file"
+        }, {
+          "name": "tenantId",
+          "in": "query",
+          "description": "要入出的租户id",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/public/group-policy": {
+      "post": {
+        "tags": ["权限管理"],
+        "summary": "根据主题ID查询公有组策略, 只会获得有效状态的主题关系",
+        "operationId": "listPublicGroupPolicyBySubjectIdUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "isRecursive",
+          "in": "query",
+          "description": "isRecursive",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }, {
+          "name": "relation",
+          "in": "query",
+          "description": "relation",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "subjectIdList",
+          "in": "query",
+          "description": "subjectIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "type",
+          "in": "query",
+          "description": "查询类型, up:向上查询,查询输入主题属于哪些组, down:向下查询,查询哪些组属于输入的主题, all:全部查询",
+          "required": true,
+          "type": "string",
+          "enum": ["up", "down", "all"]
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«T_PERMISSION_POLICY_GROUP»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/reset-resource-to-resource-group-policy": {
+      "post": {
+        "tags": ["权限管理"],
+        "summary": "重新关联资源和资源组关系, 注意备份好数据再操作",
+        "operationId": "resetResource2ResourceGroupPolicyUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "应用的key值",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "clearOldRelation",
+          "in": "query",
+          "description": "clearOldRelation",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }, {
+          "name": "rootResourceGroupSubjectId",
+          "in": "query",
+          "description": "rootResourceGroupSubjectId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "rootResourceId",
+          "in": "query",
+          "description": "rootResourceId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/subject-policy/resource-id": {
+      "post": {
+        "tags": ["权限管理"],
+        "summary": "根据资源ID查询主题策略, 只会获得有效状态的主题关系",
+        "operationId": "listSubjectPolicyByResourceIdUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "appKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "resourceIdList",
+          "in": "query",
+          "description": "resourceIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«SubjectPolicy»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/subject-policy/subject-id": {
+      "post": {
+        "tags": ["权限管理"],
+        "summary": "根据主题ID查询主题策略, 只会获得有效状态的主题关系",
+        "operationId": "listSubjectPolicyBySubjectIdUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "appKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "subjectIdList",
+          "in": "query",
+          "description": "subjectIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«SubjectPolicy»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/subject/group/policy": {
+      "post": {
+        "tags": ["主题管理"],
+        "summary": "保存主题与主题之间的关系, 公有主题与公有主题, 私有主题与应用类主题不能使用该方法",
+        "operationId": "saveGroupPolicyUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "appKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "currentRecursiveType",
+          "in": "query",
+          "description": "进行关联时的当前节点递归类型, 会将符合类型的递归节点都与parentSubjectId进行关联",
+          "required": false,
+          "type": "string",
+          "enum": ["up", "down", "all"]
+        }, {
+          "name": "parentRecursiveType",
+          "in": "query",
+          "description": "进行关联时的上级节点递归类型, 会将符合类型的递归节点都与subjectId进行关联",
+          "required": false,
+          "type": "string",
+          "enum": ["up", "down", "all"]
+        }, {
+          "name": "parentSubjectId",
+          "in": "query",
+          "description": "上级主题ID",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "recursiveConditionEntity",
+          "description": "递归时的查询条件",
+          "required": false,
+          "schema": {
+            "$ref": "#/definitions/T_PERMISSION_POLICY_GROUP"
+          }
+        }, {
+          "name": "subjectId",
+          "in": "query",
+          "description": "主题ID",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/subject/group/policy/del": {
+      "post": {
+        "tags": ["主题管理"],
+        "summary": "删除主题与主题之间的关系, 公有主题与公有主题, 私有主题与应用类主题不能使用该方法",
+        "operationId": "deleteGroupPolicyUsingPOST_2",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "appKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "currentRecursiveType",
+          "in": "query",
+          "description": "进行关联时的当前节点递归类型, 会将符合类型的递归节点都与parentSubjectId进行关联关系删除",
+          "required": false,
+          "type": "string",
+          "enum": ["up", "down", "all"]
+        }, {
+          "name": "parentRecursiveType",
+          "in": "query",
+          "description": "进行关联时的上级节点递归类型, 会将符合类型的递归节点都与subjectId进行关联关系删除",
+          "required": false,
+          "type": "string",
+          "enum": ["up", "down", "all"]
+        }, {
+          "name": "parentSubjectId",
+          "in": "query",
+          "description": "上级主题ID",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "recursiveConditionEntity",
+          "description": "递归时的查询条件",
+          "required": false,
+          "schema": {
+            "$ref": "#/definitions/T_PERMISSION_POLICY_GROUP"
+          }
+        }, {
+          "name": "subjectId",
+          "in": "query",
+          "description": "主题ID",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/subject/permission-info/resource-group/check": {
+      "post": {
+        "tags": ["主题管理"],
+        "summary": "检查资源组权限信息",
+        "operationId": "checkPermissionInfoUsingPOST",
+        "consumes": ["multipart/form-data"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "要导入到的应用",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "convertIdMap",
+          "in": "query",
+          "description": "导入时需要做转换的id映射对象",
+          "required": true,
+          "type": "string",
+          "default": "{}"
+        }, {
+          "name": "file",
+          "in": "formData",
+          "description": "file",
+          "required": true,
+          "type": "file"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«Map«string,string»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/subject/permission-info/resource-group/export": {
+      "get": {
+        "tags": ["主题管理"],
+        "summary": "资源组权限信息导出",
+        "operationId": "excelTemplateExportUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "appKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "subjectId",
+          "in": "query",
+          "description": "subjectId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/subject/permission-info/resource-group/import": {
+      "post": {
+        "tags": ["主题管理"],
+        "summary": "导入权限信息",
+        "description": "相同的资源(appKey, act, obj一致则认为是同一个资源)不会再次导入, 但是关联关系会修正后导入， 相同的主题(unifiedId、appKey、subjectType相同则认为是同一个主题)也不会再次导入, 但是关联关系会修正后导入",
+        "operationId": "importPermissionInfoUsingPOST",
+        "consumes": ["multipart/form-data"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "要导入到的应用",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "convertIdMap",
+          "in": "query",
+          "description": "导入时需要做转换的id映射对象",
+          "required": true,
+          "type": "string",
+          "default": "{}"
+        }, {
+          "name": "file",
+          "in": "formData",
+          "description": "file",
+          "required": true,
+          "type": "file"
+        }, {
+          "name": "importToSubjectId",
+          "in": "query",
+          "description": "主题信息导入到的目标节点id，将导出时的根节点下数据放入这个id下",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«Map«string,string»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/subject/private/app": {
+      "post": {
+        "tags": ["私有主题管理"],
+        "summary": "新增应用类型私有主题信息",
+        "operationId": "saveAppSubjectUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "appKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "name",
+          "in": "query",
+          "description": "name",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "status",
+          "in": "query",
+          "description": "status",
+          "required": true,
+          "type": "number"
+        }, {
+          "in": "body",
+          "name": "subjectExtList",
+          "description": "subjectExtList",
+          "required": false,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_PERMISSION_PUB_SUBJECT_EXT"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["私有主题管理"],
+        "summary": "更新应用类型私有主题信息, 只能更新名称,状态和扩展属性, appkey不能修改",
+        "operationId": "updateAppSubjectUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "appKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "id",
+          "in": "query",
+          "description": "id",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "name",
+          "in": "query",
+          "description": "name",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "status",
+          "in": "query",
+          "description": "status",
+          "required": false,
+          "type": "number"
+        }, {
+          "in": "body",
+          "name": "subjectExtList",
+          "description": "subjectExtList",
+          "required": false,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_PERMISSION_PUB_SUBJECT_EXT"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/subject/private/app/delete": {
+      "post": {
+        "tags": ["私有主题管理"],
+        "summary": "删除应用类主题信息",
+        "description": "通过id进行删除",
+        "operationId": "deleteAppSubjectUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "subjectList",
+          "description": "subjectList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_PERMISSION_PUB_SUBJECT"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/subject/private/app/group/policy": {
+      "post": {
+        "tags": ["私有主题管理"],
+        "summary": "保存私有主题与应用类主题之间的关系",
+        "operationId": "savePrivate2AppGroupingPolicyUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "appKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "parentSubjectId",
+          "in": "query",
+          "description": "上级主题ID",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "subjectId",
+          "in": "query",
+          "description": "主题ID",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/subject/private/app/group/policy/del": {
+      "post": {
+        "tags": ["私有主题管理"],
+        "summary": "删除私有主题与应用类主题之间的关系",
+        "operationId": "deleteGroupPolicyUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "appKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "parentSubjectId",
+          "in": "query",
+          "description": "上级主题ID",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "subjectId",
+          "in": "query",
+          "description": "主题ID",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/subject/private/app/{id}": {
+      "get": {
+        "tags": ["私有主题管理"],
+        "summary": "根据ID查询应用类主题",
+        "operationId": "getAppSubjectByIdUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "应用类主题ID",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«T_PERMISSION_PUB_SUBJECT»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/subject/private/common": {
+      "post": {
+        "tags": ["私有主题管理"],
+        "summary": "新增私有主题信息",
+        "operationId": "saveSubjectUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "subjectList",
+          "description": "subjectList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_PERMISSION_SUBJECT"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["私有主题管理"],
+        "summary": "更新私有主题信息信息",
+        "operationId": "updateSubjectUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "subjectList",
+          "description": "subjectList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_PERMISSION_SUBJECT"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/subject/private/common/delete": {
+      "post": {
+        "tags": ["私有主题管理"],
+        "summary": "删除私有主题信息",
+        "description": "通过id和appKey进行删除",
+        "operationId": "deletePrivateSubjectUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "subjectList",
+          "description": "subjectList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_PERMISSION_SUBJECT"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/subject/private/common/list": {
+      "post": {
+        "tags": ["私有主题管理"],
+        "summary": "查询私有主题信息",
+        "operationId": "listSubjectUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "childSubjectIdList",
+          "in": "query",
+          "description": "子级主题ID",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "parentSubjectIdList",
+          "in": "query",
+          "description": "父级主题ID",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_PERMISSION_SUBJECT»"
+          }
+        }, {
+          "name": "resourceIdList",
+          "in": "query",
+          "description": "资源ID",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "searchType",
+          "in": "query",
+          "description": "查询类型, 查询所有类型/非APP类型/APP类型",
+          "required": true,
+          "type": "string",
+          "default": "NOT_APP",
+          "enum": ["ALL", "APP", "NOT_APP"]
+        }, {
+          "name": "unionChildSubjectType",
+          "in": "query",
+          "description": "childSubjectIdList传入的情况下: ALL:会在返回结果中包含符合childSubjectIdList的list, 类似当前主题left join 子级主题, IN:只保留符合与childSubjectIdList有关联的主题, 类似当前主题 join 子级主题, NOT_IN:只保留符合与childSubjectIdList没有关联的主题",
+          "required": false,
+          "type": "string",
+          "default": "ALL",
+          "enum": ["ALL", "IN", "NOT_IN"]
+        }, {
+          "name": "unionParentSubjectType",
+          "in": "query",
+          "description": "parentSubjectIdList传入的情况下: ALL:会在返回结果中包含符合parentSubjectIdList的list, 类似当前主题left join 上级主题, IN:只保留符合与parentSubjectIdList有关联的主题, 类似当前主题 join 上级主题, NOT_IN:只保留符合与parentSubjectIdList没有关联的主题",
+          "required": false,
+          "type": "string",
+          "default": "ALL",
+          "enum": ["ALL", "IN", "NOT_IN"]
+        }, {
+          "name": "unionResourceType",
+          "in": "query",
+          "description": "resourceIdList传入的情况下: ALL:会在返回结果中包含符合resourceIdList的list, 类似主题left join 资源, IN:只保留符合与resourceIdList有关联的主题, 类似主题 join 资源, NOT_IN:只保留符合与resourceIdList没有关联的主题",
+          "required": false,
+          "type": "string",
+          "default": "ALL",
+          "enum": ["ALL", "IN", "NOT_IN"]
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«T_PERMISSION_SUBJECT»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/subject/private/common/query": {
+      "post": {
+        "tags": ["私有主题管理"],
+        "summary": "分页查询私有主题信息",
+        "operationId": "querySubjectUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "childSubjectIdList",
+          "in": "query",
+          "description": "子级主题ID",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "parentSubjectIdList",
+          "in": "query",
+          "description": "父级主题ID",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_PERMISSION_SUBJECT»"
+          }
+        }, {
+          "name": "resourceIdList",
+          "in": "query",
+          "description": "资源ID",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "searchType",
+          "in": "query",
+          "description": "查询类型, 查询所有类型/非APP类型/APP类型",
+          "required": true,
+          "type": "string",
+          "default": "NOT_APP",
+          "enum": ["ALL", "APP", "NOT_APP"]
+        }, {
+          "name": "unionChildSubjectType",
+          "in": "query",
+          "description": "childSubjectIdList传入的情况下: ALL:会在返回结果中包含符合childSubjectIdList的list, 类似当前主题left join 子级主题, IN:只保留符合与childSubjectIdList有关联的主题, 类似当前主题 join 子级主题, NOT_IN:只保留符合与childSubjectIdList没有关联的主题",
+          "required": false,
+          "type": "string",
+          "default": "ALL",
+          "enum": ["ALL", "IN", "NOT_IN"]
+        }, {
+          "name": "unionParentSubjectType",
+          "in": "query",
+          "description": "parentSubjectIdList传入的情况下: ALL:会在返回结果中包含符合parentSubjectIdList的list, 类似当前主题left join 上级主题, IN:只保留符合与parentSubjectIdList有关联的主题, 类似当前主题 join 上级主题, NOT_IN:只保留符合与parentSubjectIdList没有关联的主题",
+          "required": false,
+          "type": "string",
+          "default": "ALL",
+          "enum": ["ALL", "IN", "NOT_IN"]
+        }, {
+          "name": "unionResourceType",
+          "in": "query",
+          "description": "resourceIdList传入的情况下: ALL:会在返回结果中包含符合resourceIdList的list, 类似主题left join 资源, IN:只保留符合与resourceIdList有关联的主题, 类似主题 join 资源, NOT_IN:只保留符合与resourceIdList没有关联的主题",
+          "required": false,
+          "type": "string",
+          "default": "ALL",
+          "enum": ["ALL", "IN", "NOT_IN"]
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«T_PERMISSION_SUBJECT»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/subject/private/common/{appKey}/{id}": {
+      "get": {
+        "tags": ["私有主题管理"],
+        "summary": "根据ID和appKey查询私有主题",
+        "operationId": "getPrivateSubjectByIdUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "path",
+          "description": "appKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "id",
+          "in": "path",
+          "description": "私有主题ID",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«T_PERMISSION_SUBJECT»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/subject/public": {
+      "post": {
+        "tags": ["公有主题管理"],
+        "summary": "新增公有主题信息",
+        "operationId": "saveSubjectUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "subjectList",
+          "description": "subjectList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_PERMISSION_PUB_SUBJECT"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["公有主题管理"],
+        "summary": "更新公有主题信息信息",
+        "operationId": "updateSubjectUsingPUT_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "subjectList",
+          "description": "subjectList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_PERMISSION_PUB_SUBJECT"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/subject/public/delete": {
+      "post": {
+        "tags": ["公有主题管理"],
+        "summary": "删除公有主题信息",
+        "description": "通过unifiedId和type进行删除",
+        "operationId": "deletePublicSubjectUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "subjectList",
+          "description": "subjectList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_PERMISSION_PUB_SUBJECT"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/subject/public/group/policy": {
+      "post": {
+        "tags": ["公有主题管理"],
+        "summary": "保存公有主题与公有主题之间的关系",
+        "operationId": "saveGroupPolicyUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "parentSubjectId",
+          "in": "query",
+          "description": "上级主题ID",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "subjectId",
+          "in": "query",
+          "description": "主题ID",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/subject/public/group/policy/del": {
+      "post": {
+        "tags": ["公有主题管理"],
+        "summary": "删除公有主题与公有主题之间的关系",
+        "operationId": "deleteGroupPolicyUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "parentSubjectId",
+          "in": "query",
+          "description": "上级主题ID",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "subjectId",
+          "in": "query",
+          "description": "主题ID",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/subject/public/list": {
+      "post": {
+        "tags": ["公有主题管理"],
+        "summary": "查询公有主题信息",
+        "operationId": "listPublicSubjectUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "childSubjectIdList",
+          "in": "query",
+          "description": "子级主题ID,如果传入了该值,为父级主题添加关联说明childPolicyGroupMap",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "parentSubjectIdList",
+          "in": "query",
+          "description": "父级主题ID,如果传入了该值,会为子级主题添加关联说明parentPolicyGroupMap",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_PERMISSION_PUB_SUBJECT»"
+          }
+        }, {
+          "name": "resourceIdList",
+          "in": "query",
+          "description": "资源ID",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "unionChildSubjectType",
+          "in": "query",
+          "description": "childSubjectIdList传入的情况下: ALL:会在返回结果中包含符合childSubjectIdList的list, 类似当前主题left join 子级主题, IN:只保留符合与childSubjectIdList有关联的主题, 类似当前主题 join 子级主题, NOT_IN:只保留符合与childSubjectIdList没有关联的主题",
+          "required": false,
+          "type": "string",
+          "default": "ALL",
+          "enum": ["ALL", "IN", "NOT_IN"]
+        }, {
+          "name": "unionParentSubjectType",
+          "in": "query",
+          "description": "parentSubjectIdList传入的情况下: ALL:会在返回结果中包含符合parentSubjectIdList的list, 类似当前主题left join 上级主题, IN:只保留符合与parentSubjectIdList有关联的主题, 类似当前主题 join 上级主题, NOT_IN:只保留符合与parentSubjectIdList没有关联的主题",
+          "required": false,
+          "type": "string",
+          "default": "ALL",
+          "enum": ["ALL", "IN", "NOT_IN"]
+        }, {
+          "name": "unionResourceType",
+          "in": "query",
+          "description": "resourceIdList传入的情况下: ALL:会在返回结果中包含符合resourceIdList的list, 类似主题left join 资源, IN:只保留符合与resourceIdList有关联的主题, 类似主题 join 资源, NOT_IN:只保留符合与resourceIdList没有关联的主题",
+          "required": false,
+          "type": "string",
+          "default": "ALL",
+          "enum": ["ALL", "IN", "NOT_IN"]
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«T_PERMISSION_PUB_SUBJECT»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/subject/public/query": {
+      "post": {
+        "tags": ["公有主题管理"],
+        "summary": "分页查询公有主题信息",
+        "operationId": "queryPublicSubjectUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "childSubjectIdList",
+          "in": "query",
+          "description": "子级主题ID,如果传入了该值,为父级主题添加关联说明childPolicyGroupMap",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "parentSubjectIdList",
+          "in": "query",
+          "description": "父级主题ID,如果传入了该值,会为子级主题添加关联说明parentPolicyGroupMap",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_PERMISSION_PUB_SUBJECT»"
+          }
+        }, {
+          "name": "resourceIdList",
+          "in": "query",
+          "description": "资源ID",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "searchType",
+          "in": "query",
+          "description": "searchType",
+          "required": false,
+          "type": "string",
+          "default": "NOT_APP",
+          "enum": ["ALL", "APP", "NOT_APP"]
+        }, {
+          "name": "unionChildSubjectType",
+          "in": "query",
+          "description": "childSubjectIdList传入的情况下: ALL:会在返回结果中包含符合childSubjectIdList的list, 类似当前主题left join 子级主题, IN:只保留符合与childSubjectIdList有关联的主题, 类似当前主题 join 子级主题, NOT_IN:只保留符合与childSubjectIdList没有关联的主题",
+          "required": false,
+          "type": "string",
+          "default": "ALL",
+          "enum": ["ALL", "IN", "NOT_IN"]
+        }, {
+          "name": "unionParentSubjectType",
+          "in": "query",
+          "description": "parentSubjectIdList传入的情况下: ALL:会在返回结果中包含符合parentSubjectIdList的list, 类似当前主题left join 上级主题, IN:只保留符合与parentSubjectIdList有关联的主题, 类似当前主题 join 上级主题, NOT_IN:只保留符合与parentSubjectIdList没有关联的主题",
+          "required": false,
+          "type": "string",
+          "default": "ALL",
+          "enum": ["ALL", "IN", "NOT_IN"]
+        }, {
+          "name": "unionResourceType",
+          "in": "query",
+          "description": "resourceIdList传入的情况下: ALL:会在返回结果中包含符合resourceIdList的list, 类似主题left join 资源, IN:只保留符合与resourceIdList有关联的主题, 类似主题 join 资源, NOT_IN:只保留符合与resourceIdList没有关联的主题",
+          "required": false,
+          "type": "string",
+          "default": "ALL",
+          "enum": ["ALL", "IN", "NOT_IN"]
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«T_PERMISSION_PUB_SUBJECT»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/subject/public/{id}": {
+      "get": {
+        "tags": ["公有主题管理"],
+        "summary": "根据ID查询公有主题",
+        "operationId": "getPublicSubjectByIdUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "公有主题ID",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«T_PERMISSION_PUB_SUBJECT»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/subject/subject/policy": {
+      "post": {
+        "tags": ["主题管理"],
+        "summary": "保存主题与资源的关系",
+        "operationId": "saveSubjectPolicyUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "appKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "recursiveTypeEnum",
+          "in": "query",
+          "description": "recursiveTypeEnum",
+          "required": false,
+          "type": "string",
+          "enum": ["up", "down", "all"]
+        }, {
+          "name": "resourceId",
+          "in": "query",
+          "description": "resourceId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "subjectId",
+          "in": "query",
+          "description": "subjectId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/subject/subject/policy/del": {
+      "post": {
+        "tags": ["主题管理"],
+        "summary": "删除主题与资源的关系",
+        "operationId": "deleteSubjectPolicyUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "appKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "recursiveTypeEnum",
+          "in": "query",
+          "description": "recursiveTypeEnum",
+          "required": false,
+          "type": "string",
+          "enum": ["up", "down", "all"]
+        }, {
+          "name": "resourceId",
+          "in": "query",
+          "description": "resourceId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "subjectId",
+          "in": "query",
+          "description": "subjectId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/subject/top-subject": {
+      "post": {
+        "tags": ["主题管理"],
+        "summary": "根据出题类型,查询顶级主题, 当传入appKey时会包括私有及公有主题, 不传入则仅有公有主题",
+        "operationId": "listTopSubjectUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "childSubjectIdList",
+          "in": "query",
+          "description": "子级主题ID",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "resourceIdList",
+          "in": "query",
+          "description": "资源ID",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "subjectTypeEnum",
+          "in": "query",
+          "description": "subjectTypeEnum",
+          "required": true,
+          "type": "string",
+          "enum": ["ORG", "ROLE", "APP", "USER", "RESOURCE_GROUP", "OTHER"]
+        }, {
+          "name": "unionChildSubjectType",
+          "in": "query",
+          "description": "childSubjectIdList传入的情况下: ALL:会在返回结果中包含符合childSubjectIdList的list, 类似当前主题left join 子级主题, IN:只保留符合与childSubjectIdList有关联的主题, 类似当前主题 join 子级主题, NOT_IN:只保留符合与childSubjectIdList没有关联的主题",
+          "required": false,
+          "type": "string",
+          "default": "ALL",
+          "enum": ["ALL", "IN", "NOT_IN"]
+        }, {
+          "name": "unionResourceType",
+          "in": "query",
+          "description": "resourceIdList传入的情况下: ALL:会在返回结果中包含符合resourceIdList的list, 类似主题left join 资源, IN:只保留符合与resourceIdList有关联的主题, 类似主题 join 资源, NOT_IN:只保留符合与resourceIdList没有关联的主题",
+          "required": false,
+          "type": "string",
+          "default": "ALL",
+          "enum": ["ALL", "IN", "NOT_IN"]
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«T_PERMISSION_SUBJECT»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/permission/trace": {
+      "post": {
+        "tags": ["权限管理"],
+        "summary": "权限追踪,获得主题id到资源id的完整链路",
+        "operationId": "tracePermissionUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "resourceId",
+          "in": "query",
+          "description": "resourceId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "subjectId",
+          "in": "query",
+          "description": "subjectId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«Resource2SubjectLink»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/resource": {
+      "post": {
+        "tags": ["资源管理"],
+        "summary": "新增资源",
+        "operationId": "saveResourceUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "generateResourceGroupType",
+          "in": "query",
+          "description": "generateResourceGroupType",
+          "required": false,
+          "type": "string",
+          "enum": ["ONLY_GENERATE", "GENERATE_AND_SET_PARENT"]
+        }, {
+          "in": "body",
+          "name": "resourceList",
+          "description": "resourceList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_PERMISSION_RESOURCE"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["资源管理"],
+        "summary": "更新资源信息",
+        "description": "如果状态修改为停用, 则其子节点全部停用, 如果修改为正常, 其父节点全部正常",
+        "operationId": "updateResourceUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "generateResourceGroupType",
+          "in": "query",
+          "description": "generateResourceGroupType",
+          "required": false,
+          "type": "string",
+          "enum": ["ONLY_GENERATE", "GENERATE_AND_SET_PARENT"]
+        }, {
+          "in": "body",
+          "name": "resourceList",
+          "description": "resourceList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_PERMISSION_RESOURCE"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/resource-init": {
+      "get": {
+        "tags": ["资源初始化"],
+        "summary": "Rest接口资源初始化",
+        "operationId": "RestApiResourceInitUsingGET",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/resource/delete": {
+      "post": {
+        "tags": ["资源管理"],
+        "summary": "删除资源信息",
+        "description": "包括子节点一并删除",
+        "operationId": "deleteResourceUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "resourceList",
+          "description": "resourceList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_PERMISSION_RESOURCE"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/resource/list": {
+      "post": {
+        "tags": ["资源管理"],
+        "summary": "查询资源",
+        "operationId": "listResourceUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "isRecursive",
+          "in": "query",
+          "description": "isRecursive",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_PERMISSION_RESOURCE»"
+          }
+        }, {
+          "name": "recursiveWithInputCondition",
+          "in": "query",
+          "description": "recursiveWithInputCondition",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«T_PERMISSION_RESOURCE»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/resource/list-authorized-resource": {
+      "post": {
+        "tags": ["资源管理"],
+        "summary": "获得当前用户有权限的资源",
+        "operationId": "listAuthorizedResourceUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "action",
+          "in": "query",
+          "description": "action",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "isRecursive",
+          "in": "query",
+          "description": "isRecursive",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }, {
+          "name": "onlyChild",
+          "in": "query",
+          "description": "onlyChild",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_PERMISSION_RESOURCE»"
+          }
+        }, {
+          "name": "recursiveIgnoreProperties",
+          "in": "query",
+          "description": "recursiveIgnoreProperties",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "recursiveWithCondition",
+          "in": "query",
+          "description": "recursiveWithCondition",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«T_PERMISSION_RESOURCE»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/resource/query": {
+      "post": {
+        "tags": ["资源管理"],
+        "summary": "分页查询资源",
+        "operationId": "queryResourceUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_PERMISSION_RESOURCE»"
+          }
+        }, {
+          "name": "subjectIdList",
+          "in": "query",
+          "description": "主题ID,如果传入了该值, 会在返回结果中包含符合该值的list",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "unionSubjectType",
+          "in": "query",
+          "description": "在subjectIdList传入的情况下 ALL:会在返回结果中包含符合subjectIdList的list, 类似资源left join 主题, IN:只保留符合与subjectIdList有关联的主题, 类似资源 join 主题, NOT_IN:只保留符合与subjectIdList没有关联的主题",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«T_PERMISSION_RESOURCE»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/resource/{id}": {
+      "get": {
+        "tags": ["资源管理"],
+        "summary": "根据ID查询资源",
+        "operationId": "getResourceByIdUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "资源ID",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "IPage«T_PERMISSION_ORU»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/T_PERMISSION_ORU"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«T_PERMISSION_ORU»"
+    },
+    "IPage«T_PERMISSION_PUB_SUBJECT»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/T_PERMISSION_PUB_SUBJECT"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«T_PERMISSION_PUB_SUBJECT»"
+    },
+    "IPage«T_PERMISSION_RESOURCE»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/T_PERMISSION_RESOURCE"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«T_PERMISSION_RESOURCE»"
+    },
+    "IPage«T_PERMISSION_SUBJECT»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/T_PERMISSION_SUBJECT"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«T_PERMISSION_SUBJECT»"
+    },
+    "LoginInfo": {
+      "type": "object",
+      "properties": {
+        "alreadyCheckedPermission": {
+          "type": "boolean"
+        },
+        "clientIp": {
+          "type": "string"
+        },
+        "permissionSubjectId": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "object"
+        },
+        "subjectType": {
+          "type": "string",
+          "enum": ["USER", "APP"]
+        },
+        "tenantId": {
+          "type": "string"
+        }
+      },
+      "title": "LoginInfo"
+    },
+    "Map«string,string»": {
+      "type": "object",
+      "title": "Map«string,string»",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "OrderItem": {
+      "type": "object",
+      "properties": {
+        "asc": {
+          "type": "boolean"
+        },
+        "column": {
+          "type": "string"
+        }
+      },
+      "title": "OrderItem"
+    },
+    "QueryCondition«T_PERMISSION_ORU»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/T_PERMISSION_ORU"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«T_PERMISSION_ORU»",
+      "description": "查询条件"
+    },
+    "QueryCondition«T_PERMISSION_PUB_SUBJECT»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/T_PERMISSION_PUB_SUBJECT"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«T_PERMISSION_PUB_SUBJECT»",
+      "description": "查询条件"
+    },
+    "QueryCondition«T_PERMISSION_RESOURCE»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/T_PERMISSION_RESOURCE"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«T_PERMISSION_RESOURCE»",
+      "description": "查询条件"
+    },
+    "QueryCondition«T_PERMISSION_SUBJECT»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/T_PERMISSION_SUBJECT"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«T_PERMISSION_SUBJECT»",
+      "description": "查询条件"
+    },
+    "Resource2SubjectLink": {
+      "type": "object",
+      "properties": {
+        "accessCondition": {
+          "type": "string",
+          "description": "允许访问资源的条件"
+        },
+        "act": {
+          "type": "string",
+          "description": "访问资源的动作"
+        },
+        "appKey": {
+          "type": "string",
+          "description": "调用接口的应用键值"
+        },
+        "childSubject": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Subject2SubjectLink"
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "描述"
+        },
+        "id": {
+          "type": "string",
+          "description": "资源id"
+        },
+        "obj": {
+          "type": "string",
+          "description": "资源对象"
+        },
+        "pid": {
+          "type": "string",
+          "description": "上级ID"
+        },
+        "resourceExtList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/T_PERMISSION_RESOURCE_EXT"
+          }
+        },
+        "resourceStatus": {
+          "type": "number",
+          "description": "状态, 1:正常, 2:停用"
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "类型",
+          "enum": ["DATA", "API", "UI", "OTHER"]
+        },
+        "sort": {
+          "type": "number",
+          "description": "排序"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户ID"
+        }
+      },
+      "title": "Resource2SubjectLink",
+      "description": "资源信息"
+    },
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«T_PERMISSION_ORU»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«T_PERMISSION_ORU»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«T_PERMISSION_ORU»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«T_PERMISSION_PUB_SUBJECT»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«T_PERMISSION_PUB_SUBJECT»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«T_PERMISSION_PUB_SUBJECT»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«T_PERMISSION_RESOURCE»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«T_PERMISSION_RESOURCE»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«T_PERMISSION_RESOURCE»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«T_PERMISSION_SUBJECT»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«T_PERMISSION_SUBJECT»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«T_PERMISSION_SUBJECT»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«List«string»»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«List«string»»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«SubjectPolicy»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/SubjectPolicy"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«SubjectPolicy»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«T_PERMISSION_ORU»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/T_PERMISSION_ORU"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«T_PERMISSION_ORU»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«T_PERMISSION_POLICY_GROUP»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/T_PERMISSION_POLICY_GROUP"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«T_PERMISSION_POLICY_GROUP»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«T_PERMISSION_PUB_SUBJECT»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/T_PERMISSION_PUB_SUBJECT"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«T_PERMISSION_PUB_SUBJECT»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«T_PERMISSION_RESOURCE»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/T_PERMISSION_RESOURCE"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«T_PERMISSION_RESOURCE»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«T_PERMISSION_SUBJECT»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/T_PERMISSION_SUBJECT"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«T_PERMISSION_SUBJECT»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«Map«string,string»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«Map«string,string»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«Resource2SubjectLink»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/Resource2SubjectLink"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«Resource2SubjectLink»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«T_PERMISSION_PUB_SUBJECT»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/T_PERMISSION_PUB_SUBJECT"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«T_PERMISSION_PUB_SUBJECT»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«T_PERMISSION_SUBJECT»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/T_PERMISSION_SUBJECT"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«T_PERMISSION_SUBJECT»",
+      "description": "返回响应数据"
+    },
+    "Subject2SubjectLink": {
+      "type": "object",
+      "properties": {
+        "appKey": {
+          "type": "string",
+          "description": "管理主题的应用键值"
+        },
+        "childSubject": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Subject2SubjectLink"
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "subjectExtList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/T_PERMISSION_SUBJECT_EXT"
+          }
+        },
+        "subjectName": {
+          "type": "string",
+          "description": "名称"
+        },
+        "subjectStatus": {
+          "type": "number",
+          "description": "状态,1:正常(可用),2:不可用"
+        },
+        "subjectType": {
+          "type": "string",
+          "description": "类型",
+          "enum": ["ORG", "ROLE", "USER", "RESOURCE_GROUP", "OTHER"]
+        },
+        "subjectTypeList": {
+          "type": "array",
+          "description": "类型列表，仅在查询时有用",
+          "items": {
+            "type": "string",
+            "enum": ["ORG", "ROLE", "USER", "RESOURCE_GROUP", "OTHER"]
+          }
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户ID"
+        },
+        "unifiedId": {
+          "type": "string",
+          "description": "统一ID, 各系统间统一描述主题对象的ID, 例如: 用户学工号"
+        }
+      },
+      "title": "Subject2SubjectLink",
+      "description": "主题信息, 结构与T_PERMISSION_SUBJECT一致"
+    },
+    "SubjectPolicy": {
+      "type": "object",
+      "properties": {
+        "act": {
+          "type": "string"
+        },
+        "appKey": {
+          "type": "string"
+        },
+        "condition": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "obj": {
+          "type": "string"
+        },
+        "ptype": {
+          "type": "string",
+          "description": "策略类型"
+        },
+        "relation": {
+          "type": "string",
+          "description": "关系描述"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "资源ID"
+        },
+        "subjectId": {
+          "type": "string",
+          "description": "主题对象ID"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户ID"
+        }
+      },
+      "title": "SubjectPolicy",
+      "description": "权限管理-主题策略"
+    },
+    "T_PERMISSION_ORU": {
+      "type": "object",
+      "properties": {
+        "appKey": {
+          "type": "string",
+          "description": "管理这条数据的应用"
+        },
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "orgName": {
+          "type": "string",
+          "description": "机构名称"
+        },
+        "orgSubjectId": {
+          "type": "string",
+          "description": "机构主题id"
+        },
+        "roleName": {
+          "type": "string",
+          "description": "角色名称"
+        },
+        "roleSubjectId": {
+          "type": "string",
+          "description": "角色主题id"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        },
+        "userName": {
+          "type": "string",
+          "description": "用户名"
+        },
+        "userSubjectId": {
+          "type": "string",
+          "description": "用户主题id"
+        }
+      },
+      "title": "T_PERMISSION_ORU",
+      "description": "权限管理-ORU模型"
+    },
+    "T_PERMISSION_POLICY_GROUP": {
+      "type": "object",
+      "properties": {
+        "appKey": {
+          "type": "string",
+          "description": "管理这条数据的应用键值"
+        },
+        "groupId": {
+          "type": "string",
+          "description": "组id"
+        },
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "pgroupId": {
+          "type": "string"
+        },
+        "ptype": {
+          "type": "string",
+          "description": "策略类型"
+        },
+        "relation": {
+          "type": "string",
+          "description": "关系"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户ID"
+        }
+      },
+      "title": "T_PERMISSION_POLICY_GROUP",
+      "description": "权限管理-组策略"
+    },
+    "T_PERMISSION_PUB_SUBJECT": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "subjectExtList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/T_PERMISSION_PUB_SUBJECT_EXT"
+          }
+        },
+        "subjectName": {
+          "type": "string",
+          "description": "名称"
+        },
+        "subjectStatus": {
+          "type": "number",
+          "description": "状态,1:正常(可用),2:不可用"
+        },
+        "subjectType": {
+          "type": "string",
+          "description": "类型",
+          "enum": ["ORG", "ROLE", "USER", "RESOURCE_GROUP", "OTHER"]
+        },
+        "subjectTypeList": {
+          "type": "array",
+          "description": "类型列表，仅在查询时有用",
+          "items": {
+            "type": "string",
+            "enum": ["ORG", "ROLE", "USER", "RESOURCE_GROUP", "OTHER"]
+          }
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户ID"
+        },
+        "unifiedId": {
+          "type": "string",
+          "description": "统一ID, 各系统间统一描述主题对象的ID, 例如: 用户学工号"
+        }
+      },
+      "title": "T_PERMISSION_PUB_SUBJECT",
+      "description": "公用主题信息"
+    },
+    "T_PERMISSION_PUB_SUBJECT_EXT": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "描述"
+        },
+        "extPropertyKey": {
+          "type": "string",
+          "description": "字段键值"
+        },
+        "extPropertyValue": {
+          "type": "string",
+          "description": "字段值"
+        },
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "subjectId": {
+          "type": "string",
+          "description": "主题id"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户ID"
+        }
+      },
+      "title": "T_PERMISSION_PUB_SUBJECT_EXT",
+      "description": "主题扩展信息"
+    },
+    "T_PERMISSION_RESOURCE": {
+      "type": "object",
+      "properties": {
+        "accessCondition": {
+          "type": "string",
+          "description": "允许访问资源的条件"
+        },
+        "act": {
+          "type": "string",
+          "description": "访问资源的动作"
+        },
+        "appKey": {
+          "type": "string",
+          "description": "调用接口的应用键值"
+        },
+        "description": {
+          "type": "string",
+          "description": "描述"
+        },
+        "id": {
+          "type": "string",
+          "description": "资源id"
+        },
+        "obj": {
+          "type": "string",
+          "description": "资源对象"
+        },
+        "pid": {
+          "type": "string",
+          "description": "上级ID"
+        },
+        "resourceExtList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/T_PERMISSION_RESOURCE_EXT"
+          }
+        },
+        "resourceStatus": {
+          "type": "number",
+          "description": "状态, 1:正常, 2:停用"
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "类型",
+          "enum": ["DATA", "API", "UI", "OTHER"]
+        },
+        "sort": {
+          "type": "number",
+          "description": "排序"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户ID"
+        }
+      },
+      "title": "T_PERMISSION_RESOURCE",
+      "description": "资源信息"
+    },
+    "T_PERMISSION_RESOURCE_EXT": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "description"
+        },
+        "extPropertyKey": {
+          "type": "string",
+          "description": "extPropertyKey"
+        },
+        "extPropertyValue": {
+          "type": "string",
+          "description": "extPropertyValue"
+        },
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "resourceId"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户ID"
+        }
+      },
+      "title": "T_PERMISSION_RESOURCE_EXT",
+      "description": "资源扩展信息"
+    },
+    "T_PERMISSION_SUBJECT": {
+      "type": "object",
+      "properties": {
+        "appKey": {
+          "type": "string",
+          "description": "管理主题的应用键值"
+        },
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "subjectExtList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/T_PERMISSION_SUBJECT_EXT"
+          }
+        },
+        "subjectName": {
+          "type": "string",
+          "description": "名称"
+        },
+        "subjectStatus": {
+          "type": "number",
+          "description": "状态,1:正常(可用),2:不可用"
+        },
+        "subjectType": {
+          "type": "string",
+          "description": "类型",
+          "enum": ["ORG", "ROLE", "USER", "RESOURCE_GROUP", "OTHER"]
+        },
+        "subjectTypeList": {
+          "type": "array",
+          "description": "类型列表，仅在查询时有用",
+          "items": {
+            "type": "string",
+            "enum": ["ORG", "ROLE", "USER", "RESOURCE_GROUP", "OTHER"]
+          }
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户ID"
+        },
+        "unifiedId": {
+          "type": "string",
+          "description": "统一ID, 各系统间统一描述主题对象的ID, 例如: 用户学工号"
+        }
+      },
+      "title": "T_PERMISSION_SUBJECT",
+      "description": "主题信息"
+    },
+    "T_PERMISSION_SUBJECT_EXT": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "描述"
+        },
+        "extPropertyKey": {
+          "type": "string",
+          "description": "字段键值"
+        },
+        "extPropertyValue": {
+          "type": "string",
+          "description": "字段值"
+        },
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "subjectId": {
+          "type": "string",
+          "description": "主题id"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户ID"
+        }
+      },
+      "title": "T_PERMISSION_SUBJECT_EXT",
+      "description": "主题扩展信息"
+    }
+  }
+}

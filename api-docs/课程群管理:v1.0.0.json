@@ -1,0 +1,1276 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1.0.0",
+    "title": "课程群管理"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-course-group",
+  "tags": [{
+    "name": "订阅钉钉事件",
+    "description": "Ding Talk Callback Controller"
+  }, {
+    "name": "课程上课时间管理",
+    "description": "Course Time Controller"
+  }, {
+    "name": "课程学生管理",
+    "description": "Course Student Controller"
+  }, {
+    "name": "课程管理",
+    "description": "Course Controller"
+  }, {
+    "name": "课程群管理",
+    "description": "Course Group Controller"
+  }],
+  "paths": {
+    "/course": {
+      "post": {
+        "tags": ["课程管理"],
+        "summary": "新增课程",
+        "operationId": "saveUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "courseList",
+          "description": "courseList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_COURSE对象"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["课程管理"],
+        "summary": "更新课程信息",
+        "operationId": "updateUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "courseList",
+          "description": "courseList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_COURSE对象"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/course-group/generateCourseGroup": {
+      "post": {
+        "tags": ["课程群管理"],
+        "summary": "生成课程群",
+        "operationId": "generateCourseGroupUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "courseList",
+          "description": "courseList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_COURSE对象"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/course-group/joinCourseGroup": {
+      "post": {
+        "tags": ["课程群管理"],
+        "summary": "加入课程群",
+        "operationId": "joinCourseGroupUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "courseId",
+          "in": "query",
+          "description": "课程Id",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "studentNumber",
+          "in": "query",
+          "description": "学号",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/course-student": {
+      "post": {
+        "tags": ["课程学生管理"],
+        "summary": "新增课程学生",
+        "operationId": "saveUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "courseStudentList",
+          "description": "courseStudentList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_COURSE_STUDENT对象"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«Map«string,List«string»»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["课程学生管理"],
+        "summary": "更新课程学生信息",
+        "operationId": "updateUsingPUT_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "courseStudentList",
+          "description": "courseStudentList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_COURSE_STUDENT对象"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/course-student/delete": {
+      "post": {
+        "tags": ["课程学生管理"],
+        "summary": "删除课程学生",
+        "operationId": "deleteUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "courseStudentIdList",
+          "in": "query",
+          "description": "courseStudentIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/course-student/list": {
+      "post": {
+        "tags": ["课程学生管理"],
+        "summary": "查询课程学生",
+        "operationId": "listAppUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_COURSE_STUDENT对象»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«T_COURSE_STUDENT对象»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/course-student/query": {
+      "post": {
+        "tags": ["课程学生管理"],
+        "summary": "分页查询课程学生",
+        "operationId": "queryUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_COURSE_STUDENT对象»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«T_COURSE_STUDENT对象»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/course-student/{id}": {
+      "get": {
+        "tags": ["课程学生管理"],
+        "summary": "根据ID查询课程学生",
+        "operationId": "getByIdUsingGET_1",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "课程学生",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«T_COURSE_STUDENT对象»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/course-time": {
+      "post": {
+        "tags": ["课程上课时间管理"],
+        "summary": "新增课程上课时间",
+        "operationId": "saveUsingPOST_2",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "courseTimeList",
+          "description": "courseTimeList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_COURSE_TIME对象"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["课程上课时间管理"],
+        "summary": "更新课程上课时间信息",
+        "operationId": "updateUsingPUT_2",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "courseTimeList",
+          "description": "courseTimeList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_COURSE_TIME对象"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/course-time/delete": {
+      "post": {
+        "tags": ["课程上课时间管理"],
+        "summary": "删除课程上课时间",
+        "operationId": "deleteUsingPOST_2",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "courseTimeIdList",
+          "in": "query",
+          "description": "courseTimeIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/course-time/list": {
+      "post": {
+        "tags": ["课程上课时间管理"],
+        "summary": "查询课程上课时间",
+        "operationId": "listAppUsingPOST_2",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_COURSE_TIME对象»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«T_COURSE_TIME对象»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/course-time/query": {
+      "post": {
+        "tags": ["课程上课时间管理"],
+        "summary": "分页查询课程上课时间",
+        "operationId": "queryUsingPOST_2",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_COURSE_TIME对象»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«T_COURSE_TIME对象»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/course-time/{id}": {
+      "get": {
+        "tags": ["课程上课时间管理"],
+        "summary": "根据ID查询课程上课时间",
+        "operationId": "getByIdUsingGET_2",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "课程上课时间",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«T_COURSE_TIME对象»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/course/delete": {
+      "post": {
+        "tags": ["课程管理"],
+        "summary": "删除课程",
+        "operationId": "deleteUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "courseIdList",
+          "in": "query",
+          "description": "courseIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/course/list": {
+      "post": {
+        "tags": ["课程管理"],
+        "summary": "查询课程",
+        "operationId": "listAppUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_COURSE对象»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«T_COURSE对象»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/course/query": {
+      "post": {
+        "tags": ["课程管理"],
+        "summary": "分页查询课程",
+        "operationId": "queryUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_COURSE对象»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«T_COURSE对象»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/course/{id}": {
+      "get": {
+        "tags": ["课程管理"],
+        "summary": "根据ID查询课程",
+        "operationId": "getByIdUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "课程",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«T_COURSE对象»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/dingtalk/callback/sceneGroup/receive": {
+      "post": {
+        "tags": ["订阅钉钉事件"],
+        "summary": "接收订阅的群会话事件",
+        "operationId": "receiveDingtalkCallbackWithTenantUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "json",
+          "description": "json",
+          "required": false,
+          "schema": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          }
+        }, {
+          "name": "msg_signature",
+          "in": "query",
+          "description": "msg_signature",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "nonce",
+          "in": "query",
+          "description": "nonce",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "timestamp",
+          "in": "query",
+          "description": "timestamp",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "IPage«T_COURSE_STUDENT对象»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/T_COURSE_STUDENT对象"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«T_COURSE_STUDENT对象»"
+    },
+    "IPage«T_COURSE_TIME对象»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/T_COURSE_TIME对象"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«T_COURSE_TIME对象»"
+    },
+    "IPage«T_COURSE对象»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/T_COURSE对象"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«T_COURSE对象»"
+    },
+    "Map«string,List«string»»": {
+      "type": "object",
+      "title": "Map«string,List«string»»",
+      "additionalProperties": {
+        "$ref": "#/definitions/List"
+      }
+    },
+    "OrderItem": {
+      "type": "object",
+      "properties": {
+        "asc": {
+          "type": "boolean"
+        },
+        "column": {
+          "type": "string"
+        }
+      },
+      "title": "OrderItem"
+    },
+    "QueryCondition«T_COURSE_STUDENT对象»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/T_COURSE_STUDENT对象"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«T_COURSE_STUDENT对象»",
+      "description": "查询条件"
+    },
+    "QueryCondition«T_COURSE_TIME对象»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/T_COURSE_TIME对象"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«T_COURSE_TIME对象»",
+      "description": "查询条件"
+    },
+    "QueryCondition«T_COURSE对象»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/T_COURSE对象"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«T_COURSE对象»",
+      "description": "查询条件"
+    },
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«T_COURSE_STUDENT对象»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«T_COURSE_STUDENT对象»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«T_COURSE_STUDENT对象»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«T_COURSE_TIME对象»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«T_COURSE_TIME对象»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«T_COURSE_TIME对象»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«T_COURSE对象»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«T_COURSE对象»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«T_COURSE对象»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«T_COURSE_STUDENT对象»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/T_COURSE_STUDENT对象"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«T_COURSE_STUDENT对象»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«T_COURSE_TIME对象»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/T_COURSE_TIME对象"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«T_COURSE_TIME对象»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«T_COURSE对象»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/T_COURSE对象"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«T_COURSE对象»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«Map«string,List«string»»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«Map«string,List«string»»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«T_COURSE_STUDENT对象»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/T_COURSE_STUDENT对象"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«T_COURSE_STUDENT对象»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«T_COURSE_TIME对象»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/T_COURSE_TIME对象"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«T_COURSE_TIME对象»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«T_COURSE对象»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/T_COURSE对象"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«T_COURSE对象»",
+      "description": "返回响应数据"
+    },
+    "T_COURSE_STUDENT对象": {
+      "type": "object",
+      "properties": {
+        "courseId": {
+          "type": "string",
+          "description": "课程Id"
+        },
+        "id": {
+          "type": "string",
+          "description": "学生上课信息记录Id"
+        },
+        "joinGroupStatus": {
+          "type": "number",
+          "description": "是否已加入课程群 1:是/2:否/"
+        },
+        "noJoinReason": {
+          "type": "string",
+          "description": "未加入课程群原因"
+        },
+        "studentMobile": {
+          "type": "string",
+          "description": "学生手机号码"
+        },
+        "studentName": {
+          "type": "string",
+          "description": "学生姓名"
+        },
+        "studentNumber": {
+          "type": "string",
+          "description": "学号"
+        }
+      },
+      "title": "T_COURSE_STUDENT对象",
+      "description": "学生上课信息"
+    },
+    "T_COURSE_TIME对象": {
+      "type": "object",
+      "properties": {
+        "courseId": {
+          "type": "string",
+          "description": "课程Id"
+        },
+        "endWeek": {
+          "type": "string",
+          "description": "终止周"
+        },
+        "id": {
+          "type": "string",
+          "description": "课程上课时间信息记录Id"
+        },
+        "lessonNumber": {
+          "type": "string",
+          "description": "课节次"
+        },
+        "startWeek": {
+          "type": "string",
+          "description": "起始周"
+        },
+        "weekDay": {
+          "type": "string",
+          "description": "星期几"
+        }
+      },
+      "title": "T_COURSE_TIME对象",
+      "description": "课程上课时间信息"
+    },
+    "T_COURSE对象": {
+      "type": "object",
+      "properties": {
+        "courseCode": {
+          "type": "string",
+          "description": "课程代码"
+        },
+        "courseGroupId": {
+          "type": "string",
+          "description": "课程群Id"
+        },
+        "courseName": {
+          "type": "string",
+          "description": "课程名称"
+        },
+        "courseTime": {
+          "type": "string",
+          "description": "上课时间"
+        },
+        "id": {
+          "type": "string",
+          "description": "课程信息记录Id"
+        },
+        "schoolTerm": {
+          "type": "string",
+          "description": "学期"
+        },
+        "schoolYear": {
+          "type": "string",
+          "description": "学年"
+        },
+        "status": {
+          "type": "number",
+          "description": "课程状态 1:正常/2:删除/"
+        },
+        "teachClass": {
+          "type": "string",
+          "description": "教学班（专业）"
+        },
+        "teachJobNumber": {
+          "type": "string",
+          "description": "教师工号"
+        },
+        "teacherMobile": {
+          "type": "string",
+          "description": "教师手机号码"
+        },
+        "teacherName": {
+          "type": "string",
+          "description": "教师姓名"
+        }
+      },
+      "title": "T_COURSE对象",
+      "description": "课程信息"
+    }
+  }
+}

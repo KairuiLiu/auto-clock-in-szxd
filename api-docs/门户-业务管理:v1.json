@@ -1,0 +1,1533 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "门户-业务管理"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-lightportal-saas",
+  "tags": [{
+    "name": "会议室管理",
+    "description": "Conference Room Management Controller"
+  }, {
+    "name": "简单调度任务",
+    "description": "Schedule Task Controller"
+  }],
+  "paths": {
+    "/conferenceRoomManagement/dataExport": {
+      "post": {
+        "tags": ["会议室管理"],
+        "summary": "导出",
+        "operationId": "dataExportUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«ConferenceRoomManagementWorkFlowQueryDto»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/conferenceRoomManagement/delete": {
+      "delete": {
+        "tags": ["会议室管理"],
+        "summary": "删除",
+        "operationId": "deleteUsingDELETE",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "idList",
+          "in": "query",
+          "description": "会议室唯一健集合",
+          "required": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/list"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "404": {
+            "description": "文档不存在"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/conferenceRoomManagement/downloadAcademicLectureHallApplicationForm": {
+      "post": {
+        "tags": ["会议室管理"],
+        "summary": "根据实体下载学术报告厅申请单(.doc)",
+        "operationId": "downloadAcademicLectureHallApplicationFormUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "entity",
+          "description": "entity",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/DownloadAcademicLectureHallApplicationFormVo"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/conferenceRoomManagement/get": {
+      "get": {
+        "tags": ["会议室管理"],
+        "summary": "查看",
+        "operationId": "getUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "query",
+          "description": "id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«HyConferenceRoomManagementVo»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "404": {
+            "description": "文档不存在"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/conferenceRoomManagement/getHyInformation": {
+      "get": {
+        "tags": ["会议室管理"],
+        "summary": "获取会议室预约须知",
+        "operationId": "getHyInformationUsingGET",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«HyInformation»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "404": {
+            "description": "文档不存在"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/conferenceRoomManagement/getSysj": {
+      "get": {
+        "tags": ["会议室管理"],
+        "summary": "获取已申请使用时间（审核中，通过状态）",
+        "operationId": "getSysjUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "query",
+          "description": "id",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "sysj",
+          "in": "query",
+          "description": "sysj",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«string»»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "404": {
+            "description": "文档不存在"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/conferenceRoomManagement/list": {
+      "post": {
+        "tags": ["会议室管理"],
+        "summary": "非分页查询",
+        "operationId": "listUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«HyConferenceRoomManagement»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«HyConferenceRoomManagement»»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/conferenceRoomManagement/query": {
+      "post": {
+        "tags": ["会议室管理"],
+        "summary": "分页查询",
+        "operationId": "queryUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页的数量",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«HyConferenceRoomManagement»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«HyConferenceRoomManagement»»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/conferenceRoomManagement/queryApply": {
+      "post": {
+        "tags": ["会议室管理"],
+        "summary": "分页查询-会议室申请记录",
+        "operationId": "queryApplyUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页的数量",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«ConferenceRoomManagementWorkFlowQueryDto»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«ConferenceRoomManagementWorkFlowVo»»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/conferenceRoomManagement/queryApplyByAdmin": {
+      "post": {
+        "tags": ["会议室管理"],
+        "summary": "分页查询-会议室申请记录-管理员",
+        "operationId": "queryApplyByAdminUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页的数量",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«ConferenceRoomManagementWorkFlowQueryDto»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«ConferenceRoomManagementWorkFlowVo»»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/conferenceRoomManagement/queryCanApply": {
+      "post": {
+        "tags": ["会议室管理"],
+        "summary": "查询可以申请的报告厅-使用日期为空的话默认为当前日期",
+        "operationId": "queryCanApplyUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页的数量",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«ConferenceRoomManagementCanApplyQueryDto»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«HyConferenceRoomManagement»»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/conferenceRoomManagement/save": {
+      "post": {
+        "tags": ["会议室管理"],
+        "summary": "新增",
+        "operationId": "saveUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "entity",
+          "description": "entity",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/HyConferenceRoomManagement"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«string»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/conferenceRoomManagement/update": {
+      "post": {
+        "tags": ["会议室管理"],
+        "summary": "更新",
+        "operationId": "updateUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "entity",
+          "description": "entity",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/HyConferenceRoomManagement"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«string»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/conferenceRoomManagement/updateHyInformation": {
+      "post": {
+        "tags": ["会议室管理"],
+        "summary": "修改会议室预约须知",
+        "operationId": "updateHyInformationUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "entity",
+          "description": "entity",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/HyInformation"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«string»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/scheduleTask/get": {
+      "get": {
+        "tags": ["简单调度任务"],
+        "summary": "查看",
+        "operationId": "getUsingGET_1",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "query",
+          "description": "非业务主键-唯一健",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«TScheduledTask»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "404": {
+            "description": "文档不存在"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/scheduleTask/query": {
+      "post": {
+        "tags": ["简单调度任务"],
+        "summary": "分页查询",
+        "operationId": "queryUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页的数量",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«TScheduledTask»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«TScheduledTask»»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/scheduleTask/update": {
+      "post": {
+        "tags": ["简单调度任务"],
+        "summary": "更新",
+        "operationId": "updateUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "entity",
+          "description": "entity",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/TScheduledTask"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "ConferenceRoomManagementCanApplyQueryDto": {
+      "type": "object",
+      "properties": {
+        "syrq": {
+          "type": "string",
+          "description": "使用日期"
+        },
+        "sysj": {
+          "type": "array",
+          "description": "使用时间",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "ConferenceRoomManagementCanApplyQueryDto"
+    },
+    "ConferenceRoomManagementWorkFlowQueryDto": {
+      "type": "object",
+      "properties": {
+        "syrq": {
+          "type": "string",
+          "description": "使用日期"
+        },
+        "sysj": {
+          "type": "array",
+          "description": "使用时间",
+          "items": {
+            "type": "string"
+          }
+        },
+        "shzt": {
+          "type": "string",
+          "description": "审核状态"
+        },
+        "yybgtmcMc": {
+          "type": "string",
+          "description": "报告厅名称"
+        },
+        "sybm": {
+          "type": "string",
+          "description": "使用部门"
+        },
+        "djr": {
+          "type": "string",
+          "description": "登记人"
+        },
+        "sj": {
+          "type": "string",
+          "description": "数据"
+        }
+      },
+      "title": "ConferenceRoomManagementWorkFlowQueryDto"
+    },
+    "ConferenceRoomManagementWorkFlowVo": {
+      "type": "object",
+      "properties": {
+        "bgtid": {
+          "type": "string",
+          "description": "会议室id"
+        },
+        "bz": {
+          "type": "string",
+          "description": "备注"
+        },
+        "djr": {
+          "type": "string",
+          "description": "申请人姓名"
+        },
+        "djrqsj": {
+          "type": "string",
+          "description": "登记日期时间"
+        },
+        "dpsl": {
+          "type": "string",
+          "description": "大屏"
+        },
+        "hdnr": {
+          "type": "string",
+          "description": "活动题目"
+        },
+        "hyteacher": {
+          "type": "string",
+          "description": "会议室表：值班老师"
+        },
+        "lcid": {
+          "type": "string",
+          "description": "流程主表关键字"
+        },
+        "lxdh": {
+          "type": "string",
+          "description": "联系电话"
+        },
+        "ly": {
+          "type": "string",
+          "description": "楼宇"
+        },
+        "processinstanceid": {
+          "type": "string",
+          "description": "流程实例ID"
+        },
+        "sfyy": {
+          "type": "string",
+          "description": "释放原因"
+        },
+        "shyj": {
+          "type": "string",
+          "description": "审核详情"
+        },
+        "shzt": {
+          "type": "string",
+          "description": "审核状态"
+        },
+        "sybm": {
+          "type": "string",
+          "description": "使用部门"
+        },
+        "syrq": {
+          "type": "string",
+          "description": "使用日期"
+        },
+        "syrs": {
+          "type": "string",
+          "description": "使用人数"
+        },
+        "sysj": {
+          "type": "string",
+          "description": "使用时间"
+        },
+        "syxq": {
+          "type": "string",
+          "description": "使用星期"
+        },
+        "teacher": {
+          "type": "string",
+          "description": "值班老师"
+        },
+        "wxht": {
+          "type": "string",
+          "description": "无线话筒"
+        },
+        "xq": {
+          "type": "string",
+          "description": "校区"
+        },
+        "yxht": {
+          "type": "string",
+          "description": "有线话筒"
+        },
+        "yybgtmcMc": {
+          "type": "string",
+          "description": "预约报告厅名称"
+        }
+      },
+      "title": "ConferenceRoomManagementWorkFlowVo",
+      "description": "流程视图关联会议室表"
+    },
+    "DownloadAcademicLectureHallApplicationFormVo": {
+      "type": "object",
+      "properties": {
+        "hdnr": {
+          "type": "string",
+          "description": "活动题目"
+        },
+        "yybgtmcMc": {
+          "type": "string",
+          "description": "学术报告厅"
+        },
+        "syrq": {
+          "type": "string",
+          "description": "使用日期"
+        },
+        "syrqsj": {
+          "type": "string",
+          "description": "使用日期时间"
+        },
+        "sysj": {
+          "type": "string",
+          "description": "使用日期时间"
+        },
+        "djrqsj": {
+          "type": "string",
+          "description": "登记日期时间"
+        },
+        "sybm": {
+          "type": "string",
+          "description": "使用部门"
+        },
+        "lxdh": {
+          "type": "string",
+          "description": "联系电话"
+        },
+        "djr": {
+          "type": "string",
+          "description": "登记人"
+        },
+        "teacher": {
+          "type": "string",
+          "description": "登记人"
+        },
+        "syrs": {
+          "type": "string",
+          "description": "使用人数"
+        },
+        "dpsl": {
+          "type": "string",
+          "description": "大屏"
+        },
+        "wxht": {
+          "type": "string",
+          "description": "无线话筒"
+        },
+        "yxht": {
+          "type": "string",
+          "description": "有线话筒"
+        },
+        "bz": {
+          "type": "string",
+          "description": "备注"
+        }
+      },
+      "title": "DownloadAcademicLectureHallApplicationFormVo",
+      "description": "下载学术报告厅申请单实体"
+    },
+    "HyConferenceRoomManagement": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        },
+        "id": {
+          "type": "string",
+          "description": "id-唯一"
+        },
+        "campus": {
+          "type": "string",
+          "description": "校区"
+        },
+        "building": {
+          "type": "string",
+          "description": "楼宇"
+        },
+        "name": {
+          "type": "string",
+          "description": "报告厅名称"
+        },
+        "photo": {
+          "type": "string",
+          "description": "报告厅图片URL"
+        },
+        "introduce": {
+          "type": "string",
+          "description": "报告厅介绍"
+        },
+        "teacher": {
+          "type": "string",
+          "description": "值班老师"
+        },
+        "status": {
+          "type": "string",
+          "description": "报告厅状态（0:停用，1:启用）"
+        },
+        "capacity": {
+          "type": "string",
+          "description": "报告厅容量"
+        },
+        "phone": {
+          "type": "string",
+          "description": "值班老师电话"
+        }
+      },
+      "title": "HyConferenceRoomManagement",
+      "description": "会议室管理表"
+    },
+    "HyConferenceRoomManagementVo": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        },
+        "id": {
+          "type": "string",
+          "description": "id-唯一"
+        },
+        "campus": {
+          "type": "string",
+          "description": "校区"
+        },
+        "building": {
+          "type": "string",
+          "description": "楼宇"
+        },
+        "name": {
+          "type": "string",
+          "description": "报告厅名称"
+        },
+        "photo": {
+          "type": "string",
+          "description": "报告厅图片URL"
+        },
+        "introduce": {
+          "type": "string",
+          "description": "报告厅介绍"
+        },
+        "teacher": {
+          "type": "string",
+          "description": "值班老师"
+        },
+        "status": {
+          "type": "string",
+          "description": "报告厅状态（0:停用，1:启用）"
+        },
+        "capacity": {
+          "type": "string",
+          "description": "报告厅容量"
+        },
+        "phone": {
+          "type": "string",
+          "description": "值班老师电话"
+        },
+        "syrq": {
+          "type": "object",
+          "description": "使用日期",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "title": "HyConferenceRoomManagementVo"
+    },
+    "HyInformation": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "id-唯一"
+        },
+        "information": {
+          "type": "string",
+          "description": "具体信息"
+        }
+      },
+      "title": "HyInformation",
+      "description": "会议室预约须知表"
+    },
+    "IPage«ConferenceRoomManagementWorkFlowVo»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConferenceRoomManagementWorkFlowVo"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«ConferenceRoomManagementWorkFlowVo»"
+    },
+    "IPage«HyConferenceRoomManagement»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HyConferenceRoomManagement"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«HyConferenceRoomManagement»"
+    },
+    "IPage«TScheduledTask»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TScheduledTask"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«TScheduledTask»"
+    },
+    "OrderItem": {
+      "type": "object",
+      "properties": {
+        "asc": {
+          "type": "boolean"
+        },
+        "column": {
+          "type": "string"
+        }
+      },
+      "title": "OrderItem"
+    },
+    "QueryCondition«ConferenceRoomManagementCanApplyQueryDto»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/ConferenceRoomManagementCanApplyQueryDto"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«ConferenceRoomManagementCanApplyQueryDto»",
+      "description": "查询条件"
+    },
+    "QueryCondition«ConferenceRoomManagementWorkFlowQueryDto»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/ConferenceRoomManagementWorkFlowQueryDto"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«ConferenceRoomManagementWorkFlowQueryDto»",
+      "description": "查询条件"
+    },
+    "QueryCondition«HyConferenceRoomManagement»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/HyConferenceRoomManagement"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«HyConferenceRoomManagement»",
+      "description": "查询条件"
+    },
+    "QueryCondition«TScheduledTask»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/TScheduledTask"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«TScheduledTask»",
+      "description": "查询条件"
+    },
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«HyConferenceRoomManagementVo»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/HyConferenceRoomManagementVo"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«HyConferenceRoomManagementVo»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«HyInformation»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/HyInformation"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«HyInformation»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«ConferenceRoomManagementWorkFlowVo»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«ConferenceRoomManagementWorkFlowVo»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«ConferenceRoomManagementWorkFlowVo»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«HyConferenceRoomManagement»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«HyConferenceRoomManagement»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«HyConferenceRoomManagement»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«TScheduledTask»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«TScheduledTask»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«TScheduledTask»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«HyConferenceRoomManagement»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/HyConferenceRoomManagement"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«HyConferenceRoomManagement»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«string»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "type": "string"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«string»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«TScheduledTask»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/TScheduledTask"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«TScheduledTask»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«string»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "string",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«string»",
+      "description": "返回响应数据"
+    },
+    "TScheduledTask": {
+      "type": "object",
+      "properties": {
+        "cron_expression": {
+          "type": "string",
+          "description": "cron表达式"
+        },
+        "cron_key": {
+          "type": "string",
+          "description": "定时任务完整类名"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "非业务主键-唯一"
+        },
+        "status": {
+          "type": "boolean",
+          "description": "状态,1:启用;0:停用"
+        },
+        "task_execution_time": {
+          "type": "string",
+          "description": "任务执行时间 0到23"
+        },
+        "task_explain": {
+          "type": "string",
+          "description": "任务描述"
+        },
+        "task_time_limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "释放会议室占用的时间范围 1到15"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "TScheduledTask"
+    }
+  }
+}

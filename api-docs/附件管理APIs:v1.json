@@ -1,0 +1,534 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "附件管理APIs"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-attachment-manage",
+  "tags": [{
+    "name": "sftp附件上传,归档",
+    "description": "Sftp Controller"
+  }, {
+    "name": "附件上传",
+    "description": "Upload File Controller"
+  }],
+  "paths": {
+    "/common/document/deleteByBusinessId": {
+      "delete": {
+        "tags": ["附件上传"],
+        "summary": "根据业务唯一编码删除",
+        "operationId": "deleteByBusinessIdUsingDELETE",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "businessExtendType",
+          "in": "query",
+          "description": "业务表扩展类型",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "businessId",
+          "in": "query",
+          "description": "业务唯一编码",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "404": {
+            "description": "文档不存在"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/common/document/deleteByFileUniqueCode": {
+      "delete": {
+        "tags": ["附件上传"],
+        "summary": "根据文件唯一编码删除",
+        "operationId": "deleteByFileUniqueCodeUsingDELETE",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "fileUniqueCode",
+          "in": "query",
+          "description": "文件唯一编码",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "404": {
+            "description": "文档不存在"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/common/document/download": {
+      "get": {
+        "tags": ["附件上传"],
+        "summary": "单文件下载",
+        "description": "无异常返回附件流数据，异常返回具体报错信息。",
+        "operationId": "downloadUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "fileUniqueCode",
+          "in": "query",
+          "description": "文件唯一编码",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "isThumbImage",
+          "in": "query",
+          "description": "是否下载图片缩略图（0否，1是）,仅对图片有效",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "404": {
+            "description": "文档不存在"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/common/document/download-or-preview": {
+      "get": {
+        "tags": ["附件上传"],
+        "summary": "单文件下载或预览(支持不登录直接下载)",
+        "description": "无异常返回附件流数据，异常返回具体报错信息。",
+        "operationId": "downloadOrPreviewUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "downloadMethod",
+          "in": "query",
+          "description": "下载方式（1根据类型程序自动完成，如图片，pdf以预览方式打开，其它以下载方式提供；2指定以下载方式提供；3指定以预览方式提供）",
+          "required": false,
+          "type": "string",
+          "default": "auto",
+          "enum": ["auto", "download", "preview"]
+        }, {
+          "name": "fileUniqueCode",
+          "in": "query",
+          "description": "文件唯一编码",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "404": {
+            "description": "文档不存在"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/common/document/get-web-server-url": {
+      "get": {
+        "tags": ["附件上传"],
+        "summary": "获取储服务器storage_server访问地址",
+        "operationId": "getWebServerUrlUsingGET",
+        "produces": ["*/*"],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«string»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/common/document/listRecord": {
+      "get": {
+        "tags": ["附件上传"],
+        "summary": "查询文件上传记录",
+        "operationId": "listRecordUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "businessExtendType",
+          "in": "query",
+          "description": "业务扩展类型，业务行为自定义值（可用于区分同一表单存在不同类型的附件上传）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "businessId",
+          "in": "query",
+          "description": "业务唯一健",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«UploadFile»»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/common/document/updateRecode": {
+      "put": {
+        "tags": ["附件上传"],
+        "summary": "更新附件上传记录",
+        "description": "前端页面，可以在保存表单后，回调此方法，执行附件上传记录与业务之间的关联；也可以在在代码中调用sdk提供的方法。",
+        "operationId": "updateRecodeUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "businessId",
+          "in": "query",
+          "description": "业务唯一码",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "fileUniqueCodes",
+          "in": "query",
+          "description": "文件唯一编码集合",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "404": {
+            "description": "文档不存在"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/common/document/upload": {
+      "post": {
+        "tags": ["附件上传"],
+        "summary": "单文件上传",
+        "description": "支持的附件类型：1、文档[doc、docx、xls、xlsx、ppt、pptx、txt、pdf、md]；2、图片[jpg、jpeg、png、gif、bmp];3、视频[avi、mov、rmvb、rm、flv、mp4]；4、压缩包[rar、zip]。<br/>业务调用步骤：1、附件上传成功后，返回附件唯一码；2、前端在提交表单时，一起提交附件唯一码；3、业务方法中调用UploadFileService.updateUploadFileData方法，建立业务数据关联.",
+        "operationId": "uploadUsingPOST",
+        "consumes": ["multipart/form-data"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "businessExtendType",
+          "in": "query",
+          "description": "业务扩展类型，业务行为自定义值（可用于区分同一表单存在不同类型的附件上传）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "file",
+          "in": "formData",
+          "description": "file",
+          "required": false,
+          "type": "file"
+        }, {
+          "name": "noLoginDownloadable",
+          "in": "query",
+          "description": "未登录时可下载（如流程pdf二维码扫描预览）",
+          "required": false,
+          "type": "string",
+          "default": "false",
+          "enum": ["false", "true"]
+        }, {
+          "name": "returnEntity",
+          "in": "query",
+          "description": "返回map",
+          "required": false,
+          "type": "string",
+          "default": "false",
+          "enum": ["false", "true"]
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/sftp-archive/exe-by-file-unique-code-list": {
+      "post": {
+        "tags": ["sftp附件上传,归档"],
+        "summary": "exeByFileUniqueCodeList",
+        "operationId": "exeByFileUniqueCodeListUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "fileUniqueCodeList",
+          "in": "query",
+          "description": "fileUniqueCodeList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«UploadFile»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/UploadFile"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«UploadFile»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«string»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "string",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«string»",
+      "description": "返回响应数据"
+    },
+    "UploadFile": {
+      "type": "object",
+      "properties": {
+        "deleteFlag": {
+          "type": "integer",
+          "format": "int32",
+          "description": "删除标记（1：已删除；0：有效）"
+        },
+        "id": {
+          "type": "string",
+          "description": "唯一健"
+        },
+        "businessId": {
+          "type": "string",
+          "description": "业务唯一健"
+        },
+        "businessExtendType": {
+          "type": "string",
+          "description": "业务扩展类型，业务行为自定义值（可用于区分同一表单存在不同类型的附件上传）"
+        },
+        "fileUniqueCode": {
+          "type": "string",
+          "description": "文件uuid唯一编码"
+        },
+        "fileName": {
+          "type": "string",
+          "description": "文件名称"
+        },
+        "fileSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "文件大小（字节）"
+        },
+        "fileSuffixName": {
+          "type": "string",
+          "description": "文件后缀名（png、doc、pdf等）"
+        },
+        "fileContentType": {
+          "type": "string",
+          "description": "文件类型（image/png、application/pdf等）"
+        },
+        "fastDFSGroupName": {
+          "type": "string",
+          "description": "fastFDF：groupName"
+        },
+        "fastDFSPath": {
+          "type": "string",
+          "description": "fastFDF：fastDFSPath"
+        },
+        "fastDFSThumbImagePath": {
+          "type": "string",
+          "description": "fastFDF：图片缩略图路径"
+        },
+        "createUserName": {
+          "type": "string",
+          "description": "创建人名称"
+        },
+        "createTime": {
+          "type": "string",
+          "description": "创建时间"
+        },
+        "noLoginDownloadable": {
+          "type": "string",
+          "description": "未登录时可下载（如流程pdf二维码扫描预览）"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "UploadFile",
+      "description": "附件上传记录"
+    }
+  }
+}

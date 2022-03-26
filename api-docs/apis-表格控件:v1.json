@@ -1,0 +1,747 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "apis-表格控件"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-apis-manage",
+  "tags": [{
+    "name": "apis数据资源管理",
+    "description": "Apis Db Resources Controller"
+  }, {
+    "name": "apis表格控件",
+    "description": "Apis Tb Ctls Controller"
+  }],
+  "paths": {
+    "/apis/db/queryAllDbs": {
+      "post": {
+        "tags": ["apis数据资源管理"],
+        "summary": "查询所有数据库",
+        "operationId": "queryAllDbsUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«TDataSource对象»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/apis/db/queryField": {
+      "get": {
+        "tags": ["apis数据资源管理"],
+        "summary": "根据数据源的表获取表的所有字段",
+        "operationId": "queryFieldUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "dataSourceId",
+          "in": "query",
+          "description": "数据源ID",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "tableName",
+          "in": "query",
+          "description": "表的名称",
+          "required": false,
+          "type": "string",
+          "x-example": "tb_user"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/apis/db/queryTable": {
+      "get": {
+        "tags": ["apis数据资源管理"],
+        "summary": "根据数据源获取数据库的表",
+        "operationId": "queryTableUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "dataSourceId",
+          "in": "query",
+          "description": "dataSourceId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/apis/tb-ctls/save": {
+      "post": {
+        "tags": ["apis表格控件"],
+        "summary": "保存表格控件",
+        "operationId": "saveModelUsingPOST_2",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "model",
+          "description": "model",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ApisTbCtlsModel"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/apis/tb-ctls/stepThrough": {
+      "post": {
+        "tags": ["apis表格控件"],
+        "summary": "表格控件单步调试(参数源里不存参数数据，直接填在默认值里面)",
+        "operationId": "stepThroughUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "model",
+          "description": "model",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ApisTbCtlsModel"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/apis/tb-ctls/{id}": {
+      "get": {
+        "tags": ["apis表格控件"],
+        "summary": "查看表格控件",
+        "operationId": "queryModelUsingGET_2",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "ApisTbCtls": {
+      "type": "object",
+      "properties": {
+        "ignorePaging": {
+          "type": "boolean"
+        },
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "ctlsName": {
+          "type": "string",
+          "description": "控件名称"
+        },
+        "dataSourceId": {
+          "type": "string",
+          "description": "数据源ID"
+        },
+        "isSingle": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "是否单表(1,是;2,否)"
+        },
+        "tb": {
+          "type": "string",
+          "description": "表名"
+        },
+        "tbRname": {
+          "type": "string",
+          "description": "表别名"
+        },
+        "tbComment": {
+          "type": "string",
+          "description": "表的备注"
+        },
+        "isDistinct": {
+          "type": "integer",
+          "format": "int32",
+          "description": "是否加去重"
+        },
+        "isComplex": {
+          "type": "integer",
+          "format": "int32",
+          "description": "是否复杂sql"
+        },
+        "variableOutTb": {
+          "type": "string",
+          "description": "表的输出变量名"
+        },
+        "isPaging": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "是否分页(1,是;2,否)"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-11-29 10:10:10",
+          "description": "创建时间"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisTbCtls",
+      "description": "表格控件"
+    },
+    "ApisTbCtlsCorrelation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "tbCtlsId": {
+          "type": "string",
+          "description": "mainTb"
+        },
+        "mainTb": {
+          "type": "string",
+          "description": "主表"
+        },
+        "mainTbRname": {
+          "type": "string",
+          "description": "主表别名"
+        },
+        "mainTbComment": {
+          "type": "string",
+          "description": "主表备注"
+        },
+        "mainField": {
+          "type": "string",
+          "description": "主表关联字段"
+        },
+        "mainFunc": {
+          "type": "string",
+          "description": "主表函数"
+        },
+        "correlation": {
+          "type": "string",
+          "description": "关联关系（左连接LEFT JOIN,内链接INNER JOIN,右链接RIGHT JOIN）"
+        },
+        "afterTb": {
+          "type": "string",
+          "description": "关联表"
+        },
+        "afterTbRname": {
+          "type": "string",
+          "description": "关联表别名"
+        },
+        "afterTbComment": {
+          "type": "string",
+          "description": "关联表备注"
+        },
+        "afterField": {
+          "type": "string",
+          "description": "关联表关联字段"
+        },
+        "afterFunc": {
+          "type": "string",
+          "description": "关联表函数"
+        },
+        "conditions": {
+          "type": "string",
+          "description": "条件(等于.=,大于.>,小于.<,大于等于.>=,小于等于.<=,区间.between,like)"
+        },
+        "sortting": {
+          "type": "integer",
+          "format": "int32",
+          "description": "排序（1.2.3....）"
+        },
+        "relation": {
+          "type": "string",
+          "description": "关系AND、OR"
+        },
+        "relationTeam": {
+          "type": "string",
+          "description": "关系分组"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisTbCtlsCorrelation",
+      "description": "表与表之间的的关联关系"
+    },
+    "ApisTbCtlsModel": {
+      "type": "object",
+      "properties": {
+        "apisTbCtls": {
+          "description": "表格控件主配置",
+          "$ref": "#/definitions/ApisTbCtls"
+        },
+        "apisTbCtlsCorrelationList": {
+          "type": "array",
+          "description": "表和表之间的关联关系",
+          "items": {
+            "$ref": "#/definitions/ApisTbCtlsCorrelation"
+          }
+        },
+        "apisTbCtlsReqParamList": {
+          "type": "array",
+          "description": "表查询的请求参数配置",
+          "items": {
+            "$ref": "#/definitions/ApisTbCtlsReqParam"
+          }
+        },
+        "apisTbCtlsReqParamConditionsModelList": {
+          "type": "array",
+          "description": "表格控件查询条件组配",
+          "items": {
+            "$ref": "#/definitions/ApisTbCtlsReqParamConditionsModel"
+          }
+        },
+        "apisTbCtlsReturnList": {
+          "type": "array",
+          "description": "表查询的返回参数配置",
+          "items": {
+            "$ref": "#/definitions/ApisTbCtlsReturn"
+          }
+        }
+      },
+      "title": "ApisTbCtlsModel",
+      "description": "表格控件"
+    },
+    "ApisTbCtlsReqParam": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "编号"
+        },
+        "tbCtlsId": {
+          "type": "string",
+          "description": "控件"
+        },
+        "tb": {
+          "type": "string",
+          "description": "表名"
+        },
+        "field": {
+          "type": "string",
+          "description": "字段"
+        },
+        "filedComment": {
+          "type": "string",
+          "description": "字段注释"
+        },
+        "filedType": {
+          "type": "string",
+          "description": "字段类型(数据的字段类型)"
+        },
+        "conditions": {
+          "type": "string",
+          "description": "条件(等于.=,大于.>,小于.<,大于等于.>=,小于等于.<=,区间.between,like,notlike,in,notin,!=)"
+        },
+        "paraSource": {
+          "type": "string",
+          "description": "参数来源"
+        },
+        "paraPath": {
+          "type": "string",
+          "description": "参数值路径"
+        },
+        "defValue": {
+          "type": "string",
+          "description": "默认值"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisTbCtlsReqParam",
+      "description": "表格控件请求参数的配置"
+    },
+    "ApisTbCtlsReqParamConditionsModel": {
+      "type": "object",
+      "properties": {
+        "pid": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "description": "编号"
+        },
+        "tbCtlsId": {
+          "type": "string",
+          "description": "mainTb"
+        },
+        "conditions": {
+          "type": "string",
+          "description": "条件组"
+        },
+        "conditionsName": {
+          "type": "string",
+          "description": "条件组名称"
+        },
+        "apisTbCtlsReqParam": {
+          "description": "参数条件",
+          "$ref": "#/definitions/ApisTbCtlsReqParam"
+        },
+        "childConditions": {
+          "type": "string",
+          "description": "子条件组"
+        },
+        "scope": {
+          "type": "string",
+          "description": "范围(内部inner,外部outer,内外部innerAndOuter)"
+        },
+        "reqParamConditionsModels": {
+          "type": "array",
+          "description": "子条件组",
+          "items": {
+            "$ref": "#/definitions/ApisTbCtlsReqParamConditionsModel"
+          }
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisTbCtlsReqParamConditionsModel",
+      "description": "表格控件查询条件组配置model"
+    },
+    "ApisTbCtlsReturn": {
+      "type": "object",
+      "properties": {
+        "tb": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "scope": {
+          "type": "string",
+          "description": "范围(针对分组的范围,内部inner,外部outer,内外部innerAndOuter)"
+        },
+        "tbCtlsId": {
+          "type": "string",
+          "description": "控件"
+        },
+        "field": {
+          "type": "string",
+          "description": "字段名"
+        },
+        "filedComment": {
+          "type": "string",
+          "description": "注释"
+        },
+        "filedType": {
+          "type": "string",
+          "description": "字段类型(数据库字段类型)"
+        },
+        "otherName": {
+          "type": "string",
+          "description": "别名"
+        },
+        "func": {
+          "type": "string",
+          "description": "函数(求和.SUM 求平均.AVG 最小值.MIN 最大值.MAX 计数.COUNT)"
+        },
+        "sortMethods": {
+          "type": "string",
+          "description": "排序方式(desc.降序,asc.升序,空则不排序)"
+        },
+        "isGroup": {
+          "type": "integer",
+          "format": "int32",
+          "description": "是否分组(1,是;2,否)"
+        },
+        "sortting": {
+          "type": "integer",
+          "format": "int32",
+          "description": "排序)"
+        },
+        "isOut": {
+          "type": "integer",
+          "format": "int32",
+          "description": "是否输出(1,是;2,否)"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisTbCtlsReturn",
+      "description": "表格控件返回的信息"
+    },
+    "OrderItem": {
+      "type": "object",
+      "properties": {
+        "asc": {
+          "type": "boolean"
+        },
+        "column": {
+          "type": "string"
+        }
+      },
+      "title": "OrderItem"
+    },
+    "QueryCondition«TDataSource对象»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/TDataSource对象"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«TDataSource对象»",
+      "description": "查询条件"
+    },
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    },
+    "TDataSource对象": {
+      "type": "object",
+      "properties": {
+        "asyncInit": {
+          "type": "string",
+          "description": "true:开启，false:关闭; 异步处理, 连接无法创建不影响应用的启动"
+        },
+        "createTime": {
+          "type": "string",
+          "description": "创建时间"
+        },
+        "creatorId": {
+          "type": "string",
+          "description": "创建人ID"
+        },
+        "dbCode": {
+          "type": "string",
+          "description": "数据源名称"
+        },
+        "dbIp": {
+          "type": "string",
+          "description": "数据库IP"
+        },
+        "dbName": {
+          "type": "string",
+          "description": "数据库名称"
+        },
+        "dbPort": {
+          "type": "string",
+          "description": "数据库端口"
+        },
+        "dbType": {
+          "type": "string",
+          "description": "数据库类型"
+        },
+        "driver": {
+          "type": "string",
+          "description": "数据库连接驱动"
+        },
+        "id": {
+          "type": "string",
+          "description": "关键字"
+        },
+        "initialSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "初始连接数"
+        },
+        "maxActive": {
+          "type": "integer",
+          "format": "int32",
+          "description": "最大连接数"
+        },
+        "maxWait": {
+          "type": "integer",
+          "format": "int32",
+          "description": "最长等待时间"
+        },
+        "minEvictableIdleTimeMillis": {
+          "type": "integer",
+          "format": "int32",
+          "description": "最小空闲时间"
+        },
+        "minIdle": {
+          "type": "integer",
+          "format": "int32",
+          "description": "最小连接数"
+        },
+        "passWord": {
+          "type": "string",
+          "description": "密码"
+        },
+        "poolPreparedStatements": {
+          "type": "string",
+          "description": "true:开启，false:关闭; 是否缓存preparedStatement，也就是PSCache。PSCache对支持游标的数据库性能提升巨大，比如说oracle。在mysql下建议关闭。"
+        },
+        "status": {
+          "type": "number",
+          "description": "状态 1:可用/2:不可用"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户ID"
+        },
+        "testOnBorrow": {
+          "type": "string",
+          "description": "true:开启，false:关闭; 申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。"
+        },
+        "testOnReturn": {
+          "type": "string",
+          "description": "true:开启，false:关闭; 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。"
+        },
+        "testWhileIdle": {
+          "type": "string",
+          "description": "true:开启，false:关闭; 建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。"
+        },
+        "tfilter": {
+          "type": "string"
+        },
+        "timeBetweenEvictionRunsMillis": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Destroy线程会检测连接的间隔时间"
+        },
+        "updateTime": {
+          "type": "string",
+          "description": "最后修改时间"
+        },
+        "updatorId": {
+          "type": "string",
+          "description": "最后修改者ID"
+        },
+        "url": {
+          "type": "string",
+          "description": "数据库url"
+        },
+        "userName": {
+          "type": "string",
+          "description": "用户名"
+        }
+      },
+      "title": "TDataSource对象",
+      "description": "多数据源信息表字段"
+    }
+  }
+}

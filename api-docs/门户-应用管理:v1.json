@@ -1,0 +1,1252 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "门户-应用管理"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-lightportal-saas",
+  "tags": [{
+    "name": "系统应用管理",
+    "description": "Sys Application Controller"
+  }, {
+    "name": "系统应用管理-使用",
+    "description": "Sy Sys Application Controller"
+  }],
+  "paths": {
+    "/syApp/listMyScApp": {
+      "post": {
+        "tags": ["系统应用管理-使用"],
+        "summary": "非分页查询用户收藏应用",
+        "operationId": "listCollectAppUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "系统appkey",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "appType",
+          "in": "query",
+          "description": "应用支持类型",
+          "required": false,
+          "type": "ref",
+          "enum": ["APP_TYPE_ALL", "APP_TYPE_PC", "APP_TYPE_MOBILE"]
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«SysApplication»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«SysApplication»»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/syApp/listScApp": {
+      "post": {
+        "tags": ["系统应用管理-使用"],
+        "summary": "非分页查询用户收藏、有权限、推荐应用",
+        "operationId": "listScAppUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "系统appkey",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "appType",
+          "in": "query",
+          "description": "应用支持类型",
+          "required": false,
+          "type": "ref",
+          "enum": ["APP_TYPE_ALL", "APP_TYPE_PC", "APP_TYPE_MOBILE"]
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«SysApplication»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«SysApplication»»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/syApp/listTjApp": {
+      "post": {
+        "tags": ["系统应用管理-使用"],
+        "summary": "非分页查询根据角色推荐给用户的应用",
+        "operationId": "listRecommendAppUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "系统appkey",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "appType",
+          "in": "query",
+          "description": "应用支持类型",
+          "required": false,
+          "type": "ref",
+          "enum": ["APP_TYPE_ALL", "APP_TYPE_PC", "APP_TYPE_MOBILE"]
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«SysApplication»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«SysApplication»»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/syApp/llApp": {
+      "get": {
+        "tags": ["系统应用管理-使用"],
+        "summary": "浏览应用",
+        "operationId": "browseAppUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appId",
+          "in": "query",
+          "description": "应用id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/syApp/pjApp": {
+      "get": {
+        "tags": ["系统应用管理-使用"],
+        "summary": "评价应用",
+        "operationId": "evaluateAppUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appId",
+          "in": "query",
+          "description": "应用id",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "detail",
+          "in": "query",
+          "description": "评价内容",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "score",
+          "in": "query",
+          "description": "得分",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/syApp/queryMyScApp": {
+      "post": {
+        "tags": ["系统应用管理-使用"],
+        "summary": "分页查询用户收藏应用",
+        "operationId": "queryCollectAppUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "系统appkey",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "appType",
+          "in": "query",
+          "description": "应用支持类型",
+          "required": false,
+          "type": "ref",
+          "enum": ["APP_TYPE_ALL", "APP_TYPE_PC", "APP_TYPE_MOBILE"]
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页的数量",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«SysApplication»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«SysApplication»»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/syApp/queryScApp": {
+      "post": {
+        "tags": ["系统应用管理-使用"],
+        "summary": "分页查询用户收藏、有权限、推荐应用",
+        "operationId": "queryScAppUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "系统appkey",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "appType",
+          "in": "query",
+          "description": "应用支持类型",
+          "required": false,
+          "type": "ref",
+          "enum": ["APP_TYPE_ALL", "APP_TYPE_PC", "APP_TYPE_MOBILE"]
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页的数量",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«SysApplication»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«SysApplication»»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/syApp/queryTjApp": {
+      "post": {
+        "tags": ["系统应用管理-使用"],
+        "summary": "分页查询根据角色推荐给用户的应用",
+        "operationId": "queryRecommendAppUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "系统appkey",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "appType",
+          "in": "query",
+          "description": "应用支持类型",
+          "required": false,
+          "type": "ref",
+          "enum": ["APP_TYPE_ALL", "APP_TYPE_PC", "APP_TYPE_MOBILE"]
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页的数量",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«SysApplication»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«SysApplication»»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/syApp/qxscApp": {
+      "get": {
+        "tags": ["系统应用管理-使用"],
+        "summary": "取消收藏应用",
+        "operationId": "unCollectAppUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appId",
+          "in": "query",
+          "description": "应用id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/syApp/scApp": {
+      "get": {
+        "tags": ["系统应用管理-使用"],
+        "summary": "收藏应用",
+        "operationId": "collectAppUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appId",
+          "in": "query",
+          "description": "应用id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/syApp/syApp": {
+      "get": {
+        "tags": ["系统应用管理-使用"],
+        "summary": "使用应用",
+        "operationId": "useAppUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appId",
+          "in": "query",
+          "description": "应用id",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "businessId",
+          "in": "query",
+          "description": "业务id",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/sysApp/delete": {
+      "post": {
+        "tags": ["系统应用管理"],
+        "summary": "删除",
+        "operationId": "deleteForAnotherWarUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "系统appKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "id",
+          "in": "query",
+          "description": "系统应用唯一健",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "404": {
+            "description": "文档不存在"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["系统应用管理"],
+        "summary": "删除",
+        "operationId": "deleteUsingDELETE_1",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "系统appKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "id",
+          "in": "query",
+          "description": "系统应用唯一健",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "404": {
+            "description": "文档不存在"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/sysApp/get": {
+      "get": {
+        "tags": ["系统应用管理"],
+        "summary": "查看",
+        "operationId": "getUsingGET_2",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "系统appKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "id",
+          "in": "query",
+          "description": "系统应用唯一健",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«SysApplication»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "404": {
+            "description": "文档不存在"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/sysApp/getFirstLettersUp": {
+      "get": {
+        "tags": ["系统应用管理"],
+        "summary": "转换英文缩写(大写)",
+        "operationId": "getFirstLettersUpUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "strVal",
+          "in": "query",
+          "description": "需要转换英文缩写的汉字",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«string»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "404": {
+            "description": "文档不存在"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/sysApp/list": {
+      "post": {
+        "tags": ["系统应用管理"],
+        "summary": "非分页查询",
+        "operationId": "listAppUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appType",
+          "in": "query",
+          "description": "应用支持类型",
+          "required": false,
+          "type": "ref",
+          "enum": ["APP_TYPE_ALL", "APP_TYPE_PC", "APP_TYPE_MOBILE"]
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«SysApplication»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«SysApplication»»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/sysApp/query": {
+      "post": {
+        "tags": ["系统应用管理"],
+        "summary": "分页查询",
+        "operationId": "queryAppUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appType",
+          "in": "query",
+          "description": "应用支持类型",
+          "required": false,
+          "type": "ref",
+          "enum": ["APP_TYPE_ALL", "APP_TYPE_PC", "APP_TYPE_MOBILE"]
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "当前页",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "每页的数量",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«SysApplication»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«SysApplication»»"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/sysApp/save": {
+      "post": {
+        "tags": ["系统应用管理"],
+        "summary": "新增",
+        "operationId": "saveUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "app",
+          "description": "app",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/SysApplication"
+          }
+        }, {
+          "name": "appKey",
+          "in": "query",
+          "description": "系统appKey",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/sysApp/update": {
+      "post": {
+        "tags": ["系统应用管理"],
+        "summary": "更新",
+        "operationId": "updateUsingPOST_2",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "app",
+          "description": "app",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/SysApplication"
+          }
+        }, {
+          "name": "appKey",
+          "in": "query",
+          "description": "系统appKey",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "403": {
+            "description": "拒绝处理"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "IPage«SysApplication»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SysApplication"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«SysApplication»"
+    },
+    "OrderItem": {
+      "type": "object",
+      "properties": {
+        "asc": {
+          "type": "boolean"
+        },
+        "column": {
+          "type": "string"
+        }
+      },
+      "title": "OrderItem"
+    },
+    "QueryCondition«SysApplication»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/SysApplication"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«SysApplication»",
+      "description": "查询条件"
+    },
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«SysApplication»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«SysApplication»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«SysApplication»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«SysApplication»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/SysApplication"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«SysApplication»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«SysApplication»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/SysApplication"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«SysApplication»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«string»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "string",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«string»",
+      "description": "返回响应数据"
+    },
+    "SysApplication": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "非业务主键-唯一"
+        },
+        "appName": {
+          "type": "string",
+          "description": "应用名称"
+        },
+        "pcUrl": {
+          "type": "string",
+          "description": "pc端url"
+        },
+        "sjUrl": {
+          "type": "string",
+          "description": "手机端url"
+        },
+        "icons": {
+          "type": "string",
+          "description": "图标"
+        },
+        "yyfl": {
+          "type": "string",
+          "description": "应用分类"
+        },
+        "ssfl": {
+          "type": "string",
+          "description": "所属分类"
+        },
+        "blfs": {
+          "type": "string",
+          "description": "办理方式"
+        },
+        "ssbm": {
+          "type": "string",
+          "description": "所属部门"
+        },
+        "gjz": {
+          "type": "string",
+          "description": "关键字"
+        },
+        "szm": {
+          "type": "string",
+          "description": "首字母"
+        },
+        "ywsx": {
+          "type": "string",
+          "description": "英文缩写"
+        },
+        "bldd": {
+          "type": "string",
+          "description": "办理地点"
+        },
+        "zxdh": {
+          "type": "string",
+          "description": "咨询电话"
+        },
+        "dkfs": {
+          "type": "string",
+          "description": "打开方式"
+        },
+        "sfqy": {
+          "type": "string",
+          "description": "是否启用"
+        },
+        "jzfs": {
+          "type": "string",
+          "description": "加载方式"
+        },
+        "isLogin": {
+          "type": "string",
+          "description": "是否登录"
+        },
+        "syxs": {
+          "type": "string",
+          "description": "首页显示"
+        },
+        "fztj": {
+          "type": "string",
+          "description": "分组推荐"
+        },
+        "sort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "排序"
+        },
+        "bz": {
+          "type": "string",
+          "description": "备注"
+        },
+        "sfxsjj": {
+          "type": "string",
+          "description": "是否显示简介"
+        },
+        "yyjj": {
+          "type": "string",
+          "description": "应用简介,在“系统应用管理-使用” 下的接口中不会查询"
+        },
+        "llcs": {
+          "type": "string",
+          "description": "浏览次数"
+        },
+        "score": {
+          "type": "string",
+          "description": "平均评分"
+        },
+        "sycs": {
+          "type": "string",
+          "description": "使用次数"
+        },
+        "sccs": {
+          "type": "string",
+          "description": "收藏次数"
+        },
+        "zyzid": {
+          "type": "string",
+          "description": "资源组id"
+        },
+        "zyid": {
+          "type": "string",
+          "description": "资源id"
+        },
+        "createUser": {
+          "type": "string",
+          "description": "创建人"
+        },
+        "createTime": {
+          "type": "string",
+          "description": "创建时间"
+        },
+        "fwdx": {
+          "type": "string",
+          "description": "服务对象"
+        },
+        "zhid": {
+          "type": "string",
+          "description": "租户id"
+        },
+        "iscollect": {
+          "type": "string",
+          "description": "当前登陆人是否收藏  1 已收藏;0未收藏，管理端方法不能使用"
+        }
+      },
+      "title": "SysApplication",
+      "description": "系统应用表"
+    }
+  }
+}

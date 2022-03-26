@@ -1,0 +1,216 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "一卡通"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-lightportal-saas-ykt",
+  "tags": [{
+    "name": "一卡通",
+    "description": "Ykt Controller"
+  }],
+  "paths": {
+    "/Ykt/checkGs": {
+      "get": {
+        "tags": ["一卡通"],
+        "summary": "一卡通-挂失",
+        "operationId": "checkGsUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "ykt",
+          "in": "query",
+          "description": "一卡通卡号",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/Ykt/getNy": {
+      "get": {
+        "tags": ["一卡通"],
+        "summary": "一卡通-查询年月",
+        "operationId": "getNyUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "NY",
+          "in": "query",
+          "description": "年月（yyyyMM）",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/Ykt/getYkt": {
+      "get": {
+        "tags": ["一卡通"],
+        "summary": "一卡通-当前登录人基本信息",
+        "operationId": "getYktUsingGET",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/Ykt/getYktBykh": {
+      "get": {
+        "tags": ["一卡通"],
+        "summary": "一卡通-一卡通卡号查询基本信息",
+        "operationId": "getYktBykhUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "ykt",
+          "in": "query",
+          "description": "一卡通卡号",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/Ykt/getYktLs": {
+      "get": {
+        "tags": ["一卡通"],
+        "summary": "一卡通-当前登录人消费流水",
+        "operationId": "getYktLsUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "NY",
+          "in": "query",
+          "description": "年月（yyyyMM）",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    }
+  }
+}

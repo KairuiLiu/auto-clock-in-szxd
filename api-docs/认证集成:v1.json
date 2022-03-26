@@ -1,0 +1,369 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "认证集成"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-integrate-uaap",
+  "tags": [{
+    "name": "认证cas集成",
+    "description": "Integrate Uaap Cas Controller"
+  }, {
+    "name": "认证oauth2集成",
+    "description": "Integrate Uaap Oauth 2 Controller"
+  }],
+  "paths": {
+    "/integrate/uaap/cas/exchange-token": {
+      "post": {
+        "tags": ["认证cas集成"],
+        "summary": "交换token",
+        "operationId": "exchangeTokenUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "thirdPartyName",
+          "in": "query",
+          "description": "thirdPartyName",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "token",
+          "in": "query",
+          "description": "token",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«LoginInfo»"
+            }
+          }
+        },
+        "security": [{
+          "oauth2": ["simple", "detail"]
+        }, {
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/integrate/uaap/cas/resolve-cas-return": {
+      "get": {
+        "tags": ["认证cas集成"],
+        "summary": "解析cas返回",
+        "operationId": "resolveCasReturnUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "next",
+          "in": "query",
+          "description": "next",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "ticket",
+          "in": "query",
+          "description": "ticket",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [{
+          "oauth2": ["simple", "detail"]
+        }, {
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/integrate/uaap/cas/to-cas-login": {
+      "get": {
+        "tags": ["认证cas集成"],
+        "summary": "使用认证登录",
+        "operationId": "toCasLoginUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "frontUrl",
+          "in": "query",
+          "description": "frontUrl",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "gatewayPrefix",
+          "in": "query",
+          "description": "gatewayPrefix",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "next",
+          "in": "query",
+          "description": "next",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "thirdPartyName",
+          "in": "query",
+          "description": "thirdPartyName",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [{
+          "oauth2": ["simple", "detail"]
+        }, {
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/integrate/uaap/oauth2/access-token": {
+      "post": {
+        "tags": ["认证oauth2集成"],
+        "summary": "通过code获取accessToken",
+        "operationId": "getAccessTokenByCodeUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "code",
+          "in": "query",
+          "description": "获得的认证发放的code",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "redirectUrl",
+          "in": "query",
+          "description": "接收code的url地址",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«Map«string,object»»"
+            }
+          }
+        },
+        "security": [{
+          "oauth2": ["simple", "detail"]
+        }, {
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/integrate/uaap/oauth2/authorize-url": {
+      "get": {
+        "tags": ["认证oauth2集成"],
+        "summary": "获得认证的url",
+        "operationId": "getAuthorizeUrlUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "redirectUrl",
+          "in": "query",
+          "description": "认证成功之后附加code返回的url",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "responseType",
+          "in": "query",
+          "description": "返回类型",
+          "required": true,
+          "type": "string",
+          "default": "code"
+        }, {
+          "name": "scope",
+          "in": "query",
+          "description": "simple(只返回登录名，不需要用户确认),detail(返回详细信息，需要用户确认);",
+          "required": true,
+          "type": "string",
+          "enum": ["simple", "detail"]
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«string»"
+            }
+          }
+        },
+        "security": [{
+          "oauth2": ["simple", "detail"]
+        }, {
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/integrate/uaap/oauth2/login": {
+      "post": {
+        "tags": ["认证oauth2集成"],
+        "summary": "通过code进行登录",
+        "operationId": "loginUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "code",
+          "in": "query",
+          "description": "获得的认证发放的code",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "redirectUrl",
+          "in": "query",
+          "description": "接收code的url地址",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "oauth2": ["simple", "detail"]
+        }, {
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    },
+    "oauth2": {
+      "type": "oauth2",
+      "authorizationUrl": "http://auth.wiseloong.com/cas/oauth2.0/authorize",
+      "tokenUrl": "http://auth.wiseloong.com/cas/oauth2.0/accessToken?returnType=json",
+      "flow": "accessCode",
+      "scopes": {
+        "simple": "只返回登录名，不需要用户确认",
+        "detail": "返回详细信息，需要用户确认"
+      }
+    }
+  },
+  "definitions": {
+    "LoginInfo": {
+      "type": "object",
+      "properties": {
+        "alreadyCheckedPermission": {
+          "type": "boolean"
+        },
+        "clientIp": {
+          "type": "string"
+        },
+        "permissionSubjectId": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "object"
+        },
+        "subjectType": {
+          "type": "string",
+          "enum": ["USER", "APP"]
+        },
+        "tenantId": {
+          "type": "string"
+        }
+      },
+      "title": "LoginInfo"
+    },
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«LoginInfo»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/LoginInfo"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«LoginInfo»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«Map«string,object»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«Map«string,object»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«string»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "string",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«string»",
+      "description": "返回响应数据"
+    }
+  }
+}

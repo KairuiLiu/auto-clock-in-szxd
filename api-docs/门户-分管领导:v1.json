@@ -1,0 +1,289 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "门户-分管领导"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-lightportal-saas",
+  "tags": [{
+    "name": "部门分管领导维护",
+    "description": "Fgld Maintain Controller"
+  }],
+  "paths": {
+    "/FgldMaintain/add": {
+      "post": {
+        "tags": ["部门分管领导维护"],
+        "summary": "新增",
+        "operationId": "addUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "fgld",
+          "description": "分管领导管辖处室对象",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Fgld"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/FgldMaintain/delete": {
+      "post": {
+        "tags": ["部门分管领导维护"],
+        "summary": "删除",
+        "operationId": "deleteUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "fgld",
+          "description": "分管领导管辖处室对象",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Fgld"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/FgldMaintain/excelImport": {
+      "post": {
+        "tags": ["部门分管领导维护"],
+        "summary": "导入",
+        "operationId": "excelImportUsingPOST",
+        "consumes": ["multipart/form-data"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "file",
+          "in": "formData",
+          "description": "file",
+          "required": false,
+          "type": "file"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/FgldMaintain/queryFgOrg": {
+      "get": {
+        "tags": ["部门分管领导维护"],
+        "summary": "根据角色部门查询分管领导（流程接口）",
+        "operationId": "queryFgOrgUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "orgCode",
+          "in": "query",
+          "description": "部门code",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "roleCode",
+          "in": "query",
+          "description": "角色code",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/FgldMaintain/queryOrg": {
+      "get": {
+        "tags": ["部门分管领导维护"],
+        "summary": "查询用户所分管的角色部门",
+        "operationId": "queryOrgUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "loginName",
+          "in": "query",
+          "description": "分管领导管loginName",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "roleCode",
+          "in": "query",
+          "description": "角色code",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/FgldMaintain/templateExport": {
+      "get": {
+        "tags": ["部门分管领导维护"],
+        "summary": "模板下载",
+        "operationId": "templateExportUsingGET",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "参数不合法"
+          },
+          "500": {
+            "description": "服务器异常[请联系管理员]"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "Fgld": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "唯一健"
+        },
+        "name": {
+          "type": "string",
+          "description": "姓名"
+        },
+        "loginName": {
+          "type": "string",
+          "description": "用户名"
+        },
+        "administrationOrgId": {
+          "type": "string",
+          "description": "管辖的部门集合每个按逗号隔开(orgid)"
+        },
+        "roleCode": {
+          "type": "string",
+          "description": "角色(类型)"
+        },
+        "creator": {
+          "type": "string",
+          "description": "创建人"
+        },
+        "createdate": {
+          "type": "string",
+          "description": "创建时间"
+        }
+      },
+      "title": "Fgld"
+    },
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    }
+  }
+}

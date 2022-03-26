@@ -1,0 +1,227 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "apis-线控件"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-apis-manage",
+  "tags": [{
+    "name": "apis线控件",
+    "description": "Apis Line Ctls Controller"
+  }],
+  "paths": {
+    "/apis/line-ctls/query/order/{id}": {
+      "get": {
+        "tags": ["apis线控件"],
+        "summary": "单步调试",
+        "operationId": "queryOrderUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«LineSort»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/apis/line-ctls/query/{id}": {
+      "post": {
+        "tags": ["apis线控件"],
+        "summary": "查询服务的所有线",
+        "operationId": "queryUsingPOST_2",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«ApisLineCtls»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/apis/line-ctls/save": {
+      "post": {
+        "tags": ["apis线控件"],
+        "summary": "保存服务的所有线",
+        "operationId": "saveUsingPOST_2",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "apisLineCtlsList",
+          "description": "apisLineCtlsList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ApisLineCtls"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "ApisLineCtls": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "mainConfigId": {
+          "type": "string",
+          "description": "主服务编号"
+        },
+        "source": {
+          "type": "string",
+          "description": "来源"
+        },
+        "sourceType": {
+          "type": "string",
+          "description": "来源分类",
+          "enum": ["begin", "line", "table", "http", "constant", "data", "respons"]
+        },
+        "target": {
+          "type": "string",
+          "description": "目标"
+        },
+        "targetType": {
+          "type": "string",
+          "description": "目标分类",
+          "enum": ["begin", "line", "table", "http", "constant", "data", "respons"]
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "ApisLineCtls",
+      "description": "apis线控件"
+    },
+    "LineSort": {
+      "type": "object",
+      "properties": {
+        "line": {
+          "$ref": "#/definitions/ApisLineCtls"
+        },
+        "lineSort": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApisLineCtls"
+          }
+        }
+      },
+      "title": "LineSort"
+    },
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«LineSort»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/LineSort"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«LineSort»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«ApisLineCtls»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/ApisLineCtls"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«ApisLineCtls»»",
+      "description": "返回响应数据"
+    }
+  }
+}

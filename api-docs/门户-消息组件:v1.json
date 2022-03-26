@@ -1,0 +1,414 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "门户-消息组件"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-lightportal-saas",
+  "tags": [{
+    "name": "t-message-push-controller",
+    "description": "T Message Push Controller"
+  }],
+  "paths": {
+    "/message/t-message-push/all-read": {
+      "put": {
+        "tags": ["t-message-push-controller"],
+        "summary": "读取全部消息",
+        "operationId": "allReadUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "messageIdList",
+          "description": "messageIdList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }, {
+          "name": "type",
+          "in": "query",
+          "description": "type",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/message/t-message-push/no-read-count": {
+      "get": {
+        "tags": ["t-message-push-controller"],
+        "summary": "个人未读数量",
+        "operationId": "noReadCountUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "type",
+          "in": "query",
+          "description": "type",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/message/t-message-push/query": {
+      "post": {
+        "tags": ["t-message-push-controller"],
+        "summary": "分页查询",
+        "operationId": "queryUsingPOST_2",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«TMessagePush对象»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/message/t-message-push/read": {
+      "put": {
+        "tags": ["t-message-push-controller"],
+        "summary": "读消息",
+        "operationId": "readUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "messageId",
+          "in": "query",
+          "description": "messageId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/message/t-message-push/select-count-group-by-type": {
+      "get": {
+        "tags": ["t-message-push-controller"],
+        "summary": "按类型获取未读数量",
+        "operationId": "selectCountGroupByTypeUsingGET",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/message/t-message-push/send-msg-to-all": {
+      "post": {
+        "tags": ["t-message-push-controller"],
+        "summary": "发送给所有人",
+        "operationId": "sendMsgToAllUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "messageType",
+          "in": "query",
+          "description": "messageType",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "tMessagePush",
+          "description": "tMessagePush",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/TMessagePush对象"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/message/t-message-push/send-msg-to-user": {
+      "post": {
+        "tags": ["t-message-push-controller"],
+        "summary": "发送给一批人",
+        "operationId": "sendMsgToUserUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "messagePushToUser",
+          "description": "messagePushToUser",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/MessagePushToUser"
+          }
+        }, {
+          "name": "messageType",
+          "in": "query",
+          "description": "messageType",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/message/t-message-push/{id}": {
+      "get": {
+        "tags": ["t-message-push-controller"],
+        "summary": "根据id查询详情",
+        "operationId": "getByIdUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "信息ID",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "MessagePushToUser": {
+      "type": "object",
+      "properties": {
+        "receiverList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tmessagePush": {
+          "$ref": "#/definitions/TMessagePush对象"
+        }
+      },
+      "title": "MessagePushToUser",
+      "description": "websocket消息发送体"
+    },
+    "OrderItem": {
+      "type": "object",
+      "properties": {
+        "asc": {
+          "type": "boolean"
+        },
+        "column": {
+          "type": "string"
+        }
+      },
+      "title": "OrderItem"
+    },
+    "QueryCondition«TMessagePush对象»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/TMessagePush对象"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«TMessagePush对象»",
+      "description": "查询条件"
+    },
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    },
+    "TMessagePush对象": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "内容"
+        },
+        "createTime": {
+          "type": "string",
+          "description": "创建时间"
+        },
+        "creator": {
+          "type": "string",
+          "description": "创建人-有则记录"
+        },
+        "creatorName": {
+          "type": "string",
+          "description": "创建人姓名-有则记录"
+        },
+        "haveRead": {
+          "type": "string",
+          "description": "已读：true/false"
+        },
+        "id": {
+          "type": "string",
+          "description": "关键字"
+        },
+        "loadingMethod": {
+          "type": "string",
+          "description": "加载方式（inline:内嵌,iframe:通过iframe加载,openUrl（默认）:直接打开url）"
+        },
+        "readTime": {
+          "type": "string",
+          "description": "读消息时间"
+        },
+        "receiverId": {
+          "type": "string",
+          "description": "接收人id"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        },
+        "title": {
+          "type": "string",
+          "description": "标题"
+        },
+        "type": {
+          "type": "string",
+          "description": "类型、栏目(常量)"
+        },
+        "types": {
+          "type": "string",
+          "description": "类型集合，用于多种类型in查询"
+        },
+        "url": {
+          "type": "string",
+          "description": "打开消息的url"
+        },
+        "userCreateTime": {
+          "type": "string",
+          "description": "用户创建时间"
+        }
+      },
+      "title": "TMessagePush对象",
+      "description": "消息推送"
+    }
+  }
+}

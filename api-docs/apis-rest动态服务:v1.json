@@ -1,0 +1,438 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "apis-rest动态服务"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-apis-manage",
+  "tags": [{
+    "name": "rest动态服务请求",
+    "description": "Api Controller"
+  }, {
+    "name": "服务资源api接口信息",
+    "description": "Swagger Ui Controlle"
+  }, {
+    "name": "跳转测试",
+    "description": "Redirect Test Controller"
+  }],
+  "paths": {
+    "/apis/exportExcel/{serviceId}": {
+      "post": {
+        "tags": ["rest动态服务请求"],
+        "summary": "根据服务Id导出excel",
+        "operationId": "exportExcelUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "restBodyParams",
+          "description": "restBodyParams",
+          "required": false,
+          "schema": {
+            "$ref": "#/definitions/RestBodyParams"
+          }
+        }, {
+          "name": "serviceId",
+          "in": "path",
+          "description": "serviceId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/apis/query/{serviceId}": {
+      "get": {
+        "tags": ["rest动态服务请求"],
+        "summary": "根据服务Id查看服务信息GET",
+        "operationId": "queryUsingGET_1",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "serviceId",
+          "in": "path",
+          "description": "serviceId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«Map»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["rest动态服务请求"],
+        "summary": "根据服务Id查看服务信息POST",
+        "operationId": "queryUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "restParams",
+          "description": "restParams",
+          "required": false,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/RestParamsBody"
+            }
+          }
+        }, {
+          "name": "serviceId",
+          "in": "path",
+          "description": "serviceId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«Map»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/apis/queryPage/{serviceId}": {
+      "get": {
+        "tags": ["rest动态服务请求"],
+        "summary": "根据服务Id分页查看服务信息GET",
+        "operationId": "queryPageUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "serviceId",
+          "in": "path",
+          "description": "serviceId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«Map»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["rest动态服务请求"],
+        "summary": "根据服务Id分页查看服务信息POST",
+        "operationId": "queryPageUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "restParams",
+          "description": "restParams",
+          "required": false,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/RestParamsBody"
+            }
+          }
+        }, {
+          "name": "serviceId",
+          "in": "path",
+          "description": "serviceId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«Map»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/redirect-test": {
+      "get": {
+        "tags": ["跳转测试"],
+        "summary": "跳转测试",
+        "operationId": "saveRoleUsingGET",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/swagger/v2/api-docs": {
+      "get": {
+        "tags": ["服务资源api接口信息"],
+        "summary": "查询swagger-ui界面",
+        "operationId": "getUsingGET",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "ColumnJson": {
+      "type": "object",
+      "properties": {
+        "dicData": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DicData"
+          }
+        },
+        "label": {
+          "type": "string"
+        },
+        "prop": {
+          "type": "string"
+        }
+      },
+      "title": "ColumnJson"
+    },
+    "DicData": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "title": "DicData"
+    },
+    "IPage«Map»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Map"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«Map»"
+    },
+    "Map": {
+      "type": "object",
+      "title": "Map",
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "RestBodyParams": {
+      "type": "object",
+      "properties": {
+        "_column": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ColumnJson"
+          }
+        },
+        "_condition": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "_index": {
+          "type": "string"
+        }
+      },
+      "title": "RestBodyParams"
+    },
+    "RestParamsBody": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "键"
+        },
+        "value": {
+          "type": "object",
+          "description": "值"
+        }
+      },
+      "title": "RestParamsBody",
+      "description": "rest参数对象"
+    },
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«Map»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«Map»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«Map»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«Map»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/Map"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«Map»»",
+      "description": "返回响应数据"
+    }
+  }
+}

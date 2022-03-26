@@ -1,0 +1,6572 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "系统管理"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-system-manage",
+  "tags": [{
+    "name": "应用管理",
+    "description": "App Controller"
+  }, {
+    "name": "机构管理",
+    "description": "Org Controller"
+  }, {
+    "name": "登录失败策略管理",
+    "description": "Login Failure Strategy Controller"
+  }, {
+    "name": "登录审计管理",
+    "description": "Login Audit Controller"
+  }, {
+    "name": "系统常用接口",
+    "description": "System Controller"
+  }, {
+    "name": "自助管理",
+    "description": "Self Controller"
+  }, {
+    "name": "角色管理",
+    "description": "Role Controller"
+  }, {
+    "name": "账号修改审计",
+    "description": "Account Modify Audit Controller"
+  }, {
+    "name": "账号管理",
+    "description": "Account Controller"
+  }],
+  "paths": {
+    "/account": {
+      "post": {
+        "tags": ["账号管理"],
+        "summary": "新增账号",
+        "operationId": "saveUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "accountList",
+          "description": "accountList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_SYS_ACCOUNT"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["账号管理"],
+        "summary": "更新账号信息",
+        "operationId": "updateUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "accountList",
+          "description": "accountList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_SYS_ACCOUNT"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/account-modify-audit/query": {
+      "post": {
+        "tags": ["账号修改审计"],
+        "summary": "分页查询",
+        "operationId": "queryUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "endTime",
+          "in": "query",
+          "description": "审计结束时间, 按时间范围查询时传入, 格式: yyyy-MM-dd HH:mm:ss",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_SYS_ACCOUNT_MODIFY_LOG»"
+          }
+        }, {
+          "name": "startTime",
+          "in": "query",
+          "description": "审计开始时间, 按时间范围查询时传入, 格式: yyyy-MM-dd HH:mm:ss",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«T_SYS_ACCOUNT_MODIFY_LOG»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/account-modify-audit/query/self": {
+      "post": {
+        "tags": ["账号修改审计"],
+        "summary": "分页查询登录人的修改日志信息",
+        "operationId": "querySelfUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "endTime",
+          "in": "query",
+          "description": "审计结束时间, 按时间范围查询时传入, 格式: yyyy-MM-dd HH:mm:ss",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_SYS_ACCOUNT_MODIFY_LOG»"
+          }
+        }, {
+          "name": "startTime",
+          "in": "query",
+          "description": "审计开始时间, 按时间范围查询时传入, 格式: yyyy-MM-dd HH:mm:ss",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«T_SYS_ACCOUNT_MODIFY_LOG»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/account-modify-audit/statistics": {
+      "post": {
+        "tags": ["账号修改审计"],
+        "summary": "统计查询",
+        "operationId": "statisticsUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "endTime",
+          "in": "query",
+          "description": "审计结束时间, 按时间范围查询时传入, 格式: yyyy-MM-dd",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "moreField",
+          "in": "query",
+          "description": "需要更多的分组字段及返回字段",
+          "required": false,
+          "type": "string",
+          "default": "modifyType"
+        }, {
+          "name": "startTime",
+          "in": "query",
+          "description": "审计开始时间, 按时间范围查询时传入, modifyType为YEAR时格式: yyyy,  modifyType为MONTH时格式: yyyy-MM,  modifyType为DAY时格式: yyyy-MM-dd",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "statisticsType",
+          "in": "query",
+          "description": "statisticsType",
+          "required": true,
+          "type": "string",
+          "enum": ["YEAR", "MONTH", "DAY"]
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«T_SYS_ACCOUNT_MODIFY_LOG»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/account/delete": {
+      "post": {
+        "tags": ["账号管理"],
+        "summary": "删除用户",
+        "operationId": "deleteUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "accountIdList",
+          "in": "query",
+          "description": "accountIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "deleteForce",
+          "in": "query",
+          "description": "是否强制删除, true时直接删除账号, false时会判断该账号是否存在于多个组织, 如果是, 则只移除与deleteFromOrgId的关系, 如果否, 则直接删除",
+          "required": false,
+          "type": "boolean"
+        }, {
+          "name": "deleteFromOrgId",
+          "in": "query",
+          "description": "当deleteForce为false时, 账号存在多个机构时, 不会删除账号, 只会移除与该账号的关系",
+          "required": false,
+          "type": "boolean"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/account/excel/export": {
+      "post": {
+        "tags": ["账号管理"],
+        "summary": "excel数据导出",
+        "operationId": "excelExportUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "fileName",
+          "in": "query",
+          "description": "fileName",
+          "required": false,
+          "type": "string",
+          "default": "data"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": false,
+          "type": "integer",
+          "default": 0,
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": false,
+          "type": "integer",
+          "default": 0,
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_SYS_ACCOUNT»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/account/excel/import": {
+      "post": {
+        "tags": ["账号管理"],
+        "summary": "excel数据导入",
+        "operationId": "excelImportUsingPOST",
+        "consumes": ["multipart/form-data"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "excelType",
+          "in": "query",
+          "description": "excelType",
+          "required": true,
+          "type": "string",
+          "enum": ["save", "update", "delete"]
+        }, {
+          "name": "file",
+          "in": "formData",
+          "description": "file",
+          "required": true,
+          "type": "file"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/account/excel/template-export": {
+      "get": {
+        "tags": ["账号管理"],
+        "summary": "excel模板导出",
+        "operationId": "excelTemplateExportUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "excelTemplateType",
+          "in": "query",
+          "description": "excelTemplateType",
+          "required": true,
+          "type": "string",
+          "enum": ["save", "update", "delete"]
+        }, {
+          "name": "fileName",
+          "in": "query",
+          "description": "fileName",
+          "required": false,
+          "type": "string",
+          "default": "template"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/account/list": {
+      "post": {
+        "tags": ["账号管理"],
+        "summary": "查询账号",
+        "operationId": "listUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "containOrg",
+          "in": "query",
+          "description": "返回结果是否包含机构信息, 影响查询速度, 必须确认需要使用机构信息才能设置为true",
+          "required": false,
+          "type": "boolean"
+        }, {
+          "name": "containRole",
+          "in": "query",
+          "description": "返回结果是否包含角色信息, 影响查询速度, 必须确认需要使用角色信息才能设置为true",
+          "required": false,
+          "type": "boolean"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_SYS_ACCOUNT»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«T_SYS_ACCOUNT»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/account/list/org-id": {
+      "post": {
+        "tags": ["账号管理"],
+        "summary": "根据机构ID获得成员账号信息",
+        "operationId": "listAccountByOrgIdUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "containOrg",
+          "in": "query",
+          "description": "containOrg",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }, {
+          "name": "containRole",
+          "in": "query",
+          "description": "containRole",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }, {
+          "name": "downwardRecursive",
+          "in": "query",
+          "description": "downwardRecursive",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }, {
+          "name": "hasOrg",
+          "in": "query",
+          "description": "hasOrg",
+          "required": true,
+          "type": "boolean"
+        }, {
+          "name": "orgIdList",
+          "in": "query",
+          "description": "orgIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": false,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_SYS_ACCOUNT»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«SecretAccount»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/account/list/role-id": {
+      "post": {
+        "tags": ["账号管理"],
+        "summary": "根据角色ID获得成员账号信息",
+        "operationId": "listAccountByRoleIdUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "containOrg",
+          "in": "query",
+          "description": "containOrg",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }, {
+          "name": "containRole",
+          "in": "query",
+          "description": "containRole",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }, {
+          "name": "hasRole",
+          "in": "query",
+          "description": "hasRole",
+          "required": true,
+          "type": "boolean"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": false,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_SYS_ACCOUNT»"
+          }
+        }, {
+          "name": "roleIdList",
+          "in": "query",
+          "description": "roleIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«SecretAccount»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/account/login-name": {
+      "get": {
+        "tags": ["账号管理"],
+        "summary": "根据loginName获得账号信息",
+        "operationId": "getByLoginNameUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "loginName",
+          "in": "query",
+          "description": "loginName",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«SecretAccount»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/account/query": {
+      "post": {
+        "tags": ["账号管理"],
+        "summary": "分页查询账号",
+        "operationId": "queryUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "containOrg",
+          "in": "query",
+          "description": "返回结果是否包含机构信息, 影响查询速度, 必须确认需要使用机构信息才能设置为true",
+          "required": false,
+          "type": "boolean"
+        }, {
+          "name": "containRole",
+          "in": "query",
+          "description": "返回结果是否包含角色信息, 影响查询速度, 必须确认需要使用角色信息才能设置为true",
+          "required": false,
+          "type": "boolean"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_SYS_ACCOUNT»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«SecretAccount»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/account/query/org-id": {
+      "post": {
+        "tags": ["账号管理"],
+        "summary": "根据机构ID分页获得成员账号信息",
+        "operationId": "queryAccountByOrgIdUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "containOrg",
+          "in": "query",
+          "description": "containOrg",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }, {
+          "name": "containRole",
+          "in": "query",
+          "description": "containRole",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }, {
+          "name": "hasOrg",
+          "in": "query",
+          "description": "hasOrg",
+          "required": true,
+          "type": "boolean"
+        }, {
+          "name": "orgIdList",
+          "in": "query",
+          "description": "orgIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": false,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_SYS_ACCOUNT»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«SecretAccount»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/account/query/role-id": {
+      "post": {
+        "tags": ["账号管理"],
+        "summary": "根据角色ID分页获得成员账号信息",
+        "operationId": "queryAccountByRoleIdUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "containOrg",
+          "in": "query",
+          "description": "containOrg",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }, {
+          "name": "containRole",
+          "in": "query",
+          "description": "containRole",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }, {
+          "name": "hasRole",
+          "in": "query",
+          "description": "hasRole",
+          "required": true,
+          "type": "boolean"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": false,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_SYS_ACCOUNT»"
+          }
+        }, {
+          "name": "roleIdList",
+          "in": "query",
+          "description": "roleIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«SecretAccount»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/account/to-org-relation/del": {
+      "post": {
+        "tags": ["账号管理"],
+        "summary": "删除账号与机构的关联",
+        "operationId": "deleteAccount2OrgRelationUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "accountIdList",
+          "in": "query",
+          "description": "accountIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "orgIdList",
+          "in": "query",
+          "description": "orgIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/account/to-org-relation/save": {
+      "post": {
+        "tags": ["账号管理"],
+        "summary": "设置账号与机构的关联",
+        "operationId": "saveAccount2OrgRelationUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "accountIdList",
+          "in": "query",
+          "description": "accountIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "orgIdList",
+          "in": "query",
+          "description": "orgIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/account/to-role-relation/del": {
+      "post": {
+        "tags": ["账号管理"],
+        "summary": "删除账号与角色的关联",
+        "operationId": "deleteAccount2RoleRelationUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "accountIdList",
+          "in": "query",
+          "description": "accountIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "roleIdList",
+          "in": "query",
+          "description": "roleIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/account/to-role-relation/save": {
+      "post": {
+        "tags": ["账号管理"],
+        "summary": "设置账号与角色的关联",
+        "operationId": "saveAccount2RoleRelationUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "accountIdList",
+          "in": "query",
+          "description": "accountIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "orgList",
+          "in": "query",
+          "description": "orgList",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "roleIdList",
+          "in": "query",
+          "description": "roleIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/account/{id}": {
+      "get": {
+        "tags": ["账号管理"],
+        "summary": "根据ID查询账号",
+        "operationId": "getByIdUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "id",
+          "in": "path",
+          "description": "账号",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "withAuth",
+          "in": "query",
+          "description": "withAuth",
+          "required": false,
+          "type": "boolean",
+          "default": true
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«T_SYS_ACCOUNT»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/app": {
+      "post": {
+        "tags": ["应用管理"],
+        "summary": "新增应用",
+        "operationId": "saveAppUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "appList",
+          "description": "appList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_SYS_APP"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["应用管理"],
+        "summary": "更新应用信息",
+        "operationId": "updateAppUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "appList",
+          "description": "appList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_SYS_APP"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/app/appKey/{appKey}": {
+      "get": {
+        "tags": ["应用管理"],
+        "summary": "根据appKey查询应用",
+        "operationId": "getByAppKeyUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "path",
+          "description": "应用appKey",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "containExt",
+          "in": "query",
+          "description": "containExt",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«T_SYS_APP»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/app/delete": {
+      "post": {
+        "tags": ["应用管理"],
+        "summary": "删除应用",
+        "operationId": "deleteUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appIdList",
+          "in": "query",
+          "description": "appIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/app/key-pair": {
+      "get": {
+        "tags": ["应用管理"],
+        "summary": "获得公私钥对",
+        "operationId": "getAppByIdUsingGET",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«KeyPair»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/app/list": {
+      "post": {
+        "tags": ["应用管理"],
+        "summary": "查询应用",
+        "operationId": "listAppUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_SYS_APP»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«T_SYS_APP»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/app/query": {
+      "post": {
+        "tags": ["应用管理"],
+        "summary": "分页查询应用",
+        "operationId": "queryAppUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_SYS_APP»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«T_SYS_APP»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/app/{id}": {
+      "get": {
+        "tags": ["应用管理"],
+        "summary": "根据ID查询应用",
+        "operationId": "getAppByIdUsingGET_1",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "containExt",
+          "in": "query",
+          "description": "containExt",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }, {
+          "name": "id",
+          "in": "path",
+          "description": "应用ID",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«T_SYS_APP»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/login-audit/query": {
+      "post": {
+        "tags": ["登录审计管理"],
+        "summary": "分页查询",
+        "operationId": "queryUsingPOST_2",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "endTime",
+          "in": "query",
+          "description": "审计结束时间, 按时间范围查询时传入, 格式: yyyy-MM-dd HH:mm:ss",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_SYS_LOGIN_AUDIT»"
+          }
+        }, {
+          "name": "startTime",
+          "in": "query",
+          "description": "审计开始时间, 按时间范围查询时传入, 格式: yyyy-MM-dd HH:mm:ss",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«T_SYS_LOGIN_AUDIT»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/login-audit/query/self": {
+      "post": {
+        "tags": ["登录审计管理"],
+        "summary": "分页查询登录人的登录审计信息",
+        "operationId": "querySelfUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "endTime",
+          "in": "query",
+          "description": "审计结束时间, 按时间范围查询时传入, 格式: yyyy-MM-dd HH:mm:ss",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_SYS_LOGIN_AUDIT»"
+          }
+        }, {
+          "name": "startTime",
+          "in": "query",
+          "description": "审计开始时间, 按时间范围查询时传入, 格式: yyyy-MM-dd HH:mm:ss",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«T_SYS_LOGIN_AUDIT»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/login-audit/statistics": {
+      "post": {
+        "tags": ["登录审计管理"],
+        "summary": "统计查询",
+        "operationId": "statisticsUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "endTime",
+          "in": "query",
+          "description": "审计结束时间, 按时间范围查询时传入, 格式: yyyy-MM-dd",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "moreField",
+          "in": "query",
+          "description": "需要更多的分组字段及返回字段",
+          "required": false,
+          "type": "string",
+          "default": "loginCode,failureReason"
+        }, {
+          "name": "startTime",
+          "in": "query",
+          "description": "审计开始时间, 按时间范围查询时传入, modifyType为YEAR时格式: yyyy,  modifyType为MONTH时格式: yyyy-MM,  modifyType为DAY时格式: yyyy-MM-dd",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "statisticsType",
+          "in": "query",
+          "description": "statisticsType",
+          "required": true,
+          "type": "string",
+          "enum": ["YEAR", "MONTH", "DAY"]
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«T_SYS_LOGIN_AUDIT»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/login-failure-strategy": {
+      "post": {
+        "tags": ["登录失败策略管理"],
+        "summary": "新增策略",
+        "operationId": "saveUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "loginFailureStrategyValidList",
+          "description": "loginFailureStrategyValidList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_SYS_LOGIN_FAILURE_STRATEGY"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«Map«string,List«string»»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["登录失败策略管理"],
+        "summary": "更新策略信息",
+        "operationId": "updateUsingPUT_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "strategyValidList",
+          "description": "strategyValidList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_SYS_LOGIN_FAILURE_STRATEGY"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/login-failure-strategy/bind": {
+      "post": {
+        "tags": ["登录失败策略管理"],
+        "summary": "新增策略绑定关系",
+        "operationId": "saveBindUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "bindIdList",
+          "in": "query",
+          "description": "bindIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "loginFailureStrategyBindType",
+          "in": "query",
+          "description": "loginFailureStrategyBindType",
+          "required": true,
+          "type": "string",
+          "enum": ["ACCOUNT", "ROLE"]
+        }, {
+          "name": "strategyIdList",
+          "in": "query",
+          "description": "strategyIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«Map«string,List«string»»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/login-failure-strategy/bind/delete": {
+      "post": {
+        "tags": ["登录失败策略管理"],
+        "summary": "删除策略绑定关系",
+        "operationId": "deleteBindUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "bindIdList",
+          "in": "query",
+          "description": "bindIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "loginFailureStrategyBindType",
+          "in": "query",
+          "description": "loginFailureStrategyBindType",
+          "required": true,
+          "type": "string",
+          "enum": ["ACCOUNT", "ROLE"]
+        }, {
+          "name": "strategyIdList",
+          "in": "query",
+          "description": "strategyIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/login-failure-strategy/bind/list": {
+      "post": {
+        "tags": ["登录失败策略管理"],
+        "summary": "查询策略绑定关系",
+        "operationId": "listBindUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "bindIdList",
+          "in": "query",
+          "description": "bindIdList",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_SYS_LOGIN_FAILURE_BIND»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«T_SYS_LOGIN_FAILURE_BIND»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/login-failure-strategy/delete": {
+      "post": {
+        "tags": ["登录失败策略管理"],
+        "summary": "删除策略",
+        "operationId": "deleteUsingPOST_2",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "strategyIdList",
+          "in": "query",
+          "description": "strategyIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/login-failure-strategy/list": {
+      "post": {
+        "tags": ["登录失败策略管理"],
+        "summary": "查询策略",
+        "operationId": "listUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "bindIdList",
+          "in": "query",
+          "description": "bindIdList",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_SYS_LOGIN_FAILURE_STRATEGY»"
+          }
+        }, {
+          "name": "unionSelectType",
+          "in": "query",
+          "description": "unionSelectType",
+          "required": false,
+          "type": "string",
+          "default": "ALL",
+          "enum": ["ALL", "IN", "NOT_IN"]
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«T_SYS_LOGIN_FAILURE_STRATEGY»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/login-failure-strategy/query": {
+      "post": {
+        "tags": ["登录失败策略管理"],
+        "summary": "分页查询策略",
+        "operationId": "queryUsingPOST_3",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "bindIdList",
+          "in": "query",
+          "description": "bindIdList",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_SYS_LOGIN_FAILURE_STRATEGY»"
+          }
+        }, {
+          "name": "unionSelectType",
+          "in": "query",
+          "description": "unionSelectType",
+          "required": false,
+          "type": "string",
+          "default": "ALL",
+          "enum": ["ALL", "IN", "NOT_IN"]
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«T_SYS_LOGIN_FAILURE_STRATEGY»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/login-failure-strategy/unfrozen": {
+      "post": {
+        "tags": ["登录失败策略管理"],
+        "summary": "解冻由于触发策略造成的冻结,永久冻结请通过账号管理解冻",
+        "operationId": "deleteBindUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "accountId",
+          "in": "query",
+          "description": "accountId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/login-failure-strategy/{id}": {
+      "get": {
+        "tags": ["登录失败策略管理"],
+        "summary": "根据ID查询策略",
+        "operationId": "getByIdUsingGET_1",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "策略ID",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«T_SYS_LOGIN_FAILURE_STRATEGY»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/org": {
+      "post": {
+        "tags": ["机构管理"],
+        "summary": "新增机构",
+        "operationId": "saveOrgUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "addParentOrgIdList",
+          "in": "query",
+          "description": "addParentOrgIdList",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "in": "body",
+          "name": "orgList",
+          "description": "orgList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_SYS_ORG"
+            }
+          }
+        }, {
+          "name": "send2Permission",
+          "in": "query",
+          "description": "send2Permission",
+          "required": false,
+          "type": "boolean",
+          "default": true
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["机构管理"],
+        "summary": "更新机构信息",
+        "operationId": "updateOrgUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "addParentOrgIdList",
+          "in": "query",
+          "description": "addParentOrgIdList",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "delParentOrgIdList",
+          "in": "query",
+          "description": "delParentOrgIdList",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "in": "body",
+          "name": "orgList",
+          "description": "orgList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_SYS_ORG"
+            }
+          }
+        }, {
+          "name": "send2Permission",
+          "in": "query",
+          "description": "send2Permission",
+          "required": false,
+          "type": "boolean",
+          "default": true
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/org/delete": {
+      "post": {
+        "tags": ["机构管理"],
+        "summary": "删除机构",
+        "operationId": "deleteUsingPOST_3",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "orgIdList",
+          "in": "query",
+          "description": "orgIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "send2Permission",
+          "in": "query",
+          "description": "send2Permission",
+          "required": false,
+          "type": "boolean",
+          "default": true
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«Map«string,object»»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/org/excel/export": {
+      "post": {
+        "tags": ["机构管理"],
+        "summary": "excel数据导出",
+        "operationId": "excelExportUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "fileName",
+          "in": "query",
+          "description": "fileName",
+          "required": false,
+          "type": "string",
+          "default": "data"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": false,
+          "type": "integer",
+          "default": 0,
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": false,
+          "type": "integer",
+          "default": 0,
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_SYS_ORG»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/org/excel/import": {
+      "post": {
+        "tags": ["机构管理"],
+        "summary": "excel数据导入",
+        "operationId": "excelImportUsingPOST_1",
+        "consumes": ["multipart/form-data"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "excelType",
+          "in": "query",
+          "description": "excelType",
+          "required": true,
+          "type": "string",
+          "enum": ["save", "update", "delete"]
+        }, {
+          "name": "file",
+          "in": "formData",
+          "description": "file",
+          "required": true,
+          "type": "file"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/org/excel/template-export": {
+      "get": {
+        "tags": ["机构管理"],
+        "summary": "excel模板导出",
+        "operationId": "excelTemplateExportUsingGET_1",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "excelTemplateType",
+          "in": "query",
+          "description": "excelTemplateType",
+          "required": true,
+          "type": "string",
+          "enum": ["save", "update", "delete"]
+        }, {
+          "name": "fileName",
+          "in": "query",
+          "description": "fileName",
+          "required": false,
+          "type": "string",
+          "default": "template"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/org/list": {
+      "post": {
+        "tags": ["机构管理"],
+        "summary": "查询机构",
+        "operationId": "listOrgUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "authRoleCode",
+          "in": "query",
+          "description": "authRoleCode",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "downwardRecursive",
+          "in": "query",
+          "description": "downwardRecursive",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_SYS_ORG»"
+          }
+        }, {
+          "name": "withAuth",
+          "in": "query",
+          "description": "withAuth",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«T_SYS_ORG»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/org/list-position": {
+      "post": {
+        "tags": ["机构管理"],
+        "summary": "根据机构类型获得部门职位",
+        "operationId": "listPositionByOrgTypeUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "orgType",
+          "in": "query",
+          "description": "orgType",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«T_PERMISSION_SUBJECT»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/org/list-up": {
+      "post": {
+        "tags": ["机构管理"],
+        "summary": "向上查询机构",
+        "operationId": "listUpUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "orgId",
+          "in": "query",
+          "description": "orgId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«UpOrgTree»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/org/list/account-id": {
+      "post": {
+        "tags": ["机构管理"],
+        "summary": "根据账号ID获得机构信息",
+        "operationId": "listOrgByAccountIdUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "accountIdList",
+          "in": "query",
+          "description": "accountIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": false,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_SYS_ORG»"
+          }
+        }, {
+          "name": "withFullPath",
+          "in": "query",
+          "description": "withFullPath",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«Map«string,List«T_SYS_ORG»»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/org/query": {
+      "post": {
+        "tags": ["机构管理"],
+        "summary": "分页查询机构",
+        "operationId": "queryOrgUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "authRoleCode",
+          "in": "query",
+          "description": "authRoleCode",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_SYS_ORG»"
+          }
+        }, {
+          "name": "withAuth",
+          "in": "query",
+          "description": "withAuth",
+          "required": false,
+          "type": "boolean",
+          "default": false
+        }, {
+          "name": "withFullPath",
+          "in": "query",
+          "description": "withFullPath",
+          "required": false,
+          "type": "boolean"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«T_SYS_ORG»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/org/to-org-relation/del": {
+      "post": {
+        "tags": ["机构管理"],
+        "summary": "删除机构与机构的关联",
+        "operationId": "deleteOrg2OrgRelationUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "orgId",
+          "in": "query",
+          "description": "orgId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "parentOrgId",
+          "in": "query",
+          "description": "parentOrgId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/org/to-org-relation/parent": {
+      "post": {
+        "tags": ["机构管理"],
+        "summary": "根据机构ID获得上级机构信息",
+        "operationId": "listParentOrgByOrgIdUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "orgId",
+          "in": "query",
+          "description": "orgId",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": false,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_SYS_ORG»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«T_SYS_ORG»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/org/to-org-relation/save": {
+      "post": {
+        "tags": ["机构管理"],
+        "summary": "设置机构与机构的关联",
+        "operationId": "saveOrg2OrgRelationUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "orgId",
+          "in": "query",
+          "description": "orgId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "parentOrgId",
+          "in": "query",
+          "description": "parentOrgId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/org/{id}": {
+      "get": {
+        "tags": ["机构管理"],
+        "summary": "根据ID查询机构",
+        "operationId": "getOrgByIdUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "机构ID",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«T_SYS_ORG»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/role": {
+      "post": {
+        "tags": ["角色管理"],
+        "summary": "新增角色",
+        "operationId": "saveRoleUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "addParentRoleIdList",
+          "in": "query",
+          "description": "addParentRoleIdList",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "in": "body",
+          "name": "roleList",
+          "description": "roleList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_SYS_ROLE"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["角色管理"],
+        "summary": "更新角色信息",
+        "operationId": "updateRoleUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "addParentRoleIdList",
+          "in": "query",
+          "description": "addParentRoleIdList",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "name": "delParentRoleIdList",
+          "in": "query",
+          "description": "delParentRoleIdList",
+          "required": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "in": "body",
+          "name": "roleList",
+          "description": "roleList",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_SYS_ROLE"
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/role/delete": {
+      "post": {
+        "tags": ["角色管理"],
+        "summary": "删除角色",
+        "operationId": "deleteUsingPOST_4",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "roleIdList",
+          "in": "query",
+          "description": "roleIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«Map«string,object»»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/role/excel/export": {
+      "post": {
+        "tags": ["角色管理"],
+        "summary": "excel数据导出",
+        "operationId": "excelExportUsingPOST_2",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "fileName",
+          "in": "query",
+          "description": "fileName",
+          "required": false,
+          "type": "string",
+          "default": "data"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": false,
+          "type": "integer",
+          "default": 0,
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": false,
+          "type": "integer",
+          "default": 0,
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_SYS_ROLE»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/role/excel/import": {
+      "post": {
+        "tags": ["角色管理"],
+        "summary": "excel数据导入",
+        "operationId": "excelImportUsingPOST_2",
+        "consumes": ["multipart/form-data"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "excelType",
+          "in": "query",
+          "description": "excelType",
+          "required": true,
+          "type": "string",
+          "enum": ["save", "update", "delete"]
+        }, {
+          "name": "file",
+          "in": "formData",
+          "description": "file",
+          "required": true,
+          "type": "file"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/role/excel/template-export": {
+      "get": {
+        "tags": ["角色管理"],
+        "summary": "excel模板导出",
+        "operationId": "excelTemplateExportUsingGET_2",
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "excelTemplateType",
+          "in": "query",
+          "description": "excelTemplateType",
+          "required": true,
+          "type": "string",
+          "enum": ["save", "update", "delete"]
+        }, {
+          "name": "fileName",
+          "in": "query",
+          "description": "fileName",
+          "required": false,
+          "type": "string",
+          "default": "template"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/role/list": {
+      "post": {
+        "tags": ["角色管理"],
+        "summary": "查询角色",
+        "operationId": "listRoleUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_SYS_ROLE»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«T_SYS_ROLE»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/role/list/account-id": {
+      "post": {
+        "tags": ["角色管理"],
+        "summary": "根据账号ID获得角色信息",
+        "operationId": "listRoleByAccountIdUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "accountIdList",
+          "in": "query",
+          "description": "accountIdList",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": false,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_SYS_ROLE»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«Map«string,List«T_SYS_ROLE»»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/role/query": {
+      "post": {
+        "tags": ["角色管理"],
+        "summary": "分页查询角色",
+        "operationId": "queryRoleUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_SYS_ROLE»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«T_SYS_ROLE»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/role/to-role-relation": {
+      "post": {
+        "tags": ["角色管理"],
+        "summary": "设置角色与角色的关联",
+        "operationId": "saveRole2RoleRelationUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "parentRoleId",
+          "in": "query",
+          "description": "parentRoleId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "roleId",
+          "in": "query",
+          "description": "roleId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/role/to-role-relation/del": {
+      "post": {
+        "tags": ["角色管理"],
+        "summary": "删除角色与角色的关联",
+        "operationId": "deleteRole2RoleRelationUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "parentRoleId",
+          "in": "query",
+          "description": "parentRoleId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "roleId",
+          "in": "query",
+          "description": "roleId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/role/to-role-relation/parent": {
+      "post": {
+        "tags": ["角色管理"],
+        "summary": "根据角色ID获得上级角色信息",
+        "operationId": "listParentRoleByRoleIdUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "_appKey",
+          "in": "query",
+          "description": "_appKey",
+          "required": false,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": false,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«T_SYS_ROLE»"
+          }
+        }, {
+          "name": "roleId",
+          "in": "query",
+          "description": "roleId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«T_SYS_ROLE»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/role/{id}": {
+      "get": {
+        "tags": ["角色管理"],
+        "summary": "根据ID查询角色",
+        "operationId": "getRoleByIdUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "角色ID",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«T_SYS_ROLE»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/self/account": {
+      "post": {
+        "tags": ["自助管理"],
+        "summary": "修改自己的属性",
+        "operationId": "updateAccountBySelfUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "field",
+          "in": "query",
+          "description": "需要修改的字段",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "validNewValueString",
+          "in": "query",
+          "description": "验证新值的字符串, 通过验证码验证原值时传入验证码, 通过补全验证原值时传入原值, 不需要验证时不需要传入",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "validOldValueString",
+          "in": "query",
+          "description": "验证原值的字符串, 通过验证码验证原值时传入验证码, 通过补全验证原值时传入原值, 不需要验证时不需要传入",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "value",
+          "in": "query",
+          "description": "需要修改成为的值, 字段只能设置为空时不需要传入",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/self/account/modify-field": {
+      "get": {
+        "tags": ["自助管理"],
+        "summary": "获得可自行修改的字段属性",
+        "operationId": "listSelfModifyPropertiesUsingGET",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«Map«string,SelfModifyProperties»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/self/account/send-captcha/to-new": {
+      "post": {
+        "tags": ["自助管理"],
+        "summary": "自助修改-发送验证码给新值",
+        "operationId": "sendCaptcha2NewValueUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "field",
+          "in": "query",
+          "description": "field",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "value",
+          "in": "query",
+          "description": "value",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/self/account/send-captcha/to-old": {
+      "post": {
+        "tags": ["自助管理"],
+        "summary": "自助修改-发送验证码给原值",
+        "operationId": "sendCaptcha2OldValueUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "field",
+          "in": "query",
+          "description": "field",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/self/retrieve-password/account-info": {
+      "post": {
+        "tags": ["自助管理"],
+        "summary": "获得用户信息",
+        "operationId": "getUserInfoUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "entity",
+          "description": "entity",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/T_SYS_ACCOUNT"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«SecretAccount»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/self/retrieve-password/generate-pic-captcha": {
+      "get": {
+        "tags": ["自助管理"],
+        "summary": "密码找回-生成图片验证码",
+        "operationId": "generatePicCaptchaUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "accountId",
+          "in": "query",
+          "description": "accountId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "retrievePasswordType",
+          "in": "query",
+          "description": "retrievePasswordType",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/self/retrieve-password/generate-slider-captcha": {
+      "get": {
+        "tags": ["自助管理"],
+        "summary": "密码找回-生成滑块验证码",
+        "operationId": "generateSliderCaptchaUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "accountId",
+          "in": "query",
+          "description": "accountId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "circleR",
+          "in": "query",
+          "description": "circleR",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "cutHeight",
+          "in": "query",
+          "description": "cutHeight",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "cutWidth",
+          "in": "query",
+          "description": "cutWidth",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "rectanglePadding",
+          "in": "query",
+          "description": "rectanglePadding",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "retrievePasswordType",
+          "in": "query",
+          "description": "retrievePasswordType",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "sliderImgOutPadding",
+          "in": "query",
+          "description": "sliderImgOutPadding",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "srcImagePattern",
+          "in": "query",
+          "description": "srcImagePattern",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«SliderImage»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/self/retrieve-password/reset-password": {
+      "post": {
+        "tags": ["自助管理"],
+        "summary": "重置密码",
+        "operationId": "resetPasswordUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "accountId",
+          "in": "query",
+          "description": "accountId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "captcha",
+          "in": "query",
+          "description": "captcha",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "password",
+          "in": "query",
+          "description": "password",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "retrievePasswordType",
+          "in": "query",
+          "description": "retrievePasswordType",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/self/retrieve-password/send-captcha": {
+      "post": {
+        "tags": ["自助管理"],
+        "summary": "密码找回-发送验证码",
+        "operationId": "sendRetrievePasswordCaptchaUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "accountId",
+          "in": "query",
+          "description": "accountId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "picCaptchaInput",
+          "in": "query",
+          "description": "picCaptchaInput",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "retrievePasswordType",
+          "in": "query",
+          "description": "retrievePasswordType",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "sliderImageCaptchaXPosition",
+          "in": "query",
+          "description": "sliderImageCaptchaXPosition",
+          "required": false,
+          "type": "integer",
+          "format": "int32"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/self/retrieve-password/type": {
+      "get": {
+        "tags": ["自助管理"],
+        "summary": "获得可使用的密码找回方式",
+        "operationId": "listRetrievePasswordTypeUsingGET",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«RetrievePasswordType»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/system/access-token": {
+      "post": {
+        "tags": ["系统常用接口"],
+        "summary": "获得系统间的访问token",
+        "operationId": "getAccessTokenUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "appKey",
+          "in": "query",
+          "description": "应用key",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "appSecret",
+          "in": "query",
+          "description": "应用secret",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "tenantId",
+          "in": "query",
+          "description": "tenantId",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«Map«string,object»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/system/login": {
+      "post": {
+        "tags": ["系统常用接口"],
+        "summary": "用户登录",
+        "description": "111111加密后为bQoyS/NaIQTsg+kt1a2ZeG6xWSAeOqf1n+x6MgraHdclz/Vb8HU2pEhhVZr6Hujw0yyBB14yhRPJQcnzem3sQRDXDmWrSheFMoNxyUWw97Zrwzwksgyv5YEGOH6GyOxEzNAoo+jAI6ZAcWep9MlN+MrjT2XuIv57++Ua08B2CHI=",
+        "operationId": "loginUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "captcha",
+          "in": "query",
+          "description": "captcha",
+          "required": false,
+          "type": "string"
+        }, {
+          "name": "password",
+          "in": "query",
+          "description": "密码",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "username",
+          "in": "query",
+          "description": "用户名",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«Map«string,object»»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/system/login-captcha": {
+      "get": {
+        "tags": ["系统常用接口"],
+        "summary": "获得登录验证码",
+        "operationId": "generateLoginCaptchaUsingGET",
+        "produces": ["*/*"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/system/logout": {
+      "post": {
+        "tags": ["系统常用接口"],
+        "summary": "logout",
+        "operationId": "logoutUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "AffineTransform": {
+      "type": "object",
+      "properties": {
+        "determinant": {
+          "type": "number",
+          "format": "double"
+        },
+        "identity": {
+          "type": "boolean"
+        },
+        "scaleX": {
+          "type": "number",
+          "format": "double"
+        },
+        "scaleY": {
+          "type": "number",
+          "format": "double"
+        },
+        "shearX": {
+          "type": "number",
+          "format": "double"
+        },
+        "shearY": {
+          "type": "number",
+          "format": "double"
+        },
+        "translateX": {
+          "type": "number",
+          "format": "double"
+        },
+        "translateY": {
+          "type": "number",
+          "format": "double"
+        },
+        "type": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "AffineTransform"
+    },
+    "Attribute": {
+      "type": "object",
+      "title": "Attribute"
+    },
+    "BufferedImage": {
+      "type": "object",
+      "properties": {
+        "accelerationPriority": {
+          "type": "number",
+          "format": "float"
+        },
+        "alphaPremultiplied": {
+          "type": "boolean"
+        },
+        "alphaRaster": {
+          "$ref": "#/definitions/WritableRaster"
+        },
+        "colorModel": {
+          "$ref": "#/definitions/ColorModel"
+        },
+        "data": {
+          "$ref": "#/definitions/Raster"
+        },
+        "graphics": {
+          "$ref": "#/definitions/Graphics"
+        },
+        "height": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "minTileX": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "minTileY": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "minX": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "minY": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numXTiles": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numYTiles": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "propertyNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "raster": {
+          "$ref": "#/definitions/WritableRaster"
+        },
+        "sampleModel": {
+          "$ref": "#/definitions/SampleModel"
+        },
+        "source": {
+          "$ref": "#/definitions/ImageProducer"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RenderedImage"
+          }
+        },
+        "tileGridXOffset": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "tileGridYOffset": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "tileHeight": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "tileWidth": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "transparency": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "width": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "writableTileIndices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Point"
+          }
+        }
+      },
+      "title": "BufferedImage"
+    },
+    "CaptchaHandlerProperties": {
+      "type": "object",
+      "properties": {
+        "contentTemplate": {
+          "type": "string"
+        },
+        "needPicCaptchaBeforeSend": {
+          "type": "boolean"
+        },
+        "needSliderImageCaptchaBeforeSend": {
+          "type": "boolean"
+        },
+        "sendTimeIntervalInMills": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "sliderImageCheckOffset": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "timeoutInSecond": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "title": {
+          "type": "string"
+        },
+        "typeKey": {
+          "type": "string"
+        }
+      },
+      "title": "CaptchaHandlerProperties"
+    },
+    "Color": {
+      "type": "object",
+      "properties": {
+        "alpha": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "blue": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "colorSpace": {
+          "$ref": "#/definitions/ColorSpace"
+        },
+        "green": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "red": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "rgb": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "transparency": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Color"
+    },
+    "ColorModel": {
+      "type": "object",
+      "properties": {
+        "alphaPremultiplied": {
+          "type": "boolean"
+        },
+        "colorSpace": {
+          "$ref": "#/definitions/ColorSpace"
+        },
+        "componentSize": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "numColorComponents": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numComponents": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pixelSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "transferType": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "transparency": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "ColorModel"
+    },
+    "ColorSpace": {
+      "type": "object",
+      "properties": {
+        "cs_sRGB": {
+          "type": "boolean"
+        },
+        "numComponents": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "ColorSpace"
+    },
+    "DataBuffer": {
+      "type": "object",
+      "properties": {
+        "dataType": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numBanks": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "offsets": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "DataBuffer"
+    },
+    "Dimension": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "type": "number",
+          "format": "double"
+        },
+        "width": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "title": "Dimension"
+    },
+    "Font": {
+      "type": "object",
+      "properties": {
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "availableAttributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Attribute"
+          }
+        },
+        "bold": {
+          "type": "boolean"
+        },
+        "family": {
+          "type": "string"
+        },
+        "fontName": {
+          "type": "string"
+        },
+        "italic": {
+          "type": "boolean"
+        },
+        "italicAngle": {
+          "type": "number",
+          "format": "float"
+        },
+        "missingGlyphCode": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "numGlyphs": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "peer": {
+          "$ref": "#/definitions/FontPeer"
+        },
+        "plain": {
+          "type": "boolean"
+        },
+        "psname": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size2D": {
+          "type": "number",
+          "format": "float"
+        },
+        "style": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "transform": {
+          "$ref": "#/definitions/AffineTransform"
+        },
+        "transformed": {
+          "type": "boolean"
+        }
+      },
+      "title": "Font"
+    },
+    "FontMetrics": {
+      "type": "object",
+      "properties": {
+        "ascent": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "descent": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "font": {
+          "$ref": "#/definitions/Font"
+        },
+        "fontRenderContext": {
+          "$ref": "#/definitions/FontRenderContext"
+        },
+        "height": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "leading": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxAdvance": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxAscent": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxDecent": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxDescent": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "widths": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "title": "FontMetrics"
+    },
+    "FontPeer": {
+      "type": "object",
+      "title": "FontPeer"
+    },
+    "FontRenderContext": {
+      "type": "object",
+      "properties": {
+        "antiAliased": {
+          "type": "boolean"
+        },
+        "antiAliasingHint": {
+          "type": "object"
+        },
+        "fractionalMetricsHint": {
+          "type": "object"
+        },
+        "transform": {
+          "$ref": "#/definitions/AffineTransform"
+        },
+        "transformType": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "transformed": {
+          "type": "boolean"
+        }
+      },
+      "title": "FontRenderContext"
+    },
+    "Graphics": {
+      "type": "object",
+      "properties": {
+        "clip": {
+          "$ref": "#/definitions/Shape"
+        },
+        "clipBounds": {
+          "$ref": "#/definitions/Rectangle"
+        },
+        "clipRect": {
+          "$ref": "#/definitions/Rectangle"
+        },
+        "color": {
+          "$ref": "#/definitions/Color"
+        },
+        "font": {
+          "$ref": "#/definitions/Font"
+        },
+        "fontMetrics": {
+          "$ref": "#/definitions/FontMetrics"
+        }
+      },
+      "title": "Graphics"
+    },
+    "IPage«SecretAccount»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecretAccount"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«SecretAccount»"
+    },
+    "IPage«T_SYS_ACCOUNT_MODIFY_LOG»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/T_SYS_ACCOUNT_MODIFY_LOG"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«T_SYS_ACCOUNT_MODIFY_LOG»"
+    },
+    "IPage«T_SYS_APP»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/T_SYS_APP"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«T_SYS_APP»"
+    },
+    "IPage«T_SYS_LOGIN_AUDIT»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/T_SYS_LOGIN_AUDIT"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«T_SYS_LOGIN_AUDIT»"
+    },
+    "IPage«T_SYS_LOGIN_FAILURE_STRATEGY»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/T_SYS_LOGIN_FAILURE_STRATEGY"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«T_SYS_LOGIN_FAILURE_STRATEGY»"
+    },
+    "IPage«T_SYS_ORG»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/T_SYS_ORG"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«T_SYS_ORG»"
+    },
+    "IPage«T_SYS_ROLE»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/T_SYS_ROLE"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«T_SYS_ROLE»"
+    },
+    "ImageProducer": {
+      "type": "object",
+      "title": "ImageProducer"
+    },
+    "KeyPair": {
+      "type": "object",
+      "properties": {
+        "privateKey": {
+          "type": "string",
+          "description": "私钥"
+        },
+        "publicKey": {
+          "type": "string",
+          "description": "公钥"
+        }
+      },
+      "title": "KeyPair"
+    },
+    "Map«string,List«T_SYS_ORG»»": {
+      "type": "object",
+      "title": "Map«string,List«T_SYS_ORG»»",
+      "additionalProperties": {
+        "$ref": "#/definitions/List"
+      }
+    },
+    "Map«string,List«T_SYS_ROLE»»": {
+      "type": "object",
+      "title": "Map«string,List«T_SYS_ROLE»»",
+      "additionalProperties": {
+        "$ref": "#/definitions/List"
+      }
+    },
+    "Map«string,List«string»»": {
+      "type": "object",
+      "title": "Map«string,List«string»»",
+      "additionalProperties": {
+        "$ref": "#/definitions/List"
+      }
+    },
+    "Map«string,SelfModifyProperties»": {
+      "type": "object",
+      "title": "Map«string,SelfModifyProperties»",
+      "additionalProperties": {
+        "$ref": "#/definitions/SelfModifyProperties"
+      }
+    },
+    "Map«string,object»": {
+      "type": "object",
+      "title": "Map«string,object»",
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "OrderItem": {
+      "type": "object",
+      "properties": {
+        "asc": {
+          "type": "boolean"
+        },
+        "column": {
+          "type": "string"
+        }
+      },
+      "title": "OrderItem"
+    },
+    "Point": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "number",
+          "format": "double"
+        },
+        "y": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "title": "Point"
+    },
+    "QueryCondition«T_SYS_ACCOUNT_MODIFY_LOG»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/T_SYS_ACCOUNT_MODIFY_LOG"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«T_SYS_ACCOUNT_MODIFY_LOG»",
+      "description": "查询条件"
+    },
+    "QueryCondition«T_SYS_ACCOUNT»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/T_SYS_ACCOUNT"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«T_SYS_ACCOUNT»",
+      "description": "查询条件"
+    },
+    "QueryCondition«T_SYS_APP»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/T_SYS_APP"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«T_SYS_APP»",
+      "description": "查询条件"
+    },
+    "QueryCondition«T_SYS_LOGIN_AUDIT»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/T_SYS_LOGIN_AUDIT"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«T_SYS_LOGIN_AUDIT»",
+      "description": "查询条件"
+    },
+    "QueryCondition«T_SYS_LOGIN_FAILURE_BIND»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/T_SYS_LOGIN_FAILURE_BIND"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«T_SYS_LOGIN_FAILURE_BIND»",
+      "description": "查询条件"
+    },
+    "QueryCondition«T_SYS_LOGIN_FAILURE_STRATEGY»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/T_SYS_LOGIN_FAILURE_STRATEGY"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«T_SYS_LOGIN_FAILURE_STRATEGY»",
+      "description": "查询条件"
+    },
+    "QueryCondition«T_SYS_ORG»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/T_SYS_ORG"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«T_SYS_ORG»",
+      "description": "查询条件"
+    },
+    "QueryCondition«T_SYS_ROLE»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/T_SYS_ROLE"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«T_SYS_ROLE»",
+      "description": "查询条件"
+    },
+    "Raster": {
+      "type": "object",
+      "properties": {
+        "bounds": {
+          "$ref": "#/definitions/Rectangle"
+        },
+        "dataBuffer": {
+          "$ref": "#/definitions/DataBuffer"
+        },
+        "height": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "minX": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "minY": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numBands": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numDataElements": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "parent": {
+          "$ref": "#/definitions/Raster"
+        },
+        "sampleModel": {
+          "$ref": "#/definitions/SampleModel"
+        },
+        "sampleModelTranslateX": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sampleModelTranslateY": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "transferType": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "width": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Raster"
+    },
+    "Rectangle": {
+      "type": "object",
+      "properties": {
+        "bounds2D": {
+          "$ref": "#/definitions/Rectangle2D"
+        },
+        "centerX": {
+          "type": "number",
+          "format": "double"
+        },
+        "centerY": {
+          "type": "number",
+          "format": "double"
+        },
+        "empty": {
+          "type": "boolean"
+        },
+        "height": {
+          "type": "number",
+          "format": "double"
+        },
+        "location": {
+          "$ref": "#/definitions/Point"
+        },
+        "maxX": {
+          "type": "number",
+          "format": "double"
+        },
+        "maxY": {
+          "type": "number",
+          "format": "double"
+        },
+        "minX": {
+          "type": "number",
+          "format": "double"
+        },
+        "minY": {
+          "type": "number",
+          "format": "double"
+        },
+        "size": {
+          "$ref": "#/definitions/Dimension"
+        },
+        "width": {
+          "type": "number",
+          "format": "double"
+        },
+        "x": {
+          "type": "number",
+          "format": "double"
+        },
+        "y": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "title": "Rectangle"
+    },
+    "Rectangle2D": {
+      "type": "object",
+      "properties": {
+        "bounds": {
+          "$ref": "#/definitions/Rectangle"
+        },
+        "bounds2D": {
+          "$ref": "#/definitions/Rectangle2D"
+        },
+        "centerX": {
+          "type": "number",
+          "format": "double"
+        },
+        "centerY": {
+          "type": "number",
+          "format": "double"
+        },
+        "empty": {
+          "type": "boolean"
+        },
+        "height": {
+          "type": "number",
+          "format": "double"
+        },
+        "maxX": {
+          "type": "number",
+          "format": "double"
+        },
+        "maxY": {
+          "type": "number",
+          "format": "double"
+        },
+        "minX": {
+          "type": "number",
+          "format": "double"
+        },
+        "minY": {
+          "type": "number",
+          "format": "double"
+        },
+        "width": {
+          "type": "number",
+          "format": "double"
+        },
+        "x": {
+          "type": "number",
+          "format": "double"
+        },
+        "y": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "title": "Rectangle2D"
+    },
+    "RenderedImage": {
+      "type": "object",
+      "properties": {
+        "colorModel": {
+          "$ref": "#/definitions/ColorModel"
+        },
+        "data": {
+          "$ref": "#/definitions/Raster"
+        },
+        "height": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "minTileX": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "minTileY": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "minX": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "minY": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numXTiles": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numYTiles": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "propertyNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sampleModel": {
+          "$ref": "#/definitions/SampleModel"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RenderedImage"
+          }
+        },
+        "tileGridXOffset": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "tileGridYOffset": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "tileHeight": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "tileWidth": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "width": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "RenderedImage"
+    },
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«SecretAccount»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«SecretAccount»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«SecretAccount»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«T_SYS_ACCOUNT_MODIFY_LOG»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«T_SYS_ACCOUNT_MODIFY_LOG»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«T_SYS_ACCOUNT_MODIFY_LOG»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«T_SYS_APP»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«T_SYS_APP»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«T_SYS_APP»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«T_SYS_LOGIN_AUDIT»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«T_SYS_LOGIN_AUDIT»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«T_SYS_LOGIN_AUDIT»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«T_SYS_LOGIN_FAILURE_STRATEGY»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«T_SYS_LOGIN_FAILURE_STRATEGY»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«T_SYS_LOGIN_FAILURE_STRATEGY»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«T_SYS_ORG»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«T_SYS_ORG»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«T_SYS_ORG»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«T_SYS_ROLE»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«T_SYS_ROLE»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«T_SYS_ROLE»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«KeyPair»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/KeyPair"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«KeyPair»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«Map«string,object»»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/Map«string,object»"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«Map«string,object»»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«RetrievePasswordType»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/RetrievePasswordType"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«RetrievePasswordType»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«SecretAccount»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/SecretAccount"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«SecretAccount»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«T_PERMISSION_SUBJECT»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/T_PERMISSION_SUBJECT"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«T_PERMISSION_SUBJECT»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«T_SYS_ACCOUNT_MODIFY_LOG»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/T_SYS_ACCOUNT_MODIFY_LOG"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«T_SYS_ACCOUNT_MODIFY_LOG»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«T_SYS_ACCOUNT»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/T_SYS_ACCOUNT"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«T_SYS_ACCOUNT»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«T_SYS_APP»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/T_SYS_APP"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«T_SYS_APP»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«T_SYS_LOGIN_AUDIT»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/T_SYS_LOGIN_AUDIT"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«T_SYS_LOGIN_AUDIT»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«T_SYS_LOGIN_FAILURE_BIND»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/T_SYS_LOGIN_FAILURE_BIND"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«T_SYS_LOGIN_FAILURE_BIND»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«T_SYS_LOGIN_FAILURE_STRATEGY»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/T_SYS_LOGIN_FAILURE_STRATEGY"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«T_SYS_LOGIN_FAILURE_STRATEGY»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«T_SYS_ORG»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/T_SYS_ORG"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«T_SYS_ORG»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«T_SYS_ROLE»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/T_SYS_ROLE"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«T_SYS_ROLE»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«Map«string,List«T_SYS_ORG»»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_SYS_ORG"
+            }
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«Map«string,List«T_SYS_ORG»»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«Map«string,List«T_SYS_ROLE»»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/T_SYS_ROLE"
+            }
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«Map«string,List«T_SYS_ROLE»»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«Map«string,List«string»»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«Map«string,List«string»»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«Map«string,SelfModifyProperties»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "additionalProperties": {
+            "$ref": "#/definitions/SelfModifyProperties"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«Map«string,SelfModifyProperties»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«Map«string,object»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«Map«string,object»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«SecretAccount»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/SecretAccount"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«SecretAccount»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«SliderImage»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/SliderImage"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«SliderImage»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«T_SYS_ACCOUNT»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/T_SYS_ACCOUNT"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«T_SYS_ACCOUNT»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«T_SYS_APP»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/T_SYS_APP"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«T_SYS_APP»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«T_SYS_LOGIN_FAILURE_STRATEGY»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/T_SYS_LOGIN_FAILURE_STRATEGY"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«T_SYS_LOGIN_FAILURE_STRATEGY»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«T_SYS_ORG»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/T_SYS_ORG"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«T_SYS_ORG»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«T_SYS_ROLE»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/T_SYS_ROLE"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«T_SYS_ROLE»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«UpOrgTree»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/UpOrgTree"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«UpOrgTree»",
+      "description": "返回响应数据"
+    },
+    "RetrievePasswordType": {
+      "type": "object",
+      "properties": {
+        "captchaHandlerTypeKey": {
+          "type": "string",
+          "description": "验证码处理类型"
+        },
+        "description": {
+          "type": "string",
+          "description": "描述"
+        },
+        "needPicCaptchaBeforeSend": {
+          "type": "boolean",
+          "description": "发送验证码之前是否需要图像验证码"
+        },
+        "needSliderImageCaptchaBeforeSend": {
+          "type": "boolean",
+          "description": "发送验证码之前是否需要图像验证码"
+        },
+        "noDataMatchTip": {
+          "type": "string",
+          "description": "所选找回方式没有对应数据时的提示信息"
+        },
+        "sendTimeIntervalInMills": {
+          "type": "integer",
+          "format": "int64",
+          "description": "发送的时间间隔, 小于等于0则不控制"
+        },
+        "type": {
+          "type": "string",
+          "description": "类型"
+        }
+      },
+      "title": "RetrievePasswordType",
+      "description": "找回密码类型"
+    },
+    "SampleModel": {
+      "type": "object",
+      "properties": {
+        "dataType": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "height": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numBands": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numDataElements": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sampleSize": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "transferType": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "width": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "SampleModel"
+    },
+    "SecretAccount": {
+      "type": "object",
+      "properties": {
+        "accountRelation": {
+          "type": "number",
+          "description": "账号关系,1:独立账号/2:关联账号"
+        },
+        "avatar": {
+          "type": "string",
+          "description": "头像"
+        },
+        "currentPasswordStrength": {
+          "type": "string",
+          "description": "当前密码强度"
+        },
+        "dingTalkUnionId": {
+          "type": "string",
+          "description": "钉钉unionId"
+        },
+        "dingTalkUserId": {
+          "type": "string",
+          "description": "钉钉userId"
+        },
+        "email": {
+          "type": "string",
+          "description": "邮箱,一般用于找回密码"
+        },
+        "id": {
+          "type": "string",
+          "description": "账号ID"
+        },
+        "idCard": {
+          "type": "string",
+          "description": "身份证号"
+        },
+        "lifeTime": {
+          "type": "string",
+          "description": "过期时间, 年月日"
+        },
+        "loginName": {
+          "type": "string",
+          "description": "登录名"
+        },
+        "mobile": {
+          "type": "string",
+          "description": "手机号"
+        },
+        "name": {
+          "type": "string",
+          "description": "姓名"
+        },
+        "nickName": {
+          "type": "string",
+          "description": "昵称"
+        },
+        "ownedTenants": {
+          "type": "string",
+          "description": "拥有的租户"
+        },
+        "passwordStrength": {
+          "type": "string",
+          "description": "要求的密码强度"
+        },
+        "qqOpenId": {
+          "type": "string"
+        },
+        "schoolEmail": {
+          "type": "string",
+          "description": "校内邮箱"
+        },
+        "status": {
+          "type": "number",
+          "description": "状态 1:正常/2:冻结/3:过期"
+        },
+        "userPassword": {
+          "type": "string",
+          "description": "密码"
+        },
+        "wxgzptOpenId": {
+          "type": "string",
+          "description": "微信公众平台openId"
+        }
+      },
+      "title": "SecretAccount",
+      "description": "账号信息"
+    },
+    "SelfModifyProperties": {
+      "type": "object",
+      "properties": {
+        "allowAction": {
+          "type": "string",
+          "enum": ["SET_NEW_VALUE", "SET_EMPTY", "SET_EMPTY_WHEN_HAVE_VALUE_SHOW_IFRAME_WHEN_NOT_HAVE_VALUE"]
+        },
+        "attributeName": {
+          "type": "string"
+        },
+        "captchaHandler": {
+          "$ref": "#/definitions/CaptchaHandlerProperties"
+        },
+        "checkNewValue": {
+          "type": "string",
+          "enum": ["CAPTCHA", "COMPLETE", "NO_CHECK"]
+        },
+        "checkOldValue": {
+          "type": "string",
+          "enum": ["CAPTCHA", "COMPLETE", "NO_CHECK"]
+        },
+        "haveValueActionName": {
+          "type": "string"
+        },
+        "haveValueTips": {
+          "type": "string"
+        },
+        "iframeUrl": {
+          "type": "string"
+        },
+        "iframeUrlForMobile": {
+          "type": "string"
+        },
+        "imageSrc": {
+          "type": "string"
+        },
+        "noValueActionName": {
+          "type": "string"
+        },
+        "noValueTips": {
+          "type": "string"
+        }
+      },
+      "title": "SelfModifyProperties"
+    },
+    "Shape": {
+      "type": "object",
+      "properties": {
+        "bounds": {
+          "$ref": "#/definitions/Rectangle"
+        },
+        "bounds2D": {
+          "$ref": "#/definitions/Rectangle2D"
+        }
+      },
+      "title": "Shape"
+    },
+    "SliderImage": {
+      "type": "object",
+      "properties": {
+        "circleR": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "cutHeight": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "cutImage": {
+          "$ref": "#/definitions/BufferedImage"
+        },
+        "cutImageEncode": {
+          "type": "string"
+        },
+        "cutWidth": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "imageHeight": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "imageWidth": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "rectanglePadding": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sliderImgOutPadding": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "srcImage": {
+          "$ref": "#/definitions/BufferedImage"
+        },
+        "srcImageEncode": {
+          "type": "string"
+        },
+        "srcImagePattern": {
+          "type": "string"
+        },
+        "xposition": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "yposition": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "SliderImage"
+    },
+    "T_PERMISSION_PUB_SUBJECT_EXT": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "描述"
+        },
+        "extPropertyKey": {
+          "type": "string",
+          "description": "字段键值"
+        },
+        "extPropertyValue": {
+          "type": "string",
+          "description": "字段值"
+        },
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "subjectId": {
+          "type": "string",
+          "description": "主题id"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户ID"
+        }
+      },
+      "title": "T_PERMISSION_PUB_SUBJECT_EXT",
+      "description": "主题扩展信息"
+    },
+    "T_PERMISSION_SUBJECT": {
+      "type": "object",
+      "properties": {
+        "appKey": {
+          "type": "string",
+          "description": "管理主题的应用键值"
+        },
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "subjectExtList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/T_PERMISSION_SUBJECT_EXT"
+          }
+        },
+        "subjectName": {
+          "type": "string",
+          "description": "名称"
+        },
+        "subjectStatus": {
+          "type": "number",
+          "description": "状态,1:正常(可用),2:不可用"
+        },
+        "subjectType": {
+          "type": "string",
+          "description": "类型",
+          "enum": ["ORG", "ROLE", "USER", "RESOURCE_GROUP", "OTHER"]
+        },
+        "subjectTypeList": {
+          "type": "array",
+          "description": "类型列表，仅在查询时有用",
+          "items": {
+            "type": "string",
+            "enum": ["ORG", "ROLE", "USER", "RESOURCE_GROUP", "OTHER"]
+          }
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户ID"
+        },
+        "unifiedId": {
+          "type": "string",
+          "description": "统一ID, 各系统间统一描述主题对象的ID, 例如: 用户学工号"
+        }
+      },
+      "title": "T_PERMISSION_SUBJECT",
+      "description": "主题信息"
+    },
+    "T_PERMISSION_SUBJECT_EXT": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "描述"
+        },
+        "extPropertyKey": {
+          "type": "string",
+          "description": "字段键值"
+        },
+        "extPropertyValue": {
+          "type": "string",
+          "description": "字段值"
+        },
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "subjectId": {
+          "type": "string",
+          "description": "主题id"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户ID"
+        }
+      },
+      "title": "T_PERMISSION_SUBJECT_EXT",
+      "description": "主题扩展信息"
+    },
+    "T_SYS_ACCOUNT": {
+      "type": "object",
+      "properties": {
+        "accountRelation": {
+          "type": "number",
+          "description": "账号关系,1:独立账号/2:关联账号"
+        },
+        "avatar": {
+          "type": "string",
+          "description": "头像"
+        },
+        "currentPasswordStrength": {
+          "type": "string",
+          "description": "当前密码强度"
+        },
+        "dingTalkUnionId": {
+          "type": "string",
+          "description": "钉钉unionId"
+        },
+        "dingTalkUserId": {
+          "type": "string",
+          "description": "钉钉userId"
+        },
+        "email": {
+          "type": "string",
+          "description": "邮箱,一般用于找回密码"
+        },
+        "id": {
+          "type": "string",
+          "description": "账号ID"
+        },
+        "idCard": {
+          "type": "string",
+          "description": "身份证号"
+        },
+        "lifeTime": {
+          "type": "string",
+          "description": "过期时间, 年月日"
+        },
+        "loginName": {
+          "type": "string",
+          "description": "登录名"
+        },
+        "mobile": {
+          "type": "string",
+          "description": "手机号"
+        },
+        "name": {
+          "type": "string",
+          "description": "姓名"
+        },
+        "nickName": {
+          "type": "string",
+          "description": "昵称"
+        },
+        "ownedTenants": {
+          "type": "string",
+          "description": "拥有的租户"
+        },
+        "passwordStrength": {
+          "type": "string",
+          "description": "要求的密码强度"
+        },
+        "qqOpenId": {
+          "type": "string"
+        },
+        "schoolEmail": {
+          "type": "string",
+          "description": "校内邮箱"
+        },
+        "status": {
+          "type": "number",
+          "description": "状态 1:正常/2:冻结/3:过期"
+        },
+        "userPassword": {
+          "type": "string",
+          "description": "密码"
+        },
+        "wxgzptOpenId": {
+          "type": "string",
+          "description": "微信公众平台openId"
+        }
+      },
+      "title": "T_SYS_ACCOUNT",
+      "description": "账号信息"
+    },
+    "T_SYS_ACCOUNT_MODIFY_LOG": {
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "账号id"
+        },
+        "accountName": {
+          "type": "string",
+          "description": "账号名"
+        },
+        "auditTime": {
+          "type": "string",
+          "description": "审计时间"
+        },
+        "auditUserId": {
+          "type": "string",
+          "description": "审计用户id"
+        },
+        "auditUserName": {
+          "type": "string",
+          "description": "审计用户名"
+        },
+        "className": {
+          "type": "string",
+          "description": "类名称,用于索引创建,默认是实体类名称全小写(存入数据库时无实际意义)"
+        },
+        "cnt": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "ip": {
+          "type": "string",
+          "description": "ip"
+        },
+        "logType": {
+          "type": "string",
+          "description": "日志类型, 默认audit(存入数据库时无实际意义)"
+        },
+        "loginName": {
+          "type": "string",
+          "description": "登录名"
+        },
+        "modifyAttr": {
+          "type": "string",
+          "description": "modifyAttr"
+        },
+        "modifyType": {
+          "type": "number",
+          "description": "modifyType"
+        },
+        "newEntity": {
+          "type": "string",
+          "description": "newEntity"
+        },
+        "originEntity": {
+          "type": "string",
+          "description": "originEntity"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户ID"
+        }
+      },
+      "title": "T_SYS_ACCOUNT_MODIFY_LOG",
+      "description": "登录失败策略触发日志"
+    },
+    "T_SYS_APP": {
+      "type": "object",
+      "properties": {
+        "appKey": {
+          "type": "string",
+          "description": "应用键值"
+        },
+        "description": {
+          "type": "string",
+          "description": "描述"
+        },
+        "detail": {
+          "description": "扩展信息",
+          "$ref": "#/definitions/T_SYS_APP_DETAIL"
+        },
+        "extInfoList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/T_PERMISSION_PUB_SUBJECT_EXT"
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "name": {
+          "type": "string",
+          "description": "名称"
+        },
+        "rsaPrivateKey": {
+          "type": "string",
+          "description": "rsa私钥"
+        },
+        "rsaPublicKey": {
+          "type": "string",
+          "description": "rsa公钥"
+        },
+        "serviceId": {
+          "type": "string",
+          "description": "应用标识"
+        },
+        "sort": {
+          "type": "number",
+          "description": "排序字段"
+        },
+        "status": {
+          "type": "number",
+          "description": "状态 1:正常/2:冻结"
+        }
+      },
+      "title": "T_SYS_APP",
+      "description": "应用信息"
+    },
+    "T_SYS_APP_DETAIL": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "description": "应用ID"
+        },
+        "id": {
+          "type": "string",
+          "description": "ID"
+        },
+        "logoAndBanner": {
+          "type": "string",
+          "description": "logo和banner"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户ID"
+        }
+      },
+      "title": "T_SYS_APP_DETAIL"
+    },
+    "T_SYS_LOGIN_AUDIT": {
+      "type": "object",
+      "properties": {
+        "auditTime": {
+          "type": "string",
+          "description": "审计时间"
+        },
+        "auditUserId": {
+          "type": "string",
+          "description": "审计用户id"
+        },
+        "auditUserName": {
+          "type": "string",
+          "description": "审计用户名"
+        },
+        "className": {
+          "type": "string",
+          "description": "类名称,用于索引创建,默认是实体类名称全小写(存入数据库时无实际意义)"
+        },
+        "cnt": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "failureReason": {
+          "type": "string",
+          "description": "失败原因"
+        },
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "ip": {
+          "type": "string",
+          "description": "ip"
+        },
+        "logType": {
+          "type": "string",
+          "description": "日志类型, 默认audit(存入数据库时无实际意义)"
+        },
+        "loginCode": {
+          "type": "number",
+          "description": "记录接口返回的错误代码"
+        },
+        "loginName": {
+          "type": "string",
+          "description": "登录名"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户ID"
+        }
+      },
+      "title": "T_SYS_LOGIN_AUDIT",
+      "description": "登录审计信息"
+    },
+    "T_SYS_LOGIN_FAILURE_BIND": {
+      "type": "object",
+      "properties": {
+        "bindId": {
+          "type": "string",
+          "description": "绑定的id,根据类型不同,可以是accountid和roleid"
+        },
+        "bindType": {
+          "type": "string",
+          "description": "绑定类型, ACCOUNT/ROLE"
+        },
+        "createTime": {
+          "type": "string",
+          "description": "创建时间"
+        },
+        "creatorId": {
+          "type": "string",
+          "description": "创建人ID"
+        },
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "strategyId": {
+          "type": "string",
+          "description": "策略id"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "T_SYS_LOGIN_FAILURE_BIND",
+      "description": "登录失败策略绑定信息"
+    },
+    "T_SYS_LOGIN_FAILURE_STRATEGY": {
+      "type": "object",
+      "properties": {
+        "bindIdList": {
+          "type": "array",
+          "description": "绑定id",
+          "items": {
+            "type": "string"
+          }
+        },
+        "createTime": {
+          "type": "string",
+          "description": "创建时间"
+        },
+        "creatorId": {
+          "type": "string",
+          "description": "创建人ID"
+        },
+        "frozenTime": {
+          "type": "number",
+          "description": "冻结时间,冻结类型为1时,表示多少分钟后解冻账号  冻结类型为2时,表示几点解冻"
+        },
+        "frozenType": {
+          "type": "number",
+          "description": "冻结类型,1:冻结固定时长,2:定时解冻,3:永久冻结"
+        },
+        "handleType": {
+          "type": "number",
+          "description": "处理类型,1:验证码  2:冻结账号"
+        },
+        "id": {
+          "type": "string",
+          "description": "id"
+        },
+        "name": {
+          "type": "string",
+          "description": "策略名称"
+        },
+        "numberOfRetryLimit": {
+          "type": "number",
+          "description": "重试次数"
+        },
+        "remark": {
+          "type": "string",
+          "description": "备注"
+        },
+        "resetFailureCountTime": {
+          "type": "number",
+          "description": "每隔多长时间重置一次失败次数(秒)"
+        },
+        "status": {
+          "type": "number",
+          "description": "状态 1:正常/2:停用"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        },
+        "updateTime": {
+          "type": "string",
+          "description": "最后更新时间"
+        },
+        "updatorId": {
+          "type": "string",
+          "description": "最后更新人ID"
+        }
+      },
+      "title": "T_SYS_LOGIN_FAILURE_STRATEGY",
+      "description": "登录失败策略"
+    },
+    "T_SYS_ORG": {
+      "type": "object",
+      "properties": {
+        "dingTalkAppKey": {
+          "type": "string",
+          "description": "钉钉的appKey"
+        },
+        "dingTalkAppSecret": {
+          "type": "string",
+          "description": "钉钉的秘钥"
+        },
+        "dingTalkCorpId": {
+          "type": "string",
+          "description": "钉钉的corpId"
+        },
+        "dingTalkOrgId": {
+          "type": "string",
+          "description": "对应钉钉的机构ID"
+        },
+        "fullPath": {
+          "type": "array",
+          "description": "机构全路径",
+          "items": {
+            "type": "string"
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "机构ID"
+        },
+        "image": {
+          "type": "string",
+          "description": "部门图标"
+        },
+        "isFromUnionOrg": {
+          "type": "number",
+          "description": "是否为外部关联组织 1:是/2:否"
+        },
+        "name": {
+          "type": "string",
+          "description": "机构名称"
+        },
+        "orgCode": {
+          "type": "string",
+          "description": "机构编号, 对应资源访问控制中的统一ID"
+        },
+        "orgType": {
+          "type": "string",
+          "description": "机构类型码"
+        },
+        "parentPermissionSubjectId": {
+          "type": "string",
+          "description": "上级权限管理中的主题ID, 仅在查询时有用"
+        },
+        "sort": {
+          "type": "number",
+          "description": "排序字段"
+        },
+        "sourceIdentifier": {
+          "type": "string",
+          "description": "部门标识字段，开发者可用该字段来唯一标识一个部门，并与关联组织里的部门做映射"
+        },
+        "sourceTenantId": {
+          "type": "string",
+          "description": "源租户ID，开发者可用该字段来唯一标识一个租户，并与关联租户里的租户做映射"
+        },
+        "status": {
+          "type": "number",
+          "description": "状态 1:正常/2:冻结"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户ID"
+        }
+      },
+      "title": "T_SYS_ORG",
+      "description": "机构信息"
+    },
+    "T_SYS_ROLE": {
+      "type": "object",
+      "properties": {
+        "dingTalkCorpId": {
+          "type": "string",
+          "description": "钉钉的corpId"
+        },
+        "dingTalkRoleId": {
+          "type": "string",
+          "description": "对应钉钉的角色ID"
+        },
+        "id": {
+          "type": "string",
+          "description": "角色ID"
+        },
+        "name": {
+          "type": "string",
+          "description": "角色名称"
+        },
+        "parentPermissionSubjectId": {
+          "type": "string",
+          "description": "上级权限管理中的主题ID, 仅在查询时有用"
+        },
+        "position": {
+          "type": "number",
+          "description": "是否是职位,0:否,1是"
+        },
+        "roleCode": {
+          "type": "string",
+          "description": "角色代码"
+        },
+        "status": {
+          "type": "number",
+          "description": "状态 1:正常/2:冻结"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户ID"
+        }
+      },
+      "title": "T_SYS_ROLE",
+      "description": "角色信息"
+    },
+    "UpOrgTree": {
+      "type": "object",
+      "properties": {
+        "org": {
+          "$ref": "#/definitions/T_SYS_ORG"
+        },
+        "orgId": {
+          "type": "string"
+        },
+        "parentOrgIdList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "parentTreeList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpOrgTree"
+          }
+        }
+      },
+      "title": "UpOrgTree"
+    },
+    "WritableRaster": {
+      "type": "object",
+      "properties": {
+        "bounds": {
+          "$ref": "#/definitions/Rectangle"
+        },
+        "dataBuffer": {
+          "$ref": "#/definitions/DataBuffer"
+        },
+        "height": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "minX": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "minY": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numBands": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numDataElements": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "parent": {
+          "$ref": "#/definitions/Raster"
+        },
+        "sampleModel": {
+          "$ref": "#/definitions/SampleModel"
+        },
+        "sampleModelTranslateX": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sampleModelTranslateY": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "transferType": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "width": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "writableParent": {
+          "$ref": "#/definitions/WritableRaster"
+        }
+      },
+      "title": "WritableRaster"
+    }
+  }
+}

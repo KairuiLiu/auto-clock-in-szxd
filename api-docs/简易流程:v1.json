@@ -1,0 +1,1660 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "简易流程"
+  },
+  "host": "counselor.swu.edu.cn",
+  "basePath": "/fighter-workflow",
+  "tags": [{
+    "name": "简易流程编辑器-催办",
+    "description": "Urge Handle Controller"
+  }, {
+    "name": "简易流程编辑器-流程基础信息",
+    "description": "Wf Simple Proc Controller"
+  }, {
+    "name": "简易流程编辑器-流程模型转换",
+    "description": "Wf Simple Converter Controller"
+  }, {
+    "name": "简易流程编辑器-环节按钮控制",
+    "description": "Wf Simple Task Button Controller"
+  }, {
+    "name": "简易流程编辑器-环节表单操作属性",
+    "description": "Wf Simple Task From Property Controller"
+  }, {
+    "name": "简易流程编辑器-简易流程环节信息",
+    "description": "Wf Simple Task Info Controller"
+  }, {
+    "name": "简易流程编辑器-计算器",
+    "description": "Calculate Controller"
+  }],
+  "paths": {
+    "/flow-simple/calculate/init": {
+      "post": {
+        "tags": ["简易流程编辑器-计算器"],
+        "summary": "初始化",
+        "description": "初始化",
+        "operationId": "initUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "formData",
+          "description": "formData",
+          "required": true,
+          "schema": {
+            "type": "object"
+          }
+        }, {
+          "name": "formId",
+          "in": "query",
+          "description": "formId",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-simple/calculate/pop-up-change": {
+      "post": {
+        "tags": ["简易流程编辑器-计算器"],
+        "summary": "弹框内触发",
+        "description": "弹框内触发-返回subFormData",
+        "operationId": "popUpChangeUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "calculateData",
+          "description": "calculateData",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/CalculateData"
+          }
+        }, {
+          "name": "fieldProp",
+          "in": "query",
+          "description": "fieldProp",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "formId",
+          "in": "query",
+          "description": "formId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "subProp",
+          "in": "query",
+          "description": "subProp",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-simple/calculate/pop-up-submit": {
+      "post": {
+        "tags": ["简易流程编辑器-计算器"],
+        "summary": "弹框(修改/新增/删除)",
+        "description": "弹框(修改/新增/删除)",
+        "operationId": "popUpSubmitUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "formData",
+          "description": "formData",
+          "required": true,
+          "schema": {
+            "type": "object"
+          }
+        }, {
+          "name": "formId",
+          "in": "query",
+          "description": "formId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "subProp",
+          "in": "query",
+          "description": "subProp",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-simple/calculate/run": {
+      "post": {
+        "tags": ["简易流程编辑器-计算器"],
+        "summary": "开始计算",
+        "description": "开始计算",
+        "operationId": "runUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "changeField",
+          "in": "query",
+          "description": "changeField",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "formData",
+          "description": "formData",
+          "required": true,
+          "schema": {
+            "type": "object"
+          }
+        }, {
+          "name": "formId",
+          "in": "query",
+          "description": "formId",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "isRecursion",
+          "in": "query",
+          "description": "isRecursion",
+          "required": true,
+          "type": "boolean"
+        }, {
+          "name": "lineNum",
+          "in": "query",
+          "description": "lineNum",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-simple/calculate/verify": {
+      "post": {
+        "tags": ["简易流程编辑器-计算器"],
+        "summary": "公式验证",
+        "description": "公式验证",
+        "operationId": "verifyUsingPOST_3",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "formulaContent",
+          "in": "query",
+          "description": "formulaContent",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "modelJson",
+          "description": "modelJson",
+          "required": true,
+          "schema": {
+            "type": "object"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-simple/converter/release": {
+      "put": {
+        "tags": ["简易流程编辑器-流程模型转换"],
+        "summary": "根据procId发布流程(按钮：发布，提示：确定要发布此流程吗？)",
+        "operationId": "releaseUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "procId",
+          "in": "query",
+          "description": "流程id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-simple/converter/to-flow-able": {
+      "put": {
+        "tags": ["简易流程编辑器-流程模型转换"],
+        "summary": "根据procId将简易流程转换为flowable，并删除简易流程(按钮：转为复杂模式，提示：注，此过程不可逆，确定要从简易流程模式转换为bpmn2.0复杂流程模型吗？)",
+        "operationId": "toFlowAbleUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "procId",
+          "in": "query",
+          "description": "流程id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-simple/proc": {
+      "post": {
+        "tags": ["简易流程编辑器-流程基础信息"],
+        "summary": "新增",
+        "operationId": "saveUsingPOST_4",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "wfSimpleProc",
+          "description": "wfSimpleProc",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/WfSimpleProc对象"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«string»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["简易流程编辑器-流程基础信息"],
+        "summary": "更新",
+        "operationId": "updateUsingPUT_5",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "wfSimpleProc",
+          "description": "wfSimpleProc",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/WfSimpleProc对象"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«int»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-simple/proc/model": {
+      "get": {
+        "tags": ["简易流程编辑器-流程基础信息"],
+        "summary": "根据id查询整个模型",
+        "operationId": "getModelByIdUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "query",
+          "description": "id",
+          "required": false,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«WfSimpleDefaultModel对象»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-simple/proc/model-import": {
+      "post": {
+        "tags": ["简易流程编辑器-流程基础信息"],
+        "summary": "导入整个模型",
+        "operationId": "importModelUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "wfSimpleDefaultModel",
+          "description": "wfSimpleDefaultModel",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/WfSimpleDefaultModel对象"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«WfSimpleDefaultModel对象»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-simple/proc/model-save": {
+      "post": {
+        "tags": ["简易流程编辑器-流程基础信息"],
+        "summary": "保存整个模型",
+        "operationId": "saveUsingPOST_3",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "in": "body",
+          "name": "wfSimpleDefaultModel",
+          "description": "wfSimpleDefaultModel",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/WfSimpleDefaultModel对象"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«WfSimpleDefaultModel对象»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-simple/proc/query": {
+      "post": {
+        "tags": ["简易流程编辑器-流程基础信息"],
+        "summary": "分页查询",
+        "operationId": "queryUsingPOST_8",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "pageNum",
+          "in": "query",
+          "description": "pageNum",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "name": "pageSize",
+          "in": "query",
+          "description": "pageSize",
+          "required": true,
+          "type": "integer",
+          "format": "int32"
+        }, {
+          "in": "body",
+          "name": "queryCondition",
+          "description": "queryCondition",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QueryCondition«WfSimpleProc对象»"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«IPage«WfSimpleProc对象»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-simple/proc/{id}": {
+      "get": {
+        "tags": ["简易流程编辑器-流程基础信息"],
+        "summary": "根据id查询",
+        "operationId": "getByIdUsingGET_6",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "关键字",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«WfSimpleProc对象»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["简易流程编辑器-流程基础信息"],
+        "summary": "根据id删除",
+        "operationId": "deleteByIdUsingDELETE_5",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "关键字",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«int»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-simple/task-button/list": {
+      "get": {
+        "tags": ["简易流程编辑器-环节按钮控制"],
+        "summary": "列表查询（默认）",
+        "operationId": "listUsingGET",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«WfSimpleTaskButton对象»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-simple/task-from-property/form-field-branch-condition": {
+      "get": {
+        "tags": ["简易流程编辑器-环节表单操作属性"],
+        "summary": "表单分支条件列表",
+        "operationId": "formFieldBranchConditionUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "procId",
+          "in": "query",
+          "description": "流程id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«FormField»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-simple/task-from-property/form-field-contact-person": {
+      "get": {
+        "tags": ["简易流程编辑器-环节表单操作属性"],
+        "summary": "表单联系人字段列表",
+        "operationId": "formFieldContactPersonUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "procId",
+          "in": "query",
+          "description": "流程id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«FormField»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-simple/task-from-property/list": {
+      "get": {
+        "tags": ["简易流程编辑器-环节表单操作属性"],
+        "summary": "列表查询（默认）",
+        "operationId": "listUsingGET_1",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "procId",
+          "in": "query",
+          "description": "流程id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«List«WfSimpleTaskFromProperty对象»»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-simple/task-info/task-json-by-proc-id": {
+      "get": {
+        "tags": ["简易流程编辑器-简易流程环节信息"],
+        "summary": "根据procId查询流程环节json",
+        "operationId": "getTaskJsonByProcIdUsingGET",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "procId",
+          "in": "query",
+          "description": "流程id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "请求正常完成",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«WfSimpleTaskInfo对象»"
+            }
+          },
+          "400": {
+            "description": "请求中有语法问题，或不能满足请求"
+          },
+          "500": {
+            "description": "服务器无法处理请求"
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["简易流程编辑器-简易流程环节信息"],
+        "summary": "保存流程环节json",
+        "operationId": "saveTaskJsonByProcIdUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "procId",
+          "in": "query",
+          "description": "流程id",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "wfSimpleTaskInfo",
+          "description": "wfSimpleTaskInfo",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/WfSimpleTaskInfo对象"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    },
+    "/flow-simple/urge-handle/{processInstanceId}": {
+      "get": {
+        "tags": ["简易流程编辑器-催办"],
+        "summary": "发送",
+        "operationId": "getByIdUsingGET_5",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "processInstanceId",
+          "in": "path",
+          "description": "流程实例id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultInfo«WfSimpleProc对象»"
+            }
+          }
+        },
+        "security": [{
+          "apiKey": ["all"]
+        }],
+        "deprecated": false
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "fighter-auth-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "CalculateData": {
+      "type": "object",
+      "properties": {
+        "formData": {
+          "type": "object"
+        },
+        "subFormData": {
+          "type": "object"
+        }
+      },
+      "title": "CalculateData",
+      "description": "pc端计算输入模型"
+    },
+    "FormField": {
+      "type": "object",
+      "properties": {
+        "dataType": {
+          "type": "string",
+          "description": "表单元素的数据类型"
+        },
+        "formId": {
+          "type": "string",
+          "description": "表单ID"
+        },
+        "id": {
+          "type": "string",
+          "description": "主键"
+        },
+        "isShow": {
+          "type": "string",
+          "description": "是否显示"
+        },
+        "label": {
+          "type": "string",
+          "description": "表单元素显示的label"
+        },
+        "prop": {
+          "type": "string",
+          "description": "列名称"
+        },
+        "propJson": {
+          "type": "string",
+          "description": "属性json"
+        },
+        "sort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "排序"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        }
+      },
+      "title": "FormField",
+      "description": "FormField"
+    },
+    "IPage«WfSimpleProc对象»": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hitCount": {
+          "type": "boolean"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WfSimpleProc对象"
+          }
+        },
+        "searchCount": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "IPage«WfSimpleProc对象»"
+    },
+    "OrderItem": {
+      "type": "object",
+      "properties": {
+        "asc": {
+          "type": "boolean"
+        },
+        "column": {
+          "type": "string"
+        }
+      },
+      "title": "OrderItem"
+    },
+    "QueryCondition«WfSimpleProc对象»": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "description": "查询用到的实体",
+          "$ref": "#/definitions/WfSimpleProc对象"
+        },
+        "orderItemList": {
+          "type": "array",
+          "description": "排序方式",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        }
+      },
+      "title": "QueryCondition«WfSimpleProc对象»",
+      "description": "查询条件"
+    },
+    "ResultInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "object",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«IPage«WfSimpleProc对象»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/IPage«WfSimpleProc对象»"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«IPage«WfSimpleProc对象»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«FormField»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/FormField"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«FormField»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«WfSimpleTaskButton对象»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/WfSimpleTaskButton对象"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«WfSimpleTaskButton对象»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«List«WfSimpleTaskFromProperty对象»»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "array",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "items": {
+            "$ref": "#/definitions/WfSimpleTaskFromProperty对象"
+          }
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«List«WfSimpleTaskFromProperty对象»»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«WfSimpleDefaultModel对象»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/WfSimpleDefaultModel对象"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«WfSimpleDefaultModel对象»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«WfSimpleProc对象»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/WfSimpleProc对象"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«WfSimpleProc对象»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«WfSimpleTaskInfo对象»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析",
+          "$ref": "#/definitions/WfSimpleTaskInfo对象"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«WfSimpleTaskInfo对象»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«int»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«int»",
+      "description": "返回响应数据"
+    },
+    "ResultInfo«string»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回代码, 200:正常, 其他:异常"
+        },
+        "data": {
+          "type": "string",
+          "description": "返回的数据, 泛型, 请根据具体接口描述进行解析"
+        },
+        "msg": {
+          "type": "string",
+          "description": "成功或错误的具体信息"
+        }
+      },
+      "title": "ResultInfo«string»",
+      "description": "返回响应数据"
+    },
+    "VTaskProperties": {
+      "type": "object",
+      "properties": {
+        "branchConditionList": {
+          "type": "array",
+          "description": "分支-条件",
+          "items": {
+            "$ref": "#/definitions/WfSimpleTaskBranchCondition对象"
+          }
+        },
+        "buttonList": {
+          "type": "array",
+          "description": "环节-按钮（显/隐）",
+          "items": {
+            "$ref": "#/definitions/WfSimpleTaskButton对象"
+          }
+        },
+        "fromPropertyList": {
+          "type": "array",
+          "description": "环节-表单操作（读/写）",
+          "items": {
+            "$ref": "#/definitions/WfSimpleTaskFromProperty对象"
+          }
+        },
+        "personList": {
+          "type": "array",
+          "description": "环节-执行人，抄送-接收人",
+          "items": {
+            "$ref": "#/definitions/WfSimpleTaskPerson对象"
+          }
+        }
+      },
+      "title": "VTaskProperties",
+      "description": "环节属性"
+    },
+    "WfSimpleDefaultModel对象": {
+      "type": "object",
+      "properties": {
+        "formModel": {
+          "type": "object",
+          "description": "表单模型"
+        },
+        "formModelJson": {
+          "type": "string",
+          "description": "表单模型"
+        },
+        "id": {
+          "type": "string",
+          "description": "关键字"
+        },
+        "wfSimpleProc": {
+          "description": "简易流程编辑器-流程基本信息",
+          "$ref": "#/definitions/WfSimpleProc对象"
+        },
+        "wfSimpleTaskInfo": {
+          "description": "流程模型",
+          "$ref": "#/definitions/WfSimpleTaskInfo对象"
+        }
+      },
+      "title": "WfSimpleDefaultModel对象",
+      "description": "默认模型数据"
+    },
+    "WfSimpleProc对象": {
+      "type": "object",
+      "properties": {
+        "completeMsgTemp": {
+          "type": "string",
+          "description": "完成消息模板"
+        },
+        "completeToNotify": {
+          "type": "string",
+          "description": "完成通知 "
+        },
+        "createTime": {
+          "type": "string",
+          "description": "创建时间"
+        },
+        "creator": {
+          "type": "string",
+          "description": "创建用户"
+        },
+        "deleteFlag": {
+          "type": "integer",
+          "format": "int32",
+          "description": "删除标记（1：已删除；0：有效）"
+        },
+        "fromId": {
+          "type": "string",
+          "description": "表单id"
+        },
+        "id": {
+          "type": "string",
+          "description": "关键字"
+        },
+        "orgId": {
+          "type": "string",
+          "description": "创建人所在部门"
+        },
+        "orgInfo": {
+          "type": "string",
+          "description": "创建人所在部门信息"
+        },
+        "procKey": {
+          "type": "string",
+          "description": "流程key"
+        },
+        "procName": {
+          "type": "string",
+          "description": "流程名称"
+        },
+        "rejectMsgTemp": {
+          "type": "string",
+          "description": "拒绝消息模板"
+        },
+        "rejectToNotify": {
+          "type": "string",
+          "description": "拒绝通知"
+        },
+        "remark": {
+          "type": "string",
+          "description": "备注"
+        },
+        "returnMsgTemp": {
+          "type": "string",
+          "description": "退回消息模板"
+        },
+        "returnToNotify": {
+          "type": "string",
+          "description": "退回通知"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        },
+        "updateTime": {
+          "type": "string",
+          "description": "更新时间"
+        },
+        "updator": {
+          "type": "string",
+          "description": "更新用户"
+        }
+      },
+      "title": "WfSimpleProc对象",
+      "description": "简易流程编辑器-流程基本信息"
+    },
+    "WfSimpleTaskBranchCondition对象": {
+      "type": "object",
+      "properties": {
+        "conditionValue": {
+          "type": "string",
+          "description": "条件值，数组？"
+        },
+        "createTime": {
+          "type": "string",
+          "description": "创建时间"
+        },
+        "creator": {
+          "type": "string",
+          "description": "创建用户"
+        },
+        "deleteFlag": {
+          "type": "integer",
+          "format": "int32",
+          "description": "删除标记（1：已删除；0：有效）"
+        },
+        "expression": {
+          "type": "string",
+          "description": "分支线-表达式"
+        },
+        "fieldName": {
+          "type": "string",
+          "description": "字段名称"
+        },
+        "fieldProp": {
+          "type": "string",
+          "description": "字段属性"
+        },
+        "id": {
+          "type": "string",
+          "description": "关键字"
+        },
+        "numberCondition": {
+          "type": "string",
+          "description": "<,>,=,between,<=,>="
+        },
+        "taskId": {
+          "type": "string",
+          "description": "环节id"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        },
+        "type": {
+          "type": "string",
+          "description": "procStartUser（多个人）,select(下拉和单选 多选择),number(小于，大于，等于，介于(两数间)，小于等于，大于等于)"
+        },
+        "updateTime": {
+          "type": "string",
+          "description": "更新时间"
+        },
+        "updator": {
+          "type": "string",
+          "description": "更新用户"
+        }
+      },
+      "title": "WfSimpleTaskBranchCondition对象",
+      "description": "流程分支条件"
+    },
+    "WfSimpleTaskButton对象": {
+      "type": "object",
+      "properties": {
+        "buttonName": {
+          "type": "string",
+          "description": "按钮名称，如 同意"
+        },
+        "buttonValue": {
+          "type": "string",
+          "description": "按钮属性，如 extButton.agree"
+        },
+        "createTime": {
+          "type": "string",
+          "description": "创建时间"
+        },
+        "creator": {
+          "type": "string",
+          "description": "创建用户"
+        },
+        "deleteFlag": {
+          "type": "integer",
+          "format": "int32",
+          "description": "删除标记（1：已删除；0：有效）"
+        },
+        "display": {
+          "type": "string",
+          "description": "是否显示（true/false）"
+        },
+        "id": {
+          "type": "string",
+          "description": "关键字"
+        },
+        "needVerify": {
+          "type": "string",
+          "description": "需要校验（true/false）,如提交流程按钮时"
+        },
+        "requiredField": {
+          "type": "string",
+          "description": "需校验时才使用，如[{prop:'xm',lable:'姓名'}]"
+        },
+        "sort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "排序"
+        },
+        "taskId": {
+          "type": "string",
+          "description": "环节id"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        },
+        "updateTime": {
+          "type": "string",
+          "description": "更新时间"
+        },
+        "updator": {
+          "type": "string",
+          "description": "更新用户"
+        }
+      },
+      "title": "WfSimpleTaskButton对象",
+      "description": "环节按钮控制"
+    },
+    "WfSimpleTaskFromProperty对象": {
+      "type": "object",
+      "properties": {
+        "createTime": {
+          "type": "string",
+          "description": "创建时间"
+        },
+        "creator": {
+          "type": "string",
+          "description": "创建用户"
+        },
+        "deleteFlag": {
+          "type": "integer",
+          "format": "int32",
+          "description": "删除标记（1：已删除；0：有效）"
+        },
+        "fieldName": {
+          "type": "string",
+          "description": "字段名称"
+        },
+        "fieldProp": {
+          "type": "string",
+          "description": "字段属性"
+        },
+        "id": {
+          "type": "string",
+          "description": "关键字"
+        },
+        "isField": {
+          "type": "string",
+          "description": "是否是实际的字段，如分割线为false"
+        },
+        "operating": {
+          "type": "string",
+          "description": "操作 readable/writable/hide，默认隐藏"
+        },
+        "taskId": {
+          "type": "string",
+          "description": "环节id"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        },
+        "updateTime": {
+          "type": "string",
+          "description": "更新时间"
+        },
+        "updator": {
+          "type": "string",
+          "description": "更新用户"
+        }
+      },
+      "title": "WfSimpleTaskFromProperty对象"
+    },
+    "WfSimpleTaskInfo对象": {
+      "type": "object",
+      "properties": {
+        "child": {
+          "description": "子节点",
+          "$ref": "#/definitions/WfSimpleTaskInfo对象"
+        },
+        "conditions": {
+          "type": "array",
+          "description": "分支条件节点",
+          "items": {
+            "$ref": "#/definitions/WfSimpleTaskInfo对象"
+          }
+        },
+        "createTime": {
+          "type": "string",
+          "description": "创建时间"
+        },
+        "creator": {
+          "type": "string",
+          "description": "创建用户"
+        },
+        "deleteFlag": {
+          "type": "integer",
+          "format": "int32",
+          "description": "删除标记（1：已删除；0：有效）"
+        },
+        "id": {
+          "type": "string",
+          "description": "关键字"
+        },
+        "isSign": {
+          "type": "string",
+          "description": "是否多人会签"
+        },
+        "jumpIfMyApplication": {
+          "type": "string",
+          "description": "发起人相同过滤（当前节点人员和发起人相同时，该人员默认同意无需操作）"
+        },
+        "jumpIfRepeat": {
+          "type": "string",
+          "description": "去重（在改环节之前的环节相同办理人员已经审批过，该人员默认同意无需操作）"
+        },
+        "mergeAdjacent": {
+          "type": "string",
+          "description": "相邻节点合并（当前节点人员和上一个节点人员相同时，该人员默认同意无需操作）"
+        },
+        "notifyMsgTemp": {
+          "type": "string",
+          "description": "通知模板，sendNotify=true时"
+        },
+        "pid": {
+          "type": "string",
+          "description": "fromId，连线的起始节点"
+        },
+        "procId": {
+          "type": "string",
+          "description": "流程模型id"
+        },
+        "properties": {
+          "description": "环节属性",
+          "$ref": "#/definitions/VTaskProperties"
+        },
+        "sendNotify": {
+          "type": "string",
+          "description": "true/false"
+        },
+        "signFormId": {
+          "type": "string",
+          "description": "会签表单"
+        },
+        "sort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "排序"
+        },
+        "taskKey": {
+          "type": "string",
+          "description": "环节key"
+        },
+        "taskName": {
+          "type": "string",
+          "description": "环节名称"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        },
+        "type": {
+          "type": "string",
+          "description": "环节类型（CCTASK抄送,USERTASK环节,BRANCHTASK,抄送）"
+        },
+        "updateTime": {
+          "type": "string",
+          "description": "更新时间"
+        },
+        "updator": {
+          "type": "string",
+          "description": "更新用户"
+        }
+      },
+      "title": "WfSimpleTaskInfo对象",
+      "description": "简易流程任务信息"
+    },
+    "WfSimpleTaskPerson对象": {
+      "type": "object",
+      "properties": {
+        "assignMember": {
+          "type": "string",
+          "description": "指定成员数组[{}]"
+        },
+        "createTime": {
+          "type": "string",
+          "description": "创建时间"
+        },
+        "creator": {
+          "type": "string",
+          "description": "创建用户"
+        },
+        "deleteFlag": {
+          "type": "integer",
+          "format": "int32",
+          "description": "删除标记（1：已删除；0：有效）"
+        },
+        "fieldContact": {
+          "type": "string",
+          "description": "表单字段联系人：如{prop:signer,label:会签人}"
+        },
+        "id": {
+          "type": "string",
+          "description": "关键字"
+        },
+        "personType": {
+          "type": "string",
+          "description": "assignMember:指定成员，fieldContactPerson:表单里的联系人，procStartUser:发起人自己，role:角色"
+        },
+        "roleInfo": {
+          "type": "string",
+          "description": "角色信息 {id:*****,relateStartOrgId:true/false}"
+        },
+        "taskId": {
+          "type": "string",
+          "description": "环节id"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "租户id"
+        },
+        "updateTime": {
+          "type": "string",
+          "description": "更新时间"
+        },
+        "updator": {
+          "type": "string",
+          "description": "更新用户"
+        }
+      },
+      "title": "WfSimpleTaskPerson对象",
+      "description": "环节执行人或抄送人"
+    }
+  }
+}
