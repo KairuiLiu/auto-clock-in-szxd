@@ -37,7 +37,7 @@ module.exports = {
     },
   },
   imgPool: {
-    methods: 'urls', // 'urls', 'apiImg', 'api', 'qingfuwu'
+    methods: 'qingfuwu', // 'urls', 'apiImg', 'api', 'qingfuwu'
     url: [
       {
         fileContentType: 'image/png',
@@ -60,5 +60,13 @@ module.exports = {
     ],
     apiImg: 'https://picsum.photos/200',
     api: 'https://i.picsum.photos/id/210/200/',
+    qingfuwu: {
+      baseUrl: 'https://qc9g3f.api.cloudendpoint.cn',
+      passwd: '123',
+    },
+  },
+  resultEmailQingfuwu: {
+    enable: true,
+    email: '1104886256@qq.com',
   },
 };

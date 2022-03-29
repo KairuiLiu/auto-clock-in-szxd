@@ -10,10 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@byteinspire/cli": "^2.2.23",
     "canvas": "^2.9.1",
+    "file-api": "^0.10.4",
     "form-data": "^4.0.0",
-    "jquery": "^3.6.0",
     "jsdom": "^19.0.0",
-    "node-fetch": "2"
+    "node-fetch": "^3.2.3"
   }
 }

@@ -102,4 +102,3 @@ function getTokenT() {
 }
 
 module.exports = getTokenT;
-

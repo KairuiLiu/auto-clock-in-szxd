@@ -1,14 +1,21 @@
-const config = require('./config');
-const fetch = require('node-fetch');
-const qingfuwu = require('./qingfuwu');
+const FormData = require('form-data');
+const config = require('./config.js');
+const fetch = (...args) =>
+  import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
-function reqImage(url) {
+async function reqImage(url) {
+  const { File } = await import('node-fetch');
   return fetch(url)
-    .then((res) => res.buffer())
-    .then((buffer) => fileType(buffer));
+    .then((d) => d.blob())
+    .then((b) => new File([b], 'abc.png'), { type: 'image/png' });
 }
 
-function uploadImage(image, token) {
+async function uploadImage(image, token) {
+  const { FormData } = await import('node-fetch');
+  const form = new FormData();
+  form.append('returnEntity', 'true');
+  form.append('file', image);
+  console.log(form);
   return fetch(
     'http://counselor.swu.edu.cn/gateway//fighter-attachment-manage/common/document/upload',
     {
@@ -20,7 +27,7 @@ function uploadImage(image, token) {
       method: 'POST',
       mode: 'cors',
       credentials: 'include',
-      body: `returnEntity=true&file=`,
+      body: form,
     }
   ).then((d) => d.json());
 }
@@ -33,8 +40,7 @@ function buildImageInfo(imgInfo) {
       fileSize: imgInfo.fileSize,
       fastDFSThumbImagePath: imgInfo.fastDFSThumbImagePath,
       value: `/${imgInfo.fastDFSGroupName}/${imgInfo.fastDFSPath}`,
-      label:
-        imgInfo.fileUniqueCode + imgInfo.fileContentType.replace('image/', '.'),
+      label: imgInfo.fileUniqueCode + imgInfo.fastDFSPath.match(/\.[^\.]+$/)[0],
     },
   ];
 }
@@ -49,19 +55,24 @@ async function getImage(token) {
   else if (config.imgPool.methods === 'apiImg') {
     const image = await reqImage(config.imgPool.apiImg);
     const imgInfo = await uploadImage(image, token);
-    console.log(imgInfo);
-    return;
-    return buildImageInfo(imgInfo);
+    return buildImageInfo(imgInfo.data);
   } else if (config.imgPool.methods === 'api') {
     const imageInfo = fetch(config.imgPool.api).then((d) => d.json());
     return buildImageInfo(imgInfo);
   } else if (config.imgPool.methods === 'qingfuwu') {
-    const imgInfo = await qingfuwu.getImgInfo();
-    return buildImageInfo(imgInfo);
+    const getImageUrl = require('./qingfuwu/node/qingfuwu');
+    const url = await getImageUrl(config.imgPool.qingfuwu.passwd);
+    console.log(url);
+    if (url.code === 0) {
+      const image = await reqImage(url.url.url);
+      const imgInfo = await uploadImage(image, token);
+      console.log(imgInfo.data);
+      return buildImageInfo(imgInfo.data);
+    }
   }
   return [];
 }
 
 module.exports = getImage;
 
-getImage('5e5c0869-887c-4c31-b6b5-5d49e50deaaf');
+getImage('693e5141-8754-4472-8300-bb4cb6af8ca0');
