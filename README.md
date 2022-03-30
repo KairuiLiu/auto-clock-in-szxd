@@ -1,6 +1,8 @@
 <h2 align="center">
-🤖数智X大自动打卡&查寝
+<img src="./how-it-work/img/logo.png" width="192" height="192"/>
+<br/>数智X大自动打卡&查寝
 </h2>
+
 
 <p align="center"><strong>川渝某深蓝色大学数智X大平台, 自动健康上报 & 查寝 & 该平台API文档</strong></p>
 
