@@ -159,7 +159,7 @@ async function getBody({ formList, userInfo, formInfo, token }) {
 }
 
 async function evening() {
-  const token = await getToken();
+  const token = await getToken()
   const userInfo = await zhxdLogin(token);
   const formList = await getList(token);
   if (!formList.length) return false;
@@ -171,30 +171,25 @@ async function evening() {
     token,
   });
   const submit = await submitForm({ token, body, formList: formList[0] });
-  if (submit.code === 200) {
-    if (config.resultEmailQingfuwu.enable) {
-      const restImg = require('./restImage');
-      const emailSend = require('./noteEmail');
-      const rest = await restImg({});
-      await emailSend({ info: `查寝成功, 剩余照片: ${rest}` });
-    }
-    return true;
-  }
   if (config.resultEmailQingfuwu.enable) {
     const restImg = require('./restImage');
     const emailSend = require('./noteEmail');
     const rest = await restImg({});
-    await emailSend({
-      info: `查寝失败`,
-      context: JSON.stringify({
-        token,
-        userInfo,
-        formList,
-        body,
-        submit,
-      }),
-    });
+    if (submit.code === 200)
+      await emailSend({ info: `查寝成功, 剩余照片: ${rest}` });
+    else
+      await emailSend({
+        info: `查寝失败`,
+        context: JSON.stringify({
+          token,
+          userInfo,
+          formList,
+          body,
+          submit,
+        }),
+      });
   }
+  if (submit.code === 200) return true;
   return false;
 }
 

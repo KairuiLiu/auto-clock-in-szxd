@@ -42,7 +42,7 @@ module.exports = {
     //   - 'urls'     通过预先指定提交信息提交, 提交时随机选择一个提交 
     //   - 'api'      GET指定API获取上传信息并提交 
     //   - 'qingfuwu' [推荐]使用轻服务, 预先通过网站上传大量图片到轻服务, 轻服务每次使用一个提交并销毁图片
-    methods: 'apiImg',
+    methods: 'qingfuwu',
     // 若选择`apiImg`则需配置此接口, 默认为一个获得随机200x200图像的接口
     apiImg: 'https://picsum.photos/200',
     // 若选择urls需要手动填写下表, 可以使用`node /src/getLocalImageInfo.js demo.png`获取图片信息,
@@ -62,11 +62,11 @@ module.exports = {
     // 若选择轻服务, 需要填写项目地址与上传下载密码(注意`.cn`后没有`/`)
     qingfuwu: {
       baseUrl: 'https://xxxxxx.api.cloudendpoint.cn',
-      passwd: '',
+      passwd: 'abc123',
     },
   },
   resultEmailQingfuwu: {                    // 是否采用邮件通知, 需要开启轻服务才可以使用
-    enable: true,                           // 是否开启
-    email: 'demo@example.com',              // 邮箱地址
+    enable: false,                           // 是否开启
+    email: '100001@qq.com',              // 邮箱地址
   },
 };

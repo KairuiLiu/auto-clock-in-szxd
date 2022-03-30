@@ -16,17 +16,17 @@ const deployList = [
 ];
 
 const npmPackage = [
-  { name: 'canvas', version: '^2.9.1' },
+  // { name: 'canvas', version: '^2.9.1' },
   // { name: 'form-data', version: '^4.0.0' },
   // { name: 'jsdom', version: '^19.0.0' },
-  // { name: 'node-fetch', version: '^3.2.3' },
+  { name: 'node-fetch', version: '^3.2.3' },
 ];
 
 // (async () => {
 //   const creatFns = deployList.map(async (d) => {
 //     const code = await fs.readFileSync(path.join(__dirname, d.path), 'utf-8');
 //     console.log(code);
-//     return fetch('https://open.qingfuwu.cn/v1/services/qcqzsf/functions', {
+//     return fetch('https://open.qingfuwu.cn/v1/services/qch4pu/functions', {
 //       method: 'POST',
 //       headers: {
 //         Authorization:
@@ -43,7 +43,7 @@ const npmPackage = [
 
 (async () => {
   const creatDeps = npmPackage.map((d) =>
-    fetch('https://open.qingfuwu.cn/v1/services/qcqzsf/packages/async', {
+    fetch('https://open.qingfuwu.cn/v1/services/qch4pu/packages/async', {
       method: 'POST',
       headers: {
         Authorization:

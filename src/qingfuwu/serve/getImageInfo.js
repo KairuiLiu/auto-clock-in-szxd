@@ -1,7 +1,8 @@
 const config = require('./config.js');
 
+
 module.exports = async function(params, context) {
-  if(params.p !== config.passwd)return {
+  if(params.p !== config.imgPool.qingfuwu.passwd)return {
     code: 1,
   }
   const files = await inspirecloud.db.table('_file');

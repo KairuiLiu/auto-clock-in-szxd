@@ -50,14 +50,8 @@ async function reqLoginToken(p = promiseStick()) {
 }
 
 async function reqLogin(tokenPre) {
+  const { FormData } = await import('node-fetch');
   const form = new FormData();
-  console.log(
-    `36501JSESSIONID=${
-      tokenPre.cookie['/cas/']['36501JSESSIONID'].value
-    }; lD01YhBPHVTHO=${tokenPre.cookie['/']['lD01YhBPHVTHO'].value}; ${
-      config.login.encryptCookie
-    }=${tokenPre.cookieE.replaceAll(' path', '')}`
-  );
   form.append('username', config.login.username);
   form.append('password', config.login.password);
   form.append('lt', tokenPre.formInfo.lt);
@@ -71,7 +65,7 @@ async function reqLogin(tokenPre) {
       headers: {
         'cache-control': 'no-cache',
         pragma: 'no-cache',
-        cookie: `36501JSESSIONID=${tokenPre.cookie['/cas/']['36501JSESSIONID'].value}; lD01YhBPHVTHO=${tokenPre.cookie['/']['lD01YhBPHVTHO'].value}; ${config.login.encryptCookie}=tokenPre.cookieE`,
+        cookie: `36501JSESSIONID=${tokenPre.cookie['/cas/']['36501JSESSIONID'].value}; lD01YhBPHVTHO=${tokenPre.cookie['/']['lD01YhBPHVTHO'].value}; ${config.login.encryptCookie}=${tokenPre.cookieE.replace(' path', '')}`,
       },
       body: form,
       method: 'POST',
@@ -92,10 +86,9 @@ async function reqExchangeToken(token) {
 async function getToken() {
   const tokenPre = await reqLoginToken();
   const tokenSucc = await reqLogin(tokenPre);
-  console.log(tokenSucc);
-  return;
   const fighterAuthToken = await reqExchangeToken(tokenSucc);
   return fighterAuthToken;
 }
+
 
 module.exports = getToken;
