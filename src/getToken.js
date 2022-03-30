@@ -1,4 +1,5 @@
-const fetch = require('node-fetch');
+const fetch = (...args) =>
+  import('node-fetch').then(({ default: fetch }) => fetch(...args));
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const config = require('./config.js');
@@ -97,8 +98,4 @@ async function getToken() {
   return fighterAuthToken;
 }
 
-function getTokenT() {
-  return '97e6f2cf-90da-4c4e-b7e3-00bdaac0a42c';
-}
-
-module.exports = getTokenT;
+module.exports = getToken;

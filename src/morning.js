@@ -1,5 +1,6 @@
 const getToken = require('./getToken');
-const fetch = require('node-fetch');
+const fetch = (...args) =>
+  import('node-fetch').then(({ default: fetch }) => fetch(...args));
 const config = require('./config');
 
 async function zhxdLogin(token) {

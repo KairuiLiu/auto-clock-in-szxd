@@ -7,7 +7,9 @@ async function reqImage(url) {
   const { File } = await import('node-fetch');
   return fetch(url)
     .then((d) => d.blob())
-    .then((b) => new File([b], 'abc.png'), { type: 'image/png' });
+    .then((b) => new File([b], `${Math.random().toString(36).slice(-8)}.png`), {
+      type: 'image/png',
+    });
 }
 
 async function uploadImage(image, token) {
@@ -15,7 +17,6 @@ async function uploadImage(image, token) {
   const form = new FormData();
   form.append('returnEntity', 'true');
   form.append('file', image);
-  console.log(form);
   return fetch(
     'http://counselor.swu.edu.cn/gateway//fighter-attachment-manage/common/document/upload',
     {
@@ -62,11 +63,9 @@ async function getImage(token) {
   } else if (config.imgPool.methods === 'qingfuwu') {
     const getImageUrl = require('./qingfuwu/node/qingfuwu');
     const url = await getImageUrl(config.imgPool.qingfuwu.passwd);
-    console.log(url);
     if (url.code === 0) {
       const image = await reqImage(url.url.url);
       const imgInfo = await uploadImage(image, token);
-      console.log(imgInfo.data);
       return buildImageInfo(imgInfo.data);
     }
   }
@@ -74,5 +73,3 @@ async function getImage(token) {
 }
 
 module.exports = getImage;
-
-getImage('693e5141-8754-4472-8300-bb4cb6af8ca0');

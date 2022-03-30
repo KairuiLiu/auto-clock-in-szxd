@@ -3,7 +3,6 @@ lockfileVersion: 5.3
 specifiers:
   '@byteinspire/cli': ^2.2.23
   canvas: ^2.9.1
-  file-api: ^0.10.4
   form-data: ^4.0.0
   jsdom: ^19.0.0
   node-fetch: ^3.2.3
@@ -11,7 +10,6 @@ specifiers:
 dependencies:
   '@byteinspire/cli': 2.2.23
   canvas: 2.9.1
-  file-api: 0.10.4
   form-data: 4.0.0
   jsdom: 19.0.0_canvas@2.9.1
   node-fetch: 3.2.3
@@ -127,16 +125,6 @@ packages:
 
   /@types/dateformat/3.0.1:
     resolution: {integrity: sha512-KlPPdikagvL6ELjWsljbyDIPzNCeliYkqRpI+zea99vBBbCIA5JNshZAwQKTON139c87y9qvTFVgkFd14rtS4g==}
-    dev: false
-
-  /File/0.10.2:
-    resolution: {integrity: sha1-6Jn3dtJz4iQ7qGEFuzsFbQ+5VgQ=}
-    dependencies:
-      mime: 3.0.0
-    dev: false
-
-  /FileList/0.10.2:
-    resolution: {integrity: sha1-YAOxqXFZNBZLZ8Q0rWqHQaHNFHo=}
     dev: false
 
   /abab/2.0.5:
@@ -306,16 +294,6 @@ packages:
     dependencies:
       base64-js: 1.5.1
       ieee754: 1.2.1
-    dev: false
-
-  /bufferjs/2.0.0:
-    resolution: {integrity: sha1-aF5x7VwGAOPXA/+b0BK7MnCjnig=}
-    engines: {node: '>=0.2.0'}
-    dev: false
-
-  /bufferjs/3.0.1:
-    resolution: {integrity: sha1-BpLoKcsQoQVQ5kc5CwNesGw46O8=}
-    engines: {node: '>=0.2.0'}
     dev: false
 
   /cacheable-request/6.1.0:
@@ -716,31 +694,10 @@ packages:
       escape-string-regexp: 1.0.5
     dev: false
 
-  /file-api/0.10.4:
-    resolution: {integrity: sha1-LxASJttyfMAXKg3WiPL2iD1SiD0=}
-    dependencies:
-      bufferjs: 3.0.1
-      File: 0.10.2
-      file-error: 0.10.2
-      FileList: 0.10.2
-      filereader: 0.10.3
-      formdata: 0.10.4
-      mime: 3.0.0
-      remedial: 1.0.8
-    dev: false
-
-  /file-error/0.10.2:
-    resolution: {integrity: sha1-ljtIuSc7PUuEtADuVxvHixc5cko=}
-    dev: false
-
   /file-stream-rotator/0.6.1:
     resolution: {integrity: sha512-u+dBid4PvZw17PmDeRcNOtCP9CCK/9lRN2w+r1xIS7yOL9JFrIBKTvrYsxT4P0pGtThYTn++QS5ChHaUov3+zQ==}
     dependencies:
       moment: 2.29.1
-    dev: false
-
-  /filereader/0.10.3:
-    resolution: {integrity: sha1-x0fUos2PYeVBinwH/hJXpD8KzbE=}
     dev: false
 
   /filesize/6.4.0:
@@ -780,10 +737,6 @@ packages:
         optional: true
     dev: false
 
-  /foreachasync/3.0.0:
-    resolution: {integrity: sha1-VQKYfchxS+M5IJfzLgBxyd7gfPY=}
-    dev: false
-
   /form-data/4.0.0:
     resolution: {integrity: sha512-ETEklSGi5t0QMZuiXoA/Q6vcnxcLQP5vdugSpuAyi6SVGi2clPPp+xgEhuMaHC+zGgn31Kd235W35f7Hykkaww==}
     engines: {node: '>= 6'}
@@ -798,17 +751,6 @@ packages:
     engines: {node: '>=12.20.0'}
     dependencies:
       fetch-blob: 3.1.5
-    dev: false
-
-  /formdata/0.10.4:
-    resolution: {integrity: sha1-liH9wMw2H0oBEd5dJbNfanjcVaA=}
-    dependencies:
-      bufferjs: 2.0.0
-      File: 0.10.2
-      FileList: 0.10.2
-      filereader: 0.10.3
-      foreachasync: 3.0.0
-      remedial: 1.0.8
     dev: false
 
   /fs-extra/9.1.0:
@@ -1286,12 +1228,6 @@ packages:
       mime-db: 1.52.0
     dev: false
 
-  /mime/3.0.0:
-    resolution: {integrity: sha512-jSCU7/VB1loIWBZe14aEYHU/+1UMEHoaO7qxCOVJOw9GgH72VAWppxNcjU+x9a2k3GSIBXNKxXQFqRvvZ7vr3A==}
-    engines: {node: '>=10.0.0'}
-    hasBin: true
-    dev: false
-
   /mimic-fn/2.1.0:
     resolution: {integrity: sha512-OqbOk5oEQeAZ8WXWydlu9HJjz9WVdEIvamMCcXmuqUYjTknH/sqsWvhQ3vgwKFRR1HpjvNBKQ37nbJgYzGqGcg==}
     engines: {node: '>=6'}
@@ -1630,10 +1566,6 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       rc: 1.2.8
-    dev: false
-
-  /remedial/1.0.8:
-    resolution: {integrity: sha512-/62tYiOe6DzS5BqVsNpH/nkGlX45C/Sp6V+NtiN6JQNS1Viay7cWkazmRkrQrdFj2eshDe96SIQNIoMxqhzBOg==}
     dev: false
 
   /repeat-string/1.6.1:
