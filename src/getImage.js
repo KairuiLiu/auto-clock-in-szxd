@@ -61,8 +61,8 @@ async function getImage(token) {
     const imageInfo = fetch(config.imgPool.api).then((d) => d.json());
     return buildImageInfo(imgInfo);
   } else if (config.imgPool.methods === 'qingfuwu') {
-    const getImageUrl = require('./qingfuwu/node/qingfuwu');
-    const url = await getImageUrl(config.imgPool.qingfuwu.passwd);
+    const getImageInfo = require('./qingfuwu/serve/getImageInfo');
+    const url = await getImageInfo({ p: config.imgPool.qingfuwu.passwd });
     if (url.code === 0) {
       const image = await reqImage(url.url.url);
       const imgInfo = await uploadImage(image, token);

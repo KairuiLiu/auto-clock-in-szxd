@@ -144,7 +144,28 @@ async function morning() {
   const formInfo = await getFormInfo({ formList, token });
   const body = getBody({ userInfo, formInfo, formList });
   const submit = await submitForm({ token, body });
-  if (submit.code === 200) return true;
+  if (submit.code === 200) {
+    if (config.resultEmailQingfuwu.enable) {
+      const emailSend = require('./noteEmail');
+      await emailSend({ info: `健康打卡成功` });
+    }
+    return true;
+  }
+  if (config.resultEmailQingfuwu.enable) {
+    const rest = await restImg({});
+    const emailSend = require('./noteEmail');
+    await emailSend({
+      info: `健康打卡失败`,
+      context: JSON.stringify({
+        token,
+        userInfo,
+        formList,
+        formInfo,
+        body,
+        submit,
+      }),
+    });
+  }
   return false;
 }
 

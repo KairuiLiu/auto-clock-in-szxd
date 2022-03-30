@@ -1,10 +1,11 @@
 <h2 align="center">
 <img src="./how-it-work/img/logo.png" width="192" height="192"/>
-<br/>数智X大自动打卡&查寝
+<br/>Auto Clock In SZXD
 </h2>
 
-
 <p align="center"><strong>川渝某深蓝色大学数智X大平台, 自动健康上报 & 查寝 & 该平台API文档</strong></p>
+
+![nodejs](https://img.shields.io/badge/Node\.js-339933?style=flat-square&logo=Node.JS&logoColor=white)![ByteDance](https://img.shields.io/badge/ByteInspire-3c8cff?style=flat-square&logo=ByteDance&logoColor=white)
 
 **⚠️注意: 该项目仅用于数智X大小程序, 不适用于钉钉原生的考勤打卡等功能**
 

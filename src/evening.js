@@ -171,8 +171,30 @@ async function evening() {
     token,
   });
   const submit = await submitForm({ token, body, formList: formList[0] });
-  console.log(submit);
-  if (submit.code === 200) return true;
+  if (submit.code === 200) {
+    if (config.resultEmailQingfuwu.enable) {
+      const restImg = require('./restImage');
+      const emailSend = require('./noteEmail');
+      const rest = await restImg({});
+      await emailSend({ info: `查寝成功, 剩余照片: ${rest}` });
+    }
+    return true;
+  }
+  if (config.resultEmailQingfuwu.enable) {
+    const restImg = require('./restImage');
+    const emailSend = require('./noteEmail');
+    const rest = await restImg({});
+    await emailSend({
+      info: `查寝失败`,
+      context: JSON.stringify({
+        token,
+        userInfo,
+        formList,
+        body,
+        submit,
+      }),
+    });
+  }
   return false;
 }
 
