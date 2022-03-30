@@ -16,9 +16,8 @@ const deployList = [
 ];
 
 const npmPackage = [
-  // { name: 'canvas', version: '^2.9.1' },
-  // { name: 'form-data', version: '^4.0.0' },
-  // { name: 'jsdom', version: '^19.0.0' },
+  { name: 'form-data', version: '^4.0.0' },
+  { name: 'jsdom', version: '^19.0.0' },
   { name: 'node-fetch', version: '^3.2.3' },
 ];
 
@@ -26,11 +25,11 @@ const npmPackage = [
 //   const creatFns = deployList.map(async (d) => {
 //     const code = await fs.readFileSync(path.join(__dirname, d.path), 'utf-8');
 //     console.log(code);
-//     return fetch('https://open.qingfuwu.cn/v1/services/qch4pu/functions', {
+//     return fetch('https://open.qingfuwu.cn/v1/services/xxxxxx/functions', {
 //       method: 'POST',
 //       headers: {
 //         Authorization:
-//           'Bearer icp_8edf5a6bf80c30402d68f7da077f00e92d6ce6dae7818ba6143c6bed98b04b00',
+//           'Bearer icp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
 //       },
 //       body: JSON.stringify({
 //         name: d.name,
@@ -41,18 +40,18 @@ const npmPackage = [
 //   Promise.all(creatFns).then((d) => console.log(d));
 // })();
 
-(async () => {
-  const creatDeps = npmPackage.map((d) =>
-    fetch('https://open.qingfuwu.cn/v1/services/qch4pu/packages/async', {
-      method: 'POST',
-      headers: {
-        Authorization:
-          'Bearer icp_8edf5a6bf80c30402d68f7da077f00e92d6ce6dae7818ba6143c6bed98b04b00',
-      },
-      body: JSON.stringify([d]),
-    }).then((d) => d.json())
-  );
-  Promise.all(creatDeps).then((d) => {
-    console.log(d);
-  });
-})();
+// (async () => {
+//   const creatDeps = npmPackage.map((d) =>
+//     fetch('https://open.qingfuwu.cn/v1/services/xxxxxx/packages/async', {
+//       method: 'POST',
+//       headers: {
+//         Authorization:
+//           'Bearer icp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+//       },
+//       body: JSON.stringify([d]),
+//     }).then((d) => d.json())
+//   );
+//   Promise.all(creatDeps).then((d) => {
+//     console.log(d);
+//   });
+// })();
