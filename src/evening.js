@@ -177,5 +177,3 @@ async function evening() {
 }
 
 module.exports = evening;
-
-evening();
