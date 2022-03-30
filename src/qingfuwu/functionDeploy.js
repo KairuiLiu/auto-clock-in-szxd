@@ -21,37 +21,40 @@ const npmPackage = [
   { name: 'node-fetch', version: '^3.2.3' },
 ];
 
-// (async () => {
-//   const creatFns = deployList.map(async (d) => {
-//     const code = await fs.readFileSync(path.join(__dirname, d.path), 'utf-8');
-//     console.log(code);
-//     return fetch('https://open.qingfuwu.cn/v1/services/xxxxxx/functions', {
-//       method: 'POST',
-//       headers: {
-//         Authorization:
-//           'Bearer icp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-//       },
-//       body: JSON.stringify({
-//         name: d.name,
-//         code,
-//       }),
-//     }).then((d) => d.json());
-//   });
-//   Promise.all(creatFns).then((d) => console.log(d));
-// })();
+async function uploadCode() {
+  const creatFns = deployList.map(async (d) => {
+    const code = await fs.readFileSync(path.join(__dirname, d.path), 'utf-8');
+    console.log(code);
+    return fetch('https://open.qingfuwu.cn/v1/services/xxxxxx/functions', {
+      method: 'POST',
+      headers: {
+        Authorization:
+          'Bearer icp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+      },
+      body: JSON.stringify({
+        name: d.name,
+        code,
+      }),
+    }).then((d) => d.json());
+  });
+  Promise.all(creatFns).then((d) => console.log(d));
+}
 
-// (async () => {
-//   const creatDeps = npmPackage.map((d) =>
-//     fetch('https://open.qingfuwu.cn/v1/services/xxxxxx/packages/async', {
-//       method: 'POST',
-//       headers: {
-//         Authorization:
-//           'Bearer icp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-//       },
-//       body: JSON.stringify([d]),
-//     }).then((d) => d.json())
-//   );
-//   Promise.all(creatDeps).then((d) => {
-//     console.log(d);
-//   });
-// })();
+async function uploadPackage() {
+  const creatDeps = npmPackage.map((d) =>
+    fetch('https://open.qingfuwu.cn/v1/services/xxxxxx/packages/async', {
+      method: 'POST',
+      headers: {
+        Authorization:
+          'Bearer icp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+      },
+      body: JSON.stringify([d]),
+    }).then((d) => d.json())
+  );
+  Promise.all(creatDeps).then((d) => {
+    console.log(d);
+  });
+}
+
+// uploadCode();
+// uploadPackage();
