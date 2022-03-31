@@ -50,45 +50,83 @@ async function reqLoginToken(p = promiseStick()) {
 }
 
 async function reqLogin(tokenPre) {
-  const { FormData } = await import('node-fetch');
-  const form = new FormData();
-  form.append('username', config.login.username);
-  form.append('password', config.login.password);
-  form.append('lt', tokenPre.formInfo.lt);
-  form.append('execution', tokenPre.formInfo.execution);
-  form.append('_eventId', tokenPre.formInfo._eventId);
-  form.append('isQrSubmit', tokenPre.formInfo.isQrSubmit);
-  form.append('qrValue', tokenPre.formInfo.qrValue);
   return fetch(
-    `https://uaaap.swu.edu.cn/cas/login;36501JSESSIONID=${tokenPre.cookie['/cas/']['36501JSESSIONID'].value}?service=http://counselor.swu.edu.cn/gateway/fighter-integrate-uaap/integrate/uaap/cas/resolve-cas-return?next=http://counselor.swu.edu.cn/#/casLogin?toUrl=/index`,
+    `https://uaaap.swu.edu.cn/cas/login;36501JSESSIONID=${tokenPre.cookie['/cas/']['36501JSESSIONID'].value}service=http%3A%2F%2Fcounselor.swu.edu.cn%2Fgateway%2Ffighter-integrate-uaap%2Fintegrate%2Fuaap%2Fcas%2Fresolve-cas-return%3Fnext%3D%252FcasLogin%253FtoUrl%253D%25252Findex`,
     {
       headers: {
-        'cache-control': 'no-cache',
-        pragma: 'no-cache',
-        cookie: `36501JSESSIONID=${tokenPre.cookie['/cas/']['36501JSESSIONID'].value}; lD01YhBPHVTHO=${tokenPre.cookie['/']['lD01YhBPHVTHO'].value}; ${config.login.encryptCookie}=${tokenPre.cookieE.replace(' path', '')}`,
+        Host: 'uaaap.swu.edu.cn',
+        Connection: 'keep-alive',
+        'Content-Length': '183',
+        'Cache-Control': 'max-age=0',
+        'Upgrade-Insecure-Requests': '1',
+        Origin: 'https://uaaap.swu.edu.cn',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'User-Agent':
+          'Mozilla/5.0 (Linux; Android 11; M2102K1C Build/RKQ1.200826.002;) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/98.0.4758.101 Mobile Safari/537.36',
+        Accept:
+          'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+        'X-Requested-With': 'mark.via',
+        'Sec-Fetch-Site': 'same-origin',
+        'Sec-Fetch-Mode': 'navigate',
+        'Sec-Fetch-User': '?1',
+        'Sec-Fetch-Dest': 'document',
+        Referer:
+          'https://uaaap.swu.edu.cn/cas/login?service=http://counselor.swu.edu.cn/gateway/fighter-integrate-uaap/integrate/uaap/cas/resolve-cas-return?next=/casLogin?toUrl=http://counselor.swu.edu.cn',
+        'Accept-Encoding': 'gzip, deflate',
+        'Accept-Language': 'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7',
+        Cookie:
+          `36501JSESSIONID=${tokenPre.cookie['/cas/']['36501JSESSIONID'].value}; ` +
+          `lD01YhBPHVTHO=${tokenPre.cookie['/']['lD01YhBPHVTHO'].value};` +
+          `${config.login.encryptCookie}=${tokenPre.cookieE.replace(
+            ' path',
+            ''
+          )}`,
       },
-      body: form,
+      body: `username=${config.login.username}&password=${config.login.password}&lt=${tokenPre.formInfo.lt}&execution=e1s1&_eventId=submit&isQrSubmit=false&qrValue=`,
       method: 'POST',
+      redirect: 'manual',
     }
   ).then((d) => {
-    // console.log(d.status);
-    // console.log(d.headers.raw());
-    return d;
+    if (d.status >= 300 && d.status < 400)
+      return d.headers.get('location').match(/ticket=(.+)/)[1];
+    else return Promise.reject('login Fialed');
   });
 }
 
 async function reqExchangeToken(token) {
   return fetch(
-    `http://counselor.swu.edu.cn/gateway/fighter-integrate-uaap/integrate/uaap/cas/exchange-token?token=${token}&_appKey=lighter-portal`
-  ).then((d) => d.json());
+    `http://counselor.swu.edu.cn/gateway/fighter-integrate-uaap/integrate/uaap/cas/resolve-cas-return?ticket=${token}&next=http://counselor.swu.edu.cn/#/casLogin?toUrl=%2Findex`,
+    {
+      headers: {
+        Host: 'counselor.swu.edu.cn',
+        Connection: 'keep-alive',
+        'Cache-Control': 'max-age=0',
+        'Upgrade-Insecure-Requests': '1',
+        'User-Agent':
+          'Mozilla/5.0 (Linux; Android 11; M2102K1C Build/RKQ1.200826.002;) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/98.0.4758.101 Mobile Safari/537.36',
+        Accept:
+          'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+        'X-Requested-With': 'mark.via',
+        'Accept-Encoding': 'gzip, deflate',
+        'Accept-Language': 'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7',
+        Referer: 'http://counselor.swu.edu.cn/',
+      },
+      redirect: 'manual',
+    }
+  ).then(async (d) => {
+    console.log(d.headers);
+    t = await d.json();
+    console.log(t);
+    return d;
+  });
 }
 
 async function getToken() {
   const tokenPre = await reqLoginToken();
-  const tokenSucc = await reqLogin(tokenPre);
-  const fighterAuthToken = await reqExchangeToken(tokenSucc);
+  const tokenSuccPre = await reqLogin(tokenPre);
+  const tokenSucc = decodeURIComponent(tokenSuccPre);
+  const fighterAuthToken = await reqExchangeToken(tokenSuccPre);
   return fighterAuthToken;
 }
-
 
 module.exports = getToken;
