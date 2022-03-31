@@ -159,7 +159,7 @@ async function getBody({ formList, userInfo, formInfo, token }) {
 }
 
 async function evening() {
-  const token = await getToken()
+  const token = await getToken();
   const userInfo = await zhxdLogin(token);
   const formList = await getList(token);
   if (!formList.length) return false;
@@ -175,7 +175,7 @@ async function evening() {
     const restImg = require('./restImage');
     const emailSend = require('./noteEmail');
     const rest = await restImg({});
-    if (submit.code === 200)
+    if (submit && submit.code === 200)
       await emailSend({ info: `查寝成功, 剩余照片: ${rest}` });
     else
       await emailSend({
@@ -189,7 +189,7 @@ async function evening() {
         }),
       });
   }
-  if (submit.code === 200) return true;
+  if (submit && submit.code === 200) return true;
   return false;
 }
 

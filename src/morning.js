@@ -61,7 +61,7 @@ async function getFormInfo({ formList, token }) {
 
 async function submitForm({ token, body }) {
   return fetch(
-    `http://counselor.swu.edu.cn/gateway//fighter-workflow/form-instance/save?formId=${config.morning.formId}&procDefId=dundefined`,
+    `http://counselor.swu.edu.cn/gateway//fighter-workflow/form-instance/save?formId=${config.morning.formId}&procDefId=`,
     {
       method: 'POST',
       headers: {
@@ -145,8 +145,8 @@ async function morning() {
   const body = getBody({ userInfo, formInfo, formList });
   const submit = await submitForm({ token, body });
   if (config.resultEmailQingfuwu.enable) {
-    const emailSend = require('./qingfuwu/serve/noteEmail');
-    if (submit.code === 200) {
+    const emailSend = require('./noteEmail');
+    if (submit && submit.code === 200) {
       await emailSend({ info: `健康打卡成功` });
     } else
       await emailSend({
@@ -161,7 +161,7 @@ async function morning() {
         }),
       });
   }
-  if (submit.code === 200) return true;
+  if (submit && submit.code === 200) return true;
   return false;
 }
 
