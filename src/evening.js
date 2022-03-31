@@ -76,7 +76,7 @@ async function submitForm({ token, body, formList }) {
     .then((d) => d.json())
     .then((d) => {
       if (d.code !== 200) return Promise.reject(d.msg);
-      return d.data;
+      return d;
     });
 }
 

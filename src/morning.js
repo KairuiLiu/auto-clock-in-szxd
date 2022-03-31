@@ -75,7 +75,7 @@ async function submitForm({ token, body }) {
     .then((d) => d.json())
     .then((d) => {
       if (d.code !== 200) return Promise.reject(d.msg);
-      return d.data;
+      return d;
     });
 }
 
@@ -131,7 +131,7 @@ function getBody({ userInfo, formInfo, formList }) {
     },
     dkrq: `${t.getFullYear()}-${
       t.getMonth() + 1
-    }-${t.getDate()} ${t.getHours()}:${t.getMinutes()}`,
+    }-${t.getDate()} ${t.getUTCHours()+8}:${t.getMinutes()}`,
     ...config.morning.formInfo,
     businessKey: formList[0].id,
   };
