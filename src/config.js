@@ -68,7 +68,7 @@ module.exports = {
   resultEmai: {                                   // 采用邮件通知
     enable: false,                                // 是否开启
     qing: false,                                  // 是否采用轻服务中间件
-    saver: '1104886256@qq.com',                   // 收件邮箱地址
+    saver: '1111111111@qq.com',                   // 收件邮箱地址
     senderService: '',                            // 发件邮箱服务器(采用轻服务中间件可以不写)
     sender: '',                                   // 发件邮箱地址(采用轻服务中间件可以不写)
     senderPassword: '',                           // 发件邮箱密码(采用轻服务中间件可以不写)
