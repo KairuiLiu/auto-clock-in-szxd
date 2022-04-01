@@ -144,12 +144,12 @@ async function morning() {
   const formInfo = await getFormInfo({ formList, token });
   const body = getBody({ userInfo, formInfo, formList });
   const submit = await submitForm({ token, body });
-  if (config.resultEmai.enable) {
+  if (config.resultEmail.enable) {
     const emailSend = require('./mailNotify');
     if (submit && submit.code === 200) {
-      await emailSend(config.resultEmai, { subject: `健康打卡成功` });
+      await emailSend(config.resultEmail, { subject: `健康打卡成功` });
     } else
-      await emailSend(config.resultEmai, {
+      await emailSend(config.resultEmail, {
         subject: `健康打卡失败`,
         html: JSON.stringify({
           token,

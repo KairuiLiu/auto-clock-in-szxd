@@ -171,10 +171,10 @@ async function evening() {
     token,
   });
   const submit = await submitForm({ token, body, formList: formList[0] });
-  if (config.resultEmai.enable) {
+  if (config.resultEmail.enable) {
     const emailSend = require('./mailNotify');
     if (submit && submit.code === 200) {
-      await emailSend(config.resultEmai, { subject: `查寝成功, 剩余照片: `, getRest: true });
+      await emailSend(config.resultEmail, { subject: `查寝成功, 剩余照片: `, getRest: true });
     } else
       await emailSend({
         subject: `查寝失败`,

@@ -65,7 +65,7 @@ module.exports = {
       passwd: 'abc123',
     },
   },
-  resultEmai: {                                   // 采用邮件通知
+  resultEmail: {                                  // 采用邮件通知
     enable: false,                                // 是否开启
     qing: false,                                  // 是否采用轻服务中间件
     saver: '1111111111@qq.com',                   // 收件邮箱地址

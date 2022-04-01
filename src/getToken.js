@@ -108,9 +108,7 @@ async function reqExchangeToken(token) {
       redirect: 'manual',
     }
   ).then(async (d) => {
-    console.log(d.headers);
     t = await d.json();
-    console.log(t);
     return d;
   });
 }
@@ -124,5 +122,3 @@ async function getToken() {
 }
 
 module.exports = getToken;
-
-getToken();

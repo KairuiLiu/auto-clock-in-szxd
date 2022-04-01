@@ -3,7 +3,7 @@ async function sendEmailCheck(config, context) {
     if (context.getRest) {
       const restImg = require('./restImage');
       const rest = await restImg({});
-      context.subject += rest;
+      context.subject += rest.rest;
     }
     context.html = context.html || context.subject;
     await inspirecloud.middleware.sendEmail.sendEmail({
