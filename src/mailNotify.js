@@ -6,13 +6,13 @@ async function sendEmailCheck(config, context) {
       context.subject += rest.rest;
     }
     context.html = context.html || context.subject;
-    await inspirecloud.middleware.sendEmail.sendEmail({
+    return await inspirecloud.middleware.sendEmail.sendEmail({
       ...config,
       ...context,
     });
   } else {
     context.html = context.html || context.subject;
-    await sendEmail({ ...config, ...context });
+    return await sendEmail({ ...config, ...context });
   }
 }
 
