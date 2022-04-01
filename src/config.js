@@ -65,8 +65,12 @@ module.exports = {
       passwd: 'abc123',
     },
   },
-  resultEmailQingfuwu: {                    // 是否采用邮件通知, 需要开启轻服务才可以使用
-    enable: false,                           // 是否开启
-    email: '100001@qq.com',              // 邮箱地址
+  resultEmai: {                                   // 采用邮件通知
+    enable: false,                                // 是否开启
+    qing: false,                                  // 是否采用轻服务中间件
+    saver: '1104886256@qq.com',                   // 收件邮箱地址
+    senderService: '',                            // 发件邮箱服务器(采用轻服务中间件可以不写)
+    sender: '',                                   // 发件邮箱地址(采用轻服务中间件可以不写)
+    senderPassword: '',                           // 发件邮箱密码(采用轻服务中间件可以不写)
   },
 };

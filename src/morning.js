@@ -129,9 +129,9 @@ function getBody({ userInfo, formInfo, formList }) {
       isMobileEnabled: true,
       isOffset: true,
     },
-    dkrq: `${t.getFullYear()}-${
-      t.getMonth() + 1
-    }-${t.getDate()} ${t.getUTCHours()+8}:${t.getMinutes()}`,
+    dkrq: `${t.getFullYear()}-${t.getMonth() + 1}-${t.getDate()} ${
+      t.getUTCHours() + 8
+    }:${t.getMinutes()}`,
     ...config.morning.formInfo,
     businessKey: formList[0].id,
   };
@@ -144,14 +144,14 @@ async function morning() {
   const formInfo = await getFormInfo({ formList, token });
   const body = getBody({ userInfo, formInfo, formList });
   const submit = await submitForm({ token, body });
-  if (config.resultEmailQingfuwu.enable) {
-    const emailSend = require('./noteEmail');
+  if (config.resultEmai.enable) {
+    const emailSend = require('./mailNotify');
     if (submit && submit.code === 200) {
-      await emailSend({ info: `健康打卡成功` });
+      await emailSend(config.resultEmai, { subject: `健康打卡成功` });
     } else
-      await emailSend({
-        info: `健康打卡失败`,
-        context: JSON.stringify({
+      await emailSend(config.resultEmai, {
+        subject: `健康打卡失败`,
+        html: JSON.stringify({
           token,
           userInfo,
           formList,

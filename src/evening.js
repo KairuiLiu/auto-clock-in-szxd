@@ -171,16 +171,14 @@ async function evening() {
     token,
   });
   const submit = await submitForm({ token, body, formList: formList[0] });
-  if (config.resultEmailQingfuwu.enable) {
-    const restImg = require('./restImage');
-    const emailSend = require('./noteEmail');
-    const rest = await restImg({});
-    if (submit && submit.code === 200)
-      await emailSend({ info: `查寝成功, 剩余照片: ${rest}` });
-    else
+  if (config.resultEmai.enable) {
+    const emailSend = require('./mailNotify');
+    if (submit && submit.code === 200) {
+      await emailSend(config.resultEmai, { subject: `查寝成功, 剩余照片: `, getRest: true });
+    } else
       await emailSend({
-        info: `查寝失败`,
-        context: JSON.stringify({
+        subject: `查寝失败`,
+        html: JSON.stringify({
           token,
           userInfo,
           formList,

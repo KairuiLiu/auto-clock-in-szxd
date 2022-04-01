@@ -9,14 +9,14 @@ const deployList = [
   { path: '../getImage.js', name: 'getImage.js' },
   { path: '../getToken.js', name: 'getToken.js' },
   { path: '../morning.js', name: 'morning.js' },
+  { path: '../mailNotify.js', name: 'mailNotify.js' },
   { path: './serve/getImageInfo.js', name: 'getImageInfo.js' },
-  { path: './serve/noteEmail.js', name: 'noteEmail.js' },
   { path: './serve/passwd.js', name: 'passwd.js' },
   { path: './serve/restImage.js', name: 'restImage.js' },
 ];
 
 const npmPackage = [
-  { name: 'form-data', version: '^4.0.0' },
+  { name: 'nodemailer', version: '^6.7.3' },
   { name: 'jsdom', version: '^19.0.0' },
   { name: 'node-fetch', version: '^3.2.3' },
 ];

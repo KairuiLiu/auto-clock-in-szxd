@@ -1,4 +1,3 @@
-const FormData = require('form-data');
 const config = require('./config.js');
 const fetch = (...args) =>
   import('node-fetch').then(({ default: fetch }) => fetch(...args));

@@ -3,7 +3,6 @@ const fetch = (...args) =>
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const config = require('./config.js');
-const FormData = require('form-data');
 
 function promiseStick() {
   let res, rej;
@@ -51,12 +50,12 @@ async function reqLoginToken(p = promiseStick()) {
 
 async function reqLogin(tokenPre) {
   return fetch(
-    `https://uaaap.swu.edu.cn/cas/login;36501JSESSIONID=${tokenPre.cookie['/cas/']['36501JSESSIONID'].value}service=http%3A%2F%2Fcounselor.swu.edu.cn%2Fgateway%2Ffighter-integrate-uaap%2Fintegrate%2Fuaap%2Fcas%2Fresolve-cas-return%3Fnext%3D%252FcasLogin%253FtoUrl%253D%25252Findex`,
+    encodeURI(
+      `https://uaaap.swu.edu.cn/cas/login;36501JSESSIONID=${tokenPre.cookie['/cas/']['36501JSESSIONID'].value}?http://counselor.swu.edu.cn/gateway/fighter-integrate-uaap/integrate/uaap/cas/resolve-cas-return?next=http%3A%2F%2Fcounselor.swu.edu.cn%2F%23%2FcasLogin%3FtoUrl%3D%252Findex`
+    ),
     {
       headers: {
         Host: 'uaaap.swu.edu.cn',
-        Connection: 'keep-alive',
-        'Content-Length': '183',
         'Cache-Control': 'max-age=0',
         'Upgrade-Insecure-Requests': '1',
         Origin: 'https://uaaap.swu.edu.cn',
@@ -65,13 +64,12 @@ async function reqLogin(tokenPre) {
           'Mozilla/5.0 (Linux; Android 11; M2102K1C Build/RKQ1.200826.002;) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/98.0.4758.101 Mobile Safari/537.36',
         Accept:
           'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-        'X-Requested-With': 'mark.via',
         'Sec-Fetch-Site': 'same-origin',
         'Sec-Fetch-Mode': 'navigate',
         'Sec-Fetch-User': '?1',
         'Sec-Fetch-Dest': 'document',
         Referer:
-          'https://uaaap.swu.edu.cn/cas/login?service=http://counselor.swu.edu.cn/gateway/fighter-integrate-uaap/integrate/uaap/cas/resolve-cas-return?next=/casLogin?toUrl=http://counselor.swu.edu.cn',
+          'https://uaaap.swu.edu.cn/cas/login?service=http://counselor.swu.edu.cn/gateway/fighter-integrate-uaap/integrate/uaap/cas/resolve-cas-return?next=http://counselor.swu.edu.cn/#/casLogin?toUrl=/index',
         'Accept-Encoding': 'gzip, deflate',
         'Accept-Language': 'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7',
         Cookie:
@@ -95,21 +93,17 @@ async function reqLogin(tokenPre) {
 
 async function reqExchangeToken(token) {
   return fetch(
-    `http://counselor.swu.edu.cn/gateway/fighter-integrate-uaap/integrate/uaap/cas/resolve-cas-return?ticket=${token}&next=http://counselor.swu.edu.cn/#/casLogin?toUrl=%2Findex`,
+    decodeURI(
+      `http://counselor.swu.edu.cn/gateway/fighter-integrate-uaap/integrate/uaap/cas/resolve-cas-return?next=http%3A%2F%2Fcounselor.swu.edu.cn%2F%23%2FcasLogin%3FtoUrl%3D%252Findex&ticket=${token}`
+    ),
     {
       headers: {
         Host: 'counselor.swu.edu.cn',
         Connection: 'keep-alive',
-        'Cache-Control': 'max-age=0',
-        'Upgrade-Insecure-Requests': '1',
         'User-Agent':
           'Mozilla/5.0 (Linux; Android 11; M2102K1C Build/RKQ1.200826.002;) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/98.0.4758.101 Mobile Safari/537.36',
-        Accept:
-          'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-        'X-Requested-With': 'mark.via',
         'Accept-Encoding': 'gzip, deflate',
-        'Accept-Language': 'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7',
-        Referer: 'http://counselor.swu.edu.cn/',
+        'Accept-Language': 'zh',
       },
       redirect: 'manual',
     }
@@ -130,3 +124,5 @@ async function getToken() {
 }
 
 module.exports = getToken;
+
+getToken();

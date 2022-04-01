@@ -1,13 +1,15 @@
 const getToken = require('./getToken');
 const fs = require('fs');
-const FormData = require('form-data');
 const fetch = (...args) =>
   import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
-async function uploadImage(image, token) {
+async function uploadImage(imgpath, token) {
+  const { FormData } = await import('node-fetch');
+  const { fileFromSync } = await import('node-fetch');
   const form = new FormData();
+  const blob = fileFromSync(imgpath, 'image/png')
   form.append('returnEntity', 'true');
-  form.append('file', image);
+  form.append('file', blob);
   return fetch(
     'http://counselor.swu.edu.cn/gateway//fighter-attachment-manage/common/document/upload',
     {
@@ -39,22 +41,6 @@ function buildImageInfo(imgInfo) {
 
 (async () => {
   const token = await getToken();
-  const image = fs.createReadStream(process.argv[2]);
-  const imgInfo = await uploadImage(image, token);
-  const imgInfoParams = (({
-    fileContentType,
-    fileUniqueCode,
-    fileSize,
-    fastDFSThumbImagePath,
-    fastDFSGroupName,
-    fastDFSPath,
-  }) => ({
-    fileContentType,
-    fileUniqueCode,
-    fileSize,
-    fastDFSThumbImagePath,
-    fastDFSGroupName,
-    fastDFSPath,
-  }))(imgInfo.data);
-  console.log(imgInfoParams);
+  const imgInfo = await uploadImage(process.argv[2], token);
+  console.log(buildImageInfo(imgInfo.data));
 })();

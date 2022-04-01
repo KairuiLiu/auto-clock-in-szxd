@@ -11,8 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "@byteinspire/cli": "^2.2.23",
-    "form-data": "^4.0.0",
     "jsdom": "^19.0.0",
-    "node-fetch": "^3.2.3"
+    "node-fetch": "^3.2.3",
+    "nodemailer": "^6.7.3"
   }
 }

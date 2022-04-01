@@ -2,15 +2,15 @@ lockfileVersion: 5.3
 
 specifiers:
   '@byteinspire/cli': ^2.2.23
-  form-data: ^4.0.0
   jsdom: ^19.0.0
   node-fetch: ^3.2.3
+  nodemailer: ^6.7.3
 
 dependencies:
   '@byteinspire/cli': 2.2.23
-  form-data: 4.0.0
   jsdom: 19.0.0
   node-fetch: 3.2.3
+  nodemailer: 6.7.3
 
 packages:
 
@@ -1184,6 +1184,11 @@ packages:
       data-uri-to-buffer: 4.0.0
       fetch-blob: 3.1.5
       formdata-polyfill: 4.0.10
+    dev: false
+
+  /nodemailer/6.7.3:
+    resolution: {integrity: sha512-KUdDsspqx89sD4UUyUKzdlUOper3hRkDVkrKh/89G+d9WKsU5ox51NWS4tB1XR5dPUdR4SP0E3molyEfOvSa3g==}
+    engines: {node: '>=6.0.0'}
     dev: false
 
   /normalize-path/3.0.0:
