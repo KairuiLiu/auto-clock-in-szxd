@@ -1,5 +1,7 @@
 ## 获取token&上传图片
 
+难点在于请求链接中有很多next的地址, 所以对哪一部分url进行decode, 对哪一部分进行encode需要细心分析
+
 ### 获取登录界面token
 
 #### 接口URL
@@ -34,7 +36,6 @@ lD01YhBPHVTHP=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX...
 ```
 同时注意链接中拼入一个Token
 
-
 #### 接口URL
 > https://uaaap.swu.edu.cn/cas/login;36501JSESSIONID=XXXXXXXXXXXXXXXXXXXXXXXXXXXXX-n1?service=http://counselor.swu.edu.cn/gateway/fighter-integrate-uaap/integrate/uaap/cas/resolve-cas-return?next=http://counselor.swu.edu.cn/#/casLogin?toUrl=/index
 
@@ -61,7 +62,6 @@ lD01YhBPHVTHP=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX...
   "qrValue": ""
 }
 ```
-
 | 参数名     | 示例值 | 参数类型 | 是否必填                                                                        | 参数描述 |
 | ---------- | ------ | -------- | ------------------------------------------------------------------------------- | -------- |
 | username   | String | 是       | 用户名                                                                          |
@@ -94,11 +94,10 @@ lD01YhBPHVTHP=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX...
 | token   | ST-000000-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx | Text     | 是       | 上一步请求获得的token |
 | _appKey | lighter-portal                                          | Text     | 是       | 未知参数, 保留即可    |
 
-#### 成功响应示例
-```javascript
-获取临时授权码: XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXX
-```
 
+```javascript
+从header中获取临时授权码: XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXX
+```
 
 ### 上传图片
 

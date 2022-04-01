@@ -56,5 +56,5 @@ async function uploadPackage() {
   });
 }
 
-// uploadCode();
+uploadCode();
 // uploadPackage();
