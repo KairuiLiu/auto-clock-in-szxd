@@ -191,7 +191,7 @@ async function morning() {
       const emailSend = require('./mailNotify');
       await emailSend({
         subject: `健康打卡失败`,
-        // html: error,
+        html: `<p>${error}</p>`,
       });
     }
     return { code: 1, msg: error };
