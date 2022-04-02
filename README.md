@@ -5,7 +5,7 @@
 
 <p align="center"><strong>川渝某深蓝色大学数智X大平台, 自动健康上报 & 查寝 & 该平台API文档</strong></p>
 
-![nodejs](https://img.shields.io/badge/Node\.js-339933?style=flat-square&logo=Node.JS&logoColor=white)![ByteDance](https://img.shields.io/badge/ByteInspire-3c8cff?style=flat-square&logo=ByteDance&logoColor=white)![Tencent](https://img.shields.io/badge/TencentCloud-1261fe?style=flat-square&logo=IBMCloud&logoColor=white)
+![nodejs](https://img.shields.io/badge/Node\.js-339933?style=flat-square&logo=Node.JS&logoColor=white)![ByteDance](https://img.shields.io/badge/ByteInspire-3c8cff?style=flat-square&logo=ByteDance&logoColor=white)![Tencent](https://img.shields.io/badge/TencentCloud-1261fe?style=flat-square&logo=GoogleCloud&logoColor=white)
 
 **⚠️注意: 该项目仅用于数智X大小程序, 不适用于钉钉原生的考勤打卡等功能**
 
@@ -16,7 +16,7 @@
 - 邮件报告打卡结果
 - 高度可自定义化
 - [可选]依托于字节跳动轻服务, 零成本实现云函数, 云数据库, 小中间件, 页面部署
-- [可选]依托于腾讯云函数(字节跳动轻服务暂时无法注册的替代品)
+- [可选]依托于腾讯云云函数与腾讯云对象存储(可能产生费用)
 
 ### 📁文件结构说明
 
@@ -31,9 +31,9 @@
 
 ### 🛠️如何使用
 
-- [安装与基本使用](./how-it-work/安装与使用.md)
-- [手摸手带你将代码部署到轻服务](./how-it-work/部署到轻服务.md)
+- [部署到本地/云服务器](./how-it-work/部署到本地与云服务器.md)
 - [部署到腾讯云云函数](./how-it-work/部署到腾讯云云函数.md)
+- [手摸手带你将代码部署到轻服务](./how-it-work/部署到轻服务.md)
 
 ### ⚙️工作原理
 
@@ -44,6 +44,15 @@
 ### 🤔关于项目
 
 - [缘起](./how-it-work/缘起.md)
+
+### 🤕故障排除
+
+- > (node:4447) UnhandledPromiseRejectionWarning: Error: Not supported
+  
+  升级Node.JS到最新版本(推荐使用`n`工具进行升级)
+- > fialed, reason: Connect ETIMEOUT XXX.XXX.XXX.XXX:XX  
+  
+  请求超时, 如果建议更换更好的网络环境(或者使用轻服务)
 
 ### 💄自定义
 
