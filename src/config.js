@@ -68,7 +68,11 @@ module.exports = {
     },
     // 若选择腾讯云COS, 则需填写存储地址
     tencentCOS:{
-      
+      secretId: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',     // 登录 https://console.cloud.tencent.com/cam/capi 生成
+      secretKey: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',        // 登录 https://console.cloud.tencent.com/cam/capi 生成
+      bucket: 'xxxxxxx-1234567890',               // 在存储桶-概览-基本信息-存储桶名称
+      region: 'ap-xxxxxxxx',                      // 在存储桶-概览-基本信息-所属地域括号中内容
+      prefix: 'img/'                              // 存储图片文件夹, 非必要不动
     }
   },
   resultEmail: {                                  // 采用邮件通知

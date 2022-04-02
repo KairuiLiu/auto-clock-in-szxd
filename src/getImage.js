@@ -59,6 +59,17 @@ async function getImage(token) {
   } else if (config.imgPool.methods === 'api') {
     const imageInfo = fetch(config.imgPool.api).then((d) => d.json());
     return buildImageInfo(imgInfo);
+  } else if (config.imgPool.methods === 'tencentCOS') {
+    const getImageInfo = require('./tencent/server/getImageInfo');
+    const removeImage = require('./tencent/server/removeImage');
+    const preinfo = await getImageInfo();
+    if (!preinfo.code) {
+      const image = await reqImage(preinfo.url);
+      const imgInfo = await uploadImage(image, token);
+      console.log(imgInfo);
+      if (preinfo.len > 1) await removeImage(preinfo.key);
+      return buildImageInfo(imgInfo.data);
+    }
   } else if (config.imgPool.methods === 'qingfuwu') {
     const getImageInfo = require('./getImageInfo');
     const url = await getImageInfo({ p: config.imgPool.qingfuwu.passwd });
@@ -72,4 +83,3 @@ async function getImage(token) {
 }
 
 module.exports = getImage;
-

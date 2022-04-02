@@ -45,7 +45,7 @@
 
 - [缘起](./how-it-work/缘起.md)
 
-### 🤕故障排除
+### 🤕故障排查
 
 - > (node:4447) UnhandledPromiseRejectionWarning: Error: Not supported
   

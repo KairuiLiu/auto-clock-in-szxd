@@ -4,7 +4,7 @@ const config = require('./config');
 async function app(event, context) {
   const t = new Date();
   t.setHours(t.getHours() + 8);
-  if (t.getUTCHours() + t.getMinutes() / 60 < config.splitTime) {
+  if (t.getUTCHours() + t.getMinutes() / 60 < splitTime) {
     const morning = require('./morning');
     return morning();
   } else {
