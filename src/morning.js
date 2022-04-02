@@ -162,7 +162,7 @@ async function morning() {
   const token = await getToken();
   const userInfo = await zhxdLogin(token);
   const formList = await getList(token);
-  const formId = await getFormId(token);
+  const formId = await getFormId(token) || config.morning.formId;
   const formInfo = await getFormInfo({ formList, token, formId });
   const body = getBody({ userInfo, formInfo, formList, formId });
   const submit = await submitForm({ token, body, formId });
