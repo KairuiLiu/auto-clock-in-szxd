@@ -13,7 +13,7 @@ async function sendEmailCheck(context) {
     }
   }
   context.html = context.html || context.subject;
-  if (config.qing)
+  if (config.resultEmail.qingMid)
     return await inspirecloud.middleware.sendEmail.sendEmail({
       ...config.resultEmail,
       ...context,
