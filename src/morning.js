@@ -3,6 +3,12 @@ const fetch = (...args) =>
   import('node-fetch').then(({ default: fetch }) => fetch(...args));
 const config = require('./config');
 
+function get2bit(v) {
+  t = Number(v);
+  if (t < 10) return '0' + v;
+  return v;
+}
+
 async function zhxdLogin(token) {
   return fetch(
     `http://counselor.swu.edu.cn/gateway//fighter-integrate-dingtalk-login/integrate/ding-talk/resolve-return?code=${token}&corpId=${config.corpId}`,
@@ -42,9 +48,24 @@ async function getList(token) {
     });
 }
 
-async function getFormInfo({ formList, token }) {
+async function getFormId(token) {
+  return fetch(`http://counselor.swu.edu.cn/js/chunk-8c41e2b0.aca5308c.js`, {
+    headers: {
+      'User-Agent':
+        'Mozilla/5.0 (Linux; U; Android 11; zh-CN; M2102K1C Build/RKQ1.200826.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/69.0.3497.100 UWS/3.22.1.210 Mobile Safari/537.36 AliApp(DingTalk/6.5.0) com.alibaba.android.rimet/23628571 Channel/700159 language/zh-CN abi/64 UT4Aplus/0.2.25 colorScheme/light',
+      Cookie: `fighter-auth-token=${token}`,
+    },
+  })
+    .then((d) => {
+      if (d.status !== 200) return Promise.reject(d.msg);
+      return d.text();
+    })
+    .then((d) => d.match(/formId=([0-9a-zA-Z]+)/)[1]);
+}
+
+async function getFormInfo({ formList, token, formId }) {
   return fetch(
-    `http://counselor.swu.edu.cn/gateway//fighter-workflow/form-instance/select?dataId=${formList[0].id}&formId=${config.morning.formId}&procDefId=`,
+    `http://counselor.swu.edu.cn/gateway//fighter-workflow/form-instance/select?dataId=${formList[0].id}&formId=${formId}&procDefId=`,
     {
       headers: {
         'User-Agent': 'Apipost client Runtime/+https://www.apipost.cn/',
@@ -59,9 +80,9 @@ async function getFormInfo({ formList, token }) {
     });
 }
 
-async function submitForm({ token, body }) {
+async function submitForm({ token, body, formId }) {
   return fetch(
-    `http://counselor.swu.edu.cn/gateway//fighter-workflow/form-instance/save?formId=${config.morning.formId}&procDefId=`,
+    `http://counselor.swu.edu.cn/gateway//fighter-workflow/form-instance/save?formId=${formId}&procDefId=`,
     {
       method: 'POST',
       headers: {
@@ -79,7 +100,7 @@ async function submitForm({ token, body }) {
     });
 }
 
-function getBody({ userInfo, formInfo, formList }) {
+function getBody({ userInfo, formInfo, formList, formId }) {
   const t = new Date();
   return {
     id: formList[0].id,
@@ -105,7 +126,7 @@ function getBody({ userInfo, formInfo, formList }) {
     ycdksfcl: '',
     zymc: formInfo.zymc,
     bjmc: formInfo.bjmc,
-    formId: config.morning.formId,
+    formId,
     jbxx: '',
     xh: formInfo.xh,
     xm: formInfo.xm,
@@ -129,9 +150,9 @@ function getBody({ userInfo, formInfo, formList }) {
       isMobileEnabled: true,
       isOffset: true,
     },
-    dkrq: `${t.getFullYear()}-${t.getMonth() + 1}-${t.getDate()} ${
+    dkrq: `${t.getFullYear()}-${t.getMonth() + 1}-${t.getDate()} ${get2bit(
       t.getUTCHours() + 8
-    }:${t.getMinutes()}`,
+    )}:${get2bit(t.getMinutes())}`,
     ...config.morning.formInfo,
     businessKey: formList[0].id,
   };
@@ -141,9 +162,10 @@ async function morning() {
   const token = await getToken();
   const userInfo = await zhxdLogin(token);
   const formList = await getList(token);
-  const formInfo = await getFormInfo({ formList, token });
-  const body = getBody({ userInfo, formInfo, formList });
-  const submit = await submitForm({ token, body });
+  const formId = await getFormId(token);
+  const formInfo = await getFormInfo({ formList, token, formId });
+  const body = getBody({ userInfo, formInfo, formList, formId });
+  const submit = await submitForm({ token, body, formId });
   if (config.resultEmail.enable) {
     const emailSend = require('./mailNotify');
     if (submit && submit.code === 200) {
