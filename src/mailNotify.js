@@ -1,19 +1,24 @@
-async function sendEmailCheck(config, context) {
-  if (config.qing) {
-    if (context.getRest) {
+const config = require('./config');
+
+async function sendEmailCheck(context) {
+  if (context.getRest) {
+    if (config.environment === 'qingfuwu') {
       const restImg = require('./restImage');
       const rest = await restImg({});
-      context.subject += rest.rest;
+      context.subject += ', 剩余图片: ' + rest.rest;
+    } else if (config.environment === 'tencent') {
+      const restImg = require('./tencent/server/restImage');
+      const rest = await restImg({});
+      context.subject += ', 剩余图片: ' + rest.rest;
     }
-    context.html = context.html || context.subject;
+  }
+  context.html = context.html || context.subject;
+  if (config.qing)
     return await inspirecloud.middleware.sendEmail.sendEmail({
-      ...config,
+      ...config.resultEmail,
       ...context,
     });
-  } else {
-    context.html = context.html || context.subject;
-    return await sendEmail({ ...config, ...context });
-  }
+  else return await sendEmail({ ...config.resultEmail, ...context });
 }
 
 async function sendEmail({
@@ -25,10 +30,8 @@ async function sendEmail({
   senderService,
 }) {
   const nodemailer = require('nodemailer');
-
   const user = sender;
   const pass = senderPassword;
-
   const smtpTransport = nodemailer.createTransport({
     service: senderService,
     auth: { user, pass },

@@ -102,6 +102,7 @@ async function submitForm({ token, body, formId }) {
 
 function getBody({ userInfo, formInfo, formList, formId }) {
   const t = new Date();
+  t.setHours(t.getHours() + 8);
   return {
     id: formList[0].id,
     creator: '',
@@ -151,7 +152,7 @@ function getBody({ userInfo, formInfo, formList, formId }) {
       isOffset: true,
     },
     dkrq: `${t.getFullYear()}-${t.getMonth() + 1}-${t.getDate()} ${get2bit(
-      t.getUTCHours() + 8
+      t.getUTCHours()
     )}:${get2bit(t.getMinutes())}`,
     ...config.morning.formInfo,
     businessKey: formList[0].id,
@@ -159,32 +160,50 @@ function getBody({ userInfo, formInfo, formList, formId }) {
 }
 
 async function morning() {
-  const token = await getToken();
-  const userInfo = await zhxdLogin(token);
-  const formList = await getList(token);
-  const formId = await getFormId(token) || config.morning.formId;
-  const formInfo = await getFormInfo({ formList, token, formId });
-  const body = getBody({ userInfo, formInfo, formList, formId });
-  const submit = await submitForm({ token, body, formId });
-  if (config.resultEmail.enable) {
-    const emailSend = require('./mailNotify');
-    if (submit && submit.code === 200) {
-      await emailSend(config.resultEmail, { subject: `健康打卡成功` });
-    } else
-      await emailSend(config.resultEmail, {
-        subject: `健康打卡失败`,
-        html: JSON.stringify({
+  try {
+    token = await getToken();
+    userInfo = await zhxdLogin(token);
+    formList = await getList(token);
+    if (formList.length === 0)
+      throw new Error(JSON.stringify({ token, userInfo, formList }));
+    formId = (await getFormId(token)) || config.morning.formId;
+    formInfo = await getFormInfo({ formList, token, formId });
+    body = getBody({ userInfo, formInfo, formList, formId });
+    submit = await submitForm({ token, body, formId });
+    if (!(submit && submit.code === 200))
+      throw new Error(
+        JSON.stringify({
           token,
           userInfo,
           formList,
           formInfo,
           body,
           submit,
-        }),
+        })
+      );
+    if (config.resultEmail.enable) {
+      const emailSend = require('./mailNotify');
+      await emailSend({ subject: `健康打卡成功` });
+    }
+    return { code: 0 };
+  } catch (error) {
+    if (config.resultEmail.enable) {
+      const emailSend = require('./mailNotify');
+      await emailSend({
+        subject: `健康打卡失败`,
+        html: error,
       });
+    }
+    return { code: 1, msg: error };
   }
-  if (submit && submit.code === 200) return true;
-  return false;
 }
 
 module.exports = morning;
+
+(async () => {
+  if (config.environment === 'local') {
+    const res = await morning();
+    console.log(res);
+    return res;
+  }
+})();

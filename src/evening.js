@@ -159,36 +159,57 @@ async function getBody({ formList, userInfo, formInfo, token }) {
 }
 
 async function evening() {
-  const token = await getToken();
-  const userInfo = await zhxdLogin(token);
-  const formList = await getList(token);
-  if (!formList.length) return false;
-  const formInfo = await getFormInfo({ formList: formList[0], token });
-  const body = await getBody({
-    formList: formList[0],
-    userInfo,
-    formInfo,
-    token,
-  });
-  const submit = await submitForm({ token, body, formList: formList[0] });
-  if (config.resultEmail.enable) {
-    const emailSend = require('./mailNotify');
-    if (submit && submit.code === 200) {
-      await emailSend(config.resultEmail, { subject: `查寝成功, 剩余照片: `, getRest: true });
-    } else
-      await emailSend({
-        subject: `查寝失败`,
-        html: JSON.stringify({
+  try {
+    const token = await getToken();
+    const userInfo = await zhxdLogin(token);
+    const formList = await getList(token);
+    if (formList.length === 0)
+      throw new Error(JSON.stringify({ token, userInfo, formList }));
+    const formInfo = await getFormInfo({ formList: formList[0], token });
+    const body = await getBody({
+      formList: formList[0],
+      userInfo,
+      formInfo,
+      token,
+    });
+    const submit = await submitForm({ token, body, formList: formList[0] });
+    if (!(submit && submit.code === 200))
+      throw new Error(
+        JSON.stringify({
           token,
           userInfo,
           formList,
+          formInfo,
           body,
           submit,
-        }),
+        })
+      );
+    if (config.resultEmail.enable) {
+      const emailSend = require('./mailNotify');
+      await emailSend({
+        subject: `查寝成功`,
+        getRest: config.resultEmail.restImg,
       });
+    }
+    return { code: 0 };
+  } catch (error) {
+    if (config.resultEmail.enable) {
+      const emailSend = require('./mailNotify');
+      await emailSend({
+        subject: `查寝失败`,
+        html: error,
+      });
+    }
+    return { code: 1, msg: error };
   }
-  if (submit && submit.code === 200) return true;
-  return false;
 }
 
 module.exports = evening;
+
+(async () => {
+  if (config.environment === 'local') {
+    const res = await evening();
+    console.log(res);
+    return res;
+  }
+})();

@@ -111,10 +111,14 @@ async function reqExchangeToken(token) {
 }
 
 async function getToken() {
-  const tokenPre = await reqLoginToken();
-  const tokenSuccPre = await reqLogin(tokenPre);
-  const fighterAuthToken = await reqExchangeToken(tokenSuccPre);
-  return fighterAuthToken;
+  try {
+    const tokenPre = await reqLoginToken();
+    const tokenSuccPre = await reqLogin(tokenPre);
+    const fighterAuthToken = await reqExchangeToken(tokenSuccPre);
+    return fighterAuthToken;
+  } catch (error) {
+    return Promise.reject(error);
+  }
 }
 
 module.exports = getToken;

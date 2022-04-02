@@ -1,6 +1,5 @@
 const config = require('./config.js');
 
-
 module.exports = async function(params, context) {
   if(params.p !== config.imgPool.qingfuwu.passwd)return {
     code: 1,
