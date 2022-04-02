@@ -197,7 +197,7 @@ async function evening() {
       const emailSend = require('./mailNotify');
       await emailSend({
         subject: `查寝失败`,
-        html: error,
+        // html: error,
       });
     }
     return { code: 1, msg: error };
