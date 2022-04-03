@@ -66,7 +66,6 @@ async function getImage(token) {
     if (!preinfo.code) {
       const image = await reqImage(preinfo.url);
       const imgInfo = await uploadImage(image, token);
-      console.log(imgInfo);
       if (preinfo.len > 1) await removeImage(preinfo.key);
       return buildImageInfo(imgInfo.data);
     }
