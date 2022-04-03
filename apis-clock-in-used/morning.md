@@ -4,7 +4,7 @@
 一部分显而易见的参数并没有注释, 如有疑问见`健康打卡默认数据采集`或GitHub上API
 ```
 
-### 智慧X大登录
+### 数智X大登录
 
 #### 接口URL
 > http://counselor.swu.edu.cn/gateway//fighter-integrate-dingtalk-login/integrate/ding-talk/resolve-return?code=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXX&corpId=dingdd44fee6e26b31f3f2c783f7214b6d69
@@ -1205,7 +1205,7 @@
 #### 请求Body参数
 ```javascript
 * 定义 formList: 获取健康打卡列表得到的List
-* 定义 userInfo: 智慧X大登录数据
+* 定义 userInfo: 数智X大登录数据
 * 定义 formInfo: 健康打卡表单数据查询返回值
 * 定义 config: {
   position: {

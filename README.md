@@ -7,7 +7,7 @@
 
 ![nodejs](https://img.shields.io/badge/Node\.js-339933?style=flat-square&logo=Node.JS&logoColor=white)![ByteDance](https://img.shields.io/badge/ByteInspire-3c8cff?style=flat-square&logo=ByteDance&logoColor=white)![Tencent](https://img.shields.io/badge/TencentCloud-1261fe?style=flat-square&logo=GoogleCloud&logoColor=white)
 
-**⚠️注意: 该项目仅用于数智X大小程序, 不适用于钉钉原生的考勤打卡等功能**
+**⚠️注意: 该项目仅适用于钉钉数智X大平台, 不适用于钉钉原生的考勤打卡等功能**
 
 ### ✨特性
 
@@ -39,7 +39,7 @@
 
 - [统一登录系统是如何工作的](./how-it-work/统一登录系统是如何工作的.md)
 - [数智X大是如何工作的](./how-it-work/数智X大是如何工作的.md)
-- [数瑞Cookie混淆是如何工作的](./how-it-work/数瑞COOKIE混淆是如何工作的.md)
+- [瑞数Cookie混淆是如何工作的](./how-it-work/瑞数COOKIE混淆是如何工作的.md)
 
 ### 🤔关于项目
 
@@ -52,7 +52,7 @@
   升级Node.JS到最新版本(推荐使用`n`工具进行升级)
 - > fialed, reason: Connect ETIMEOUT XXX.XXX.XXX.XXX:XX  
   
-  请求超时, 如果建议更换更好的网络环境(或者使用轻服务)
+  请求超时, 建议更换网络环境(或者使用轻服务)
 
 ### 💄自定义
 

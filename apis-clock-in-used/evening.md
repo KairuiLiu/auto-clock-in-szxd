@@ -4,7 +4,7 @@
 一部分显而易见的参数并没有注释, 如有疑问见GitHub上API
 ```
 
-### 智慧X大登录
+### 数智X大登录
 
 #### 接口URL
 > http://counselor.swu.edu.cn/gateway//fighter-integrate-dingtalk-login/integrate/ding-talk/resolve-return?code=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXX&corpId=dingdd44fee6e26b31f3f2c783f7214b6d69
@@ -27,7 +27,7 @@
 
 #### 成功响应示例
 ```javascript
-见: 健康打卡-智慧X大登录
+见: 健康打卡-数智X大登录
 ```
 ### 获取今日查寝信息
 
@@ -355,7 +355,7 @@
 #### 请求Body参数
 ```javascript
 * 定义 formList: 获取今日查寝信息得到的List
-* 定义 userInfo: 智慧X大登录数据
+* 定义 userInfo: 数智X大登录数据
 * 定义 formInfo: 获取查寝表单信息返回值
 * 定义 token:    临时授权码
 * 定义 evening: { // 一些非必要的未知参数

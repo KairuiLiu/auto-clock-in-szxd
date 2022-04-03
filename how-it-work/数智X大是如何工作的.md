@@ -1,6 +1,8 @@
 ### 数智X大是如何工作的
 
-作为钉钉小程序, 数智X大全程使用`fighter-auth-token`作为其`token`, 不采用`Cookie`. API详细信息见[本项目使用的API文档](../apis-clock-in-used/index.md)
+> API中的BaseUrl(`*.swu.edu.cn`)为随机选取的示例链接, 不代表可以正常访问
+
+作为钉钉云平台, 数智X大全程使用`fighter-auth-token`作为其`token`, 不采用`Cookie`. API详细信息见[本项目使用的API文档](../apis-clock-in-used/index.md)
 
 #### 图片上传
 
