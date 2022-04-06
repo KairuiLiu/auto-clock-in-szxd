@@ -151,9 +151,9 @@ function getBody({ userInfo, formInfo, formList, formId }) {
       isMobileEnabled: true,
       isOffset: true,
     },
-    dkrq: `${t.getFullYear()}-${t.getMonth() + 1}-${t.getDate()} ${get2bit(
+    dkrq: `${t.getUTCFullYear()}-${t.getUTCMonth() + 1}-${t.getUTCDate()} ${get2bit(
       t.getUTCHours()
-    )}:${get2bit(t.getMinutes())}`,
+    )}:${get2bit(t.getUTCMinutes())}`,
     ...config.morning.formInfo,
     businessKey: formList[0].id,
   };
