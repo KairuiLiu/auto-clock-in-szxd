@@ -49,7 +49,7 @@ async function getList(token) {
 }
 
 async function getFormId(token) {
-  return fetch(`http://counselor.swu.edu.cn/js/chunk-8c41e2b0.aca5308c.js`, {
+  return fetch(`http://counselor.swu.edu.cn/flow/formInclude/js/xsjkdk.js`, {
     headers: {
       'User-Agent':
         'Mozilla/5.0 (Linux; U; Android 11; zh-CN; M2102K1C Build/RKQ1.200826.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/69.0.3497.100 UWS/3.22.1.210 Mobile Safari/537.36 AliApp(DingTalk/6.5.0) com.alibaba.android.rimet/23628571 Channel/700159 language/zh-CN abi/64 UT4Aplus/0.2.25 colorScheme/light',
@@ -60,7 +60,8 @@ async function getFormId(token) {
       if (d.status !== 200) return Promise.reject(d.msg);
       return d.text();
     })
-    .then((d) => d.match(/formId=([0-9a-zA-Z]+)/)[1]);
+    .then((d) => d.match(/formId\'\] = \'(.+)\'/)[1])
+    .catch((d) => null);
 }
 
 async function getFormInfo({ formList, token, formId }) {
