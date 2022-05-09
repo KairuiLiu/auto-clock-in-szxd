@@ -188,6 +188,9 @@ async function evening() {
       const emailSend = require('./mailNotify');
       await emailSend({
         subject: `查寝成功`,
+        html: `<p>查寝使用图片</p><img src="${
+          'http://counselor.swu.edu.cn/fastdfs/' + body.imgInfo[0].value
+        }" />`,
         getRest: config.resultEmail.restImg,
       });
     }
