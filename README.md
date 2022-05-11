@@ -48,11 +48,15 @@
 ### 🤕故障排查
 
 - > (node:4447) UnhandledPromiseRejectionWarning: Error: Not supported
-  
+
   升级Node.JS到最新版本(推荐使用`n`工具进行升级)
-- > fialed, reason: Connect ETIMEOUT XXX.XXX.XXX.XXX:XX  
-  
-  请求超时, 建议更换网络环境(或者使用轻服务)
+- > fialed, reason: Connect ETIMEOUT XXX.XXX.XXX.XXX:XX
+
+  请求超时, 建议更换网络环境(或者使用云服务)
+
+- > 腾讯云云函数随机出现打卡失败`Error: read ECONNRESET`
+
+  配置腾讯云函数, 开启固定出口IP与DNS缓存
 
 ### 💄自定义
 
