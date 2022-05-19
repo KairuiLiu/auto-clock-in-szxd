@@ -1,0 +1,17 @@
+name: clock-in
+on:
+  schedule:
+      - cron: "31 1,13 * * *"
+  workflow_dispatch:
+
+jobs:
+  clock-in:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - run: cd src && npm i
+      - run: cd src && node ./github/app.js
+      - run: ./src/github/push.sh
