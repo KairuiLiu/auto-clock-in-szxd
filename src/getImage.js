@@ -77,6 +77,9 @@ async function getImage(token) {
       const imgInfo = await uploadImage(image, token);
       return buildImageInfo(imgInfo.data);
     }
+  } else if (config.imgPool.methods === 'github') {
+    const getLocalImageInfo = require('./getLocalImageInfo');
+    getLocalImageInfo();
   }
   return [];
 }

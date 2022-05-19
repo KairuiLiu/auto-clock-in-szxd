@@ -1,6 +1,11 @@
 module.exports = {
-  environment: 'local',                        // 工作环境: 'local'(本地/服务器), 'qingfuwu'(字节跳动轻服务), 'tencent'(腾讯云函数)
-  corpId: 'dingdd44fee6e26b31f3f2c783f7214b6d69',       // [无需修改] 钉钉企业ID, 同一学校只有一个 
+  // environment: 运行环境
+  //   - 'local'     [默认]本地/服务器
+  //   - 'qingfuwu'  字节跳动轻服务
+  //   - 'tencent'   腾讯云函数
+  //   - 'github'    github action
+  environment: 'local',
+  corpId: 'dingdd44fee6e26b31f3f2c783f7214b6d69',       // [无需修改] 钉钉企业ID, 同一学校只有一个
   login: {
     username: '',                              // 学号
     password: '',                              // 登录 i.swu.edu.cn 时使用的密码
@@ -40,10 +45,11 @@ module.exports = {
   imgPool: {                                    // 查寝图片提交方式
     // methods: 可选
     //   - 'apiImg'     [默认]GET指定API获取图片并上传提交
-    //   - 'urls'       通过预先指定提交信息提交, 提交时随机选择一个提交 
-    //   - 'api'        GET指定API获取上传信息并提交 
+    //   - 'urls'       通过预先指定提交信息提交, 提交时随机选择一个提交
+    //   - 'api'        GET指定API获取上传信息并提交
     //   - 'tencentCOS' 使用腾讯云COS, 预先通过网站上传大量图片到COS, 云函数每次使用一个提交并销毁图片
-    //   - 'qingfuwu'   [推荐]使用轻服务, 预先通过网站上传大量图片到轻服务, 轻服务每次使用一个提交并销毁图片
+    //   - 'qingfuwu'   使用轻服务, 预先通过网站上传大量图片到轻服务, 轻服务每次使用一个提交并销毁图片
+    //   - 'github'     [推荐]使用github action从仓库中上传, 每次使用一个提交并销毁图片
     methods: 'apiImg',
     // 若选择`apiImg`则需配置此接口, 默认为一个获得随机200x200图像的接口
     apiImg: 'https://picsum.photos/200',

@@ -83,7 +83,7 @@ async function reqLogin(tokenPre) {
   }).then((d) => {
     if (d.status >= 300 && d.status < 400)
       return d.headers.get('location').match(/ticket=(.+)/)[1];
-    else return Promise.reject('login Fialed');
+    else return Promise.reject('Login Failed');
   });
 }
 
