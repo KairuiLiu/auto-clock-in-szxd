@@ -5,7 +5,7 @@
 
 <p align="center"><strong>川渝某深蓝色大学数智X大平台, 自动健康上报 & 查寝 & 该平台API文档</strong></p>
 
-![nodejs](https://img.shields.io/badge/Node\.js-339933?style=flat-square&logo=Node.JS&logoColor=white) ![ByteDance](https://img.shields.io/badge/ByteInspire-3c8cff?style=flat-square&logo=ByteDance&logoColor=white) ![Tencent](https://img.shields.io/badge/TencentCloud-1261fe?style=flat-square&logo=GoogleCloud&logoColor=white)
+![nodejs](https://img.shields.io/badge/Node\.js-339933?style=flat-square&logo=Node.JS&logoColor=white) ![ByteDance](https://img.shields.io/badge/ByteInspire-3c8cff?style=flat-square&logo=ByteDance&logoColor=white) ![Tencent](https://img.shields.io/badge/TencentCloud-1261fe?style=flat-square&logo=GoogleCloud&logoColor=white) ![GithubAction](https://img.shields.io/badge/Github%20Action-181717?style=flat-square&logo=github&logoColor=white)
 
 **⚠️注意: 该项目仅适用于钉钉数智X大平台, 不适用于钉钉原生的考勤打卡等功能**
 
@@ -17,8 +17,10 @@
 - 高度可自定义化
 - [可选]依托于Github Action, 零成本实现自动触发打卡与图片存储(功能仍在测试)
 - [可选]依托于字节跳动轻服务, 零成本实现云函数, 云数据库, 小中间件, 页面部署
+  
   > update 2022.04.14: 轻服务将于2022年6月14日正式停服, 请尽量将项目迁移至本地或腾讯云云函数
 - [可选]依托于腾讯云云函数与腾讯云对象存储(可能产生费用)
+
   > update 2022.05.20: 腾讯云云服务计费规则将于2022年6月1日修改. 在新的计费体系下, 用户每月可能至少需要消费9.9元. 您可以使用免费的Github Action实现免费打卡
 
 ### 📁文件结构说明
@@ -64,7 +66,7 @@
 
 - > Github Action 随机出现打卡失败
 
-  Github服务器在境外, 也没啥办法. 出现错误后转至项目 - Action - clock-in - Run workflow - Run workflow
+  Github服务器在境外, 也没啥办法. 出现错误后转至项目 - Action - clock-in - Run workflow - Run workflow重新执行即可
 
 ### 💄自定义
 

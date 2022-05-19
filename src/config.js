@@ -83,8 +83,8 @@ module.exports = {
   },
   resultEmail: {                                  // 采用邮件通知
     enable: false,                                // 是否开启
-    qingMid: false,                               // 是否采用轻服务小中间件发送邮件, 若不采用则必须配置79-81行
-    restImg: false,                               // [限腾讯云COS与轻服务修改]是否在返回查寝信息时返回剩余照片数
+    qingMid: false,                               // 是否采用轻服务小中间件发送邮件, 若不采用则必须配置89-91行
+    restImg: false,                               // [限腾讯云COS/轻服务/Github Action修改]是否在返回查寝信息时返回剩余照片数
     saver: '1111111111@qq.com',                   // 收件邮箱地址
     senderService: '',                            // [采用轻服务中间件可以不写]发件邮箱服务器, 例如`QQ`, `outlook`
     sender: '',                                   // [采用轻服务中间件可以不写]发件邮箱地址
