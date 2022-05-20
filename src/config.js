@@ -3,7 +3,7 @@ module.exports = {
   //   - 'local'     [默认]本地/服务器
   //   - 'qingfuwu'  字节跳动轻服务
   //   - 'tencent'   腾讯云函数
-  //   - 'github'    github action
+  //   - 'github'    github actions
   environment: 'local',
   corpId: 'dingdd44fee6e26b31f3f2c783f7214b6d69',       // [无需修改] 钉钉企业ID, 同一学校只有一个
   login: {
@@ -49,7 +49,7 @@ module.exports = {
     //   - 'api'        GET指定API获取上传信息并提交
     //   - 'tencentCOS' 使用腾讯云COS, 预先通过网站上传大量图片到COS, 云函数每次使用一个提交并销毁图片
     //   - 'qingfuwu'   使用轻服务, 预先通过网站上传大量图片到轻服务, 轻服务每次使用一个提交并销毁图片
-    //   - 'github'     [推荐]使用github action从仓库中上传, 每次使用一个提交并销毁图片
+    //   - 'github'     [推荐]使用github actions从仓库中上传, 每次使用一个提交并销毁图片
     methods: 'apiImg',
     // 若选择`apiImg`则需配置此接口, 默认为一个获得随机200x200图像的接口
     apiImg: 'https://picsum.photos/200',
@@ -84,11 +84,11 @@ module.exports = {
   resultEmail: {                                  // 采用邮件通知
     enable: false,                                // 是否开启
     qingMid: false,                               // 是否采用轻服务小中间件发送邮件, 若不采用则必须配置89-91行
-    restImg: false,                               // [限腾讯云COS/轻服务/Github Action修改]是否在返回查寝信息时返回剩余照片数
+    restImg: false,                               // [限腾讯云COS/轻服务/Github Actions修改]是否在返回查寝信息时返回剩余照片数
     saver: '1111111111@qq.com',                   // 收件邮箱地址
     senderService: '',                            // [采用轻服务中间件可以不写]发件邮箱服务器, 例如`QQ`, `outlook`
     sender: '',                                   // [采用轻服务中间件可以不写]发件邮箱地址
     senderPassword: '',                           // [采用轻服务中间件可以不写]发件邮箱密码
   },
-  githubTryCount: 5,                              // Github Action 尝试次数上限
+  githubTryCount: 5,                              // Github Actions 尝试次数上限
 };
