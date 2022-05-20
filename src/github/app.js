@@ -20,7 +20,7 @@ const config = require('../config');
       path.join(__dirname, `./log/${fname}-FC`),
       'utf8'
     );
-    if (cnt.length > config.githubTryCount) return;
+    if (cnt.length >= config.githubTryCount) return;
   }
 
   if (tag === 'morning') {
