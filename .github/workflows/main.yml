@@ -2,6 +2,7 @@ name: clock-in
 on:
   # schedule:
   #     - cron: "31 1,13 * * *"
+  # push:
   workflow_dispatch:
 
 jobs:

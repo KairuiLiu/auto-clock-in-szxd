@@ -6,5 +6,5 @@ git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 git config user.name "GitHub Actions"
 
 git add .
-git commit -m "update image 😎"
+git commit -m "update clockin log 😎"
 git push
