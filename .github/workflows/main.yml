@@ -2,8 +2,10 @@ name: clock-in
 on:
   # schedule:
   #     - cron: "31 1,13 * * *"
-  # push:
   workflow_dispatch:
+  repository_dispatch:
+    types:
+      - reclockin
 
 jobs:
   clock-in:
