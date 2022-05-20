@@ -64,9 +64,9 @@
 
   配置腾讯云函数, 开启固定出口IP与DNS缓存
 
-- > Github Action 随机出现打卡失败
+- > Github Action 随机出现打卡失败(如`Login Failed`)
 
-  Github服务器在境外, 也没啥办法. 出现错误后转至项目 - Action - clock-in - Run workflow - Run workflow重新执行即可. 若是频繁提示打卡失败, 建议尝试国内其他云服务商
+  Github服务器在境外, 请求经常会失效, 也没啥办法. 出现错误后转至项目 - Action - clock-in - Run workflow - Run workflow重新执行即可. 若是频繁提示打卡失败, 建议尝试国内其他云服务商.
 
 ### 💄自定义
 

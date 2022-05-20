@@ -90,5 +90,5 @@ module.exports = {
     sender: '',                                   // [采用轻服务中间件可以不写]发件邮箱地址
     senderPassword: '',                           // [采用轻服务中间件可以不写]发件邮箱密码
   },
-  githubTryCount: 3,                              // Github Action 尝试次数上限
+  githubTryCount: 5,                              // Github Action 尝试次数上限
 };
