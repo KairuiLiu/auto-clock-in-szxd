@@ -41,9 +41,9 @@ function buildImageInfo(imgInfo) {
   ];
 }
 
-async function getLocalImageInfo() {
-  const token = await getToken();
+async function getLocalImageInfo({ token }) {
   if (config.imgPool.methods !== 'github') {
+    const token = await getToken();
     const imgInfo = await uploadImage(process.argv[2], token);
     console.log(buildImageInfo(imgInfo.data));
     return;
@@ -53,6 +53,7 @@ async function getLocalImageInfo() {
     const imgPath = path.join(imgFold, imgs[0]);
     const imgInfo = await uploadImage(imgPath, token);
     if (imgs.length > 1) fs.unlinkSync(imgPath);
+    config.githubRestImg = Math.max(imgs.length - 1, 1);
     return imgInfo;
   }
 }

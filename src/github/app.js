@@ -31,7 +31,7 @@ const config = require('../config');
     res = await evening();
   }
 
-  if (res.code === 0) {
+  if (res?.code === 0) {
     fs.writeFileSync(path.join(__dirname, `./log/${fname}`), 'EXEC SUCCESS');
   } else {
     fs.appendFileSync(path.join(__dirname, `./log/${fname}-FC`), '.');

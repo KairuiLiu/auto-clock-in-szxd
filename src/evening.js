@@ -189,7 +189,7 @@ async function evening() {
       await emailSend({
         subject: `查寝成功`,
         html: `<p>查寝使用图片</p><img src="${
-          'http://counselor.swu.edu.cn/fastdfs/' + body.sczp[0].value
+          'http://counselor.swu.edu.cn/fastdfs/' + body?.sczp[0]?.value
         }" />`,
         getRest: config.resultEmail.restImg,
       });
