@@ -10,6 +10,11 @@ async function sendEmailCheck(context) {
       const restImg = require('./tencent/server/restImage');
       const rest = await restImg({});
       context.subject += ', 剩余图片: ' + rest.rest;
+    } else if (
+      config.environment === 'github' &&
+      config.imgPool.methods === 'github'
+    ) {
+      context.subject += ', 剩余图片: ' + config.githubRestImg;
     }
   }
   context.html = context.html || context.subject;
