@@ -11,7 +11,7 @@ const config = require('../config');
     t.getUTCHours() + t.getUTCMinutes() / 60 < splitTime
       ? 'morning'
       : 'evening';
-  const fname = `${t.getUTCFullYear()}-${t.getUTCMonth()}-${t.getUTCDate()}-${tag}`;
+  const fname = `${t.getUTCFullYear()}-${t.getUTCMonth()+1}-${t.getUTCDate()}-${tag}`;
   const files = fs.readdirSync(path.join(__dirname, `./log`), 'utf8');
 
   if (files.indexOf(fname) !== -1) return;
