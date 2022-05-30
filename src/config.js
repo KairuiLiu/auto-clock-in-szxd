@@ -9,7 +9,7 @@ module.exports = {
   login: {
     username: '',                              // 学号
     password: '',                              // 登录 i.swu.edu.cn 时使用的密码
-    encryptCookie: 'lD01YhBPHVTHP',            // [无需修改] 同一登录系统使用的加密Cookie名
+    encryptCookie: '61zqTsrO93nzP',            // [无需修改] 同一登录系统使用的加密Cookie名
   },
   position: {                                  // 健康上报与查寝时使用的位置信息(非必要不修改)
     latitude: 29.826612,                       // 纬度, 可以自行搜索坐标拾取工具设置但需保留6位小数

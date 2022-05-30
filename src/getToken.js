@@ -71,7 +71,7 @@ async function reqLogin(tokenPre) {
       'Accept-Language': 'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7',
       Cookie:
         `36501JSESSIONID=${tokenPre.cookie['/cas/']['36501JSESSIONID'].value}; ` +
-        `lD01YhBPHVTHO=${tokenPre.cookie['/']['lD01YhBPHVTHO'].value};` +
+        `61zqTsrO93nzO=${tokenPre.cookie['/']['61zqTsrO93nzO'].value};` +
         `${config.login.encryptCookie}=${tokenPre.cookieE.replace(
           ' path',
           ''
@@ -122,3 +122,8 @@ async function getToken() {
 }
 
 module.exports = getToken;
+
+(async () => {
+  const t = await getToken();
+  console.log(t);
+})();
