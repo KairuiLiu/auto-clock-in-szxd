@@ -122,8 +122,3 @@ async function getToken() {
 }
 
 module.exports = getToken;
-
-(async () => {
-  const t = await getToken();
-  console.log(t);
-})();
