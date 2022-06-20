@@ -46,6 +46,16 @@ async function reqLoginToken(p = promiseStick()) {
     (pre, cur) => Object.defineProperty(pre, cur.name, { value: cur.value }),
     {}
   );
+  setTimeout(() => {
+    p.res({
+      cookie: Object(dom.cookieJar.store.idx['uaaap.swu.edu.cn']),
+      cookieE: cookieMap.get(config.login.encryptCookie),
+      formInfo: formInfo,
+      posturl: dom.window.document.querySelector('#loginForm').action,
+    });
+    dom.window.close();
+    dom = null;
+  }, 30000);
   return p;
 }
 
@@ -72,10 +82,13 @@ async function reqLogin(tokenPre) {
       Cookie:
         `36501JSESSIONID=${tokenPre.cookie['/cas/']['36501JSESSIONID'].value}; ` +
         `61zqTsrO93nzO=${tokenPre.cookie['/']['61zqTsrO93nzO'].value};` +
-        `${config.login.encryptCookie}=${tokenPre.cookieE.replace(
-          ' path',
-          ''
-        )}`,
+        `${
+          tokenPre.cookieE
+            ? config.login.encryptCookie +
+              '=' +
+              tokenPre.cookieE.replace(' path', '')
+            : ''
+        }`,
     },
     body: `username=${config.login.username}&password=${config.login.password}&lt=${tokenPre.formInfo.lt}&execution=e1s1&_eventId=submit&isQrSubmit=false&qrValue=`,
     method: 'POST',
